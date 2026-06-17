@@ -187,7 +187,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <motion.span
                       key={index}
                       variants={letterVars}
-                      className="text-5.5xl sm:text-7xl font-sans font-black tracking-tight select-none inline-block text-white"
+                      className="text-[52px] min-[375px]:text-[60px] min-[415px]:text-[66px] sm:text-8xl font-sans font-black tracking-tighter select-none inline-block text-white"
                       style={{
                         textShadow: "0 4px 12px rgba(0,0,0,0.15)"
                       }}

@@ -208,7 +208,21 @@ export default function MobileContainer({
       <main
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className={`flex-1 relative overflow-y-auto px-4 pb-4 transition-colors duration-300 ${
+        onClick={(e) => {
+          // If already in fullscreen, nothing to do
+          if (isSwipedFullscreen) return;
+
+          // Check if user clicked on any interactive elements like buttons, inputs, links, sliders etc.
+          const target = e.target as HTMLElement;
+          const interactiveSelector = "button, input, select, textarea, a, svg, path, [role='button']";
+          if (target.closest(interactiveSelector)) {
+            return; // let standard interactive events perform naturally
+          }
+
+          // Otherwise, activate immersive fullscreen mode!
+          setIsSwipedFullscreen(true);
+        }}
+        className={`flex-1 relative overflow-y-auto px-4 pb-4 transition-colors duration-300 cursor-pointer ${
           isSwipedFullscreen ? "pt-14" : "pt-4"
         } ${
           activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-[#F9F8F6] text-[#2D2D2D]"
