@@ -27,9 +27,17 @@ export default function MobileContainer({
   onRestartOnboarding,
 }: MobileContainerProps) {
   const [showConfig, setShowConfig] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(0);
 
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const totalRoundedRemaining = Math.round(totalRemaining * 10) / 10;
+
+  const goToSlide = (newIndex: number) => {
+    if (newIndex < 0 || newIndex > 3) return;
+    setSlideDirection(newIndex > activeSlide ? 1 : -1);
+    setActiveSlide(newIndex);
+  };
 
   return (
     <div
@@ -49,7 +57,7 @@ export default function MobileContainer({
             type="button"
             id="btn-mobile-config"
             onClick={() => setShowConfig(true)}
-            className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1"
+            className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1 animate-pulse"
           >
             <Settings className="w-3.5 h-3.5 animate-spin-slow" />
             <span>Configuratie</span>
@@ -74,57 +82,298 @@ export default function MobileContainer({
         </button>
       </div>
 
+      {/* 1.5 Custom Dashboard Segmented Navigation Tabs */}
+      <div className="px-4 py-2 bg-white border-b border-[#EAEAEA] flex justify-between gap-1 overflow-x-auto shrink-0 scrollbar-none select-none">
+        {[
+          { id: 0, name: "1. Runway" },
+          { id: 1, name: "2. Matrix" },
+          { id: 2, name: "3. Vitaliteit" },
+          { id: 3, name: "4. Overzicht" },
+        ].map((s) => {
+          const isActive = activeSlide === s.id;
+          return (
+            <button
+              key={s.id}
+              onClick={() => goToSlide(s.id)}
+              className={`flex-1 min-w-[70px] py-2 px-1 rounded-md text-center transition-all cursor-pointer flex flex-col items-center justify-center border ${
+                isActive
+                  ? s.id === 3
+                    ? "bg-amber-100 border-[#D56B45] text-amber-900 font-black"
+                    : "bg-[#D56B45]/10 border-[#D56B45]/30 text-[#D56B45] font-black"
+                  : "bg-zinc-50 border-zinc-100 text-[#767676] hover:bg-zinc-100 font-medium"
+              }`}
+            >
+              <span className="text-[10px] uppercase tracking-wider leading-none">{s.name}</span>
+            </button>
+          );
+        })}
+      </div>
+
       {/* 2. Main Scrollable Dashboard Content */}
-      <main className="flex-1 relative overflow-y-auto px-4 py-4 space-y-5">
-        
-        {/* Levensloop & Markering (StatsCard & LifePhasesBar) */}
-        <div id="mobile-stats-wrapper" className="space-y-4">
-          <StatsCard
-            inputs={inputs}
-            projectedLifeExpectancy={projectedLifeExpectancy}
-            apiSource={apiSource}
-          />
-          
-          <div className="bg-white p-3 border border-[#EAEAEA] rounded-md shadow-3xs">
-            <LifePhasesBar
-              inputs={inputs}
-              projectedLifeExpectancy={projectedLifeExpectancy}
-              phases={phases}
-              onInputChange={onInputChange}
-            />
-          </div>
-        </div>
-
-        {/* Levensmatrix (DecadeGrid) */}
-        <div id="mobile-matrix-wrapper" className="bg-white p-3 border border-[#EAEAEA] rounded-lg shadow-3xs">
-          <div className="mb-2">
-            <DecadeGrid
-              inputs={inputs}
-              projectedLifeExpectancy={projectedLifeExpectancy}
-            />
-          </div>
-        </div>
-
-        {/* Dynamic Analytics (AestheticFidelityCards) */}
-        <div id="mobile-analytics-wrapper" className="pb-8">
-          <AestheticFidelityCards
-            inputs={inputs}
-            projectedLifeExpectancy={projectedLifeExpectancy}
-            apiSource={apiSource}
-          />
-        </div>
-
-        {/* Floating Configuration Assist Button at the bottom for quick thumb reach */}
-        <div className="flex justify-center pt-2">
-          <button
-            type="button"
-            onClick={onRestartOnboarding}
-            className="flex items-center space-x-1.5 px-4 py-2 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-full text-xs font-semibold text-[#767676] transition-all cursor-pointer shadow-3xs"
+      <main className={`flex-1 relative overflow-y-auto px-4 py-4 transition-colors duration-300 ${activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-[#F9F8F6] text-[#2D2D2D]"}`}>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activeSlide}
+            initial={{ opacity: 0, x: slideDirection * 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -slideDirection * 60 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="w-full min-h-full flex flex-col justify-between"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span>Herstart Introductie</span>
-          </button>
-        </div>
+            {/* Screen 1: Runway */}
+            {activeSlide === 0 && (
+              <div className="space-y-4 flex flex-col justify-between h-full">
+                <div className="space-y-4">
+                  <StatsCard
+                    inputs={inputs}
+                    projectedLifeExpectancy={projectedLifeExpectancy}
+                    apiSource={apiSource}
+                  />
+                  
+                  <div className="bg-white p-3.5 border border-[#EAEAEA] rounded-md shadow-3xs text-[#2D2D2D]">
+                    <LifePhasesBar
+                      inputs={inputs}
+                      projectedLifeExpectancy={projectedLifeExpectancy}
+                      phases={phases}
+                      onInputChange={onInputChange}
+                    />
+                  </div>
+                </div>
+
+                {/* Navigation Controls */}
+                <div className="flex items-center justify-between pt-4 border-t border-[#EAEAEA]/80 mt-6 bg-white/50 p-2.5 rounded-lg text-[#2D2D2D] shrink-0">
+                  <button
+                    disabled={activeSlide === 0}
+                    onClick={() => goToSlide(activeSlide - 1)}
+                    className={`px-4 py-2 border rounded-lg text-xs font-bold transition-all ${
+                      activeSlide === 0
+                        ? "opacity-30 border-zinc-200 text-zinc-400 cursor-not-allowed"
+                        : "border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 cursor-pointer"
+                    }`}
+                  >
+                    ◀ Vorige
+                  </button>
+                  
+                  <div className="flex space-x-1.5">
+                    {[0, 1, 2, 3].map((idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                          activeSlide === idx ? "w-4 bg-[#D56B45]" : "bg-zinc-200"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => goToSlide(activeSlide + 1)}
+                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
+                  >
+                    <span>Volgende</span>
+                    <span>▶</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Screen 2: Matrix & Verbruikt */}
+            {activeSlide === 1 && (
+              <div className="space-y-4 flex flex-col justify-between h-full">
+                <div className="space-y-4">
+                  {/* Levensmatrix (DecadeGrid) */}
+                  <div id="mobile-matrix-wrapper" className="bg-white p-3.5 border border-[#EAEAEA] rounded-lg shadow-3xs text-[#2D2D2D]">
+                    <div className="mb-1">
+                      <DecadeGrid
+                        inputs={inputs}
+                        projectedLifeExpectancy={projectedLifeExpectancy}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Verbruikt vs Resterend */}
+                  <div id="mobile-verbruikt-wrapper">
+                    <AestheticFidelityCards
+                      inputs={inputs}
+                      projectedLifeExpectancy={projectedLifeExpectancy}
+                      apiSource={apiSource}
+                      showOnly={["verbruikt"]}
+                    />
+                  </div>
+                </div>
+
+                {/* Navigation Controls */}
+                <div className="flex items-center justify-between pt-4 border-t border-[#EAEAEA]/80 mt-6 bg-white/50 p-2.5 rounded-lg text-[#2D2D2D] shrink-0">
+                  <button
+                    onClick={() => goToSlide(activeSlide - 1)}
+                    className="px-4 py-2 border border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                  >
+                    ◀ Vorige
+                  </button>
+                  
+                  <div className="flex space-x-1.5">
+                    {[0, 1, 2, 3].map((idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                          activeSlide === idx ? "w-4 bg-[#D56B45]" : "bg-zinc-200"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => goToSlide(activeSlide + 1)}
+                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
+                  >
+                    <span>Volgende</span>
+                    <span>▶</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Screen 3: Vitaliteit, Carriere & Horizon */}
+            {activeSlide === 2 && (
+              <div className="space-y-4 flex flex-col justify-between h-full">
+                <div className="space-y-4">
+                  <div id="mobile-analytics-wrapper" className="space-y-4">
+                    <AestheticFidelityCards
+                      inputs={inputs}
+                      projectedLifeExpectancy={projectedLifeExpectancy}
+                      apiSource={apiSource}
+                      showOnly={["vitaliteit", "carriere", "horizon"]}
+                    />
+                  </div>
+                </div>
+
+                {/* Navigation Controls */}
+                <div className="flex items-center justify-between pt-4 border-t border-[#EAEAEA]/80 mt-6 bg-white/50 p-2.5 rounded-lg text-[#2D2D2D] shrink-0">
+                  <button
+                    onClick={() => goToSlide(activeSlide - 1)}
+                    className="px-4 py-2 border border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                  >
+                    ◀ Vorige
+                  </button>
+                  
+                  <div className="flex space-x-1.5">
+                    {[0, 1, 2, 3].map((idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                          activeSlide === idx ? "w-4 bg-[#D56B45]" : "bg-zinc-200"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => goToSlide(activeSlide + 1)}
+                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
+                  >
+                    <span>Conclusie</span>
+                    <span>▶</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Screen 4: Conclusie (Orange Screen) */}
+            {activeSlide === 3 && (
+              <div className="space-y-5 flex flex-col justify-between h-full text-white">
+                <div className="space-y-5">
+                  <div className="text-center space-y-2 mt-2">
+                    <div className="inline-flex items-center justify-center w-11 h-11 bg-white/20 rounded-full border border-white/35 backdrop-blur-xs shadow-3xs">
+                      <span className="text-xl">🎯</span>
+                    </div>
+                    <h3 className="text-lg font-black font-sans uppercase tracking-tight text-white">
+                      Eindconclusie & Reflectie
+                    </h3>
+                    <p className="text-[11px] text-white/80 max-w-xs mx-auto leading-normal">
+                      Jouw CBS Levensrunway samengevat op een soevereine rij.
+                    </p>
+                  </div>
+
+                  {/* Highlights circle */}
+                  <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs shrink-0 max-w-sm mx-auto w-full">
+                    <span className="text-4xl font-extrabold font-mono tracking-tight text-white mb-0.5">
+                      {totalRemaining.toFixed(1)} jaar
+                    </span>
+                    <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100">
+                      resterende tijdsperspectief
+                    </span>
+                    <span className="text-[9px] font-sans text-white/70 mt-1">
+                      ca. {Math.round(totalRemaining * 52.17).toLocaleString("nl-NL")} betekenisvolle weken over
+                    </span>
+                  </div>
+
+                  {/* Quick summary statistics */}
+                  <div className="bg-white/10 border border-white/15 rounded-xl p-4 space-y-3.5 max-w-sm mx-auto w-full backdrop-blur-xs text-xs font-mono">
+                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                      <span className="text-amber-100">Huidige Leeftijd:</span>
+                      <span className="font-extrabold text-white text-sm">{inputs.currentAge} jaar</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                      <span className="text-amber-100">Prognose Levensduur:</span>
+                      <span className="font-extrabold text-white text-sm">{Math.round(projectedLifeExpectancy)} jaar</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                      <span className="text-amber-100">Actieve Carrière (tot {inputs.fireAge} jr):</span>
+                      <span className="font-extrabold text-white text-sm">Nog {Math.max(0, inputs.fireAge - inputs.currentAge)} jaar</span>
+                    </div>
+                    <div className="flex justify-between items-center pt-1">
+                      <span className="text-white font-sans font-extrabold uppercase tracking-wide text-[10px]">Vrije Horizon (Vrijheidsoogst):</span>
+                      <span className="font-extrabold text-white text-sm text-right bg-white/20 px-2 py-0.5 rounded">
+                        {(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} jr
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Dutch insights summary */}
+                  <div className="bg-[#5c2411]/20 p-4 rounded-xl border border-white/10 text-xs text-stone-100 max-w-sm mx-auto w-full leading-relaxed space-y-2">
+                    <p>
+                      Jouw verwachte leefduur van <span className="font-bold text-white">{Math.round(projectedLifeExpectancy)} jaar</span> telt ca. <span className="font-bold text-white">{Math.round(projectedLifeExpectancy * 52.17).toLocaleString("nl-NL")} weken</span>. Elk hokje in de matrix vertegenwoordigt een unieke week.
+                    </p>
+                    <p className="font-bold text-white">
+                      💡 Tip: Met gezonde slaap, sport en gerichte stressreductie kun je actief jaren aan levenskwaliteit (Levenswinst) toevoegen!
+                    </p>
+                  </div>
+                </div>
+
+                {/* Scroll Bottom Navigation controls */}
+                <div className="flex items-center justify-between pt-4 border-t border-white/20 mt-6 max-w-sm mx-auto w-full shrink-0">
+                  <button
+                    onClick={() => goToSlide(activeSlide - 1)}
+                    className="px-4 py-2 border border-white/30 text-white hover:bg-white/10 text-xs font-bold rounded-lg transition-all cursor-pointer"
+                  >
+                    ◀ Vorige
+                  </button>
+                  
+                  <div className="flex space-x-1.5">
+                    {[0, 1, 2, 3].map((idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                          activeSlide === idx ? "w-4 bg-white" : "bg-white/40"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => setShowConfig(true)}
+                    className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1"
+                  >
+                    <span>⚙️ Pas aan</span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* 3. Sliding Configuration Bottom Sheet Modal */}
