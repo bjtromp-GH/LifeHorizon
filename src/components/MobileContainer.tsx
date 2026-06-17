@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
-import React, { useState } from "react";
-import { Sparkles, Settings, X, RefreshCw } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Sparkles, Settings, X, RefreshCw, Minimize2 } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -29,6 +29,16 @@ export default function MobileContainer({
   const [showConfig, setShowConfig] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [slideDirection, setSlideDirection] = useState(0);
+  const [isSwipedFullscreen, setIsSwipedFullscreen] = useState(false);
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSwipeHint(false);
+    }, 6000); // hint visible slightly longer
+    return () => clearTimeout(timer);
+  }, []);
 
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const totalRoundedRemaining = Math.round(totalRemaining * 10) / 10;
@@ -39,78 +49,158 @@ export default function MobileContainer({
     setActiveSlide(newIndex);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setTouchStart({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    const touch = e.changedTouches[0];
+    const diffX = touch.clientX - touchStart.x;
+    const diffY = touch.clientY - touchStart.y;
+    setTouchStart(null);
+
+    // Filter out simple vertical scroll gestures, focus on clear horizontal swipes
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) {
+        // Swipe Right -> previous slide
+        if (activeSlide > 0) {
+          goToSlide(activeSlide - 1);
+          setIsSwipedFullscreen(true);
+        }
+      } else {
+        // Swipe Left -> next slide
+        if (activeSlide < 3) {
+          goToSlide(activeSlide + 1);
+          setIsSwipedFullscreen(true);
+        }
+      }
+    }
+  };
+
   return (
     <div
       id="mobile-viewport-root"
-      className="flex flex-col h-[100dvh] bg-[#F9F8F6] text-[#2D2D2D] overflow-hidden select-none"
+      className="flex flex-col h-[100dvh] bg-[#F9F8F6] text-[#2D2D2D] overflow-hidden select-none relative"
     >
-      {/* 1. Mobile Custom Header Bar */}
-      <header className="px-4 py-3 bg-white border-b border-[#EAEAEA] flex items-center justify-between shrink-0">
-        <div className="flex items-center space-x-2">
-          <Sparkles className="w-4 h-4 text-[#D56B45]" />
-          <span className="font-sans font-bold text-sm tracking-tight text-[#2D2D2D]">
-            LifeRunway
-          </span>
-        </div>
-        <div className="flex items-center space-x-2">
+      {/* Absolute hint of swiping gesture */}
+      <AnimatePresence>
+        {showSwipeHint && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="absolute bottom-20 left-4 right-4 z-40 bg-[#2D2D2D]/95 text-white p-3.5 rounded-lg border border-white/10 shadow-lg flex items-center justify-between backdrop-blur-xs"
+          >
+            <div className="flex items-center space-x-2.5">
+              <span className="text-base animate-bounce">👆</span>
+              <span className="text-xs font-medium leading-tight">
+                Tip: Swipe naar links of rechts om tussen de 4 schermen te wisselen, of klik op de navigatieknoppen.
+              </span>
+            </div>
+            <button
+              onClick={() => setShowSwipeHint(false)}
+              className="text-white/70 hover:text-white p-1 px-2.5 bg-white/10 hover:bg-white/20 rounded-md text-[10px] font-black cursor-pointer transition-all uppercase shrink-0 ml-2"
+            >
+              OK
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Restore Navigation button when in immersive swiped view */}
+      {isSwipedFullscreen && (
+        <div className="absolute top-3 right-3 z-50 flex items-center space-x-1.5 pointer-events-auto">
           <button
             type="button"
-            id="btn-mobile-config"
-            onClick={() => setShowConfig(true)}
-            className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1 animate-pulse"
+            onClick={() => setIsSwipedFullscreen(false)}
+            className="py-1.5 px-3 bg-zinc-900/90 hover:bg-zinc-900 text-white border border-white/10 rounded-full shadow-lg flex items-center space-x-1 transition-all cursor-pointer active:scale-95"
+            title="Herstel navigatie bar"
           >
-            <Settings className="w-3.5 h-3.5 animate-spin-slow" />
-            <span>Configuratie</span>
+            <Minimize2 className="w-3.5 h-3.5 mr-0.5 text-[#D56B45]" />
+            <span className="text-[10px] font-extrabold uppercase tracking-wide">Toon Menu ☰</span>
           </button>
-          <div className="font-mono text-[11px] text-[#D56B45] font-semibold bg-[#D56B45]/10 px-2.5 py-1 rounded-full">
-            {totalRoundedRemaining} jr restant
-          </div>
         </div>
-      </header>
+      )}
 
-      {/* Quick Info bar triggering configuration */}
-      <div className="bg-white border-b border-[#EAEAEA]/80 px-4 py-1.5 flex items-center justify-between text-[11px] text-[#767676] shrink-0">
-        <div className="flex items-center space-x-1">
-          <span className="font-bold text-[#2D2D2D]">Profiel:</span>
-          <span>{inputs.gender === "man" ? "Man" : "Vrouw"} &bull; Geb. {inputs.birthYear} &bull; Work: {inputs.startWorkAge} - {inputs.fireAge} jr</span>
-        </div>
-        <button
-          onClick={() => setShowConfig(true)}
-          className="text-[#D56B45] font-bold hover:underline cursor-pointer"
-        >
-          Wijzig
-        </button>
-      </div>
+      {/* 1. Mobile Custom Header Bar */}
+      {!isSwipedFullscreen && (
+        <>
+          <header className="px-4 py-3 bg-white border-b border-[#EAEAEA] flex items-center justify-between shrink-0">
+            <div className="flex items-center space-x-2">
+              <Sparkles className="w-4 h-4 text-[#D56B45]" />
+              <span className="font-sans font-bold text-sm tracking-tight text-[#2D2D2D]">
+                LifeRunway
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <button
+                type="button"
+                id="btn-mobile-config"
+                onClick={() => setShowConfig(true)}
+                className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1 animate-pulse"
+              >
+                <Settings className="w-3.5 h-3.5 animate-spin-slow" />
+                <span>Configuratie</span>
+              </button>
+              <div className="font-mono text-[11px] text-[#D56B45] font-semibold bg-[#D56B45]/10 px-2.5 py-1 rounded-full">
+                {totalRoundedRemaining} jr restant
+              </div>
+            </div>
+          </header>
 
-      {/* 1.5 Custom Dashboard Segmented Navigation Tabs */}
-      <div className="px-4 py-2 bg-white border-b border-[#EAEAEA] flex justify-between gap-1 overflow-x-auto shrink-0 scrollbar-none select-none">
-        {[
-          { id: 0, name: "1. Runway" },
-          { id: 1, name: "2. Matrix" },
-          { id: 2, name: "3. Vitaliteit" },
-          { id: 3, name: "4. Overzicht" },
-        ].map((s) => {
-          const isActive = activeSlide === s.id;
-          return (
+          {/* Quick Info bar triggering configuration */}
+          <div className="bg-white border-b border-[#EAEAEA]/80 px-4 py-1.5 flex items-center justify-between text-[11px] text-[#767676] shrink-0">
+            <div className="flex items-center space-x-1">
+              <span className="font-bold text-[#2D2D2D]">Profiel:</span>
+              <span>{inputs.gender === "man" ? "Man" : "Vrouw"} &bull; Geb. {inputs.birthYear} &bull; Work: {inputs.startWorkAge} - {inputs.fireAge} jr</span>
+            </div>
             <button
-              key={s.id}
-              onClick={() => goToSlide(s.id)}
-              className={`flex-1 min-w-[70px] py-2 px-1 rounded-md text-center transition-all cursor-pointer flex flex-col items-center justify-center border ${
-                isActive
-                  ? s.id === 3
-                    ? "bg-amber-100 border-[#D56B45] text-amber-900 font-black"
-                    : "bg-[#D56B45]/10 border-[#D56B45]/30 text-[#D56B45] font-black"
-                  : "bg-zinc-50 border-zinc-100 text-[#767676] hover:bg-zinc-100 font-medium"
-              }`}
+              onClick={() => setShowConfig(true)}
+              className="text-[#D56B45] font-bold hover:underline cursor-pointer"
             >
-              <span className="text-[10px] uppercase tracking-wider leading-none">{s.name}</span>
+              Wijzig
             </button>
-          );
-        })}
-      </div>
+          </div>
+
+          {/* 1.5 Custom Dashboard Segmented Navigation Tabs */}
+          <div className="px-4 py-2 bg-white border-b border-[#EAEAEA] flex justify-between gap-1 overflow-x-auto shrink-0 scrollbar-none select-none">
+            {[
+              { id: 0, name: "1. Runway" },
+              { id: 1, name: "2. Matrix" },
+              { id: 2, name: "3. Vitaliteit" },
+              { id: 3, name: "4. Overzicht" },
+            ].map((s) => {
+              const isActive = activeSlide === s.id;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => goToSlide(s.id)}
+                  className={`flex-1 min-w-[70px] py-2 px-1 rounded-md text-center transition-all cursor-pointer flex flex-col items-center justify-center border ${
+                    isActive
+                      ? s.id === 3
+                        ? "bg-amber-100 border-[#D56B45] text-amber-900 font-black"
+                        : "bg-[#D56B45]/10 border-[#D56B45]/30 text-[#D56B45] font-black"
+                      : "bg-zinc-50 border-zinc-100 text-[#767676] hover:bg-zinc-100 font-medium"
+                  }`}
+                >
+                  <span className="text-[10px] uppercase tracking-wider leading-none">{s.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
 
       {/* 2. Main Scrollable Dashboard Content */}
-      <main className={`flex-1 relative overflow-y-auto px-4 py-4 transition-colors duration-300 ${activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-[#F9F8F6] text-[#2D2D2D]"}`}>
+      <main
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className={`flex-1 relative overflow-y-auto px-4 py-4 transition-colors duration-300 ${
+          activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-[#F9F8F6] text-[#2D2D2D]"
+        }`}
+      >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activeSlide}
@@ -296,13 +386,13 @@ export default function MobileContainer({
                     </p>
                   </div>
 
-                  {/* Highlights circle */}
+                  {/* Highlights circle: Swap titles vertically */}
                   <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs shrink-0 max-w-sm mx-auto w-full">
+                    <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1.5 text-center">
+                      resterende tijdsperspectief
+                    </span>
                     <span className="text-4xl font-extrabold font-mono tracking-tight text-white mb-0.5">
                       {totalRemaining.toFixed(1)} jaar
-                    </span>
-                    <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100">
-                      resterende tijdsperspectief
                     </span>
                     <span className="text-[9px] font-sans text-white/70 mt-1">
                       ca. {Math.round(totalRemaining * 52.17).toLocaleString("nl-NL")} betekenisvolle weken over
