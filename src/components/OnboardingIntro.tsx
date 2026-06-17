@@ -505,27 +505,27 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-2.5 sm:space-y-4 px-1"
+              className="w-full space-y-4 sm:space-y-6 px-1"
             >
-              <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
-                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+              <div className="space-y-2 text-center sm:text-left">
+                <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
                   Stap 2: Bio-Score Leefstijl
                 </span>
-                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   Wat zijn uw dagelijkse gewoonten?
                 </h2>
-                <p className="text-[11px] sm:text-xs text-[#767676]">
+                <p className="text-sm text-[#767676]">
                   Leefstijlfactoren beïnvloeden de levensverwachting met jaren winst of verlies.
                 </p>
               </div>
 
               {/* 1. Slaap */}
-              <div className="space-y-1 sm:space-y-1.5">
-                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
-                  <Moon className="w-3.5 h-3.5 text-[#D56B45]" />
+              <div className="space-y-2">
+                <label className="text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-2">
+                  <Moon className="w-4 h-4 text-[#D56B45]" />
                   <span>Slaappatroon</span>
                 </label>
-                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm">
                   {[
                     { key: "kort", label: "Kort (<6u)", detail: "-1.5 jr" },
                     { key: "matig", label: "Matig (onrustig)", detail: "-0.5 jr" },
@@ -537,26 +537,26 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-sleep-${item.key}`}
                       onClick={() => updateBioAnswer("sleep", item.key as SleepLevel)}
-                      className={`p-1.5 sm:p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-3.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.sleep === item.key
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-semibold text-[11px] sm:text-xs">{item.label}</span>
-                      <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
+                      <span className="font-extrabold text-[13px] sm:text-[14px]">{item.label}</span>
+                      <span className="text-[11px] sm:text-xs font-semibold opacity-90 mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* 2. Beweging */}
-              <div className="space-y-1 sm:space-y-1.5">
-                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
-                  <Heart className="w-3.5 h-3.5 text-[#D56B45]" />
+              <div className="space-y-2">
+                <label className="text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-2">
+                  <Heart className="w-4 h-4 text-[#D56B45]" />
                   <span>Fysieke Activiteit</span>
                 </label>
-                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm">
                   {[
                     { key: "zittend", label: "Zittend (kantoor)", detail: "-1.5 jr" },
                     { key: "licht", label: "Lichte beweging", detail: "Neutraal" },
@@ -568,26 +568,26 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-activity-${item.key}`}
                       onClick={() => updateBioAnswer("activity", item.key as ActivityLevel)}
-                      className={`p-1.5 sm:p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-3.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.activity === item.key
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-semibold text-[11px] sm:text-xs">{item.label}</span>
-                      <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
+                      <span className="font-extrabold text-[13px] sm:text-[14px]">{item.label}</span>
+                      <span className="text-[11px] sm:text-xs font-semibold opacity-90 mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* 3. Stress */}
-              <div className="space-y-1 sm:space-y-1.5">
-                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
-                  <Brain className="w-3.5 h-3.5 text-[#D56B45]" />
+              <div className="space-y-2">
+                <label className="text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-2">
+                  <Brain className="w-4 h-4 text-[#D56B45]" />
                   <span>Psychische Stress</span>
                 </label>
-                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm">
                   {[
                     { key: "hoog", label: "Veel stress", detail: "-1.8 jr" },
                     { key: "gemiddeld", label: "Gemiddeld", detail: "Neutraal" },
@@ -599,14 +599,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-stress-${item.key}`}
                       onClick={() => updateBioAnswer("stress", item.key as StressLevel)}
-                      className={`p-1.5 sm:p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-3.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.stress === item.key
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-semibold text-[11px] sm:text-xs">{item.label}</span>
-                      <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
+                      <span className="font-extrabold text-[13px] sm:text-[14px]">{item.label}</span>
+                      <span className="text-[11px] sm:text-xs font-semibold opacity-90 mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
@@ -622,32 +622,32 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-3 sm:space-y-5 px-1"
+              className="w-full space-y-4 sm:space-y-6 px-1"
             >
-              <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
-                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+              <div className="space-y-2 text-center sm:text-left">
+                <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
                   Stap 3: Erfelijkheid
                 </span>
-                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   Hoe oud zijn uw biologische ouders geworden?
                 </h2>
-                <p className="text-[11px] sm:text-xs text-[#767676]">
+                <p className="text-sm text-[#767676]">
                   Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn (-1.5 tot +1.5 jaar per ouder).
                 </p>
               </div>
 
               {/* Father */}
-              <div className="p-2.5 sm:p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-2">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#2D2D2D]">Vader</span>
-                  <div className="flex space-x-1">
+              <div className="p-4 sm:p-5 bg-gray-50 border border-[#EAEAEA] rounded-2xl space-y-3.5 shadow-3xs">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2.5">
+                  <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">Vader</span>
+                  <div className="grid grid-cols-2 sm:flex sm:space-x-1 gap-2">
                     <button
                       type="button"
                       id="onboarding-father-alive"
                       onClick={() => onInputChange({ fatherPassedAge: null })}
-                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
                         inputs.fatherPassedAge === null
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
@@ -657,9 +657,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-father-passed"
                       onClick={() => onInputChange({ fatherPassedAge: 75 })}
-                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center ${
                         inputs.fatherPassedAge !== null
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
@@ -669,12 +669,12 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </div>
 
                 {inputs.fatherPassedAge !== null && (
-                  <div className="space-y-1 sm:space-y-2 mt-1 sm:mt-2">
-                    <div className="flex justify-between items-center text-[11px] sm:text-xs font-semibold">
-                      <span className="text-[#666]">Geleefde leeftijd van vader:</span>
-                      <span className="text-[#D56B45]">{inputs.fatherPassedAge} jaar</span>
+                  <div className="space-y-2.5 pt-1.5 border-t border-[#EAEAEA]/60">
+                    <div className="flex justify-between items-center text-xs font-bold">
+                      <span className="text-[#767676]">Geleefde leeftijd van vader:</span>
+                      <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{inputs.fatherPassedAge} jaar</span>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
                       <input
                         type="range"
                         id="slider-onboarding-fatherpassed"
@@ -682,7 +682,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         max="100"
                         value={inputs.fatherPassedAge}
                         onChange={(e) => onInputChange({ fatherPassedAge: parseInt(e.target.value) })}
-                        className="hidden sm:block w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                        className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                       />
                       <input
                         type="number"
@@ -694,7 +694,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                           const fatherPassedAge = Math.min(100, Math.max(40, val));
                           onInputChange({ fatherPassedAge });
                         }}
-                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                        className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
                       />
                     </div>
                   </div>
@@ -702,17 +702,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Mother */}
-              <div className="p-2.5 sm:p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-2">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#2D2D2D]">Moeder</span>
-                  <div className="flex space-x-1">
+              <div className="p-4 sm:p-5 bg-gray-50 border border-[#EAEAEA] rounded-2xl space-y-3.5 shadow-3xs">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2.5">
+                  <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">Moeder</span>
+                  <div className="grid grid-cols-2 sm:flex sm:space-x-1 gap-2">
                     <button
                       type="button"
                       id="onboarding-mother-alive"
                       onClick={() => onInputChange({ motherPassedAge: null })}
-                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
                         inputs.motherPassedAge === null
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
@@ -722,9 +722,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-mother-passed"
                       onClick={() => onInputChange({ motherPassedAge: 82 })}
-                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center ${
                         inputs.motherPassedAge !== null
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
@@ -734,12 +734,12 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </div>
 
                 {inputs.motherPassedAge !== null && (
-                  <div className="space-y-1 sm:space-y-2 mt-1 sm:mt-2">
-                    <div className="flex justify-between items-center text-[11px] sm:text-xs font-semibold">
-                      <span className="text-[#666]">Geleefde leeftijd van moeder:</span>
-                      <span className="text-[#D56B45]">{inputs.motherPassedAge} jaar</span>
+                  <div className="space-y-2.5 pt-1.5 border-t border-[#EAEAEA]/60">
+                    <div className="flex justify-between items-center text-xs font-bold">
+                      <span className="text-[#767676]">Geleefde leeftijd van moeder:</span>
+                      <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{inputs.motherPassedAge} jaar</span>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
                       <input
                         type="range"
                         id="slider-onboarding-motherpassed"
@@ -747,7 +747,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         max="100"
                         value={inputs.motherPassedAge}
                         onChange={(e) => onInputChange({ motherPassedAge: parseInt(e.target.value) })}
-                        className="hidden sm:block w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                        className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                       />
                       <input
                         type="number"
@@ -759,7 +759,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                           const motherPassedAge = Math.min(100, Math.max(40, val));
                           onInputChange({ motherPassedAge });
                         }}
-                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                        className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
                       />
                     </div>
                   </div>
@@ -776,27 +776,27 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-3 sm:space-y-5 px-1"
+              className="w-full space-y-4 sm:space-y-6 px-1"
             >
-              <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
-                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+              <div className="space-y-2 text-center sm:text-left">
+                <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
                   Stap 4: Carrière & FIRE
                 </span>
-                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   Wanneer begon u met werken en wat is uw FIRE doel?
                 </h2>
-                <p className="text-[11px] sm:text-xs text-[#767676]">
+                <p className="text-sm text-[#767676]">
                   De splitsing tussen verplichte werktijd en absolute tijdssoevereiniteit.
                 </p>
               </div>
 
               {/* Start of working life */}
-              <div className="space-y-1 sm:space-y-3">
-                <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Startleeftijd Carrière</span>
-                  <span className="font-mono text-sm font-extrabold text-[#2D2D2D]">{inputs.startWorkAge} jaar</span>
+              <div className="space-y-2.5">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold text-[#767676] uppercase tracking-wider">Startleeftijd Carrière</span>
+                  <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{inputs.startWorkAge} jaar</span>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
                   <input
                     type="range"
                     id="slider-onboarding-startwork"
@@ -804,7 +804,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     max="40"
                     value={inputs.startWorkAge}
                     onChange={(e) => onInputChange({ startWorkAge: parseInt(e.target.value) })}
-                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                    className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                   />
                   <input
                     type="number"
@@ -815,18 +815,18 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       const val = parseInt(e.target.value) || 20;
                       onInputChange({ startWorkAge: Math.min(40, Math.max(15, val)) });
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
                   />
                 </div>
               </div>
 
               {/* FIRE Target Age */}
-              <div className="space-y-1 sm:space-y-3">
-                <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Doelleeftijd FIRE / Pensioen</span>
-                  <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.fireAge} jaar</span>
+              <div className="space-y-2.5">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold text-[#767676] uppercase tracking-wider">Doelleeftijd FIRE / Pensioen</span>
+                  <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{inputs.fireAge} jaar</span>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
                   <input
                     type="range"
                     id="slider-onboarding-fireage"
@@ -834,7 +834,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     max="90"
                     value={inputs.fireAge}
                     onChange={(e) => onInputChange({ fireAge: parseInt(e.target.value) })}
-                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#2D2D2D]"
+                    className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                   />
                   <input
                     type="number"
@@ -846,17 +846,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       const val = parseInt(e.target.value) || minVal;
                       onInputChange({ fireAge: Math.min(90, Math.max(minVal, val)) });
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
                   />
                 </div>
               </div>
 
-              <div className="p-2 sm:p-3 bg-neutral-50 rounded border border-[#EAEAEA] text-[11px] sm:text-xs space-y-1 sm:space-y-1.5">
-                <div className="flex justify-between font-medium">
+              <div className="p-4 bg-neutral-50 rounded-2xl border border-[#EAEAEA] text-xs space-y-2 shadow-3xs">
+                <div className="flex justify-between font-extrabold text-sm text-[#2D2D2D]">
                   <span className="text-[#767676]">Actieve Accumulatie:</span>
-                  <span className="text-[#2D2D2D]">{inputs.fireAge - inputs.startWorkAge} jaar</span>
+                  <span className="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded border border-emerald-500/15">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
-                <p className="text-[10px] sm:text-[11px] text-[#767676] leading-relaxed">
+                <p className="text-xs text-[#767676] leading-relaxed">
                   Dit is het aantal jaren verplichte kapitaalaccumulatie dat u heeft ingepland voor uw financiële onafhankelijkheid.
                 </p>
               </div>
@@ -871,37 +871,37 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
-              className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-1"
+              className="text-center space-y-4 sm:space-y-6 max-w-md w-full px-1"
             >
-              <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#F0FAF3] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
-                <Smile className="w-6 h-6 sm:w-8 sm:h-8 text-[#45D57C]" />
+              <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#F0FAF3] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
+                <Smile className="w-8 h-8 text-[#45D57C]" />
               </div>
 
-              <div className="space-y-1 sm:space-y-2">
-                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+              <div className="space-y-2">
+                <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   Klaar om te ontdekken!
                 </h2>
-                <p className="text-xs sm:text-sm text-[#767676]">
+                <p className="text-sm text-[#767676]">
                   Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.
                 </p>
               </div>
 
-              <div className="bg-[#FAF3F0] p-2.5 sm:p-4 rounded-lg border border-[#D56B45]/20 text-xs text-left grid grid-cols-2 gap-y-1.5 sm:gap-y-2.5 gap-x-4">
+              <div className="bg-[#FAF3F0] p-4 sm:p-5 rounded-2xl border border-[#D56B45]/20 text-left grid grid-cols-2 gap-y-3.5 gap-x-4 shadow-3xs">
                 <div>
-                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">Profiel</span>
-                  <span className="text-[#2D2D2D] font-semibold">{inputs.gender === "man" ? "Man" : "Vrouw"}, {inputs.currentAge} jr</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Profiel</span>
+                  <span className="text-sm font-black text-[#2D2D2D]">{inputs.gender === "man" ? "Man" : "Vrouw"}, {inputs.currentAge} jr</span>
                 </div>
                 <div>
-                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">Geboortejaar</span>
-                  <span className="text-[#2D2D2D] font-semibold font-mono">{inputs.birthYear}</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Geboortejaar</span>
+                  <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.birthYear}</span>
                 </div>
                 <div>
-                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">Accumulatie</span>
-                  <span className="text-[#2D2D2D] font-semibold font-mono">{inputs.fireAge - inputs.startWorkAge} jaar</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Accumulatie</span>
+                  <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
                 <div>
-                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">FIRE Doel</span>
-                  <span className="text-[#2D2D2D] font-semibold font-mono">{inputs.fireAge} jaar</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">FIRE Doel</span>
+                  <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge} jaar</span>
                 </div>
               </div>
 
@@ -910,10 +910,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onComplete}
-                className="w-full py-2.5 sm:py-3.5 bg-[#D56B45] hover:bg-[#C25B36] text-white font-bold text-xs sm:text-sm tracking-wide rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+                className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-black text-sm tracking-wide rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
               >
                 <span>Open Interactief Dashboard</span>
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-5 h-5" />
               </motion.button>
             </motion.div>
           )}
@@ -922,14 +922,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </main>
 
       {/* Navigation Footer */}
-      <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-2 sm:pt-4 border-t border-[#F3F2F0] z-10">
+      <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] z-10">
         <div>
           {step > 0 && (
             <button
                type="button"
                id="btn-onboarding-back"
                onClick={handleBack}
-               className="px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
+               className="px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-extrabold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4" />
               <span>Vorige</span>
@@ -943,7 +943,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               type="button"
               id="btn-onboarding-skip"
               onClick={() => setStep(stepsMeta.length - 1)}
-              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium text-[#767676] hover:text-[#2D2D2D] transition-colors duration-150 cursor-pointer"
+              className="px-3 sm:px-4 py-2.5 sm:py-3 text-sm font-bold text-[#767676] hover:text-[#2D2D2D] transition-colors duration-150 cursor-pointer"
             >
               Sla over
             </button>
@@ -954,10 +954,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               type="button"
               id="btn-onboarding-next"
               onClick={handleNext}
-              className="px-3.5 sm:px-5 py-1.5 sm:py-2.5 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-bold text-[11px] sm:text-xs rounded-md flex items-center space-x-1 shadow-sm transition-colors duration-150 cursor-pointer"
+              className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 cursor-pointer"
             >
               <span>Volgende</span>
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           )}
         </div>
