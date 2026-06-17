@@ -539,27 +539,27 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-4 sm:space-y-6 px-1"
+              className="w-full space-y-2 sm:space-y-6 px-1"
             >
-              <div className="space-y-2 text-center sm:text-left">
-                <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
+              <div className="space-y-0.5 sm:space-y-2 text-center sm:text-left">
+                <span className="hidden sm:inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
                   Stap 2: Bio-Score Leefstijl
                 </span>
-                <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
+                <h2 className="text-lg sm:text-2xl font-black tracking-tight text-[#2D2D2D] leading-tight">
                   Wat zijn uw dagelijkse gewoonten?
                 </h2>
-                <p className="text-sm text-[#767676]">
+                <p className="text-[11px] sm:text-sm text-[#767676] leading-tight">
                   Leefstijlfactoren beïnvloeden de levensverwachting met jaren winst of verlies.
                 </p>
               </div>
 
               {/* 1. Slaap */}
-              <div className="space-y-2">
-                <label className="text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-2">
-                  <Moon className="w-4 h-4 text-[#D56B45]" />
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Slaappatroon</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm">
                   {[
                     { key: "kort", label: "Kort (<6u)", detail: "-1.5 jr" },
                     { key: "matig", label: "Matig (onrustig)", detail: "-0.5 jr" },
@@ -571,26 +571,26 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-sleep-${item.key}`}
                       onClick={() => updateBioAnswer("sleep", item.key as SleepLevel)}
-                      className={`p-3.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.sleep === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-extrabold text-[13px] sm:text-[14px]">{item.label}</span>
-                      <span className="text-[11px] sm:text-xs font-semibold opacity-90 mt-1">{item.detail}</span>
+                      <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
+                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* 2. Beweging */}
-              <div className="space-y-2">
-                <label className="text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-2">
-                  <Heart className="w-4 h-4 text-[#D56B45]" />
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Fysieke Activiteit</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm">
                   {[
                     { key: "zittend", label: "Zittend (kantoor)", detail: "-1.5 jr" },
                     { key: "licht", label: "Lichte beweging", detail: "Neutraal" },
@@ -602,26 +602,26 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-activity-${item.key}`}
                       onClick={() => updateBioAnswer("activity", item.key as ActivityLevel)}
-                      className={`p-3.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.activity === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-extrabold text-[13px] sm:text-[14px]">{item.label}</span>
-                      <span className="text-[11px] sm:text-xs font-semibold opacity-90 mt-1">{item.detail}</span>
+                      <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
+                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* 3. Stress */}
-              <div className="space-y-2">
-                <label className="text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-2">
-                  <Brain className="w-4 h-4 text-[#D56B45]" />
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Psychische Stress</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm">
                   {[
                     { key: "hoog", label: "Veel stress", detail: "-1.8 jr" },
                     { key: "gemiddeld", label: "Gemiddeld", detail: "Neutraal" },
@@ -633,14 +633,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-stress-${item.key}`}
                       onClick={() => updateBioAnswer("stress", item.key as StressLevel)}
-                      className={`p-3.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.stress === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-extrabold text-[13px] sm:text-[14px]">{item.label}</span>
-                      <span className="text-[11px] sm:text-xs font-semibold opacity-90 mt-1">{item.detail}</span>
+                      <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
+                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
