@@ -351,22 +351,40 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Geboortejaar</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
                 </div>
-                <input
-                  type="range"
-                  id="slider-onboarding-birthyear"
-                  min="1940"
-                  max="2024"
-                  value={inputs.birthYear}
-                  onChange={(e) => {
-                    const bYear = parseInt(e.target.value);
-                    const calculatedAge = 2026 - bYear;
-                    onInputChange({ 
-                      birthYear: bYear,
-                      currentAge: Math.max(2, Math.min(100, calculatedAge))
-                    });
-                  }}
-                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                />
+                <div className="flex space-x-2">
+                  <input
+                    type="range"
+                    id="slider-onboarding-birthyear"
+                    min="1940"
+                    max="2024"
+                    value={inputs.birthYear}
+                    onChange={(e) => {
+                      const bYear = parseInt(e.target.value);
+                      const calculatedAge = 2026 - bYear;
+                      onInputChange({ 
+                        birthYear: bYear,
+                        currentAge: Math.max(2, Math.min(100, calculatedAge))
+                      });
+                    }}
+                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                  />
+                  <input
+                    type="number"
+                    min="1940"
+                    max="2024"
+                    value={inputs.birthYear}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 1990;
+                      const bYear = Math.min(2024, Math.max(1940, val));
+                      const calculatedAge = 2026 - bYear;
+                      onInputChange({
+                        birthYear: bYear,
+                        currentAge: Math.max(2, Math.min(100, calculatedAge))
+                      });
+                    }}
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                  />
+                </div>
               </div>
 
               {/* Current Age display and tweak */}
@@ -375,15 +393,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Huidige Leeftijd (in 2026)</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.currentAge} jaar</span>
                 </div>
-                <input
-                  type="range"
-                  id="slider-onboarding-currentage"
-                  min="2"
-                  max="100"
-                  value={inputs.currentAge}
-                  onChange={(e) => onInputChange({ currentAge: parseInt(e.target.value) })}
-                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                />
+                <div className="flex space-x-2">
+                  <input
+                    type="range"
+                    id="slider-onboarding-currentage"
+                    min="2"
+                    max="100"
+                    value={inputs.currentAge}
+                    onChange={(e) => onInputChange({ currentAge: parseInt(e.target.value) })}
+                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                  />
+                  <input
+                    type="number"
+                    min="2"
+                    max="100"
+                    value={inputs.currentAge}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 30;
+                      const currentAge = Math.min(100, Math.max(2, val));
+                      onInputChange({ currentAge });
+                    }}
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                  />
+                </div>
               </div>
 
               {/* Own Expected Age Option */}
@@ -426,15 +458,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         {inputs.customLifeExpectancy} jaar
                       </span>
                     </div>
-                    <input
-                      type="range"
-                      id="slider-onboarding-custom-expectancy"
-                      min={Math.max(45, inputs.currentAge + 1)}
-                      max="115"
-                      value={inputs.customLifeExpectancy ?? 85}
-                      onChange={(e) => onInputChange({ customLifeExpectancy: parseInt(e.target.value) })}
-                      className="w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                    />
+                    <div className="flex space-x-2">
+                      <input
+                        type="range"
+                        id="slider-onboarding-custom-expectancy"
+                        min={Math.max(45, inputs.currentAge + 1)}
+                        max="115"
+                        value={inputs.customLifeExpectancy ?? 85}
+                        onChange={(e) => onInputChange({ customLifeExpectancy: parseInt(e.target.value) })}
+                        className="hidden sm:block w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                      />
+                      <input
+                        type="number"
+                        min={Math.max(45, inputs.currentAge + 1)}
+                        max="115"
+                        value={inputs.customLifeExpectancy ?? 85}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value) || 85;
+                          const customLifeExpectancy = Math.min(115, Math.max(Math.max(45, inputs.currentAge + 1), val));
+                          onInputChange({ customLifeExpectancy });
+                        }}
+                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                      />
+                    </div>
                     <p className="text-[10px] text-[#767676] italic">
                       Deze waarde overschrijft het biologische/CBS cohort prognosemodel in de grafieken.
                     </p>
@@ -618,15 +664,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       <span className="text-[#666]">Geleefde leeftijd van vader:</span>
                       <span className="text-[#D56B45]">{inputs.fatherPassedAge} jaar</span>
                     </div>
-                    <input
-                      type="range"
-                      id="slider-onboarding-fatherpassed"
-                      min="40"
-                      max="100"
-                      value={inputs.fatherPassedAge}
-                      onChange={(e) => onInputChange({ fatherPassedAge: parseInt(e.target.value) })}
-                      className="w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                    />
+                    <div className="flex space-x-2">
+                      <input
+                        type="range"
+                        id="slider-onboarding-fatherpassed"
+                        min="40"
+                        max="100"
+                        value={inputs.fatherPassedAge}
+                        onChange={(e) => onInputChange({ fatherPassedAge: parseInt(e.target.value) })}
+                        className="hidden sm:block w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                      />
+                      <input
+                        type="number"
+                        min="40"
+                        max="100"
+                        value={inputs.fatherPassedAge}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value) || 75;
+                          const fatherPassedAge = Math.min(100, Math.max(40, val));
+                          onInputChange({ fatherPassedAge });
+                        }}
+                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                      />
+                    </div>
                   </div>
                 )}
               </div>
@@ -669,15 +729,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       <span className="text-[#666]">Geleefde leeftijd van moeder:</span>
                       <span className="text-[#D56B45]">{inputs.motherPassedAge} jaar</span>
                     </div>
-                    <input
-                      type="range"
-                      id="slider-onboarding-motherpassed"
-                      min="40"
-                      max="100"
-                      value={inputs.motherPassedAge}
-                      onChange={(e) => onInputChange({ motherPassedAge: parseInt(e.target.value) })}
-                      className="w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                    />
+                    <div className="flex space-x-2">
+                      <input
+                        type="range"
+                        id="slider-onboarding-motherpassed"
+                        min="40"
+                        max="100"
+                        value={inputs.motherPassedAge}
+                        onChange={(e) => onInputChange({ motherPassedAge: parseInt(e.target.value) })}
+                        className="hidden sm:block w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                      />
+                      <input
+                        type="number"
+                        min="40"
+                        max="100"
+                        value={inputs.motherPassedAge}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value) || 78;
+                          const motherPassedAge = Math.min(100, Math.max(40, val));
+                          onInputChange({ motherPassedAge });
+                        }}
+                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                      />
+                    </div>
                   </div>
                 )}
               </div>
@@ -712,15 +786,28 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Startleeftijd Carrière</span>
                   <span className="font-mono text-sm font-extrabold text-[#2D2D2D]">{inputs.startWorkAge} jaar</span>
                 </div>
-                <input
-                  type="range"
-                  id="slider-onboarding-startwork"
-                  min="15"
-                  max="40"
-                  value={inputs.startWorkAge}
-                  onChange={(e) => onInputChange({ startWorkAge: parseInt(e.target.value) })}
-                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                />
+                <div className="flex space-x-2">
+                  <input
+                    type="range"
+                    id="slider-onboarding-startwork"
+                    min="15"
+                    max="40"
+                    value={inputs.startWorkAge}
+                    onChange={(e) => onInputChange({ startWorkAge: parseInt(e.target.value) })}
+                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                  />
+                  <input
+                    type="number"
+                    min="15"
+                    max="40"
+                    value={inputs.startWorkAge}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value) || 20;
+                      onInputChange({ startWorkAge: Math.min(40, Math.max(15, val)) });
+                    }}
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                  />
+                </div>
               </div>
 
               {/* FIRE Target Age */}
@@ -729,15 +816,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Doelleeftijd FIRE / Pensioen</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.fireAge} jaar</span>
                 </div>
-                <input
-                  type="range"
-                  id="slider-onboarding-fireage"
-                  min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
-                  max="90"
-                  value={inputs.fireAge}
-                  onChange={(e) => onInputChange({ fireAge: parseInt(e.target.value) })}
-                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#2D2D2D]"
-                />
+                <div className="flex space-x-2">
+                  <input
+                    type="range"
+                    id="slider-onboarding-fireage"
+                    min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
+                    max="90"
+                    value={inputs.fireAge}
+                    onChange={(e) => onInputChange({ fireAge: parseInt(e.target.value) })}
+                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#2D2D2D]"
+                  />
+                  <input
+                    type="number"
+                    min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
+                    max="90"
+                    value={inputs.fireAge}
+                    onChange={(e) => {
+                      const minVal = Math.max(inputs.startWorkAge + 2, inputs.currentAge);
+                      const val = parseInt(e.target.value) || minVal;
+                      onInputChange({ fireAge: Math.min(90, Math.max(minVal, val)) });
+                    }}
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                  />
+                </div>
               </div>
 
               <div className="p-3 bg-neutral-50 rounded border border-[#EAEAEA] text-xs space-y-1.5">
