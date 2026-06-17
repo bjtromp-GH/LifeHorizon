@@ -241,12 +241,6 @@ export default function MobileContainer({
             {activeSlide === 0 && (
               <div className="space-y-4 flex flex-col justify-between h-full">
                 <div className="space-y-4">
-                  <StatsCard
-                    inputs={inputs}
-                    projectedLifeExpectancy={projectedLifeExpectancy}
-                    apiSource={apiSource}
-                  />
-                  
                   <div className="bg-white p-3.5 border border-[#EAEAEA] rounded-md shadow-3xs text-[#2D2D2D]">
                     <LifePhasesBar
                       inputs={inputs}
@@ -255,6 +249,12 @@ export default function MobileContainer({
                       onInputChange={onInputChange}
                     />
                   </div>
+                  
+                  <StatsCard
+                    inputs={inputs}
+                    projectedLifeExpectancy={projectedLifeExpectancy}
+                    apiSource={apiSource}
+                  />
                 </div>
 
                 {/* Navigation Controls */}
