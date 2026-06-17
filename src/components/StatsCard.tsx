@@ -40,9 +40,9 @@ export default function StatsCard({
           </span>
           <span className="text-xs text-[#767676] ml-1 font-sans">jaar</span>
         </div>
-        <div className="mt-1 flex items-center justify-between text-[9px] text-[#767676]">
-          <span>Gecalibreerd</span>
-          <span className="font-mono bg-[#EAE8E4] px-1 rounded text-[#2D2D2D]">
+        <div className="mt-2.5 pt-2 border-t border-[#F8F7F5] flex flex-wrap items-center justify-between gap-1 text-[10px] text-[#767676]">
+          <span className="text-[#8E8C88] font-medium">Gecalibreerd met:</span>
+          <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[8.5px] font-extrabold uppercase tracking-widest bg-[#FAF3F0] text-[#D56B45] border border-[#D56B45]/15 whitespace-nowrap">
             {apiSource}
           </span>
         </div>

@@ -13,7 +13,12 @@ import {
   CheckCircle2, 
   Info,
   Calendar,
-  Smile
+  Smile,
+  Target,
+  Moon,
+  Brain,
+  Cpu,
+  Edit3
 } from "lucide-react";
 
 interface OnboardingIntroProps {
@@ -139,7 +144,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full"
                 >
-                  <span className="text-xs sm:text-sm">🎯</span>
+                  <Target className="w-3.5 h-3.5 text-white" />
                   <span className="font-sans font-bold text-[10px] sm:text-[11px] tracking-widest uppercase text-white">
                     DE GOUDEN RUNWAY
                   </span>
@@ -339,7 +344,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                            : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
                       }`}
                     >
-                      <span>{g === "man" ? "👨 Man" : "👩 Vrouw"}</span>
+                      <span>{g === "man" ? "Man" : "Vrouw"}</span>
                     </button>
                   ))}
                 </div>
@@ -428,25 +433,27 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     type="button"
                     id="btn-onboarding-life-calc"
                     onClick={() => onInputChange({ customLifeExpectancy: null })}
-                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
+                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                       inputs.customLifeExpectancy === null
                         ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                         : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
                     }`}
                   >
-                    🤖 CBS model + Leefstijl
+                    <Cpu className="w-3.5 h-3.5" />
+                    <span>CBS model + Leefstijl</span>
                   </button>
                   <button
                     type="button"
                     id="btn-onboarding-life-custom"
                     onClick={() => onInputChange({ customLifeExpectancy: 85 })}
-                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
+                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                       inputs.customLifeExpectancy !== null
                         ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                         : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
                     }`}
                   >
-                    ✍️ Zelf inschatten
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>Zelf inschatten</span>
                   </button>
                 </div>
 
@@ -514,8 +521,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               {/* 1. Slaap */}
               <div className="space-y-1 sm:space-y-1.5">
-                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
-                  <span>🌙 Slaappatroon</span>
+                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Moon className="w-3.5 h-3.5 text-[#D56B45]" />
+                  <span>Slaappatroon</span>
                 </label>
                 <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                   {[
@@ -544,8 +552,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               {/* 2. Beweging */}
               <div className="space-y-1 sm:space-y-1.5">
-                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
-                  <span>🏃 Fysieke Activiteit</span>
+                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Heart className="w-3.5 h-3.5 text-[#D56B45]" />
+                  <span>Fysieke Activiteit</span>
                 </label>
                 <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                   {[
@@ -574,8 +583,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               {/* 3. Stress */}
               <div className="space-y-1 sm:space-y-1.5">
-                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
-                  <span>🧠 Psychische Stress</span>
+                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Brain className="w-3.5 h-3.5 text-[#D56B45]" />
+                  <span>Psychische Stress</span>
                 </label>
                 <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                   {[

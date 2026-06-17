@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import { Settings, Edit3 } from "lucide-react";
 import { LifePhases, UserInputs } from "../types";
 
 interface LifePhasesBarProps {
@@ -31,13 +32,24 @@ export default function LifePhasesBar({
           {onInputChange && (
             <button
               onClick={() => setIsEditingExpectancy(!isEditingExpectancy)}
-              className="px-2 py-0.5 rounded text-[10px] bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[#D56B45] font-extrabold flex items-center space-x-1 cursor-pointer transition-all shrink-0"
+              className="px-2 py-1 rounded text-[10px] bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[#D56B45] font-bold flex items-center space-x-1 cursor-pointer transition-all shrink-0 shadow-3xs"
             >
-              <span>{inputs.customLifeExpectancy !== null ? `✍️ Zelf: ${Math.round(projectedLifeExpectancy)} jr` : "⚙️ Pas levensverwachting aan"}</span>
+              {inputs.customLifeExpectancy !== null ? (
+                <>
+                  <Edit3 className="w-3 h-3 text-[#D56B45]" />
+                  <span>Zelf: {Math.round(projectedLifeExpectancy)} jr</span>
+                </>
+              ) : (
+                <>
+                  <Settings className="w-3 h-3 text-[#D56B45]" />
+                  <span>Pas levensverwachting aan</span>
+                </>
+              )}
             </button>
           )}
-          <span className="text-xs font-mono text-[#D56B45] font-medium whitespace-nowrap">
-            Huidige Leeftijd: {currentAge} jaar
+          <span className="px-2.5 py-1 text-[10px] uppercase font-bold font-sans rounded bg-[#FAF3F0] text-[#D56B45] border border-[#D56B45]/20 whitespace-nowrap flex items-center gap-1.5 shadow-3xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D56B45] animate-pulse" />
+            Huidige Leeftijd: <span className="font-mono text-xs font-black">{currentAge} jaar</span>
           </span>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useEffect } from "react";
-import { Sparkles, Settings, X, RefreshCw, Minimize2 } from "lucide-react";
+import { Sparkles, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -105,8 +105,8 @@ export default function MobileContainer({
             className="absolute bottom-20 left-4 right-4 z-40 bg-[#2D2D2D]/95 text-white p-3.5 rounded-lg border border-white/10 shadow-lg flex items-center justify-between backdrop-blur-xs"
           >
             <div className="flex items-center space-x-2.5">
-              <span className="text-base animate-bounce">👆</span>
-              <span className="text-xs font-medium leading-tight">
+              <Info className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+              <span className="text-xs font-medium leading-tight text-white">
                 Tip: Swipe naar links of rechts om tussen de 4 schermen te wisselen, of klik op de navigatieknoppen.
               </span>
             </div>
@@ -403,7 +403,7 @@ export default function MobileContainer({
                 <div className="space-y-5">
                   <div className="text-center space-y-2 mt-2">
                     <div className="inline-flex items-center justify-center w-11 h-11 bg-white/20 rounded-full border border-white/35 backdrop-blur-xs shadow-3xs">
-                      <span className="text-xl">🎯</span>
+                      <Target className="w-5 h-5 text-white" />
                     </div>
                     <h3 className="text-lg font-black font-sans uppercase tracking-tight text-white">
                       Eindconclusie & Reflectie
@@ -453,9 +453,12 @@ export default function MobileContainer({
                     <p>
                       Jouw verwachte leefduur van <span className="font-bold text-white">{Math.round(projectedLifeExpectancy)} jaar</span> telt ca. <span className="font-bold text-white">{Math.round(projectedLifeExpectancy * 52.17).toLocaleString("nl-NL")} weken</span>. Elk hokje in de matrix vertegenwoordigt een unieke week.
                     </p>
-                    <p className="font-bold text-white">
-                      💡 Tip: Met gezonde slaap, sport en gerichte stressreductie kun je actief jaren aan levenskwaliteit (Levenswinst) toevoegen!
-                    </p>
+                    <div className="flex items-start space-[#767676] space-x-2 pt-1 text-left">
+                      <Lightbulb className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+                      <p className="font-bold text-white text-[11px] leading-snug">
+                        Tip: Met gezonde slaap, sport en gerichte stressreductie kun je actief jaren aan levenskwaliteit (Levenswinst) toevoegen!
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -482,9 +485,10 @@ export default function MobileContainer({
 
                   <button
                     onClick={() => setShowConfig(true)}
-                    className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1"
+                    className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5"
                   >
-                    <span>⚙️ Pas aan</span>
+                    <Settings className="w-3.5 h-3.5" />
+                    <span>Pas aan</span>
                   </button>
                 </div>
               </div>
