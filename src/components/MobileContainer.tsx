@@ -211,13 +211,6 @@ export default function MobileContainer({
 
               {slideIndex === 2 && (
                 <div className="space-y-4 pb-4">
-                  {/* High Fidelity Stacked Cards */}
-                  <AestheticFidelityCards
-                    inputs={inputs}
-                    projectedLifeExpectancy={projectedLifeExpectancy}
-                    apiSource={apiSource}
-                  />
-
                   {/* Tiny Life phases bar */}
                   <div className="bg-white p-3 border border-[#EAEAEA] rounded-md">
                     <LifePhasesBar
@@ -234,6 +227,13 @@ export default function MobileContainer({
                       projectedLifeExpectancy={projectedLifeExpectancy}
                     />
                   </div>
+
+                  {/* High Fidelity Stacked Cards */}
+                  <AestheticFidelityCards
+                    inputs={inputs}
+                    projectedLifeExpectancy={projectedLifeExpectancy}
+                    apiSource={apiSource}
+                  />
                 </div>
               )}
             </motion.div>
