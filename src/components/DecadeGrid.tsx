@@ -46,9 +46,9 @@ export default function DecadeGrid({
         </div>
       </div>
 
-      {/* Main Grid Card wrapper */}
-      <div className="p-4 sm:p-5 bg-white border border-[#EAEAEA] rounded-md">
-        <div className="flex flex-col space-y-2.5 overflow-x-auto">
+      {/* Main Grid Card wrapper - borderless and transparent on mobile to support clean layout, with hidden scrollbar */}
+      <div className="p-0 sm:p-5 bg-transparent sm:bg-white border-none sm:border sm:border-[#EAEAEA] sm:rounded-md shadow-none sm:shadow-3xs">
+        <div className="flex flex-col space-y-2.5 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden">
           {decadesArray.map((decadeIndex) => {
             const startYearOfDecade = decadeIndex * 10;
             const yearsInThisDecade = Array.from({ length: 10 }, (_, i) => startYearOfDecade + i).filter(

@@ -24,6 +24,7 @@ interface OnboardingIntroProps {
 
 export default function OnboardingIntro({ inputs, onInputChange, onComplete }: OnboardingIntroProps) {
   const [step, setStep] = useState<number>(0);
+  const [imgError, setImgError] = useState(false);
 
   // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
@@ -146,8 +147,35 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Core Body Container */}
-              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-xl mx-auto px-4 z-10 space-y-8">
+              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-xl mx-auto px-4 z-10 space-y-7">
                 
+                {/* De Olifant Logo Badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                  className="w-24 h-24 shrink-0 flex items-center justify-center bg-white/10 border border-white/25 rounded-full p-4.5 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-1.5"
+                >
+                  <img
+                    src="/img/Olifant.png"
+                    alt="Olifant"
+                    onError={() => setImgError(true)}
+                    className={`w-full h-full object-contain filter brightness-0 invert transition-all duration-500 hover:scale-105 ${imgError ? 'hidden' : 'block'}`}
+                  />
+                  {imgError && (
+                    <div className="flex flex-col items-center justify-center text-white">
+                      <svg
+                        viewBox="0 0 100 100"
+                        className="w-14 h-14 stroke-current fill-none stroke-[1.5]"
+                      >
+                        <path d="M75,50 C75,35 60,25 45,25 C32,25 25,35 25,48 M25,48 C20,49 15,52 15,58 C15,65 22,66 25,66 M25,48 C26,56 28,62 30,75 M45,25 C50,25 55,30 55,38 C55,42 50,44 48,46 M48,46 C48,55 52,65 52,75 M38,48 C38,58 40,68 40,75 M75,40 C82,41 85,45 85,55 C85,68 72,75 72,75 M63,45 C63,55 64,65 64,75" />
+                        <circle cx="34" cy="38" r="1.5" className="fill-current" />
+                        <path d="M55,32 C58,31 62,32 64,35 C66,38 65,42 63,45" />
+                      </svg>
+                    </div>
+                  )}
+                </motion.div>
+
                 {/* Animated Header */}
                 <motion.div 
                   variants={containerVars}
@@ -221,8 +249,25 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="text-center space-y-6 max-w-md"
             >
-              <div className="mx-auto w-16 h-16 rounded-2xl bg-[#FAF3F0] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
-                <Sparkles className="w-8 h-8 text-[#D56B45] animate-pulse" />
+              <div className="mx-auto w-24 h-24 rounded-2xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-center justify-center shadow-sm relative overflow-hidden group p-4.5 mb-1">
+                <img
+                  src="/img/Olifant.png"
+                  alt="De Olifant"
+                  onError={() => setImgError(true)}
+                  className={`w-full h-full object-contain transition-all duration-500 hover:scale-105 ${imgError ? 'hidden' : 'block'}`}
+                />
+                {imgError && (
+                  <div className="flex flex-col items-center justify-center text-[#D56B45]">
+                    <svg
+                      viewBox="0 0 100 100"
+                      className="w-14 h-14 stroke-current fill-none stroke-[1.5]"
+                    >
+                      <path d="M75,50 C75,35 60,25 45,25 C32,25 25,35 25,48 M25,48 C20,49 15,52 15,58 C15,65 22,66 25,66 M25,48 C26,56 28,62 30,75 M45,25 C50,25 55,30 55,38 C55,42 50,44 48,46 M48,46 C48,55 52,65 52,75 M38,48 C38,58 40,68 40,75 M75,40 C82,41 85,45 85,55 C85,68 72,75 72,75 M63,45 C63,55 64,65 64,75" />
+                      <circle cx="34" cy="38" r="1.5" className="fill-current" />
+                      <path d="M55,32 C58,31 62,32 64,35 C66,38 65,42 63,45" />
+                    </svg>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-3">

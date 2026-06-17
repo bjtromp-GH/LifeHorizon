@@ -40,6 +40,17 @@ export default function MobileContainer({
     return () => clearTimeout(timer);
   }, []);
 
+  // Update theme-color in page meta headers dynamically to ensure perfect mobile styling matching app's branding
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', '#D56B45');
+  }, []);
+
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const totalRoundedRemaining = Math.round(totalRemaining * 10) / 10;
 
@@ -271,8 +282,8 @@ export default function MobileContainer({
             {activeSlide === 1 && (
               <div className="space-y-4 flex flex-col justify-between h-full">
                 <div className="space-y-4">
-                  {/* Levensmatrix (DecadeGrid) */}
-                  <div id="mobile-matrix-wrapper" className="bg-white p-3.5 border border-[#EAEAEA] rounded-lg shadow-3xs text-[#2D2D2D]">
+                  {/* Levensmatrix (DecadeGrid) - outer box borders removed for clean layout */}
+                  <div id="mobile-matrix-wrapper" className="text-[#2D2D2D] py-1 bg-transparent border-0 shadow-none">
                     <div className="mb-1">
                       <DecadeGrid
                         inputs={inputs}
