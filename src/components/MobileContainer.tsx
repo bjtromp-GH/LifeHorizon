@@ -7,6 +7,7 @@ import BioScoreSection from "./BioScoreSection";
 import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
+import StatsCard from "./StatsCard";
 
 interface MobileContainerProps {
   inputs: UserInputs;
@@ -211,29 +212,37 @@ export default function MobileContainer({
 
               {slideIndex === 2 && (
                 <div className="space-y-4 pb-4">
-                  {/* High Fidelity Stacked Cards */}
-                  <AestheticFidelityCards
-                    inputs={inputs}
-                    projectedLifeExpectancy={projectedLifeExpectancy}
-                    apiSource={apiSource}
-                  />
-
-                  {/* Tiny Life phases bar */}
-                  <div className="bg-white p-3 border border-[#EAEAEA] rounded-md">
-                    <LifePhasesBar
+                  {/* Levensloop & Markering (StatsCard & LifePhasesBar) */}
+                  <div className="space-y-4">
+                    <StatsCard
                       inputs={inputs}
                       projectedLifeExpectancy={projectedLifeExpectancy}
-                      phases={phases}
+                      apiSource={apiSource}
                     />
+                    
+                    <div className="bg-white p-3 border border-[#EAEAEA] rounded-md">
+                      <LifePhasesBar
+                        inputs={inputs}
+                        projectedLifeExpectancy={projectedLifeExpectancy}
+                        phases={phases}
+                      />
+                    </div>
                   </div>
 
-                  {/* Decade Grid resized/formatted for mobile screens */}
+                  {/* Levensmatrix (DecadeGrid) */}
                   <div className="scale-[0.98] transform origin-top">
                     <DecadeGrid
                       inputs={inputs}
                       projectedLifeExpectancy={projectedLifeExpectancy}
                     />
                   </div>
+
+                  {/* Overige schermen (High Fidelity Stacked Cards) */}
+                  <AestheticFidelityCards
+                    inputs={inputs}
+                    projectedLifeExpectancy={projectedLifeExpectancy}
+                    apiSource={apiSource}
+                  />
                 </div>
               )}
             </motion.div>

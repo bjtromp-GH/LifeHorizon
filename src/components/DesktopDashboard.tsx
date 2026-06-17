@@ -5,6 +5,7 @@ import BioScoreSection from "./BioScoreSection";
 import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
+import StatsCard from "./StatsCard";
 
 interface DesktopDashboardProps {
   inputs: UserInputs;
@@ -82,6 +83,15 @@ export default function DesktopDashboard({
             </div>
           </div>
         </header>
+
+        {/* Dynamic Key Counters Overview */}
+        <div id="desktop-overview-counters" className="w-full">
+          <StatsCard
+            inputs={inputs}
+            projectedLifeExpectancy={projectedLifeExpectancy}
+            apiSource={apiSource}
+          />
+        </div>
 
         {/* Bento Grid */}
         <div id="bento-grid-root" className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
