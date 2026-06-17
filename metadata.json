@@ -1,0 +1,6 @@
+{
+  "name": "LifeRunway",
+  "description": "Calculates dynamic life expectancy and maps life into three distinct phases: Development, Accumulation, and Freedom, in a high-end Fintech Minimalist design system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,755 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
+import { 
+  Sparkles, 
+  ChevronRight, 
+  ChevronLeft, 
+  Play, 
+  User, 
+  Heart, 
+  Dna, 
+  Briefcase, 
+  CheckCircle2, 
+  Info,
+  Calendar,
+  Smile
+} from "lucide-react";
+
+interface OnboardingIntroProps {
+  inputs: UserInputs;
+  onInputChange: (updates: Partial<UserInputs>) => void;
+  onComplete: () => void;
+}
+
+export default function OnboardingIntro({ inputs, onInputChange, onComplete }: OnboardingIntroProps) {
+  const [step, setStep] = useState<number>(0);
+
+  // List of step metadata including the new Intro Splash screen at index 0
+  const stepsMeta = [
+    { title: "Intro", icon: Sparkles },
+    { title: "Welkom", icon: Sparkles },
+    { title: "Profiel", icon: User },
+    { title: "Leefstijl", icon: Heart },
+    { title: "Genetica", icon: Dna },
+    { title: "Carrière & FIRE", icon: Briefcase },
+    { title: "Klaar", icon: CheckCircle2 }
+  ];
+
+  const titleLetters = Array.from("LifeRunway");
+  const containerVars = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.06,
+      }
+    }
+  };
+  const letterVars = {
+    hidden: { opacity: 0, y: 35, rotate: -4 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      rotate: 0,
+      transition: { type: "spring", damping: 11, stiffness: 180 } 
+    }
+  };
+
+  const handleNext = () => {
+    if (step < stepsMeta.length - 1) {
+      setStep(step + 1);
+    } else {
+      onComplete();
+    }
+  };
+
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
+  // Helper to handle bio score answer changes
+  const updateBioAnswer = (key: "activity" | "sleep" | "stress", value: any) => {
+    onInputChange({
+      bioAnswers: {
+        ...inputs.bioAnswers,
+        [key]: value
+      }
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-[#FDFDFD] flex flex-col justify-between p-4 sm:p-8 font-sans text-[#2D2D2D] select-none overflow-x-hidden relative">
+      {/* Abstract elegant background elements */}
+      <div className="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full bg-[#FAF3F0] blur-3xl opacity-60 pointer-events-none z-0" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-[#FAFCEE] blur-3xl opacity-60 pointer-events-none z-0" />
+
+      {/* Top Header & Step Progress Bar */}
+      <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-2 sm:pt-6 z-10">
+        <div className="flex items-center space-x-1.5 mb-3">
+          <span className="text-xl">🔥</span>
+          <h1 className="font-sans font-extrabold text-base uppercase tracking-wider text-[#2D2D2D]">
+            Levensloop & FIRE
+          </h1>
+        </div>
+
+        {step > 0 && (
+          <div className="w-full bg-[#EAE8E4] h-1.5 rounded-full relative overflow-hidden flex mb-2">
+            <motion.div 
+              className="h-full bg-[#D56B45]"
+              initial={{ width: 0 }}
+              animate={{ width: `${(step / (stepsMeta.length - 1)) * 100}%` }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            />
+          </div>
+        )}
+
+        {step > 0 && (
+          <div className="flex justify-between w-full px-1 text-[10px] text-[#767676] font-medium uppercase tracking-wider">
+            <span>Stap {step} van {stepsMeta.length - 1}</span>
+            <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
+          </div>
+        )}
+      </header>
+
+      {/* Main Interactive Slides container */}
+      <main className="flex-grow flex items-center justify-center py-6 sm:py-12 z-10 w-full max-w-xl mx-auto">
+        <AnimatePresence mode="wait">
+          
+          {/* SLIDE 0: ORANGE INTRO SPLASH */}
+          {step === 0 && (
+            <motion.div
+              key="splash-screen"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-gradient-to-br from-[#E25C26] via-[#D56B45] to-[#B84E29] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
+            >
+              {/* Subtle animated light orb background */}
+              <div className="absolute inset-x-0 top-0 h-96 bg-radial-gradient from-white/10 to-transparent blur-2xl pointer-events-none" />
+              
+              {/* Logo/Badge at Top */}
+              <div className="w-full flex justify-center pt-8 z-10">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full"
+                >
+                  <span className="text-sm">🎯</span>
+                  <span className="font-sans font-bold text-[11px] tracking-widest uppercase text-white">
+                    DE GOUDEN RUNWAY
+                  </span>
+                </motion.div>
+              </div>
+
+              {/* Core Body Container */}
+              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-xl mx-auto px-4 z-10 space-y-8">
+                
+                {/* Animated Header */}
+                <motion.div 
+                  variants={containerVars}
+                  initial="hidden"
+                  animate="visible"
+                  className="flex justify-center items-center space-x-[2px]"
+                >
+                  {titleLetters.map((char, index) => (
+                    <motion.span
+                      key={index}
+                      variants={letterVars}
+                      className="text-5.5xl sm:text-7xl font-sans font-black tracking-tight select-none inline-block text-white"
+                      style={{
+                        textShadow: "0 4px 12px rgba(0,0,0,0.15)"
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.div>
+
+                {/* Slogan */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+                  className="space-y-4"
+                >
+                  <p className="text-lg sm:text-2xl font-serif italic text-white/95 max-w-lg leading-relaxed font-semibold">
+                    "Confronteer je schaarste. Visualiseer je vitaliteit en levensfases."
+                  </p>
+                  <div className="w-12 h-[2px] bg-white/30 mx-auto rounded" />
+                </motion.div>
+              </div>
+
+              {/* Footer with Continuing button */}
+              <div className="w-full max-w-md mx-auto pb-12 flex flex-col items-center z-10 space-y-4">
+                <motion.button
+                  id="btn-orange-splash-continue"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => setStep(1)}
+                  className="w-full py-4 px-6 bg-white hover:bg-[#FFF8F5] text-[#D56B45] font-extrabold text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-xl border border-white/10 cursor-pointer transition-all duration-200"
+                >
+                  <span>Ga verder</span>
+                  <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
+                </motion.button>
+                
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.6 }}
+                  transition={{ delay: 1.5 }}
+                  className="text-[10px] uppercase tracking-widest text-white/80 font-mono"
+                >
+                  Bereken je overgebleven tijd &bull; CBS Cohort Model 2026
+                </motion.span>
+              </div>
+            </motion.div>
+          )}
+
+          {/* SLIDE 1: WELCOME INTRO SPLASH */}
+          {step === 1 && (
+            <motion.div
+              key="welcome"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="text-center space-y-6 max-w-md"
+            >
+              <div className="mx-auto w-16 h-16 rounded-2xl bg-[#FAF3F0] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
+                <Sparkles className="w-8 h-8 text-[#D56B45] animate-pulse" />
+              </div>
+
+              <div className="space-y-3">
+                <h2 className="text-3xl font-extrabold font-sans tracking-tight text-[#2D2D2D] sm:text-4xl">
+                  Welkom bij uw Levensloop
+                </h2>
+                <p className="text-sm text-[#767676] leading-relaxed">
+                  Hoeveel soevereine tijd heeft u echt te besteden? Ontdek uw statistische levensverwachting gebaseerd op het officiële CBS cohortmodel en zet dit af tegen uw FIRE ambities.
+                </p>
+              </div>
+
+              <div className="p-3.5 bg-gray-50 rounded-lg border border-[#EAEAEA] text-xs text-left flex items-start space-x-2.5">
+                <Info className="w-4.5 h-4.5 text-[#D56B45] shrink-0 mt-0.5" />
+                <p className="text-[#767676] leading-snug">
+                  Dit model berekent uw prognose dynamisch overlevingsstatistieken, leefstijlfactoren en genetische hereditaire aanpassingen.
+                </p>
+              </div>
+
+              <motion.button
+                id="btn-intro-start"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleNext}
+                className="w-full py-3.5 bg-[#201F1D] hover:bg-[#1A1A1A] text-white font-semibold text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+              >
+                <span>Start de Levensmeting</span>
+                <Play className="w-4 h-4 fill-current" />
+              </motion.button>
+            </motion.div>
+          )}
+
+          {/* SLIDE 2: BASE DEMOGRAPHY */}
+          {step === 2 && (
+            <motion.div
+              key="demographics"
+              initial={{ opacity: 0, x: 25 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -25 }}
+              transition={{ duration: 0.4 }}
+              className="w-full space-y-6"
+            >
+              <div className="space-y-1.5 text-center sm:text-left">
+                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                  Stap 1: Demografie
+                </span>
+                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                  Wat is uw biologische basisprofiel?
+                </h2>
+                <p className="text-xs text-[#767676]">
+                  Biologischer geslacht en geboortejaar bepalen de startprognose van het CBS cohortmodel.
+                </p>
+              </div>
+
+              {/* Gender selection */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#767676]">
+                  Biologisch Geslacht
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(["man", "vrouw"] as Gender[]).map((g) => (
+                    <button
+                      key={g}
+                      type="button"
+                      id={`btn-onboarding-gender-${g}`}
+                      onClick={() => onInputChange({ gender: g })}
+                      className={`py-3.5 rounded-lg border font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
+                        inputs.gender === g
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span>{g === "man" ? "👨 Man" : "👩 Vrouw"}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Birth Year selection */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Geboortejaar</span>
+                  <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
+                </div>
+                <input
+                  type="range"
+                  id="slider-onboarding-birthyear"
+                  min="1940"
+                  max="2024"
+                  value={inputs.birthYear}
+                  onChange={(e) => {
+                    const bYear = parseInt(e.target.value);
+                    const calculatedAge = 2026 - bYear;
+                    onInputChange({ 
+                      birthYear: bYear,
+                      currentAge: Math.max(2, Math.min(100, calculatedAge))
+                    });
+                  }}
+                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                />
+              </div>
+
+              {/* Current Age display and tweak */}
+              <div className="space-y-3 pt-2">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Huidige Leeftijd (in 2026)</span>
+                  <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.currentAge} jaar</span>
+                </div>
+                <input
+                  type="range"
+                  id="slider-onboarding-currentage"
+                  min="2"
+                  max="100"
+                  value={inputs.currentAge}
+                  onChange={(e) => onInputChange({ currentAge: parseInt(e.target.value) })}
+                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                />
+              </div>
+            </motion.div>
+          )}
+
+          {/* SLIDE 3: LIFESTYLE / BIO-SCORE */}
+          {step === 3 && (
+            <motion.div
+              key="lifestyle"
+              initial={{ opacity: 0, x: 25 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -25 }}
+              transition={{ duration: 0.4 }}
+              className="w-full space-y-5"
+            >
+              <div className="space-y-1.5 text-center sm:text-left">
+                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                  Stap 2: Bio-Score Leefstijl
+                </span>
+                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                  Wat zijn uw dagelijkse gewoonten?
+                </h2>
+                <p className="text-xs text-[#767676]">
+                  Leefstijlfactoren beïnvloeden de levensverwachting met jaren winst of verlies.
+                </p>
+              </div>
+
+              {/* 1. Slaap */}
+              <div className="space-y-2">
+                <label className="text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
+                  <span>🌙 Slaappatroon</span>
+                </label>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  {[
+                    { key: "kort", label: "Kort (<6u)", detail: "-1.5 jr" },
+                    { key: "matig", label: "Matig (onrustig)", detail: "-0.5 jr" },
+                    { key: "goed", label: "Goed (7-8u)", detail: "+1.0 jr" },
+                    { key: "optimaal", label: "Perfect (diep)", detail: "+2.0 jr" }
+                  ].map((item) => (
+                    <button
+                      key={item.key}
+                      type="button"
+                      id={`btn-onboarding-sleep-${item.key}`}
+                      onClick={() => updateBioAnswer("sleep", item.key as SleepLevel)}
+                      className={`p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                        inputs.bioAnswers.sleep === item.key
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="font-semibold text-xs">{item.label}</span>
+                      <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 2. Beweging */}
+              <div className="space-y-2">
+                <label className="text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
+                  <span>🏃 Fysieke Activiteit</span>
+                </label>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  {[
+                    { key: "zittend", label: "Zittend (kantoor)", detail: "-1.5 jr" },
+                    { key: "licht", label: "Lichte beweging", detail: "Neutraal" },
+                    { key: "actief", label: "Actief (sportief)", detail: "+1.2 jr" },
+                    { key: "optimaal", label: "Atleet / Optimaal", detail: "+2.5 jr" }
+                  ].map((item) => (
+                    <button
+                      key={item.key}
+                      type="button"
+                      id={`btn-onboarding-activity-${item.key}`}
+                      onClick={() => updateBioAnswer("activity", item.key as ActivityLevel)}
+                      className={`p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                        inputs.bioAnswers.activity === item.key
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="font-semibold text-xs">{item.label}</span>
+                      <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 3. Stress */}
+              <div className="space-y-2">
+                <label className="text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
+                  <span>🧠 Psychische Stress</span>
+                </label>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  {[
+                    { key: "hoog", label: "Veel stress", detail: "-1.8 jr" },
+                    { key: "gemiddeld", label: "Gemiddeld", detail: "Neutraal" },
+                    { key: "balans", label: "In balans", detail: "+0.8 jr" },
+                    { key: "laag", label: "Grootmoedig / Zen", detail: "+1.5 jr" }
+                  ].map((item) => (
+                    <button
+                      key={item.key}
+                      type="button"
+                      id={`btn-onboarding-stress-${item.key}`}
+                      onClick={() => updateBioAnswer("stress", item.key as StressLevel)}
+                      className={`p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                        inputs.bioAnswers.stress === item.key
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="font-semibold text-xs">{item.label}</span>
+                      <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* SLIDE 4: HEREDITARY / GENETICS */}
+          {step === 4 && (
+            <motion.div
+              key="genetics"
+              initial={{ opacity: 0, x: 25 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -25 }}
+              transition={{ duration: 0.4 }}
+              className="w-full space-y-6"
+            >
+              <div className="space-y-1.5 text-center sm:text-left">
+                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                  Stap 3: Erfelijkheid
+                </span>
+                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                  Hoe oud zijn uw biologische ouders geworden?
+                </h2>
+                <p className="text-xs text-[#767676]">
+                  Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn (-1.5 tot +1.5 jaar per ouder).
+                </p>
+              </div>
+
+              {/* Father */}
+              <div className="p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-3">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold text-[#2D2D2D]">Vader</span>
+                  <div className="flex space-x-1">
+                    <button
+                      type="button"
+                      id="onboarding-father-alive"
+                      onClick={() => onInputChange({ fatherPassedAge: null })}
+                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                        inputs.fatherPassedAge === null
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#767676]"
+                      }`}
+                    >
+                      In leven / Neutraal
+                    </button>
+                    <button
+                      type="button"
+                      id="onboarding-father-passed"
+                      onClick={() => onInputChange({ fatherPassedAge: 75 })}
+                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                        inputs.fatherPassedAge !== null
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#767676]"
+                      }`}
+                    >
+                      Overleden
+                    </button>
+                  </div>
+                </div>
+
+                {inputs.fatherPassedAge !== null && (
+                  <div className="space-y-2 mt-2">
+                    <div className="flex justify-between items-center text-xs font-semibold">
+                      <span className="text-[#666]">Geleefde leeftijd van vader:</span>
+                      <span className="text-[#D56B45]">{inputs.fatherPassedAge} jaar</span>
+                    </div>
+                    <input
+                      type="range"
+                      id="slider-onboarding-fatherpassed"
+                      min="40"
+                      max="100"
+                      value={inputs.fatherPassedAge}
+                      onChange={(e) => onInputChange({ fatherPassedAge: parseInt(e.target.value) })}
+                      className="w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Mother */}
+              <div className="p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-3">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold text-[#2D2D2D]">Moeder</span>
+                  <div className="flex space-x-1">
+                    <button
+                      type="button"
+                      id="onboarding-mother-alive"
+                      onClick={() => onInputChange({ motherPassedAge: null })}
+                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                        inputs.motherPassedAge === null
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#767676]"
+                      }`}
+                    >
+                      In leven / Neutraal
+                    </button>
+                    <button
+                      type="button"
+                      id="onboarding-mother-passed"
+                      onClick={() => onInputChange({ motherPassedAge: 82 })}
+                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                        inputs.motherPassedAge !== null
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                          : "border-[#EAEAEA] bg-white text-[#767676]"
+                      }`}
+                    >
+                      Overleden
+                    </button>
+                  </div>
+                </div>
+
+                {inputs.motherPassedAge !== null && (
+                  <div className="space-y-2 mt-2">
+                    <div className="flex justify-between items-center text-xs font-semibold">
+                      <span className="text-[#666]">Geleefde leeftijd van moeder:</span>
+                      <span className="text-[#D56B45]">{inputs.motherPassedAge} jaar</span>
+                    </div>
+                    <input
+                      type="range"
+                      id="slider-onboarding-motherpassed"
+                      min="40"
+                      max="100"
+                      value={inputs.motherPassedAge}
+                      onChange={(e) => onInputChange({ motherPassedAge: parseInt(e.target.value) })}
+                      className="w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                    />
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+
+          {/* SLIDE 5: CAREER & FIRE TARGETS */}
+          {step === 5 && (
+            <motion.div
+              key="career_fire"
+              initial={{ opacity: 0, x: 25 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -25 }}
+              transition={{ duration: 0.4 }}
+              className="w-full space-y-6"
+            >
+              <div className="space-y-1.5 text-center sm:text-left">
+                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                  Stap 4: Carrière & FIRE
+                </span>
+                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                  Wanneer begon u met werken en wat is uw FIRE doel?
+                </h2>
+                <p className="text-xs text-[#767676]">
+                  De splitsing tussen verplichte werktijd en absolute tijdssoevereiniteit.
+                </p>
+              </div>
+
+              {/* Start of working life */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Startleeftijd Carrière</span>
+                  <span className="font-mono text-sm font-extrabold text-[#2D2D2D]">{inputs.startWorkAge} jaar</span>
+                </div>
+                <input
+                  type="range"
+                  id="slider-onboarding-startwork"
+                  min="15"
+                  max="40"
+                  value={inputs.startWorkAge}
+                  onChange={(e) => onInputChange({ startWorkAge: parseInt(e.target.value) })}
+                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                />
+              </div>
+
+              {/* FIRE Target Age */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Doelleeftijd FIRE / Pensioen</span>
+                  <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.fireAge} jaar</span>
+                </div>
+                <input
+                  type="range"
+                  id="slider-onboarding-fireage"
+                  min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
+                  max="90"
+                  value={inputs.fireAge}
+                  onChange={(e) => onInputChange({ fireAge: parseInt(e.target.value) })}
+                  className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#2D2D2D]"
+                />
+              </div>
+
+              <div className="p-3 bg-neutral-50 rounded border border-[#EAEAEA] text-xs space-y-1.5">
+                <div className="flex justify-between font-medium">
+                  <span className="text-[#767676]">Actieve Accumulatie:</span>
+                  <span className="text-[#2D2D2D]">{inputs.fireAge - inputs.startWorkAge} jaar</span>
+                </div>
+                <p className="text-[11px] text-[#767676] leading-relaxed">
+                  Dit is het aantal jaren verplichte kapitaalaccumulatie dat u heeft ingepland voor uw financiële onafhankelijkheid.
+                </p>
+              </div>
+            </motion.div>
+          )}
+
+          {/* SLIDE 6: FINAL SUMMARY AND COMPLETE */}
+          {step === 6 && (
+            <motion.div
+              key="complete"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4 }}
+              className="text-center space-y-6 max-w-md"
+            >
+              <div className="mx-auto w-16 h-16 rounded-2xl bg-[#F0FAF3] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
+                <Smile className="w-8 h-8 text-[#45D57C]" />
+              </div>
+
+              <div className="space-y-2">
+                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                  Klaar om te ontdekken!
+                </h2>
+                <p className="text-sm text-[#767676]">
+                  Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.
+                </p>
+              </div>
+
+              <div className="bg-[#FAF3F0] p-4 rounded-lg border border-[#D56B45]/20 text-xs text-left grid grid-cols-2 gap-y-2.5 gap-x-4">
+                <div>
+                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">Profiel</span>
+                  <span className="text-[#2D2D2D] font-semibold">{inputs.gender === "man" ? "Man" : "Vrouw"}, {inputs.currentAge} jr</span>
+                </div>
+                <div>
+                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">Geboortejaar</span>
+                  <span className="text-[#2D2D2D] font-semibold font-mono">{inputs.birthYear}</span>
+                </div>
+                <div>
+                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">Accumulatie</span>
+                  <span className="text-[#2D2D2D] font-semibold font-mono">{inputs.fireAge - inputs.startWorkAge} jaar</span>
+                </div>
+                <div>
+                  <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">FIRE Doel</span>
+                  <span className="text-[#2D2D2D] font-semibold font-mono">{inputs.fireAge} jaar</span>
+                </div>
+              </div>
+
+              <motion.button
+                id="btn-onboarding-complete"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onComplete}
+                className="w-full py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-bold text-sm tracking-wide rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+              >
+                <span>Open Interactief Dashboard</span>
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            </motion.div>
+          )}
+
+        </AnimatePresence>
+      </main>
+
+      {/* Navigation Footer */}
+      <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-4 border-t border-[#F3F2F0] z-10">
+        <div>
+          {step > 0 && (
+            <button
+              type="button"
+              id="btn-onboarding-back"
+              onClick={handleBack}
+              className="px-4 py-2 text-xs font-semibold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>Vorige</span>
+            </button>
+          )}
+        </div>
+
+        <div className="flex items-center space-x-3">
+          {step > 0 && step < stepsMeta.length - 1 && (
+            <button
+              type="button"
+              id="btn-onboarding-skip"
+              onClick={() => setStep(stepsMeta.length - 1)}
+              className="px-3.5 py-2 text-xs font-medium text-[#767676] hover:text-[#2D2D2D] transition-colors duration-150 cursor-pointer"
+            >
+              Sla over
+            </button>
+          )}
+
+          {step > 0 && step < stepsMeta.length - 1 && (
+            <button
+              type="button"
+              id="btn-onboarding-next"
+              onClick={handleNext}
+              className="px-5 py-2.5 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-bold text-xs rounded-md flex items-center space-x-1 shadow-sm transition-colors duration-150 cursor-pointer"
+            >
+              <span>Volgende</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+      </footer>
+    </div>
+  );
+}
