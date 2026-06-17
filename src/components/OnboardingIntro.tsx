@@ -81,22 +81,22 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] flex flex-col justify-between p-4 sm:p-8 font-sans text-[#2D2D2D] select-none overflow-x-hidden relative">
+    <div className="h-[100dvh] md:h-auto md:min-h-screen overflow-hidden bg-[#FDFDFD] flex flex-col justify-between p-3.5 sm:p-8 font-sans text-[#2D2D2D] select-none relative">
       {/* Abstract elegant background elements */}
       <div className="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full bg-[#FAF3F0] blur-3xl opacity-60 pointer-events-none z-0" />
       <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-[#FAFCEE] blur-3xl opacity-60 pointer-events-none z-0" />
 
       {/* Top Header & Step Progress Bar */}
-      <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-2 sm:pt-6 z-10">
-        <div className="flex items-center space-x-1.5 mb-3">
+      <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10">
+        <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
           <span className="text-xl">🔥</span>
-          <h1 className="font-sans font-extrabold text-base uppercase tracking-wider text-[#2D2D2D]">
+          <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
             Levensloop & FIRE
           </h1>
         </div>
 
         {step > 0 && (
-          <div className="w-full bg-[#EAE8E4] h-1.5 rounded-full relative overflow-hidden flex mb-2">
+          <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
             <motion.div 
               className="h-full bg-[#D56B45]"
               initial={{ width: 0 }}
@@ -107,7 +107,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
         )}
 
         {step > 0 && (
-          <div className="flex justify-between w-full px-1 text-[10px] text-[#767676] font-medium uppercase tracking-wider">
+          <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
             <span>Stap {step} van {stepsMeta.length - 1}</span>
             <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
           </div>
@@ -115,7 +115,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </header>
 
       {/* Main Interactive Slides container */}
-      <main className="flex-grow flex items-center justify-center py-6 sm:py-12 z-10 w-full max-w-xl mx-auto">
+      <main className="flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto overflow-y-auto pr-1">
         <AnimatePresence mode="wait">
           
           {/* SLIDE 0: ORANGE INTRO SPLASH */}
@@ -132,29 +132,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               <div className="absolute inset-x-0 top-0 h-96 bg-radial-gradient from-white/10 to-transparent blur-2xl pointer-events-none" />
               
               {/* Logo/Badge at Top */}
-              <div className="w-full flex justify-center pt-8 z-10">
+              <div className="w-full flex justify-center pt-4 sm:pt-8 z-10">
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full"
+                  className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full"
                 >
-                  <span className="text-sm">🎯</span>
-                  <span className="font-sans font-bold text-[11px] tracking-widest uppercase text-white">
+                  <span className="text-xs sm:text-sm">🎯</span>
+                  <span className="font-sans font-bold text-[10px] sm:text-[11px] tracking-widest uppercase text-white">
                     DE GOUDEN RUNWAY
                   </span>
                 </motion.div>
               </div>
 
               {/* Core Body Container */}
-              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-xl mx-auto px-4 z-10 space-y-7">
+              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-xl mx-auto px-4 z-10 space-y-4 sm:space-y-7">
                 
                 {/* De Olifant Logo Badge */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8, y: -20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                  className="w-24 h-24 shrink-0 flex items-center justify-center bg-white/10 border border-white/25 rounded-full p-4.5 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-1.5"
+                  className="w-16 h-16 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center bg-white/10 border border-white/25 rounded-full p-3 sm:p-4.5 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-1"
                 >
                   <img
                     src="/img/Olifant.png"
@@ -166,7 +166,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <div className="flex flex-col items-center justify-center text-white">
                       <svg
                         viewBox="0 0 100 100"
-                        className="w-14 h-14 stroke-current fill-none stroke-[1.5]"
+                        className="w-10 h-10 sm:w-14 sm:h-14 stroke-current fill-none stroke-[1.5]"
                       >
                         <path d="M75,50 C75,35 60,25 45,25 C32,25 25,35 25,48 M25,48 C20,49 15,52 15,58 C15,65 22,66 25,66 M25,48 C26,56 28,62 30,75 M45,25 C50,25 55,30 55,38 C55,42 50,44 48,46 M48,46 C48,55 52,65 52,75 M38,48 C38,58 40,68 40,75 M75,40 C82,41 85,45 85,55 C85,68 72,75 72,75 M63,45 C63,55 64,65 64,75" />
                         <circle cx="34" cy="38" r="1.5" className="fill-current" />
@@ -187,7 +187,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <motion.span
                       key={index}
                       variants={letterVars}
-                      className="text-[52px] min-[375px]:text-[60px] min-[415px]:text-[66px] sm:text-8xl font-sans font-black tracking-tighter select-none inline-block text-white"
+                      className="text-[32px] min-[375px]:text-[38px] min-[415px]:text-[42px] sm:text-7xl font-sans font-black tracking-tight select-none inline-block text-white"
                       style={{
                         textShadow: "0 4px 12px rgba(0,0,0,0.15)"
                       }}
@@ -202,9 +202,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-                  className="space-y-4"
+                  className="space-y-2 sm:space-y-4"
                 >
-                  <p className="text-lg sm:text-2xl font-serif italic text-white/95 max-w-lg leading-relaxed font-semibold">
+                  <p className="text-sm min-[375px]:text-base sm:text-2xl font-serif italic text-white/95 max-w-lg leading-relaxed font-semibold">
                     "Confronteer je schaarste. Visualiseer je vitaliteit en levensfases."
                   </p>
                   <div className="w-12 h-[2px] bg-white/30 mx-auto rounded" />
@@ -212,7 +212,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Footer with Continuing button */}
-              <div className="w-full max-w-md mx-auto pb-12 flex flex-col items-center z-10 space-y-4">
+              <div className="w-full max-w-md mx-auto pb-4 sm:pb-12 flex flex-col items-center z-10 space-y-2 sm:space-y-4">
                 <motion.button
                   id="btn-orange-splash-continue"
                   initial={{ opacity: 0, y: 20 }}
@@ -221,17 +221,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => setStep(1)}
-                  className="w-full py-4 px-6 bg-white hover:bg-[#FFF8F5] text-[#D56B45] font-extrabold text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-xl border border-white/10 cursor-pointer transition-all duration-200"
+                  className="w-full py-3 px-5 sm:py-4 sm:px-6 bg-white hover:bg-[#FFF8F5] text-[#D56B45] font-extrabold text-xs sm:text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-xl border border-white/10 cursor-pointer transition-all duration-200"
                 >
                   <span>Ga verder</span>
-                  <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
                 </motion.button>
                 
                 <motion.span 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.6 }}
                   transition={{ delay: 1.5 }}
-                  className="text-[10px] uppercase tracking-widest text-white/80 font-mono"
+                  className="text-[9px] sm:text-[10px] uppercase tracking-widest text-white/80 font-mono"
                 >
                   Bereken je overgebleven tijd &bull; CBS Cohort Model 2026
                 </motion.span>
@@ -247,9 +247,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-center space-y-6 max-w-md"
+              className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-2"
             >
-              <div className="mx-auto w-24 h-24 rounded-2xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-center justify-center shadow-sm relative overflow-hidden group p-4.5 mb-1">
+              <div className="mx-auto w-16 h-16 sm:w-24 sm:h-24 rounded-2xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-center justify-center shadow-sm relative overflow-hidden group p-3 mb-0.5">
                 <img
                   src="/img/Olifant.png"
                   alt="De Olifant"
@@ -260,7 +260,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <div className="flex flex-col items-center justify-center text-[#D56B45]">
                     <svg
                       viewBox="0 0 100 100"
-                      className="w-14 h-14 stroke-current fill-none stroke-[1.5]"
+                      className="w-10 h-10 sm:w-14 sm:h-14 stroke-current fill-none stroke-[1.5]"
                     >
                       <path d="M75,50 C75,35 60,25 45,25 C32,25 25,35 25,48 M25,48 C20,49 15,52 15,58 C15,65 22,66 25,66 M25,48 C26,56 28,62 30,75 M45,25 C50,25 55,30 55,38 C55,42 50,44 48,46 M48,46 C48,55 52,65 52,75 M38,48 C38,58 40,68 40,75 M75,40 C82,41 85,45 85,55 C85,68 72,75 72,75 M63,45 C63,55 64,65 64,75" />
                       <circle cx="34" cy="38" r="1.5" className="fill-current" />
@@ -270,17 +270,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
 
-              <div className="space-y-3">
-                <h2 className="text-3xl font-extrabold font-sans tracking-tight text-[#2D2D2D] sm:text-4xl">
+              <div className="space-y-1.5 sm:space-y-3">
+                <h2 className="text-xl sm:text-3xl font-extrabold font-sans tracking-tight text-[#2D2D2D]">
                   Welkom bij uw Levensloop
                 </h2>
-                <p className="text-sm text-[#767676] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#767676] leading-relaxed">
                   Hoeveel soevereine tijd heeft u echt te besteden? Ontdek uw statistische levensverwachting gebaseerd op het officiële CBS cohortmodel en zet dit af tegen uw FIRE ambities.
                 </p>
               </div>
 
-              <div className="p-3.5 bg-gray-50 rounded-lg border border-[#EAEAEA] text-xs text-left flex items-start space-x-2.5">
-                <Info className="w-4.5 h-4.5 text-[#D56B45] shrink-0 mt-0.5" />
+              <div className="p-2.5 sm:p-3.5 bg-gray-50 rounded-lg border border-[#EAEAEA] text-[11px] sm:text-xs text-left flex items-start space-x-2">
+                <Info className="w-4 h-4 text-[#D56B45] shrink-0 mt-0.5" />
                 <p className="text-[#767676] leading-snug">
                   Dit model berekent uw prognose dynamisch overlevingsstatistieken, leefstijlfactoren en genetische hereditaire aanpassingen.
                 </p>
@@ -291,10 +291,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleNext}
-                className="w-full py-3.5 bg-[#201F1D] hover:bg-[#1A1A1A] text-white font-semibold text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+                className="w-full py-2.5 sm:py-3.5 bg-[#201F1D] hover:bg-[#1A1A1A] text-white font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
               >
                 <span>Start de Levensmeting</span>
-                <Play className="w-4 h-4 fill-current" />
+                <Play className="w-3.5 h-3.5 fill-current" />
               </motion.button>
             </motion.div>
           )}
@@ -307,36 +307,36 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-6"
+              className="w-full space-y-3 sm:space-y-5 px-1"
             >
-              <div className="space-y-1.5 text-center sm:text-left">
+              <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
                 <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                   Stap 1: Demografie
                 </span>
-                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
                   Wat is uw biologische basisprofiel?
                 </h2>
-                <p className="text-xs text-[#767676]">
+                <p className="text-[11px] sm:text-xs text-[#767676]">
                   Biologischer geslacht en geboortejaar bepalen de startprognose van het CBS cohortmodel.
                 </p>
               </div>
 
               {/* Gender selection */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#767676]">
+              <div className="space-y-1 sm:space-y-2">
+                <label className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#767676]">
                   Biologisch Geslacht
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {(["man", "vrouw"] as Gender[]).map((g) => (
                     <button
                       key={g}
                       type="button"
                       id={`btn-onboarding-gender-${g}`}
                       onClick={() => onInputChange({ gender: g })}
-                      className={`py-3.5 rounded-lg border font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
+                      className={`py-2 sm:py-3 rounded-lg border font-semibold text-xs sm:text-sm transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
                         inputs.gender === g
-                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
-                          : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
+                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                           : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
                       }`}
                     >
                       <span>{g === "man" ? "👨 Man" : "👩 Vrouw"}</span>
@@ -346,8 +346,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Birth Year selection */}
-              <div className="space-y-3">
-                <div className="flex justify-between items-center text-xs">
+              <div className="space-y-1 sm:space-y-3">
+                <div className="flex justify-between items-center text-[10px] sm:text-xs">
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Geboortejaar</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
                 </div>
@@ -382,14 +382,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         currentAge: Math.max(2, Math.min(100, calculatedAge))
                       });
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
                   />
                 </div>
               </div>
 
               {/* Current Age display and tweak */}
-              <div className="space-y-3 pt-2">
-                <div className="flex justify-between items-center text-xs">
+              <div className="space-y-1 sm:space-y-3 pt-0.5 sm:pt-2">
+                <div className="flex justify-between items-center text-[10px] sm:text-xs">
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Huidige Leeftijd (in 2026)</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.currentAge} jaar</span>
                 </div>
@@ -413,22 +413,22 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       const currentAge = Math.min(100, Math.max(2, val));
                       onInputChange({ currentAge });
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
                   />
                 </div>
               </div>
 
               {/* Own Expected Age Option */}
-              <div className="space-y-3 pt-2 border-t border-[#EAEAEA]/60 mt-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#767676] block">
+              <div className="space-y-1.5 sm:space-y-3 pt-1.5 sm:pt-2 border-t border-[#EAEAEA]/60 mt-1 sm:mt-2">
+                <label className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#767676] block">
                   Levensverwachting Instellen
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   <button
                     type="button"
                     id="btn-onboarding-life-calc"
                     onClick={() => onInputChange({ customLifeExpectancy: null })}
-                    className={`py-2 rounded-md border text-xs font-semibold transition-all cursor-pointer ${
+                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
                       inputs.customLifeExpectancy === null
                         ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                         : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
@@ -440,7 +440,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     type="button"
                     id="btn-onboarding-life-custom"
                     onClick={() => onInputChange({ customLifeExpectancy: 85 })}
-                    className={`py-2 rounded-md border text-xs font-semibold transition-all cursor-pointer ${
+                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
                       inputs.customLifeExpectancy !== null
                         ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                         : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
@@ -451,8 +451,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </div>
 
                 {inputs.customLifeExpectancy !== null && (
-                  <div className="space-y-2 pt-2 bg-amber-50/50 p-2.5 rounded-lg border border-amber-200/50">
-                    <div className="flex justify-between items-center text-xs">
+                  <div className="space-y-1 sm:space-y-2 pt-1 sm:pt-2 bg-amber-50/50 p-1.5 sm:p-2.5 rounded-lg border border-amber-200/50">
+                    <div className="flex justify-between items-center text-[10px] sm:text-xs">
                       <span className="text-[#666] font-medium">Hoe oud denkt u te worden?</span>
                       <span className="font-mono font-extrabold text-[#D56B45]">
                         {inputs.customLifeExpectancy} jaar
@@ -478,10 +478,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                           const customLifeExpectancy = Math.min(115, Math.max(Math.max(45, inputs.currentAge + 1), val));
                           onInputChange({ customLifeExpectancy });
                         }}
-                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 font-mono text-[#2D2D2D] bg-white shadow-3xs"
                       />
                     </div>
-                    <p className="text-[10px] text-[#767676] italic">
+                    <p className="text-[9px] sm:text-[10px] text-[#767676] italic">
                       Deze waarde overschrijft het biologische/CBS cohort prognosemodel in de grafieken.
                     </p>
                   </div>
@@ -498,26 +498,26 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-5"
+              className="w-full space-y-2.5 sm:space-y-4 px-1"
             >
-              <div className="space-y-1.5 text-center sm:text-left">
+              <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
                 <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                   Stap 2: Bio-Score Leefstijl
                 </span>
-                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
                   Wat zijn uw dagelijkse gewoonten?
                 </h2>
-                <p className="text-xs text-[#767676]">
+                <p className="text-[11px] sm:text-xs text-[#767676]">
                   Leefstijlfactoren beïnvloeden de levensverwachting met jaren winst of verlies.
                 </p>
               </div>
 
               {/* 1. Slaap */}
-              <div className="space-y-2">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
+              <div className="space-y-1 sm:space-y-1.5">
+                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
                   <span>🌙 Slaappatroon</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                   {[
                     { key: "kort", label: "Kort (<6u)", detail: "-1.5 jr" },
                     { key: "matig", label: "Matig (onrustig)", detail: "-0.5 jr" },
@@ -529,13 +529,13 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-sleep-${item.key}`}
                       onClick={() => updateBioAnswer("sleep", item.key as SleepLevel)}
-                      className={`p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-1.5 sm:p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.sleep === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-semibold text-xs">{item.label}</span>
+                      <span className="font-semibold text-[11px] sm:text-xs">{item.label}</span>
                       <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
                     </button>
                   ))}
@@ -543,11 +543,11 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* 2. Beweging */}
-              <div className="space-y-2">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
+              <div className="space-y-1 sm:space-y-1.5">
+                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
                   <span>🏃 Fysieke Activiteit</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                   {[
                     { key: "zittend", label: "Zittend (kantoor)", detail: "-1.5 jr" },
                     { key: "licht", label: "Lichte beweging", detail: "Neutraal" },
@@ -559,13 +559,13 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-activity-${item.key}`}
                       onClick={() => updateBioAnswer("activity", item.key as ActivityLevel)}
-                      className={`p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-1.5 sm:p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.activity === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-semibold text-xs">{item.label}</span>
+                      <span className="font-semibold text-[11px] sm:text-xs">{item.label}</span>
                       <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
                     </button>
                   ))}
@@ -573,11 +573,11 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* 3. Stress */}
-              <div className="space-y-2">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
+              <div className="space-y-1 sm:space-y-1.5">
+                <label className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#767676] flex items-center space-x-1">
                   <span>🧠 Psychische Stress</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                   {[
                     { key: "hoog", label: "Veel stress", detail: "-1.8 jr" },
                     { key: "gemiddeld", label: "Gemiddeld", detail: "Neutraal" },
@@ -589,13 +589,13 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id={`btn-onboarding-stress-${item.key}`}
                       onClick={() => updateBioAnswer("stress", item.key as StressLevel)}
-                      className={`p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-1.5 sm:p-2.5 rounded border text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         inputs.bioAnswers.stress === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-semibold text-xs">{item.label}</span>
+                      <span className="font-semibold text-[11px] sm:text-xs">{item.label}</span>
                       <span className="text-[9px] opacity-80 mt-0.5">{item.detail}</span>
                     </button>
                   ))}
@@ -612,22 +612,22 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-6"
+              className="w-full space-y-3 sm:space-y-5 px-1"
             >
-              <div className="space-y-1.5 text-center sm:text-left">
+              <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
                 <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                   Stap 3: Erfelijkheid
                 </span>
-                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
                   Hoe oud zijn uw biologische ouders geworden?
                 </h2>
-                <p className="text-xs text-[#767676]">
+                <p className="text-[11px] sm:text-xs text-[#767676]">
                   Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn (-1.5 tot +1.5 jaar per ouder).
                 </p>
               </div>
 
               {/* Father */}
-              <div className="p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-3">
+              <div className="p-2.5 sm:p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-2">
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-bold text-[#2D2D2D]">Vader</span>
                   <div className="flex space-x-1">
@@ -635,7 +635,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-father-alive"
                       onClick={() => onInputChange({ fatherPassedAge: null })}
-                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
                         inputs.fatherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -647,7 +647,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-father-passed"
                       onClick={() => onInputChange({ fatherPassedAge: 75 })}
-                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
                         inputs.fatherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -659,8 +659,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </div>
 
                 {inputs.fatherPassedAge !== null && (
-                  <div className="space-y-2 mt-2">
-                    <div className="flex justify-between items-center text-xs font-semibold">
+                  <div className="space-y-1 sm:space-y-2 mt-1 sm:mt-2">
+                    <div className="flex justify-between items-center text-[11px] sm:text-xs font-semibold">
                       <span className="text-[#666]">Geleefde leeftijd van vader:</span>
                       <span className="text-[#D56B45]">{inputs.fatherPassedAge} jaar</span>
                     </div>
@@ -684,7 +684,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                           const fatherPassedAge = Math.min(100, Math.max(40, val));
                           onInputChange({ fatherPassedAge });
                         }}
-                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
                       />
                     </div>
                   </div>
@@ -692,7 +692,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Mother */}
-              <div className="p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-3">
+              <div className="p-2.5 sm:p-4 bg-gray-50 border border-[#EAEAEA] rounded-lg space-y-2">
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-bold text-[#2D2D2D]">Moeder</span>
                   <div className="flex space-x-1">
@@ -700,7 +700,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-mother-alive"
                       onClick={() => onInputChange({ motherPassedAge: null })}
-                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
                         inputs.motherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -712,7 +712,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-mother-passed"
                       onClick={() => onInputChange({ motherPassedAge: 82 })}
-                      className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all cursor-pointer ${
+                      className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-semibold border transition-all cursor-pointer ${
                         inputs.motherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -724,8 +724,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </div>
 
                 {inputs.motherPassedAge !== null && (
-                  <div className="space-y-2 mt-2">
-                    <div className="flex justify-between items-center text-xs font-semibold">
+                  <div className="space-y-1 sm:space-y-2 mt-1 sm:mt-2">
+                    <div className="flex justify-between items-center text-[11px] sm:text-xs font-semibold">
                       <span className="text-[#666]">Geleefde leeftijd van moeder:</span>
                       <span className="text-[#D56B45]">{inputs.motherPassedAge} jaar</span>
                     </div>
@@ -749,7 +749,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                           const motherPassedAge = Math.min(100, Math.max(40, val));
                           onInputChange({ motherPassedAge });
                         }}
-                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
                       />
                     </div>
                   </div>
@@ -766,23 +766,23 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -25 }}
               transition={{ duration: 0.4 }}
-              className="w-full space-y-6"
+              className="w-full space-y-3 sm:space-y-5 px-1"
             >
-              <div className="space-y-1.5 text-center sm:text-left">
+              <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
                 <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                   Stap 4: Carrière & FIRE
                 </span>
-                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
                   Wanneer begon u met werken en wat is uw FIRE doel?
                 </h2>
-                <p className="text-xs text-[#767676]">
+                <p className="text-[11px] sm:text-xs text-[#767676]">
                   De splitsing tussen verplichte werktijd en absolute tijdssoevereiniteit.
                 </p>
               </div>
 
               {/* Start of working life */}
-              <div className="space-y-3">
-                <div className="flex justify-between items-center text-xs">
+              <div className="space-y-1 sm:space-y-3">
+                <div className="flex justify-between items-center text-[10px] sm:text-xs">
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Startleeftijd Carrière</span>
                   <span className="font-mono text-sm font-extrabold text-[#2D2D2D]">{inputs.startWorkAge} jaar</span>
                 </div>
@@ -805,14 +805,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       const val = parseInt(e.target.value) || 20;
                       onInputChange({ startWorkAge: Math.min(40, Math.max(15, val)) });
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
                   />
                 </div>
               </div>
 
               {/* FIRE Target Age */}
-              <div className="space-y-3">
-                <div className="flex justify-between items-center text-xs">
+              <div className="space-y-1 sm:space-y-3">
+                <div className="flex justify-between items-center text-[10px] sm:text-xs">
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Doelleeftijd FIRE / Pensioen</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.fireAge} jaar</span>
                 </div>
@@ -836,17 +836,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       const val = parseInt(e.target.value) || minVal;
                       onInputChange({ fireAge: Math.min(90, Math.max(minVal, val)) });
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-sm py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
                   />
                 </div>
               </div>
 
-              <div className="p-3 bg-neutral-50 rounded border border-[#EAEAEA] text-xs space-y-1.5">
+              <div className="p-2 sm:p-3 bg-neutral-50 rounded border border-[#EAEAEA] text-[11px] sm:text-xs space-y-1 sm:space-y-1.5">
                 <div className="flex justify-between font-medium">
                   <span className="text-[#767676]">Actieve Accumulatie:</span>
                   <span className="text-[#2D2D2D]">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
-                <p className="text-[11px] text-[#767676] leading-relaxed">
+                <p className="text-[10px] sm:text-[11px] text-[#767676] leading-relaxed">
                   Dit is het aantal jaren verplichte kapitaalaccumulatie dat u heeft ingepland voor uw financiële onafhankelijkheid.
                 </p>
               </div>
@@ -861,22 +861,22 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
-              className="text-center space-y-6 max-w-md"
+              className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-1"
             >
-              <div className="mx-auto w-16 h-16 rounded-2xl bg-[#F0FAF3] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
-                <Smile className="w-8 h-8 text-[#45D57C]" />
+              <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#F0FAF3] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
+                <Smile className="w-6 h-6 sm:w-8 sm:h-8 text-[#45D57C]" />
               </div>
 
-              <div className="space-y-2">
-                <h2 className="text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
+              <div className="space-y-1 sm:space-y-2">
+                <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
                   Klaar om te ontdekken!
                 </h2>
-                <p className="text-sm text-[#767676]">
+                <p className="text-xs sm:text-sm text-[#767676]">
                   Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.
                 </p>
               </div>
 
-              <div className="bg-[#FAF3F0] p-4 rounded-lg border border-[#D56B45]/20 text-xs text-left grid grid-cols-2 gap-y-2.5 gap-x-4">
+              <div className="bg-[#FAF3F0] p-2.5 sm:p-4 rounded-lg border border-[#D56B45]/20 text-xs text-left grid grid-cols-2 gap-y-1.5 sm:gap-y-2.5 gap-x-4">
                 <div>
                   <span className="text-[#767676] block text-[9px] uppercase font-bold tracking-wider">Profiel</span>
                   <span className="text-[#2D2D2D] font-semibold">{inputs.gender === "man" ? "Man" : "Vrouw"}, {inputs.currentAge} jr</span>
@@ -900,7 +900,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onComplete}
-                className="w-full py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-bold text-sm tracking-wide rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+                className="w-full py-2.5 sm:py-3.5 bg-[#D56B45] hover:bg-[#C25B36] text-white font-bold text-xs sm:text-sm tracking-wide rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
               >
                 <span>Open Interactief Dashboard</span>
                 <ChevronRight className="w-4 h-4" />
@@ -912,14 +912,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </main>
 
       {/* Navigation Footer */}
-      <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-4 border-t border-[#F3F2F0] z-10">
+      <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-2 sm:pt-4 border-t border-[#F3F2F0] z-10">
         <div>
           {step > 0 && (
             <button
-              type="button"
-              id="btn-onboarding-back"
-              onClick={handleBack}
-              className="px-4 py-2 text-xs font-semibold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
+               type="button"
+               id="btn-onboarding-back"
+               onClick={handleBack}
+               className="px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4" />
               <span>Vorige</span>
@@ -927,13 +927,13 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           )}
         </div>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2 sm:space-x-3">
           {step > 0 && step < stepsMeta.length - 1 && (
             <button
               type="button"
               id="btn-onboarding-skip"
               onClick={() => setStep(stepsMeta.length - 1)}
-              className="px-3.5 py-2 text-xs font-medium text-[#767676] hover:text-[#2D2D2D] transition-colors duration-150 cursor-pointer"
+              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium text-[#767676] hover:text-[#2D2D2D] transition-colors duration-150 cursor-pointer"
             >
               Sla over
             </button>
@@ -944,7 +944,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               type="button"
               id="btn-onboarding-next"
               onClick={handleNext}
-              className="px-5 py-2.5 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-bold text-xs rounded-md flex items-center space-x-1 shadow-sm transition-colors duration-150 cursor-pointer"
+              className="px-3.5 sm:px-5 py-1.5 sm:py-2.5 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-bold text-[11px] sm:text-xs rounded-md flex items-center space-x-1 shadow-sm transition-colors duration-150 cursor-pointer"
             >
               <span>Volgende</span>
               <ChevronRight className="w-3.5 h-3.5" />
