@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
 import { 
@@ -30,6 +30,11 @@ interface OnboardingIntroProps {
 export default function OnboardingIntro({ inputs, onInputChange, onComplete }: OnboardingIntroProps) {
   const [step, setStep] = useState<number>(0);
   const [imgError, setImgError] = useState(false);
+  const [localBirthYear, setLocalBirthYear] = useState(inputs.birthYear.toString());
+  const [localAge, setLocalAge] = useState(inputs.currentAge.toString());
+
+  useEffect(() => { setLocalBirthYear(inputs.birthYear.toString()); }, [inputs.birthYear]);
+  useEffect(() => { setLocalAge(inputs.currentAge.toString()); }, [inputs.currentAge]);
 
   // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
@@ -156,9 +161,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 
                 {/* De Olifant Logo Badge */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: -20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                  initial={{ opacity: 0, scale: 0.3, rotate: -15, y: 40 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
+                  transition={{ duration: 1.2, type: "spring", bounce: 0.5, delay: 0.1 }}
                   className="w-40 h-40 sm:w-48 sm:h-48 shrink-0 flex items-end justify-center bg-white/10 border border-white/25 rounded-xl pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-1"
                 >
                   <img
@@ -254,7 +259,12 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-2"
             >
-              <div className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-end justify-center shadow-sm relative overflow-hidden group pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 mb-0.5">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.5, delay: 0.2 }}
+                className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-end justify-center shadow-sm relative overflow-hidden group pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 mb-0.5"
+              >
                 <img
                   src="/img/Olifant.png"
                   alt="De Olifant"
@@ -273,7 +283,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     </svg>
                   </div>
                 )}
-              </div>
+              </motion.div>
 
               <div className="space-y-1.5 sm:space-y-3">
                 <h2 className="text-xl sm:text-3xl font-extrabold font-sans tracking-tight text-[#2D2D2D]">
@@ -377,17 +387,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     type="number"
                     min="1940"
                     max="2024"
-                    value={inputs.birthYear}
+                    value={localBirthYear}
                     onChange={(e) => {
-                      const val = parseInt(e.target.value) || 1990;
-                      const bYear = Math.min(2024, Math.max(1940, val));
-                      const calculatedAge = 2026 - bYear;
-                      onInputChange({
-                        birthYear: bYear,
-                        currentAge: Math.max(2, Math.min(100, calculatedAge))
-                      });
+                      setLocalBirthYear(e.target.value);
+                      const val = parseInt(e.target.value);
+                      if (!isNaN(val)) {
+                        const bYear = Math.min(2024, Math.max(1940, val));
+                        const calculatedAge = 2026 - bYear;
+                        onInputChange({
+                          birthYear: bYear,
+                          currentAge: Math.max(2, Math.min(100, calculatedAge))
+                        });
+                      }
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    onBlur={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (isNaN(val)) {
+                        setLocalBirthYear(inputs.birthYear.toString());
+                      } else {
+                        const bYear = Math.min(2024, Math.max(1940, val));
+                        setLocalBirthYear(bYear.toString());
+                      }
+                    }}
+                    className="w-full sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-2 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors"
                   />
                 </div>
               </div>
@@ -412,13 +434,25 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     type="number"
                     min="2"
                     max="100"
-                    value={inputs.currentAge}
+                    value={localAge}
                     onChange={(e) => {
-                      const val = parseInt(e.target.value) || 30;
-                      const currentAge = Math.min(100, Math.max(2, val));
-                      onInputChange({ currentAge });
+                      setLocalAge(e.target.value);
+                      const val = parseInt(e.target.value);
+                      if (!isNaN(val)) {
+                        const currentAge = Math.min(100, Math.max(2, val));
+                        onInputChange({ currentAge });
+                      }
                     }}
-                    className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 sm:py-1.5 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                    onBlur={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (isNaN(val)) {
+                        setLocalAge(inputs.currentAge.toString());
+                      } else {
+                        const currentAge = Math.min(100, Math.max(2, val));
+                        setLocalAge(currentAge.toString());
+                      }
+                    }}
+                    className="w-full sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-2 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors"
                   />
                 </div>
               </div>
