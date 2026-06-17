@@ -32,9 +32,13 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   const [imgError, setImgError] = useState(false);
   const [localBirthYear, setLocalBirthYear] = useState(inputs.birthYear.toString());
   const [localAge, setLocalAge] = useState(inputs.currentAge.toString());
+  const [localStartWorkAge, setLocalStartWorkAge] = useState(inputs.startWorkAge.toString());
+  const [localFireAge, setLocalFireAge] = useState(inputs.fireAge.toString());
 
   useEffect(() => { setLocalBirthYear(inputs.birthYear.toString()); }, [inputs.birthYear]);
   useEffect(() => { setLocalAge(inputs.currentAge.toString()); }, [inputs.currentAge]);
+  useEffect(() => { setLocalStartWorkAge(inputs.startWorkAge.toString()); }, [inputs.startWorkAge]);
+  useEffect(() => { setLocalFireAge(inputs.fireAge.toString()); }, [inputs.fireAge]);
 
   // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
@@ -844,12 +848,23 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     type="number"
                     min="15"
                     max="40"
-                    value={inputs.startWorkAge}
+                    value={localStartWorkAge}
                     onChange={(e) => {
-                      const val = parseInt(e.target.value) || 20;
-                      onInputChange({ startWorkAge: Math.min(40, Math.max(15, val)) });
+                      setLocalStartWorkAge(e.target.value);
+                      const val = parseInt(e.target.value);
+                      if (!isNaN(val)) {
+                        onInputChange({ startWorkAge: Math.min(40, Math.max(15, val)) });
+                      }
                     }}
-                    className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
+                    onBlur={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (isNaN(val)) {
+                        setLocalStartWorkAge(inputs.startWorkAge.toString());
+                      } else {
+                        setLocalStartWorkAge(Math.min(40, Math.max(15, val)).toString());
+                      }
+                    }}
+                    className="w-20 sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-1.5 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors shrink-0"
                   />
                 </div>
               </div>
@@ -874,13 +889,25 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     type="number"
                     min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
                     max="90"
-                    value={inputs.fireAge}
+                    value={localFireAge}
                     onChange={(e) => {
-                      const minVal = Math.max(inputs.startWorkAge + 2, inputs.currentAge);
-                      const val = parseInt(e.target.value) || minVal;
-                      onInputChange({ fireAge: Math.min(90, Math.max(minVal, val)) });
+                      setLocalFireAge(e.target.value);
+                      const val = parseInt(e.target.value);
+                      if (!isNaN(val)) {
+                        const minVal = Math.max(inputs.startWorkAge + 2, inputs.currentAge);
+                        onInputChange({ fireAge: Math.min(90, Math.max(minVal, val)) });
+                      }
                     }}
-                    className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
+                    onBlur={(e) => {
+                      const val = parseInt(e.target.value);
+                      if (isNaN(val)) {
+                        setLocalFireAge(inputs.fireAge.toString());
+                      } else {
+                        const minVal = Math.max(inputs.startWorkAge + 2, inputs.currentAge);
+                        setLocalFireAge(Math.min(90, Math.max(minVal, val)).toString());
+                      }
+                    }}
+                    className="w-20 sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-1.5 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors shrink-0"
                   />
                 </div>
               </div>
