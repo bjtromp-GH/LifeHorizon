@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
-import React, { useState, useRef } from "react";
-import { ChevronLeft, ChevronRight, Sparkles, User, Heart, Compass } from "lucide-react";
+import React, { useState } from "react";
+import { Sparkles, Settings, X, RefreshCw } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -26,89 +26,7 @@ export default function MobileContainer({
   onInputChange,
   onRestartOnboarding,
 }: MobileContainerProps) {
-  // 3 high-level Slides:
-  // 0: Persoonlijke Parameters (Onboarding)
-  // 1: Vitaliteit & Bio-Score
-  // 2: Dashboard (Phases, Stats, Decade Grid)
-  const [slideIndex, setSlideIndex] = useState(0);
-  const [swipeDirection, setSwipeDirection] = useState<"left" | "right">("right");
-  
-  // Touch coordinates for swipe detection
-  const touchStart = useRef<number | null>(null);
-  const touchEnd = useRef<number | null>(null);
-
-  // Minimum distance in px to qualify as a swipe
-  const minSwipeDistance = 50;
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStart.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEnd.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart.current || !touchEnd.current) return;
-    const distance = touchStart.current - touchEnd.current;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe && slideIndex < 2) {
-      setSwipeDirection("right");
-      setSlideIndex((prev) => prev + 1);
-    } else if (isRightSwipe && slideIndex > 0) {
-      setSwipeDirection("left");
-      setSlideIndex((prev) => prev - 1);
-    }
-
-    // Reset touch variables
-    touchStart.current = null;
-    touchEnd.current = null;
-  };
-
-  const goToSlide = (idx: number) => {
-    setSwipeDirection(idx > slideIndex ? "right" : "left");
-    setSlideIndex(idx);
-  };
-
-  // Slides configuration with custom header details and icons
-  const slides = [
-    {
-      id: "slide-onboarding",
-      title: "Profiel",
-      subtitle: "Calibreer je biologische parameters",
-      icon: <User className="w-4 h-4" />,
-    },
-    {
-      id: "slide-bioscore",
-      title: "Vitaliteit",
-      subtitle: "Leefstijl modifiers",
-      icon: <Heart className="w-4 h-4" />,
-    },
-    {
-      id: "slide-grid",
-      title: "Matrix",
-      subtitle: "Tijd-budget & decennia",
-      icon: <Compass className="w-4 h-4" />,
-    },
-  ];
-
-  // Animation variants for card slide effects
-  const slideVariants = {
-    enter: (direction: "left" | "right") => ({
-      x: direction === "right" ? "100%" : "-100%",
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: "left" | "right") => ({
-      x: direction === "right" ? "-100%" : "100%",
-      opacity: 0,
-    }),
-  };
+  const [showConfig, setShowConfig] = useState(false);
 
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const totalRoundedRemaining = Math.round(totalRemaining * 10) / 10;
@@ -116,12 +34,9 @@ export default function MobileContainer({
   return (
     <div
       id="mobile-viewport-root"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
       className="flex flex-col h-[100dvh] bg-[#F9F8F6] text-[#2D2D2D] overflow-hidden select-none"
     >
-      {/* 1. Mobile Custom Header bar */}
+      {/* 1. Mobile Custom Header Bar */}
       <header className="px-4 py-3 bg-white border-b border-[#EAEAEA] flex items-center justify-between shrink-0">
         <div className="flex items-center space-x-2">
           <Sparkles className="w-4 h-4 text-[#D56B45]" />
@@ -132,177 +47,190 @@ export default function MobileContainer({
         <div className="flex items-center space-x-2">
           <button
             type="button"
-            id="btn-mobile-restart-onboarding"
-            onClick={onRestartOnboarding}
-            title="Start de geanimeerde introductie opnieuw"
-            className="p-1 px-2 border border-[#EAEAEA] bg-white text-[10px] font-bold text-[#767676] rounded hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-1"
+            id="btn-mobile-config"
+            onClick={() => setShowConfig(true)}
+            className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1"
           >
-            <span>🎈 Intro</span>
+            <Settings className="w-3.5 h-3.5 animate-spin-slow" />
+            <span>Configuratie</span>
           </button>
-          <div className="font-mono text-[11px] text-[#D56B45] font-semibold bg-[#D56B45]/10 px-2 py-0.5 rounded-full">
+          <div className="font-mono text-[11px] text-[#D56B45] font-semibold bg-[#D56B45]/10 px-2.5 py-1 rounded-full">
             {totalRoundedRemaining} jr restant
           </div>
         </div>
       </header>
 
-      {/* 2. Top Slides Tab indicators */}
-      <nav id="mobile-tabs" className="px-4 py-2 bg-white flex border-b border-[#EAEAEA]/80 shrink-0">
-        <div className="grid grid-cols-3 w-full gap-1 bg-gray-100 p-1 rounded-md">
-          {slides.map((slide, idx) => {
-            const isActive = slideIndex === idx;
-            return (
-              <button
-                key={slide.id}
-                type="button"
-                id={`btn-mobile-tab-${idx}`}
-                onClick={() => goToSlide(idx)}
-                className={`flex items-center justify-center space-x-1 py-1.5 rounded text-[11px] font-semibold transition-all duration-300 cursor-pointer ${
-                  isActive
-                    ? "bg-white text-[#D56B45] shadow-xs"
-                    : "text-[#767676] hover:bg-white/40"
-                }`}
-              >
-                {slide.icon}
-                <span>{slide.title}</span>
-              </button>
-            );
-          })}
+      {/* Quick Info bar triggering configuration */}
+      <div className="bg-white border-b border-[#EAEAEA]/80 px-4 py-1.5 flex items-center justify-between text-[11px] text-[#767676] shrink-0">
+        <div className="flex items-center space-x-1">
+          <span className="font-bold text-[#2D2D2D]">Profiel:</span>
+          <span>{inputs.gender === "man" ? "Man" : "Vrouw"} &bull; Geb. {inputs.birthYear} &bull; Work: {inputs.startWorkAge} - {inputs.fireAge} jr</span>
         </div>
-      </nav>
+        <button
+          onClick={() => setShowConfig(true)}
+          className="text-[#D56B45] font-bold hover:underline cursor-pointer"
+        >
+          Wijzig
+        </button>
+      </div>
 
-      {/* 3. Main Slides Body frame (Animated horizontally, no vertical scrolling!) */}
-      <main className="flex-1 relative overflow-hidden px-4 py-3 flex flex-col justify-between">
-        <div className="absolute inset-0 px-4 py-3 flex flex-col overflow-y-auto overflow-x-hidden">
-          <AnimatePresence initial={false} custom={swipeDirection} mode="wait">
-            <motion.div
-              key={slideIndex}
-              custom={swipeDirection}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="w-full flex-1 flex flex-col h-full"
-            >
-              {/* Slide Title */}
-              <div className="mb-3">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#767676]">
-                  Stap {slideIndex + 1} van 3
-                </span>
-                <h2 className="text-base font-bold text-[#2D2D2D] leading-tight">
-                  {slides[slideIndex].title}
-                </h2>
-                <p className="text-[11px] text-[#767676]">
-                  {slides[slideIndex].subtitle}
-                </p>
-              </div>
+      {/* 2. Main Scrollable Dashboard Content */}
+      <main className="flex-1 relative overflow-y-auto px-4 py-4 space-y-5">
+        
+        {/* Levensloop & Markering (StatsCard & LifePhasesBar) */}
+        <div id="mobile-stats-wrapper" className="space-y-4">
+          <StatsCard
+            inputs={inputs}
+            projectedLifeExpectancy={projectedLifeExpectancy}
+            apiSource={apiSource}
+          />
+          
+          <div className="bg-white p-3 border border-[#EAEAEA] rounded-md shadow-3xs">
+            <LifePhasesBar
+              inputs={inputs}
+              projectedLifeExpectancy={projectedLifeExpectancy}
+              phases={phases}
+            />
+          </div>
+        </div>
 
-              {/* Dynamic Slides render */}
-              {slideIndex === 0 && (
-                <div className="bg-white p-4 border border-[#EAEAEA] rounded-md space-y-4">
-                  <OnboardingPanel inputs={inputs} onChange={onInputChange} />
-                </div>
-              )}
+        {/* Levensmatrix (DecadeGrid) */}
+        <div id="mobile-matrix-wrapper" className="bg-white p-3 border border-[#EAEAEA] rounded-lg shadow-3xs">
+          <div className="mb-2">
+            <DecadeGrid
+              inputs={inputs}
+              projectedLifeExpectancy={projectedLifeExpectancy}
+            />
+          </div>
+        </div>
 
-              {slideIndex === 1 && (
-                <div className="bg-white p-4 border border-[#EAEAEA] rounded-md overflow-y-auto max-h-[62dvh] pr-1">
-                  <BioScoreSection answers={inputs.bioAnswers} onChange={(u) => onInputChange({ bioAnswers: { ...inputs.bioAnswers, ...u } })} />
-                </div>
-              )}
+        {/* Dynamic Analytics (AestheticFidelityCards) */}
+        <div id="mobile-analytics-wrapper" className="pb-8">
+          <AestheticFidelityCards
+            inputs={inputs}
+            projectedLifeExpectancy={projectedLifeExpectancy}
+            apiSource={apiSource}
+          />
+        </div>
 
-              {slideIndex === 2 && (
-                <div className="space-y-4 pb-4">
-                  {/* Levensloop & Markering (StatsCard & LifePhasesBar) */}
-                  <div className="space-y-4">
-                    <StatsCard
-                      inputs={inputs}
-                      projectedLifeExpectancy={projectedLifeExpectancy}
-                      apiSource={apiSource}
-                    />
-                    
-                    <div className="bg-white p-3 border border-[#EAEAEA] rounded-md">
-                      <LifePhasesBar
-                        inputs={inputs}
-                        projectedLifeExpectancy={projectedLifeExpectancy}
-                        phases={phases}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Levensmatrix (DecadeGrid) */}
-                  <div className="scale-[0.98] transform origin-top">
-                    <DecadeGrid
-                      inputs={inputs}
-                      projectedLifeExpectancy={projectedLifeExpectancy}
-                    />
-                  </div>
-
-                  {/* Overige schermen (High Fidelity Stacked Cards) */}
-                  <AestheticFidelityCards
-                    inputs={inputs}
-                    projectedLifeExpectancy={projectedLifeExpectancy}
-                    apiSource={apiSource}
-                  />
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+        {/* Floating Configuration Assist Button at the bottom for quick thumb reach */}
+        <div className="flex justify-center pt-2">
+          <button
+            type="button"
+            onClick={onRestartOnboarding}
+            className="flex items-center space-x-1.5 px-4 py-2 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-full text-xs font-semibold text-[#767676] transition-all cursor-pointer shadow-3xs"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>Herstart Introductie</span>
+          </button>
         </div>
       </main>
 
-      {/* 4. Swiper Controls and Pagination indicators at bottom */}
-      <footer className="bg-white border-t border-[#EAEAEA] py-2 px-4 flex items-center justify-between shrink-0 select-none">
-        {/* Left Indicator/Button */}
-        <button
-          type="button"
-          id="btn-mobile-prev"
-          disabled={slideIndex === 0}
-          onClick={() => {
-            if (slideIndex > 0) {
-              setSwipeDirection("left");
-              setSlideIndex((prev) => prev - 1);
-            }
-          }}
-          className={`p-1.5 rounded-full transition-all duration-300 ${
-            slideIndex === 0 ? "opacity-20 cursor-default" : "hover:bg-gray-100 cursor-pointer text-[#D56B45]"
-          }`}
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-
-        {/* Small Progress Dots */}
-        <div className="flex space-x-2">
-          {slides.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              id={`nav-dot-${idx}`}
-              onClick={() => goToSlide(idx)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                slideIndex === idx ? "bg-[#D56B45] w-4" : "bg-zinc-200"
-              }`}
+      {/* 3. Sliding Configuration Bottom Sheet Modal */}
+      <AnimatePresence>
+        {showConfig && (
+          <div className="fixed inset-0 z-50 flex items-end justify-center select-none">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowConfig(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-xs cursor-pointer"
             />
-          ))}
-        </div>
 
-        {/* Right Indicator/Button */}
-        <button
-          type="button"
-          id="btn-mobile-next"
-          disabled={slideIndex === 2}
-          onClick={() => {
-            if (slideIndex < 2) {
-              setSwipeDirection("right");
-              setSlideIndex((prev) => prev + 1);
-            }
-          }}
-          className={`p-1.5 rounded-full transition-all duration-300 ${
-            slideIndex === 2 ? "opacity-20 cursor-default" : "hover:bg-gray-100 cursor-pointer text-[#D56B45]"
-          }`}
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
-      </footer>
+            {/* Sheet */}
+            <motion.div
+              initial={{ y: "15%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "25%", opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 220 }}
+              className="relative w-full max-w-xl bg-[#FDFDFD] rounded-t-2xl shadow-2xl flex flex-col max-h-[88vh] overflow-hidden border-t border-[#EAEAEA]"
+            >
+              {/* Header */}
+              <div className="px-5 py-4 bg-white border-b border-[#EAEAEA] flex items-center justify-between shrink-0">
+                <div className="flex items-center space-x-2">
+                  <span className="p-1.5 bg-[#D56B45]/10 rounded-lg text-[#D56B45]">
+                    <Settings className="w-4 h-4 animate-spin-slow" />
+                  </span>
+                  <div>
+                    <h3 className="font-sans font-bold text-sm text-[#2D2D2D]">
+                      Onboarding Configuratie
+                    </h3>
+                    <p className="text-[10px] text-[#767676]">
+                      Wijzig hier uw ingevoerde levensloopparameters
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowConfig(false)}
+                  className="p-1 px-1.5 hover:bg-gray-100 rounded-md text-[#767676] hover:text-[#2D2D2D] cursor-pointer transition-all"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Scrollable inputs Container */}
+              <div className="flex-1 overflow-y-auto px-5 py-4 space-y-6">
+                
+                {/* Part 1: Basic Demographics Form */}
+                <div className="bg-white p-4 rounded-xl border border-[#EAEAEA] shadow-3xs space-y-4">
+                  <div className="flex items-center space-x-2 mb-1">
+                    <span className="text-xs">👤</span>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#D56B45]">
+                      1. Basis Profiel
+                    </h4>
+                  </div>
+                  <OnboardingPanel inputs={inputs} onChange={onInputChange} />
+                </div>
+
+                {/* Part 2: Lifestyle / Vitality modifiers */}
+                <div className="bg-white p-4 rounded-xl border border-[#EAEAEA] shadow-3xs space-y-4">
+                  <div className="flex items-center space-x-2 mb-1">
+                    <span className="text-xs">🌱</span>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#D56B45]">
+                      2. Vitaliteit & Leefstijl Modifiers
+                    </h4>
+                  </div>
+                  <BioScoreSection
+                    answers={inputs.bioAnswers}
+                    onChange={(u) =>
+                      onInputChange({
+                        bioAnswers: { ...inputs.bioAnswers, ...u },
+                      })
+                    }
+                  />
+                </div>
+
+                {/* Custom genetic overview widget */}
+                <div className="bg-[#FAF9F6] p-3.5 rounded-lg border border-[#EAEAEA] space-y-1 text-center font-mono">
+                  <span className="text-xs text-[#767676]">Actuele CBS Cohort prognose:</span>
+                  <div className="text-xl font-black text-[#D56B45]">
+                    {projectedLifeExpectancy.toFixed(1)} <span className="text-xs font-normal text-[#2D2D2D]">jaar oud</span>
+                  </div>
+                  <p className="text-[10px] text-[#767676] max-w-xs mx-auto leading-normal">
+                    Gecompileerd op basis van jouw actieve leefstijlscore en erfelijke parameters.
+                  </p>
+                </div>
+
+              </div>
+
+              {/* Footer */}
+              <div className="px-5 py-4 bg-white border-t border-[#EAEAEA] flex items-center shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setShowConfig(false)}
+                  className="w-full py-3.5 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-extrabold text-xs tracking-wider uppercase rounded-xl shadow-md transition-all cursor-pointer text-center"
+                >
+                  Toon Levensmatrix
+                </button>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
