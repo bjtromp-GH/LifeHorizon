@@ -125,7 +125,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </header>
 
       {/* Main Interactive Slides container */}
-      <main className="flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto overflow-y-auto pr-1">
+      <main className={`flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto pr-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
         <AnimatePresence mode="wait">
           
           {/* SLIDE 0: ORANGE INTRO SPLASH */}
