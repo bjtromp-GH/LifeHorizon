@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "motion/react";
 import { LifePhases, UserInputs } from "../types";
 
@@ -5,28 +6,78 @@ interface LifePhasesBarProps {
   inputs: UserInputs;
   projectedLifeExpectancy: number;
   phases: LifePhases;
+  onInputChange?: (updates: Partial<UserInputs>) => void;
 }
 
 export default function LifePhasesBar({
   inputs,
   projectedLifeExpectancy,
   phases,
+  onInputChange,
 }: LifePhasesBarProps) {
   const { currentAge } = inputs;
+  const [isEditingExpectancy, setIsEditingExpectancy] = useState(false);
 
   // Calculate current age percentage position relative to the entire life runway.
   const currentAgePercent = (currentAge / projectedLifeExpectancy) * 100;
 
   return (
     <div id="life-phases-bar-container" className="flex flex-col space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-2">
         <h4 className="text-xs font-semibold uppercase tracking-wider text-[#767676]">
           Levensloop & Markering
         </h4>
-        <span className="text-xs font-mono text-[#D56B45] font-medium">
-          Huidige Leeftijd: {currentAge} jaar
-        </span>
+        <div className="flex items-center space-x-2">
+          {onInputChange && (
+            <button
+              onClick={() => setIsEditingExpectancy(!isEditingExpectancy)}
+              className="px-2 py-0.5 rounded text-[10px] bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[#D56B45] font-extrabold flex items-center space-x-1 cursor-pointer transition-all shrink-0"
+            >
+              <span>{inputs.customLifeExpectancy !== null ? `✍️ Zelf: ${Math.round(projectedLifeExpectancy)} jr` : "⚙️ Pas levensverwachting aan"}</span>
+            </button>
+          )}
+          <span className="text-xs font-mono text-[#D56B45] font-medium whitespace-nowrap">
+            Huidige Leeftijd: {currentAge} jaar
+          </span>
+        </div>
       </div>
+
+      {isEditingExpectancy && onInputChange && (
+        <div className="p-3 bg-amber-50/50 rounded-lg border border-amber-200/40 text-xs space-y-2.5">
+          <div className="flex justify-between items-center">
+            <span className="font-semibold text-zinc-700">Eigen levensverwachting overschrijven:</span>
+            <div className="flex items-center space-x-2">
+              <span className="font-mono font-black text-sm text-[#D56B45]">{Math.round(projectedLifeExpectancy)} jaar</span>
+              {inputs.customLifeExpectancy !== null && (
+                <button
+                  onClick={() => onInputChange({ customLifeExpectancy: null })}
+                  className="px-1.5 py-0.5 rounded text-[9px] bg-zinc-200 hover:bg-zinc-300 text-zinc-700 font-bold transition-all cursor-pointer"
+                  title="Herstel naar CBS model"
+                >
+                  Model herstellen
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center space-x-3">
+            <span className="text-[10px] text-zinc-500 font-mono">{inputs.currentAge + 1} jr</span>
+            <input
+              type="range"
+              min={Math.max(45, inputs.currentAge + 1)}
+              max="115"
+              value={Math.round(projectedLifeExpectancy)}
+              onChange={(e) => onInputChange({ customLifeExpectancy: parseInt(e.target.value) })}
+              className="flex-grow h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+            />
+            <span className="text-[10px] text-zinc-500 font-mono">115 jr</span>
+          </div>
+          <p className="text-[9px] text-[#767676] leading-tight">
+            {inputs.customLifeExpectancy === null 
+              ? "Nu ingesteld op het dynamische CBS Cohortmodel + leefstijl modifiers." 
+              : "Verwachte leeftijd met de hand ingesteld. Dit overschrijft de CBS prognose."}
+          </p>
+        </div>
+      )}
 
       {/* Stacked Horizontal Bar with Integrated Age Ticks */}
       <div className="relative pt-6 pb-8">

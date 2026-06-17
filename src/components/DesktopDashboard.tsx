@@ -124,6 +124,7 @@ export default function DesktopDashboard({
                 inputs={inputs}
                 projectedLifeExpectancy={projectedLifeExpectancy}
                 phases={phases}
+                onInputChange={onInputChange}
               />
             </div>
 

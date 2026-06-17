@@ -90,6 +90,7 @@ export default function MobileContainer({
               inputs={inputs}
               projectedLifeExpectancy={projectedLifeExpectancy}
               phases={phases}
+              onInputChange={onInputChange}
             />
           </div>
         </div>

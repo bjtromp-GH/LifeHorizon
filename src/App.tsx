@@ -22,6 +22,7 @@ export default function App() {
       sleep: "goed",
       stress: "gemiddeld",
     },
+    customLifeExpectancy: null,
   });
 
   const [cbsBaseLife, setCbsBaseLife] = useState<number>(80.5);
@@ -107,8 +108,12 @@ export default function App() {
     }
   }
 
-  // Total projected life is the CBS base life plus both the bio lifestyle and hereditary modifiers
-  const projectedLifeExpectancy = cbsBaseLife + bioOffset + hereditaryOffset;
+  // Total projected life is the CBS base life plus both the bio lifestyle and hereditary modifiers,
+  // unless overridden by user's custom estimate.
+  const calculatedLifeExpectancy = cbsBaseLife + bioOffset + hereditaryOffset;
+  const projectedLifeExpectancy = inputs.customLifeExpectancy !== null && inputs.customLifeExpectancy !== undefined
+    ? Math.max(inputs.currentAge + 1, inputs.customLifeExpectancy)
+    : calculatedLifeExpectancy;
 
   const basisYears = inputs.startWorkAge;
   const accumulationYears = Math.max(0, inputs.fireAge - inputs.startWorkAge);

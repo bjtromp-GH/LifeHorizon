@@ -19,6 +19,7 @@ export interface UserInputs {
   fatherPassedAge: number | null;
   motherPassedAge: number | null;
   bioAnswers: BioScoreAnswers;
+  customLifeExpectancy: number | null;
 }
 
 export interface LifePhases {

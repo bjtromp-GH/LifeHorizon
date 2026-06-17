@@ -340,6 +340,62 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   className="w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                 />
               </div>
+
+              {/* Own Expected Age Option */}
+              <div className="space-y-3 pt-2 border-t border-[#EAEAEA]/60 mt-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#767676] block">
+                  Levensverwachting Instellen
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    id="btn-onboarding-life-calc"
+                    onClick={() => onInputChange({ customLifeExpectancy: null })}
+                    className={`py-2 rounded-md border text-xs font-semibold transition-all cursor-pointer ${
+                      inputs.customLifeExpectancy === null
+                        ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                        : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
+                    }`}
+                  >
+                    🤖 CBS model + Leefstijl
+                  </button>
+                  <button
+                    type="button"
+                    id="btn-onboarding-life-custom"
+                    onClick={() => onInputChange({ customLifeExpectancy: 85 })}
+                    className={`py-2 rounded-md border text-xs font-semibold transition-all cursor-pointer ${
+                      inputs.customLifeExpectancy !== null
+                        ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
+                        : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
+                    }`}
+                  >
+                    ✍️ Zelf inschatten
+                  </button>
+                </div>
+
+                {inputs.customLifeExpectancy !== null && (
+                  <div className="space-y-2 pt-2 bg-amber-50/50 p-2.5 rounded-lg border border-amber-200/50">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-[#666] font-medium">Hoe oud denkt u te worden?</span>
+                      <span className="font-mono font-extrabold text-[#D56B45]">
+                        {inputs.customLifeExpectancy} jaar
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      id="slider-onboarding-custom-expectancy"
+                      min={Math.max(45, inputs.currentAge + 1)}
+                      max="115"
+                      value={inputs.customLifeExpectancy ?? 85}
+                      onChange={(e) => onInputChange({ customLifeExpectancy: parseInt(e.target.value) })}
+                      className="w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
+                    />
+                    <p className="text-[10px] text-[#767676] italic">
+                      Deze waarde overschrijft het biologische/CBS cohort prognosemodel in de grafieken.
+                    </p>
+                  </div>
+                )}
+              </div>
             </motion.div>
           )}
 
