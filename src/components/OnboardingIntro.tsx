@@ -159,7 +159,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   initial={{ opacity: 0, scale: 0.8, y: -20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                  className="w-16 h-16 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center bg-white/10 border border-white/25 rounded-full p-3 sm:p-4.5 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-1"
+                  className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 flex items-center justify-center bg-white/10 border border-white/25 rounded-xl p-3 sm:p-4.5 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-1"
                 >
                   <img
                     src="/img/Olifant.png"
@@ -254,7 +254,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-2"
             >
-              <div className="mx-auto w-16 h-16 sm:w-24 sm:h-24 rounded-2xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-center justify-center shadow-sm relative overflow-hidden group p-3 mb-0.5">
+              <div className="mx-auto w-28 h-28 sm:w-32 sm:h-32 rounded-xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-center justify-center shadow-sm relative overflow-hidden group p-3 mb-0.5">
                 <img
                   src="/img/Olifant.png"
                   alt="De Olifant"
