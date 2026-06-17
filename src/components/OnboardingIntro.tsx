@@ -160,7 +160,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     src="/img/Olifant.png"
                     alt="Olifant"
                     onError={() => setImgError(true)}
-                    className={`w-full h-full object-contain filter brightness-0 invert transition-all duration-500 hover:scale-105 ${imgError ? 'hidden' : 'block'}`}
+                    className={`w-full h-full object-contain transition-all duration-500 hover:scale-105 ${imgError ? 'hidden' : 'block'}`}
                   />
                   {imgError && (
                     <div className="flex flex-col items-center justify-center text-white">

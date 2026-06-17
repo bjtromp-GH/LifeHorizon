@@ -208,7 +208,9 @@ export default function MobileContainer({
       <main
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className={`flex-1 relative overflow-y-auto px-4 py-4 transition-colors duration-300 ${
+        className={`flex-1 relative overflow-y-auto px-4 pb-4 transition-colors duration-300 ${
+          isSwipedFullscreen ? "pt-14" : "pt-4"
+        } ${
           activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-[#F9F8F6] text-[#2D2D2D]"
         }`}
       >
