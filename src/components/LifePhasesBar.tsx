@@ -34,7 +34,8 @@ export default function LifePhasesBar({
       }}
       animate={isExpanded ? {
         boxShadow: "0px 4px 6px -1px rgba(0, 0, 0, 0.1)",
-        borderColor: "rgba(253, 230, 138, 0.6)"
+        borderColor: "rgba(253, 230, 138, 0.6)",
+        backgroundColor: "rgba(254, 243, 199, 1)"
       } : {
         boxShadow: [
           "0px 0px 15px rgba(213,107,69,0.12)",
@@ -49,6 +50,13 @@ export default function LifePhasesBar({
           "rgba(253, 230, 138, 0.5)",
           "rgba(213, 107, 69, 0.9)",
           "rgba(253, 230, 138, 0.5)"
+        ],
+        backgroundColor: [
+          "rgba(255, 255, 255, 1)",
+          "rgba(254, 243, 199, 0.8)",
+          "rgba(255, 255, 255, 1)",
+          "rgba(254, 243, 199, 0.8)",
+          "rgba(255, 255, 255, 1)"
         ]
       }}
       transition={isExpanded ? { duration: 0.3 } : {
