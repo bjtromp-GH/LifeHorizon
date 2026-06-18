@@ -469,53 +469,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Current Age display and tweak */}
-              <div className="space-y-1 sm:space-y-3 pt-0.5 sm:pt-2">
-                <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Huidige Leeftijd (in 2026)</span>
-                  <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.currentAge} jaar</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="range"
-                    id="slider-onboarding-currentage"
-                    min="2"
-                    max="100"
-                    value={inputs.currentAge}
-                    onChange={(e) => {
-                      setAgeInteracted(true);
-                      const cAge = parseInt(e.target.value);
-                      setLocalAge(cAge.toString());
-                      setLocalBirthYear((2026 - cAge).toString());
-                      onInputChange({ currentAge: cAge, birthYear: 2026 - cAge });
-                    }}
-                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                  />
-                  <input
-                    type="number"
-                    min="2"
-                    max="100"
-                    value={localAge}
-                    onChange={(e) => {
-                      setAgeInteracted(true);
-                      setLocalAge(e.target.value);
-                      const val = parseInt(e.target.value);
-                      if (!isNaN(val)) {
-                        const currentAge = Math.min(100, Math.max(2, val));
-                        setLocalBirthYear((2026 - currentAge).toString());
-                        onInputChange({ currentAge, birthYear: 2026 - currentAge });
-                      }
-                    }}
-                    onBlur={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (isNaN(val)) {
-                        setLocalAge(inputs.currentAge.toString());
-                      } else {
-                        const currentAge = Math.min(100, Math.max(2, val));
-                        setLocalAge(currentAge.toString());
-                      }
-                    }}
-                    className="w-full sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-2 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors"
-                  />
+              <div className="space-y-1 sm:space-y-3 pt-0.5 sm:pt-2 pb-1">
+                <div className="flex justify-between items-center text-[10px] sm:text-xs bg-[#FAF3F0] p-2.5 rounded-lg border border-[#D56B45]/15">
+                  <span className="font-semibold text-[#D56B45] uppercase tracking-wider">Huidige Leeftijd (in 2026)</span>
+                  <span className="font-mono text-sm sm:text-base font-black text-[#D56B45]">{inputs.currentAge} jaar</span>
                 </div>
               </div>
 
