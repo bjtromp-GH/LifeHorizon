@@ -18,45 +18,38 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
   return (
     <div 
       ref={containerRef} 
-      className="absolute inset-0 w-full h-full overflow-y-auto bg-[#111111] text-white"
+      className="absolute inset-0 w-full h-full overflow-y-auto bg-black text-white"
     >
       <div style={{ height: "300vh" }} className="relative w-full">
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center p-6 sm:p-12 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#D56B45]/10 via-[#111111]/80 to-[#111111] pointer-events-none" />
-        
-        <div className="max-w-3xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-3 sm:gap-x-3 sm:gap-y-5 relative z-10">
-          {words.map((word, i) => {
-            const start = (i / words.length) * 0.8; // finish text animation at 80% scroll
-            const end = start + (1 / words.length);
-            
-            // Each word fades in as scroll passes its specific start/end window
-            const opacity = useTransform(scrollYProgress, [Math.max(0, start - 0.1), start, end], [0.15, 0.15, 1]);
-            
-            // Adding a blur effect for an extra cinematic feel
-            const blur = useTransform(scrollYProgress, [Math.max(0, start - 0.1), start, end], ["blur(8px)", "blur(8px)", "blur(0px)"]);
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center p-6 sm:p-12 md:p-24 overflow-hidden">
+          <div className="max-w-5xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-4 relative z-10">
+            {words.map((word, i) => {
+              const start = (i / words.length) * 0.85; 
+              const end = start + (1 / words.length);
+              
+              const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
 
-            return (
-              <motion.span
-                key={i}
-                style={{ opacity, filter: blur }}
-                className="text-2xl sm:text-4xl md:text-5xl font-black font-sans leading-tight tracking-tight text-white"
-              >
-                {word}
-              </motion.span>
-            );
-          })}
-        </div>
+              return (
+                <motion.span
+                  key={i}
+                  style={{ opacity }}
+                  className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-sans leading-snug tracking-tight text-white"
+                >
+                  {word}
+                </motion.span>
+              );
+            })}
+          </div>
 
-        {/* Final Button reveals when scroll is almost at the end */}
-        <motion.div
-          style={{ 
-            opacity: useTransform(scrollYProgress, [0.85, 0.95], [0, 1]),
-            y: useTransform(scrollYProgress, [0.85, 0.95], [40, 0]),
-            pointerEvents: useTransform(scrollYProgress, (v) => v > 0.9 ? "auto" : "none") as any
-          }}
-          className="absolute bottom-12 sm:bottom-24 w-full flex justify-center z-20"
-        >
-          <motion.button
+          <motion.div
+            style={{ 
+              opacity: useTransform(scrollYProgress, [0.85, 0.95], [0, 1]),
+              y: useTransform(scrollYProgress, [0.85, 0.95], [40, 0]),
+              pointerEvents: useTransform(scrollYProgress, (v) => v > 0.9 ? "auto" : "none") as any
+            }}
+            className="absolute bottom-12 sm:bottom-24 w-full flex justify-center z-20"
+          >
+            <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(213,107,69,0.5)" }}
             whileTap={{ scale: 0.95 }}
             onClick={onComplete}
