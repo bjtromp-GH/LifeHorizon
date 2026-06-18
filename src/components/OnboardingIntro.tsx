@@ -42,6 +42,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   const [geneticsInteracted, setGeneticsInteracted] = useState(false);
   
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showValidation, setShowValidation] = useState(false);
 
   // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
@@ -84,8 +85,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
     canProceed = localStartWorkAge !== "" && localFireAge !== "";
   }
 
+  useEffect(() => {
+    if (canProceed) setShowValidation(false);
+  }, [canProceed]);
+
   const handleNext = () => {
+    if (step < 6 && !canProceed) {
+      setShowValidation(true);
+      return;
+    }
     if (step < 6 && canProceed) {
+      setShowValidation(false);
       setIsTransitioning(true);
       setTimeout(() => {
         setStep((s) => s + 1);
@@ -337,15 +347,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               <motion.button
                 id="btn-intro-start"
-                whileHover={canProceed ? { scale: 1.02 } : {}}
-                whileTap={canProceed ? { scale: 0.98 } : {}}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleNext}
-                disabled={!canProceed}
-                className={`w-full py-2.5 sm:py-3.5 font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md transition-colors duration-200 ${
-                  !canProceed 
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
-                    : "bg-[#201F1D] hover:bg-[#1A1A1A] text-white cursor-pointer"
-                }`}
+                className="w-full py-2.5 sm:py-3.5 font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md transition-colors duration-200 bg-[#201F1D] hover:bg-[#1A1A1A] text-white cursor-pointer"
               >
                 <span>Start de Levensmeting</span>
                 <Play className="w-3.5 h-3.5 fill-current" />
@@ -1045,19 +1050,23 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
         </div>
 
         <div className="flex items-center space-x-2 sm:space-x-3">
+          {showValidation && (
+            <motion.span 
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-[#D56B45] font-bold text-xs sm:text-sm mr-1 sm:mr-2"
+            >
+              Vul a.u.b. alles in
+            </motion.span>
+          )}
           {step > 0 && step < stepsMeta.length - 1 && (
             <motion.button
               type="button"
               id="btn-onboarding-next"
-              whileHover={canProceed ? { scale: 1.02 } : {}}
-              whileTap={canProceed ? { scale: 0.98 } : {}}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={handleNext}
-              disabled={!canProceed}
-              className={`px-5 sm:px-6 py-2.5 sm:py-3 font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 ${
-                !canProceed 
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
-                  : "bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white cursor-pointer"
-              }`}
+              className="px-5 sm:px-6 py-2.5 sm:py-3 font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white cursor-pointer"
             >
               <span>Volgende</span>
               <ChevronRight className="w-4 h-4" />
