@@ -1057,15 +1057,6 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
         </div>
 
         <div className="flex items-center space-x-2 sm:space-x-3">
-          {showValidation && (
-            <motion.span 
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="text-[#D56B45] font-bold text-xs sm:text-sm mr-1 sm:mr-2"
-            >
-              Vul a.u.b. alles in
-            </motion.span>
-          )}
           {step > 0 && step < stepsMeta.length - 1 && (
             <motion.button
               type="button"
