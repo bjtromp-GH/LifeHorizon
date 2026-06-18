@@ -18,22 +18,22 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
   return (
     <div 
       ref={containerRef} 
-      className="absolute inset-0 w-full h-full overflow-y-auto bg-black text-white"
+      className="absolute inset-0 w-full h-full overflow-y-auto bg-gradient-to-br from-[#E25C26] to-[#B84E29] text-white"
     >
       <div style={{ height: "300vh" }} className="relative w-full">
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center p-6 sm:p-12 md:p-24 overflow-hidden">
-          <div className="max-w-5xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-4 relative z-10">
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center p-8 sm:p-16 md:p-24 overflow-hidden">
+          <div className="max-w-4xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-3 relative z-10 w-full h-full content-center">
             {words.map((word, i) => {
               const start = (i / words.length) * 0.85; 
               const end = start + (1 / words.length);
               
-              const opacity = useTransform(scrollYProgress, [start, end], [0.1, 1]);
+              const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
 
               return (
                 <motion.span
                   key={i}
                   style={{ opacity }}
-                  className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-sans leading-snug tracking-tight text-white"
+                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-sans leading-tight tracking-tight text-white drop-shadow-sm"
                 >
                   {word}
                 </motion.span>
@@ -47,7 +47,7 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
               y: useTransform(scrollYProgress, [0.85, 0.95], [40, 0]),
               pointerEvents: useTransform(scrollYProgress, (v) => v > 0.9 ? "auto" : "none") as any
             }}
-            className="absolute bottom-12 sm:bottom-24 w-full flex justify-center z-20"
+            className="absolute bottom-8 sm:bottom-16 w-full flex justify-center z-20"
           >
             <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(213,107,69,0.5)" }}
