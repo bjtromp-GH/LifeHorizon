@@ -9,8 +9,7 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
+    container: containerRef,
   });
 
   const text = "We worden gemiddeld ouder dan ooit tevoren. Onze levensverwachting blijft stijgen. Maar er is een verborgen realiteit. Onze 'gezonde' levensverwachting stijgt niet in hetzelfde tempo mee. Dit betekent dat we aan het einde van ons leven gemiddeld langer kampen met chronische ziekten, vermoeidheid of beperkingen. Je doel is niet simpelweg zo oud mogelijk worden. Je ware doel is zo lang mogelijk reëel, vitaal en onafhankelijk leven. Hier draait de Bio-Score om. Neem de regie over je gezonde jaren.";
@@ -19,10 +18,10 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
   return (
     <div 
       ref={containerRef} 
-      className="relative w-full bg-[#111111] text-white"
-      style={{ height: "300vh" }} // 3 screens tall to allow slow scrolling
+      className="absolute inset-0 w-full h-full overflow-y-auto bg-[#111111] text-white"
     >
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center p-6 sm:p-12 overflow-hidden">
+      <div style={{ height: "300vh" }} className="relative w-full">
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center p-6 sm:p-12 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#D56B45]/10 via-[#111111]/80 to-[#111111] pointer-events-none" />
         
         <div className="max-w-3xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-3 sm:gap-x-3 sm:gap-y-5 relative z-10">
@@ -69,6 +68,7 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
             </svg>
           </motion.button>
         </motion.div>
+      </div>
       </div>
     </div>
   );
