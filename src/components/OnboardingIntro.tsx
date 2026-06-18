@@ -21,6 +21,7 @@ import {
   Edit3,
   Zap
 } from "lucide-react";
+import ScrollRevealText from "./ScrollRevealText";
 
 interface OnboardingIntroProps {
   inputs: UserInputs;
@@ -140,7 +141,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       setShowValidation(true);
       return;
     }
-    if (step < 6 && canProceed) {
+    if (step < 7 && canProceed) {
       setShowValidation(false);
       if (step === 0 || step === 1) {
         setStep((s) => s + 1);
@@ -151,7 +152,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           setIsTransitioning(false);
         }, 1200);
       }
-    } else if (step >= 6) {
+    } else if (step >= 7) {
       onComplete();
     }
   };
@@ -179,32 +180,34 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-[#FAFCEE] blur-3xl opacity-60 pointer-events-none z-0" />
 
       {/* Top Header & Step Progress Bar */}
-      <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10">
-        <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
-          <span className="text-xl">🔥</span>
-          <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
-            Levensloop & FIRE
-          </h1>
-        </div>
-
-        {step > 0 && (
-          <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
-            <motion.div 
-              className="h-full bg-[#D56B45]"
-              initial={{ width: 0 }}
-              animate={{ width: `${(step / (stepsMeta.length - 1)) * 100}%` }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            />
+      {step < 7 && (
+        <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10">
+          <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
+            <span className="text-xl">🔥</span>
+            <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
+              Levensloop & FIRE
+            </h1>
           </div>
-        )}
 
-        {step > 0 && (
-          <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
-            <span>Stap {step} van {stepsMeta.length - 1}</span>
-            <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
-          </div>
-        )}
-      </header>
+          {step > 0 && (
+            <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
+              <motion.div 
+                className="h-full bg-[#D56B45]"
+                initial={{ width: 0 }}
+                animate={{ width: `${(step / (stepsMeta.length - 1)) * 100}%` }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              />
+            </div>
+          )}
+
+          {step > 0 && (
+            <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
+              <span>Stap {step} van {stepsMeta.length - 1}</span>
+              <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
+            </div>
+          )}
+        </header>
+      )}
 
       {/* Main Interactive Slides container */}
       <main className={`flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto pr-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
@@ -1014,16 +1017,38 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </div>
               </div>
 
-              <motion.button
-                id="btn-onboarding-complete"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={onComplete}
-                className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-black text-sm tracking-wide rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="pt-6 sm:pt-8"
               >
-                <span>Open Interactief Dashboard</span>
-                <ChevronRight className="w-5 h-5" />
-              </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => {
+                    setIsTransitioning(true);
+                    setTimeout(() => {
+                      setStep(7);
+                      setIsTransitioning(false);
+                    }, 1200);
+                  }}
+                  className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-black text-sm tracking-wide rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+                >
+                  <span>Eerst nog even dit...</span>
+                  <ChevronRight className="w-5 h-5" />
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          ) : step === 7 ? (
+            <motion.div
+              key="scroll-reveal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 z-[300] bg-[#111111]"
+            >
+              <ScrollRevealText onComplete={onComplete} />
             </motion.div>
           ) : null}
 
@@ -1100,37 +1125,39 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </main>
 
       {/* Navigation Footer */}
-      <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] z-10">
-        <div>
-          {step > 0 && (
-            <button
-               type="button"
-               id="btn-onboarding-back"
-               onClick={handleBack}
-               className="px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-extrabold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span>Vorige</span>
-            </button>
-          )}
-        </div>
+      {step < 6 && (
+        <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] z-10">
+          <div>
+            {step > 0 && (
+              <button
+                 type="button"
+                 id="btn-onboarding-back"
+                 onClick={handleBack}
+                 className="px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-extrabold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Vorige</span>
+              </button>
+            )}
+          </div>
 
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          {step > 0 && step < stepsMeta.length - 1 && (
-            <motion.button
-              type="button"
-              id="btn-onboarding-next"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={handleNext}
-              className="px-5 sm:px-6 py-2.5 sm:py-3 font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white cursor-pointer"
-            >
-              <span>Volgende</span>
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          )}
-        </div>
-      </footer>
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {step > 0 && step < stepsMeta.length - 1 && (
+              <motion.button
+                type="button"
+                id="btn-onboarding-next"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleNext}
+                className="px-5 sm:px-6 py-2.5 sm:py-3 font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white cursor-pointer"
+              >
+                <span>Volgende</span>
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            )}
+          </div>
+        </footer>
+      )}
     </div>
   );
 }
