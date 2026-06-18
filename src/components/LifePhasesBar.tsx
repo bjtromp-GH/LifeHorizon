@@ -27,11 +27,40 @@ export default function LifePhasesBar({
     <motion.div
       layout
       id="life-phases-bar-container"
-      className={`flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl transition-all duration-500 cursor-pointer ${
+      className={`flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl cursor-pointer ${
         isExpanded
-          ? "bg-amber-50 border border-amber-200/60 shadow-md"
-          : "bg-gradient-to-br from-amber-50/60 to-orange-50/30 border border-amber-200/50 shadow-[0_0_15px_rgba(213,107,69,0.12)] hover:shadow-[0_0_20px_rgba(213,107,69,0.25)] hover:border-amber-300/60"
+          ? "bg-amber-50"
+          : "bg-gradient-to-br from-amber-50/60 to-orange-50/30"
       }`}
+      style={{
+        borderWidth: "1px",
+        borderStyle: "solid"
+      }}
+      animate={isExpanded ? {
+        boxShadow: "0px 4px 6px -1px rgba(0, 0, 0, 0.1)",
+        borderColor: "rgba(253, 230, 138, 0.6)"
+      } : {
+        boxShadow: [
+          "0px 0px 15px rgba(213,107,69,0.12)",
+          "0px 0px 25px rgba(213,107,69,0.7)",
+          "0px 0px 15px rgba(213,107,69,0.12)",
+          "0px 0px 25px rgba(213,107,69,0.7)",
+          "0px 0px 15px rgba(213,107,69,0.12)"
+        ],
+        borderColor: [
+          "rgba(253, 230, 138, 0.5)",
+          "rgba(213, 107, 69, 0.9)",
+          "rgba(253, 230, 138, 0.5)",
+          "rgba(213, 107, 69, 0.9)",
+          "rgba(253, 230, 138, 0.5)"
+        ]
+      }}
+      transition={isExpanded ? { duration: 0.3 } : {
+        duration: 2.2,
+        ease: "easeInOut",
+        times: [0, 0.25, 0.5, 0.75, 1],
+        delay: 0.8
+      }}
       onClick={(e) => {
         const target = e.target as HTMLElement;
         if (target.closest("button") || target.closest("input")) return;
