@@ -1027,11 +1027,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
-                    setIsTransitioning(true);
-                    setTimeout(() => {
-                      setStep(7);
-                      setIsTransitioning(false);
-                    }, 1200);
+                    setStep(7);
                   }}
                   className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-black text-sm tracking-wide rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
                 >
