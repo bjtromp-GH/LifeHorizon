@@ -399,7 +399,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 <label className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#767676]">
                   Biologisch Geslacht
                 </label>
-                <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                <div className={`grid grid-cols-2 gap-2 sm:gap-3 p-1 rounded-xl transition-all duration-300 ${showValidation && localGender === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {(["man", "vrouw"] as Gender[]).map((g) => (
                     <button
                       key={g}
@@ -416,6 +416,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     </button>
                   ))}
                 </div>
+                {showValidation && localGender === null && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
+                )}
               </div>
 
               {/* Birth Year selection */}
@@ -424,7 +427,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Geboortejaar</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className={`flex items-center space-x-2 p-1.5 rounded-xl transition-all duration-300 ${showValidation && !ageInteracted ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   <input
                     type="range"
                     id="slider-onboarding-birthyear"
@@ -475,6 +478,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     className="w-full sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-2 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors"
                   />
                 </div>
+                {showValidation && !ageInteracted && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Verplaats de schuifbalk a.u.b. om uw leeftijd in te stellen</p>
+                )}
               </div>
 
               {/* Current Age display and tweak */}
@@ -587,7 +593,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Slaappatroon</span>
                 </label>
-                <div className="grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm">
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localSleep === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
                     { key: "kort", label: "Kort (<6u)", detail: "-1.5 jr" },
                     { key: "matig", label: "Matig (onrustig)", detail: "-0.5 jr" },
@@ -610,6 +616,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     </button>
                   ))}
                 </div>
+                {showValidation && localSleep === null && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
+                )}
               </div>
 
               {/* 2. Beweging */}
@@ -618,7 +627,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Fysieke Activiteit</span>
                 </label>
-                <div className="grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm">
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localActivity === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
                     { key: "zittend", label: "Zittend (kantoor)", detail: "-1.5 jr" },
                     { key: "licht", label: "Lichte beweging", detail: "Neutraal" },
@@ -641,15 +650,18 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     </button>
                   ))}
                 </div>
+                {showValidation && localActivity === null && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
+                )}
               </div>
 
               {/* 3. Stress */}
               <div className="space-y-1.5 sm:space-y-2">
                 <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
-                  <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
-                  <span>Psychische Stress</span>
+                  <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                  <span>Stress / Werkdruk</span>
                 </label>
-                <div className="grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm">
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localStress === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
                     { key: "hoog", label: "Veel stress", detail: "-1.8 jr" },
                     { key: "gemiddeld", label: "Gemiddeld", detail: "Neutraal" },
@@ -672,6 +684,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     </button>
                   ))}
                 </div>
+                {showValidation && localStress === null && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
+                )}
               </div>
             </motion.div>
           )}
@@ -699,7 +714,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Father */}
-              <div className="p-4 sm:p-5 bg-gray-50 border border-[#EAEAEA] rounded-2xl space-y-3.5 shadow-3xs">
+              <div className={`p-4 sm:p-5 bg-gray-50 border rounded-2xl space-y-3.5 shadow-3xs transition-all duration-300 ${
+                showValidation && !geneticsInteracted ? "border-red-400 bg-red-50/50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
+              }`}>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2.5">
                   <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">Vader</span>
                   <div className="grid grid-cols-2 sm:flex sm:space-x-1 gap-2">
@@ -765,7 +782,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               {/* Mother */}
-              <div className="p-4 sm:p-5 bg-gray-50 border border-[#EAEAEA] rounded-2xl space-y-3.5 shadow-3xs">
+              <div className={`p-4 sm:p-5 bg-gray-50 border rounded-2xl space-y-3.5 shadow-3xs transition-all duration-300 ${
+                showValidation && !geneticsInteracted ? "border-red-400 bg-red-50/50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
+              }`}>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2.5">
                   <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">Moeder</span>
                   <div className="grid grid-cols-2 sm:flex sm:space-x-1 gap-2">
@@ -828,6 +847,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     </div>
                   </div>
                 )}
+                {showValidation && !geneticsInteracted && (
+                  <p className="text-red-500 text-xs font-bold px-1 mt-2">Vul a.u.b. iets in voor minstens één ouder</p>
+                )}
               </div>
             </motion.div>
           )}
@@ -860,7 +882,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-bold text-[#767676] uppercase tracking-wider">Startleeftijd Carrière</span>
                   <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{inputs.startWorkAge} jaar</span>
                 </div>
-                <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
+                <div className={`flex items-center space-x-3 bg-white p-2.5 rounded-xl border shadow-3xs transition-all duration-300 ${
+                  showValidation && localStartWorkAge === "" ? "border-red-400 bg-red-50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
+                }`}>
                   <input
                     type="range"
                     id="slider-onboarding-startwork"
@@ -893,6 +917,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     className="w-20 sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-1.5 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors shrink-0"
                   />
                 </div>
+                {showValidation && localStartWorkAge === "" && (
+                  <p className="text-red-500 text-xs font-bold px-1 mt-1">Vul dit a.u.b. in</p>
+                )}
               </div>
 
               {/* FIRE Target Age */}
@@ -901,7 +928,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-bold text-[#767676] uppercase tracking-wider">Doelleeftijd FIRE / Pensioen</span>
                   <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{inputs.fireAge} jaar</span>
                 </div>
-                <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
+                <div className={`flex items-center space-x-3 bg-white p-2.5 rounded-xl border shadow-3xs transition-all duration-300 ${
+                  showValidation && localFireAge === "" ? "border-red-400 bg-red-50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
+                }`}>
                   <input
                     type="range"
                     id="slider-onboarding-fireage"
@@ -936,6 +965,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     className="w-20 sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-1.5 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors shrink-0"
                   />
                 </div>
+                {showValidation && localFireAge === "" && (
+                  <p className="text-red-500 text-xs font-bold px-1 mt-1">Vul dit a.u.b. in</p>
+                )}
               </div>
 
               <div className="p-4 bg-neutral-50 rounded-2xl border border-[#EAEAEA] text-xs space-y-2 shadow-3xs">
