@@ -221,7 +221,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white/95 backdrop-blur-md"
             >
               <motion.img 
-                src="/img/Olifant.png" 
+                src="/img/LR_Olifant_v2.png" 
                 initial={{ scale: 0.8, rotate: -5, opacity: 0, y: 20 }}
                 animate={{ scale: 1.1, rotate: 0, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0 }}
