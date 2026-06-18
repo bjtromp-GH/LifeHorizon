@@ -1125,7 +1125,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </main>
 
       {/* Navigation Footer */}
-      {step < 6 && (
+      {step < 6 && !showYearPicker && (
         <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] z-10">
           <div>
             {step > 0 && (
