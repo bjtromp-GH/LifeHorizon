@@ -370,7 +370,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Geboortejaar</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex items-center space-x-2">
                   <input
                     type="range"
                     id="slider-onboarding-birthyear"
@@ -424,7 +424,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Huidige Leeftijd (in 2026)</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.currentAge} jaar</span>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex items-center space-x-2">
                   <input
                     type="range"
                     id="slider-onboarding-currentage"
@@ -503,7 +503,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         {inputs.customLifeExpectancy} jaar
                       </span>
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex items-center space-x-2">
                       <input
                         type="range"
                         id="slider-onboarding-custom-expectancy"
