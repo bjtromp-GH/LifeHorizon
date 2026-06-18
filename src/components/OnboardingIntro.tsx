@@ -351,7 +351,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 <Play className="w-3.5 h-3.5 fill-current" />
               </motion.button>
             </motion.div>
-          )}
+          ) : null}
 
           {/* SLIDE 2: BASE DEMOGRAPHY */}
           {step === 2 && (
