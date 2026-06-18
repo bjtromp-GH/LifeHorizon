@@ -32,8 +32,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   const [imgError, setImgError] = useState(false);
   
   const [localGender, setLocalGender] = useState<Gender | null>(null);
-  const [localBirthYear, setLocalBirthYear] = useState<string>("");
-  const [localAge, setLocalAge] = useState<string>("");
+  const [localBirthYear, setLocalBirthYear] = useState<string>(inputs.birthYear.toString());
+  const [localAge, setLocalAge] = useState<string>(inputs.currentAge.toString());
+  const [ageInteracted, setAgeInteracted] = useState(false);
   const [localStartWorkAge, setLocalStartWorkAge] = useState<string>("");
   const [localFireAge, setLocalFireAge] = useState<string>("");
   const [localSleep, setLocalSleep] = useState<SleepLevel | null>(null);
@@ -76,7 +77,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
   let canProceed = true;
   if (step === 2) {
-    canProceed = localGender !== null && localBirthYear !== "" && localAge !== "";
+    canProceed = localGender !== null && ageInteracted;
   } else if (step === 3) {
     canProceed = localSleep !== null && localActivity !== null && localStress !== null;
   } else if (step === 4) {
@@ -96,7 +97,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
     }
     if (step < 6 && canProceed) {
       setShowValidation(false);
-      if (step === 0) {
+      if (step === 0 || step === 1) {
         setStep((s) => s + 1);
       } else {
         setIsTransitioning(true);
@@ -422,6 +423,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     max="2024"
                     value={inputs.birthYear}
                     onChange={(e) => {
+                      setAgeInteracted(true);
                       const bYear = parseInt(e.target.value);
                       const calculatedAge = 2026 - bYear;
                       setLocalBirthYear(bYear.toString());
@@ -439,6 +441,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     max="2024"
                     value={localBirthYear}
                     onChange={(e) => {
+                      setAgeInteracted(true);
                       setLocalBirthYear(e.target.value);
                       const val = parseInt(e.target.value);
                       if (!isNaN(val)) {
@@ -479,6 +482,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     max="100"
                     value={inputs.currentAge}
                     onChange={(e) => {
+                      setAgeInteracted(true);
                       const cAge = parseInt(e.target.value);
                       setLocalAge(cAge.toString());
                       setLocalBirthYear((2026 - cAge).toString());
@@ -492,6 +496,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     max="100"
                     value={localAge}
                     onChange={(e) => {
+                      setAgeInteracted(true);
                       setLocalAge(e.target.value);
                       const val = parseInt(e.target.value);
                       if (!isNaN(val)) {
