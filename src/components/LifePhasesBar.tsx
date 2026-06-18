@@ -27,10 +27,10 @@ export default function LifePhasesBar({
     <motion.div
       layout
       id="life-phases-bar-container"
-      className={`flex flex-col space-y-4 p-3 -m-3 rounded-xl transition-all duration-500 cursor-pointer ${
+      className={`flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl transition-all duration-500 cursor-pointer ${
         isExpanded
-          ? "bg-amber-50/40 border border-amber-200/40 shadow-sm"
-          : "hover:bg-amber-50/20 hover:border-amber-100/30 border border-transparent"
+          ? "bg-amber-50 border border-amber-200/60 shadow-md"
+          : "bg-gradient-to-br from-amber-50/60 to-orange-50/30 border border-amber-200/50 shadow-[0_0_15px_rgba(213,107,69,0.12)] hover:shadow-[0_0_20px_rgba(213,107,69,0.25)] hover:border-amber-300/60"
       }`}
       onClick={(e) => {
         const target = e.target as HTMLElement;
@@ -64,14 +64,17 @@ export default function LifePhasesBar({
               ) : (
                 <>
                   <Settings className="w-3 h-3 text-[#D56B45]" />
-                  <span>Pas levensverwachting aan</span>
+                  <span className="hidden sm:inline">Pas levensverwachting aan</span>
+                  <span className="sm:hidden">Pas aan</span>
                 </>
               )}
             </button>
           )}
           <span className="px-2.5 py-1 text-[10px] uppercase font-bold font-sans rounded bg-[#FAF3F0] text-[#D56B45] border border-[#D56B45]/20 whitespace-nowrap flex items-center gap-1.5 shadow-3xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D56B45] animate-pulse shadow-[0_0_8px_rgba(213,107,69,0.8)]" />
-            Huidige Leeftijd: <span className="font-mono text-xs font-black">{currentAge} jaar</span>
+            <span className="hidden min-[375px]:inline">Huidige Leeftijd:</span>
+            <span className="min-[375px]:hidden">Leeftijd:</span>
+            <span className="font-mono text-xs font-black">{currentAge} <span className="hidden sm:inline">jaar</span></span>
           </span>
         </div>
       </div>
