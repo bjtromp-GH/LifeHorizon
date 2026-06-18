@@ -1021,7 +1021,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 <ChevronRight className="w-5 h-5" />
               </motion.button>
             </motion.div>
-          )}
+          ) : null}
 
         </AnimatePresence>
       </main>
