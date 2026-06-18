@@ -74,13 +74,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
     }
   };
 
-  const confirmYearSelection = () => {
+  const confirmYearSelection = (selectedYear?: number) => {
+    const yearToUse = selectedYear || focusedYear;
     setAgeInteracted(true);
-    const calculatedAge = 2026 - focusedYear;
-    setLocalBirthYear(focusedYear.toString());
+    const calculatedAge = 2026 - yearToUse;
+    setLocalBirthYear(yearToUse.toString());
     setLocalAge(calculatedAge.toString());
     onInputChange({ 
-      birthYear: focusedYear,
+      birthYear: yearToUse,
       currentAge: Math.max(2, Math.min(100, calculatedAge))
     });
     setShowYearPicker(false);
@@ -1066,9 +1067,15 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                           key={year}
                           className="h-[64px] snap-center flex items-center justify-center cursor-pointer select-none"
                           onClick={() => {
-                            const idx = yearsList.indexOf(year);
-                            if (scrollContainerRef.current) {
-                              scrollContainerRef.current.scrollTo({ top: idx * ITEM_HEIGHT, behavior: 'smooth' });
+                            if (year === focusedYear) {
+                              confirmYearSelection(year);
+                            } else {
+                              const idx = yearsList.indexOf(year);
+                              if (scrollContainerRef.current) {
+                                scrollContainerRef.current.scrollTo({ top: idx * ITEM_HEIGHT, behavior: 'smooth' });
+                              }
+                              // Optionally auto-confirm after scrolling
+                              setTimeout(() => confirmYearSelection(year), 300);
                             }
                           }}
                         >
@@ -1086,15 +1093,6 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     })}
                   </div>
                 </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={confirmYearSelection}
-                  className="mt-10 px-10 py-4 bg-white text-[#D56B45] font-black text-lg uppercase tracking-wider rounded-2xl shadow-xl border-2 border-white/50"
-                >
-                  Klaar
-                </motion.button>
               </div>
             </motion.div>
           )}
