@@ -104,7 +104,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
         setTimeout(() => {
           setStep((s) => s + 1);
           setIsTransitioning(false);
-        }, 700);
+        }, 1200);
       }
     } else if (step >= 6) {
       onComplete();
@@ -170,7 +170,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col items-center justify-center w-full"
+              className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white/95 backdrop-blur-md"
             >
               <motion.img 
                 src="/img/Olifant.png" 
@@ -178,8 +178,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 animate={{ scale: 1.1, rotate: 0, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ type: "spring", bounce: 0.4, duration: 0.6 }}
-                className="w-40 h-40 object-contain drop-shadow-xl"
+                className="w-48 h-48 sm:w-56 sm:h-56 object-contain drop-shadow-2xl mb-6"
               />
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+                className="text-center"
+              >
+                <h2 className="text-xl sm:text-3xl font-black text-[#D56B45] uppercase tracking-wider mb-2 drop-shadow-sm">Goed bezig!</h2>
+                <p className="text-sm sm:text-lg font-bold text-[#767676]">Door naar stap {step}</p>
+              </motion.div>
             </motion.div>
           ) : step === 0 ? (
             <motion.div
