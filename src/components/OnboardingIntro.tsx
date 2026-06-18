@@ -43,6 +43,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   const [localStress, setLocalStress] = useState<StressLevel | null>(null);
   const [geneticsInteracted, setGeneticsInteracted] = useState(false);
   
+  const [showYearPicker, setShowYearPicker] = useState(false);
+  
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
 
@@ -425,59 +427,19 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="font-semibold text-[#767676] uppercase tracking-wider">Geboortejaar</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
                 </div>
-                <div className={`flex items-center space-x-2 p-1.5 rounded-xl transition-all duration-300 ${showValidation && !ageInteracted ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
-                  <input
-                    type="range"
-                    id="slider-onboarding-birthyear"
-                    min="1940"
-                    max="2024"
-                    value={inputs.birthYear}
-                    onChange={(e) => {
-                      setAgeInteracted(true);
-                      const bYear = parseInt(e.target.value);
-                      const calculatedAge = 2026 - bYear;
-                      setLocalBirthYear(bYear.toString());
-                      setLocalAge(calculatedAge.toString());
-                      onInputChange({ 
-                        birthYear: bYear,
-                        currentAge: Math.max(2, Math.min(100, calculatedAge))
-                      });
-                    }}
-                    className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                  />
-                  <input
-                    type="number"
-                    min="1940"
-                    max="2024"
-                    value={localBirthYear}
-                    onChange={(e) => {
-                      setAgeInteracted(true);
-                      setLocalBirthYear(e.target.value);
-                      const val = parseInt(e.target.value);
-                      if (!isNaN(val)) {
-                        const bYear = Math.min(2024, Math.max(1940, val));
-                        const calculatedAge = 2026 - bYear;
-                        setLocalAge(calculatedAge.toString());
-                        onInputChange({
-                          birthYear: bYear,
-                          currentAge: Math.max(2, Math.min(100, calculatedAge))
-                        });
-                      }
-                    }}
-                    onBlur={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (isNaN(val)) {
-                        setLocalBirthYear(inputs.birthYear.toString());
-                      } else {
-                        const bYear = Math.min(2024, Math.max(1940, val));
-                        setLocalBirthYear(bYear.toString());
-                      }
-                    }}
-                    className="w-full sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-2 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors"
-                  />
+                <div 
+                  onClick={() => setShowYearPicker(true)}
+                  className={`flex items-center justify-center p-3 sm:p-4 rounded-xl cursor-pointer bg-white border-2 hover:border-[#D56B45] hover:bg-[#FAF3F0] transition-all duration-300 shadow-sm ${showValidation && !ageInteracted ? 'border-red-400 bg-red-50/80 ring-2 ring-red-400 animate-pulse' : 'border-[#EAEAEA]'}`}
+                >
+                  <span className="text-2xl sm:text-3xl font-mono font-black text-[#D56B45]">
+                    {inputs.birthYear}
+                  </span>
+                  <span className="ml-3 text-xs sm:text-sm font-bold text-[#767676] uppercase tracking-wider">
+                    Tik om te wijzigen
+                  </span>
                 </div>
                 {showValidation && !ageInteracted && (
-                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Verplaats de schuifbalk a.u.b. om uw leeftijd in te stellen</p>
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Kies a.u.b. uw geboortejaar</p>
                 )}
               </div>
 
@@ -1023,6 +985,58 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
             </motion.div>
           ) : null}
 
+        </AnimatePresence>
+        <AnimatePresence>
+          {showYearPicker && (
+            <motion.div
+              initial={{ opacity: 0, y: "100%" }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-0 z-[200] bg-gradient-to-br from-[#E25C26] to-[#B84E29] flex flex-col items-center overflow-hidden"
+            >
+              <div className="w-full max-w-md mx-auto h-full flex flex-col p-6 pt-12">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl sm:text-3xl font-black text-white">Kies Geboortejaar</h3>
+                  <button onClick={() => setShowYearPicker(false)} className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white font-bold backdrop-blur-md transition-colors">
+                    X
+                  </button>
+                </div>
+                
+                <div 
+                  className="flex-grow overflow-y-auto space-y-3 pb-32 pr-2"
+                  style={{ WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)", scrollbarWidth: "none" }}
+                >
+                  {Array.from({ length: 2024 - 1940 + 1 }, (_, i) => 2024 - i).map((year, idx) => (
+                    <motion.button
+                      key={year}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: Math.min(idx * 0.03, 0.5), duration: 0.3 }}
+                      onClick={() => {
+                        setAgeInteracted(true);
+                        const calculatedAge = 2026 - year;
+                        setLocalBirthYear(year.toString());
+                        setLocalAge(calculatedAge.toString());
+                        onInputChange({ 
+                          birthYear: year,
+                          currentAge: Math.max(2, Math.min(100, calculatedAge))
+                        });
+                        setTimeout(() => setShowYearPicker(false), 250);
+                      }}
+                      className={`w-full py-4 text-center rounded-2xl text-2xl font-mono font-black transition-all cursor-pointer ${
+                        inputs.birthYear === year 
+                          ? 'bg-white text-[#D56B45] scale-[1.02] shadow-xl' 
+                          : 'bg-white/10 text-white hover:bg-white/20'
+                      }`}
+                    >
+                      {year}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>
       </main>
 
