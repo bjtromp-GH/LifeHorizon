@@ -30,15 +30,18 @@ interface OnboardingIntroProps {
 export default function OnboardingIntro({ inputs, onInputChange, onComplete }: OnboardingIntroProps) {
   const [step, setStep] = useState<number>(0);
   const [imgError, setImgError] = useState(false);
-  const [localBirthYear, setLocalBirthYear] = useState(inputs.birthYear.toString());
-  const [localAge, setLocalAge] = useState(inputs.currentAge.toString());
-  const [localStartWorkAge, setLocalStartWorkAge] = useState(inputs.startWorkAge.toString());
-  const [localFireAge, setLocalFireAge] = useState(inputs.fireAge.toString());
-
-  useEffect(() => { setLocalBirthYear(inputs.birthYear.toString()); }, [inputs.birthYear]);
-  useEffect(() => { setLocalAge(inputs.currentAge.toString()); }, [inputs.currentAge]);
-  useEffect(() => { setLocalStartWorkAge(inputs.startWorkAge.toString()); }, [inputs.startWorkAge]);
-  useEffect(() => { setLocalFireAge(inputs.fireAge.toString()); }, [inputs.fireAge]);
+  
+  const [localGender, setLocalGender] = useState<Gender | null>(null);
+  const [localBirthYear, setLocalBirthYear] = useState<string>("");
+  const [localAge, setLocalAge] = useState<string>("");
+  const [localStartWorkAge, setLocalStartWorkAge] = useState<string>("");
+  const [localFireAge, setLocalFireAge] = useState<string>("");
+  const [localSleep, setLocalSleep] = useState<SleepLevel | null>(null);
+  const [localActivity, setLocalActivity] = useState<ActivityLevel | null>(null);
+  const [localStress, setLocalStress] = useState<StressLevel | null>(null);
+  const [geneticsInteracted, setGeneticsInteracted] = useState(false);
+  
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
@@ -70,10 +73,25 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
     }
   };
 
+  let canProceed = true;
+  if (step === 2) {
+    canProceed = localGender !== null && localBirthYear !== "" && localAge !== "";
+  } else if (step === 3) {
+    canProceed = localSleep !== null && localActivity !== null && localStress !== null;
+  } else if (step === 4) {
+    canProceed = geneticsInteracted;
+  } else if (step === 5) {
+    canProceed = localStartWorkAge !== "" && localFireAge !== "";
+  }
+
   const handleNext = () => {
-    if (step < stepsMeta.length - 1) {
-      setStep(step + 1);
-    } else {
+    if (step < 6 && canProceed) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setStep((s) => s + 1);
+        setIsTransitioning(false);
+      }, 700);
+    } else if (step >= 6) {
       onComplete();
     }
   };
@@ -131,9 +149,24 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       {/* Main Interactive Slides container */}
       <main className={`flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto pr-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
         <AnimatePresence mode="wait">
-          
-          {/* SLIDE 0: ORANGE INTRO SPLASH */}
-          {step === 0 && (
+          {isTransitioning ? (
+            <motion.div
+              key="transition"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col items-center justify-center w-full"
+            >
+              <motion.img 
+                src="/img/Olifant.png" 
+                initial={{ scale: 0.8, rotate: -5, opacity: 0, y: 20 }}
+                animate={{ scale: 1.1, rotate: 0, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", bounce: 0.4, duration: 0.6 }}
+                className="w-40 h-40 object-contain drop-shadow-xl"
+              />
+            </motion.div>
+          ) : step === 0 ? (
             <motion.div
               key="splash-screen"
               initial={{ opacity: 0 }}
@@ -234,7 +267,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
                   whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => setStep(1)}
+                  onClick={handleNext}
                   className="w-full py-3 px-5 sm:py-4 sm:px-6 bg-white hover:bg-[#FFF8F5] text-[#D56B45] font-extrabold text-xs sm:text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-xl border border-white/10 cursor-pointer transition-all duration-200"
                 >
                   <span>Ga verder</span>
@@ -251,10 +284,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </motion.span>
               </div>
             </motion.div>
-          )}
-
-          {/* SLIDE 1: WELCOME INTRO SPLASH */}
-          {step === 1 && (
+          ) : step === 1 ? (
             <motion.div
               key="welcome"
               initial={{ opacity: 0, y: 15 }}
@@ -307,10 +337,15 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               <motion.button
                 id="btn-intro-start"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={canProceed ? { scale: 1.02 } : {}}
+                whileTap={canProceed ? { scale: 0.98 } : {}}
                 onClick={handleNext}
-                className="w-full py-2.5 sm:py-3.5 bg-[#201F1D] hover:bg-[#1A1A1A] text-white font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
+                disabled={!canProceed}
+                className={`w-full py-2.5 sm:py-3.5 font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md transition-colors duration-200 ${
+                  !canProceed 
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
+                    : "bg-[#201F1D] hover:bg-[#1A1A1A] text-white cursor-pointer"
+                }`}
               >
                 <span>Start de Levensmeting</span>
                 <Play className="w-3.5 h-3.5 fill-current" />
@@ -351,9 +386,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       key={g}
                       type="button"
                       id={`btn-onboarding-gender-${g}`}
-                      onClick={() => onInputChange({ gender: g })}
+                      onClick={() => { setLocalGender(g as Gender); onInputChange({ gender: g as Gender }); }}
                       className={`py-2 sm:py-3 rounded-lg border font-semibold text-xs sm:text-sm transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
-                        inputs.gender === g
+                        localGender === g
                            ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                            : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
                       }`}
@@ -380,6 +415,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     onChange={(e) => {
                       const bYear = parseInt(e.target.value);
                       const calculatedAge = 2026 - bYear;
+                      setLocalBirthYear(bYear.toString());
+                      setLocalAge(calculatedAge.toString());
                       onInputChange({ 
                         birthYear: bYear,
                         currentAge: Math.max(2, Math.min(100, calculatedAge))
@@ -398,6 +435,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       if (!isNaN(val)) {
                         const bYear = Math.min(2024, Math.max(1940, val));
                         const calculatedAge = 2026 - bYear;
+                        setLocalAge(calculatedAge.toString());
                         onInputChange({
                           birthYear: bYear,
                           currentAge: Math.max(2, Math.min(100, calculatedAge))
@@ -431,7 +469,12 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     min="2"
                     max="100"
                     value={inputs.currentAge}
-                    onChange={(e) => onInputChange({ currentAge: parseInt(e.target.value) })}
+                    onChange={(e) => {
+                      const cAge = parseInt(e.target.value);
+                      setLocalAge(cAge.toString());
+                      setLocalBirthYear((2026 - cAge).toString());
+                      onInputChange({ currentAge: cAge, birthYear: 2026 - cAge });
+                    }}
                     className="hidden sm:block w-full h-1.5 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                   />
                   <input
@@ -444,7 +487,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       const val = parseInt(e.target.value);
                       if (!isNaN(val)) {
                         const currentAge = Math.min(100, Math.max(2, val));
-                        onInputChange({ currentAge });
+                        setLocalBirthYear((2026 - currentAge).toString());
+                        onInputChange({ currentAge, birthYear: 2026 - currentAge });
                       }
                     }}
                     onBlur={(e) => {
@@ -574,9 +618,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-sleep-${item.key}`}
-                      onClick={() => updateBioAnswer("sleep", item.key as SleepLevel)}
+                      onClick={() => { setLocalSleep(item.key as SleepLevel); updateBioAnswer("sleep", item.key as SleepLevel); }}
                       className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
-                        inputs.bioAnswers.sleep === item.key
+                        localSleep === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
@@ -605,9 +649,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-activity-${item.key}`}
-                      onClick={() => updateBioAnswer("activity", item.key as ActivityLevel)}
+                      onClick={() => { setLocalActivity(item.key as ActivityLevel); updateBioAnswer("activity", item.key as ActivityLevel); }}
                       className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
-                        inputs.bioAnswers.activity === item.key
+                        localActivity === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
@@ -636,9 +680,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-stress-${item.key}`}
-                      onClick={() => updateBioAnswer("stress", item.key as StressLevel)}
+                      onClick={() => { setLocalStress(item.key as StressLevel); updateBioAnswer("stress", item.key as StressLevel); }}
                       className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
-                        inputs.bioAnswers.stress === item.key
+                        localStress === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
@@ -682,7 +726,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <button
                       type="button"
                       id="onboarding-father-alive"
-                      onClick={() => onInputChange({ fatherPassedAge: null })}
+                      onClick={() => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: null }); }}
                       className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
                         inputs.fatherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
@@ -694,7 +738,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <button
                       type="button"
                       id="onboarding-father-passed"
-                      onClick={() => onInputChange({ fatherPassedAge: 75 })}
+                      onClick={() => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: 75 }); }}
                       className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center ${
                         inputs.fatherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
@@ -719,7 +763,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         min="40"
                         max="100"
                         value={inputs.fatherPassedAge}
-                        onChange={(e) => onInputChange({ fatherPassedAge: parseInt(e.target.value) })}
+                        onChange={(e) => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: parseInt(e.target.value) }); }}
                         className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                       />
                       <input
@@ -728,6 +772,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         max="100"
                         value={inputs.fatherPassedAge}
                         onChange={(e) => {
+                          setGeneticsInteracted(true);
                           const val = parseInt(e.target.value) || 75;
                           const fatherPassedAge = Math.min(100, Math.max(40, val));
                           onInputChange({ fatherPassedAge });
@@ -747,7 +792,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <button
                       type="button"
                       id="onboarding-mother-alive"
-                      onClick={() => onInputChange({ motherPassedAge: null })}
+                      onClick={() => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: null }); }}
                       className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
                         inputs.motherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
@@ -759,7 +804,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <button
                       type="button"
                       id="onboarding-mother-passed"
-                      onClick={() => onInputChange({ motherPassedAge: 82 })}
+                      onClick={() => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: 82 }); }}
                       className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center ${
                         inputs.motherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
@@ -784,7 +829,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         min="40"
                         max="100"
                         value={inputs.motherPassedAge}
-                        onChange={(e) => onInputChange({ motherPassedAge: parseInt(e.target.value) })}
+                        onChange={(e) => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: parseInt(e.target.value) }); }}
                         className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                       />
                       <input
@@ -793,6 +838,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                         max="100"
                         value={inputs.motherPassedAge}
                         onChange={(e) => {
+                          setGeneticsInteracted(true);
                           const val = parseInt(e.target.value) || 78;
                           const motherPassedAge = Math.min(100, Math.max(40, val));
                           onInputChange({ motherPassedAge });
@@ -841,7 +887,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     min="15"
                     max="40"
                     value={inputs.startWorkAge}
-                    onChange={(e) => onInputChange({ startWorkAge: parseInt(e.target.value) })}
+                    onChange={(e) => { setLocalStartWorkAge(e.target.value); onInputChange({ startWorkAge: parseInt(e.target.value) }); }}
                     className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                   />
                   <input
@@ -882,7 +928,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
                     max="90"
                     value={inputs.fireAge}
-                    onChange={(e) => onInputChange({ fireAge: parseInt(e.target.value) })}
+                    onChange={(e) => { setLocalFireAge(e.target.value); onInputChange({ fireAge: parseInt(e.target.value) }); }}
                     className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
                   />
                   <input
@@ -1000,26 +1046,22 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
         <div className="flex items-center space-x-2 sm:space-x-3">
           {step > 0 && step < stepsMeta.length - 1 && (
-            <button
-              type="button"
-              id="btn-onboarding-skip"
-              onClick={() => setStep(stepsMeta.length - 1)}
-              className="px-3 sm:px-4 py-2.5 sm:py-3 text-sm font-bold text-[#767676] hover:text-[#2D2D2D] transition-colors duration-150 cursor-pointer"
-            >
-              Sla over
-            </button>
-          )}
-
-          {step > 0 && step < stepsMeta.length - 1 && (
-            <button
+            <motion.button
               type="button"
               id="btn-onboarding-next"
+              whileHover={canProceed ? { scale: 1.02 } : {}}
+              whileTap={canProceed ? { scale: 0.98 } : {}}
               onClick={handleNext}
-              className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 cursor-pointer"
+              disabled={!canProceed}
+              className={`px-5 sm:px-6 py-2.5 sm:py-3 font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 ${
+                !canProceed 
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
+                  : "bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white cursor-pointer"
+              }`}
             >
               <span>Volgende</span>
               <ChevronRight className="w-4 h-4" />
-            </button>
+            </motion.button>
           )}
         </div>
       </footer>
