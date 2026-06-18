@@ -156,6 +156,7 @@ export default function App() {
       <MobileContainer
         inputs={inputs}
         projectedLifeExpectancy={projectedLifeExpectancy}
+        cbsBaseLife={cbsBaseLife}
         phases={phases}
         apiSource={apiSource}
         onInputChange={handleInputChange}
@@ -168,6 +169,7 @@ export default function App() {
     <DesktopDashboard
       inputs={inputs}
       projectedLifeExpectancy={projectedLifeExpectancy}
+      cbsBaseLife={cbsBaseLife}
       phases={phases}
       apiSource={apiSource}
       isLoadingCBS={isLoadingCBS}

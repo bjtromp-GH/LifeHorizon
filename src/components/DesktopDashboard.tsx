@@ -10,6 +10,7 @@ import StatsCard from "./StatsCard";
 interface DesktopDashboardProps {
   inputs: UserInputs;
   projectedLifeExpectancy: number;
+  cbsBaseLife: number;
   phases: LifePhases;
   apiSource: string;
   isLoadingCBS: boolean;
@@ -21,6 +22,7 @@ interface DesktopDashboardProps {
 export default function DesktopDashboard({
   inputs,
   projectedLifeExpectancy,
+  cbsBaseLife,
   phases,
   apiSource,
   isLoadingCBS,
@@ -143,6 +145,7 @@ export default function DesktopDashboard({
           <AestheticFidelityCards
             inputs={inputs}
             projectedLifeExpectancy={projectedLifeExpectancy}
+            cbsBaseLife={cbsBaseLife}
             apiSource={apiSource}
           />
         </div>

@@ -1,9 +1,11 @@
 import { Hourglass, ShieldCheck, Heart, Landmark } from "lucide-react";
 import { UserInputs } from "../types";
+import { getBioScoreOffset } from "./BioScoreSection";
 
 interface AestheticFidelityCardsProps {
   inputs: UserInputs;
   projectedLifeExpectancy: number;
+  cbsBaseLife: number;
   apiSource: string;
   showOnly?: ("verbruikt" | "vitaliteit" | "carriere" | "horizon")[];
 }
@@ -11,6 +13,7 @@ interface AestheticFidelityCardsProps {
 export default function AestheticFidelityCards({
   inputs,
   projectedLifeExpectancy,
+  cbsBaseLife,
   apiSource,
   showOnly,
 }: AestheticFidelityCardsProps) {
@@ -26,13 +29,8 @@ export default function AestheticFidelityCards({
   const workedPercentage = Math.round(Math.min(100, Math.max(0, (yearsWorked / totalWorking) * 100)));
 
   // Calculate CBS base life expectation relative to birth year (excluding offsets)
-  // cbsBaseExpectancy is approx cbsBaseLife which is processed in App.tsx
-  // We can query the birth year difference. Let's do a reliable approximation of the base CBS life.
-  const birthYear = 2026 - currentAge;
-  const yearDiff = birthYear - 1980;
-  const cbsBaseExpectancy = inputs.gender === "man" 
-    ? Math.max(74.0, Math.min(84.0, 79.5 + yearDiff * 0.12))
-    : Math.max(78.0, Math.min(87.0, 83.0 + yearDiff * 0.10));
+  // Use the actual CBS Base Life from props
+  const cbsBaseExpectancy = cbsBaseLife;
 
   let hereditaryOffset = 0;
   if (fatherPassedAge !== null) {
@@ -44,25 +42,8 @@ export default function AestheticFidelityCards({
     else if (motherPassedAge >= 85) hereditaryOffset += 1.5;
   }
 
-  // Calculate dynamic bio offset
-  const getBioScoreOffsetVal = (ans: typeof bioAnswers): number => {
-    let offset = 0;
-    if (ans.activity === "actief") offset += 1.2;
-    else if (ans.activity === "optimaal") offset += 2.5;
-    else if (ans.activity === "zittend") offset -= 1.5;
-
-    if (ans.sleep === "matig") offset -= 0.5;
-    else if (ans.sleep === "goed") offset += 1.0;
-    else if (ans.sleep === "optimaal") offset += 2.0;
-    else if (ans.sleep === "kort") offset -= 1.5;
-
-    if (ans.stress === "hoog") offset -= 1.8;
-    else if (ans.stress === "balans") offset += 0.8;
-    else if (ans.stress === "laag") offset += 1.5;
-
-    return offset;
-  };
-  const bioOffset = getBioScoreOffsetVal(bioAnswers);
+  // Calculate dynamic bio offset using the shared function
+  const bioOffset = getBioScoreOffset(bioAnswers);
 
   // Dynamic Vitality score calculation for ring progress (85% inside the image)
   const calculateVitalityScore = (): number => {
@@ -244,6 +225,15 @@ export default function AestheticFidelityCards({
                       {bioOffset >= 0 ? `+${bioOffset.toFixed(1)}` : bioOffset.toFixed(1)} j.
                     </span>
                   </div>
+                  {inputs.customLifeExpectancy !== null && inputs.customLifeExpectancy !== undefined && (
+                    <div className="flex justify-between items-center py-1 border-b border-[#F3F2F0] text-[#D56B45]">
+                      <span>Zelf aangepast (overrule):</span>
+                      <span className="font-mono font-medium">
+                        {(projectedLifeExpectancy - (cbsBaseExpectancy + hereditaryOffset + bioOffset)) >= 0 ? "+" : ""}
+                        {(projectedLifeExpectancy - (cbsBaseExpectancy + hereditaryOffset + bioOffset)).toFixed(1)} j.
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
 

@@ -12,6 +12,7 @@ import StatsCard from "./StatsCard";
 interface MobileContainerProps {
   inputs: UserInputs;
   projectedLifeExpectancy: number;
+  cbsBaseLife: number;
   phases: LifePhases;
   apiSource: string;
   onInputChange: (updates: Partial<UserInputs>) => void;
@@ -21,6 +22,7 @@ interface MobileContainerProps {
 export default function MobileContainer({
   inputs,
   projectedLifeExpectancy,
+  cbsBaseLife,
   phases,
   apiSource,
   onInputChange,
@@ -313,6 +315,7 @@ export default function MobileContainer({
                     <AestheticFidelityCards
                       inputs={inputs}
                       projectedLifeExpectancy={projectedLifeExpectancy}
+                      cbsBaseLife={cbsBaseLife}
                       apiSource={apiSource}
                       showOnly={["verbruikt"]}
                     />
@@ -359,6 +362,7 @@ export default function MobileContainer({
                     <AestheticFidelityCards
                       inputs={inputs}
                       projectedLifeExpectancy={projectedLifeExpectancy}
+                      cbsBaseLife={cbsBaseLife}
                       apiSource={apiSource}
                       showOnly={["vitaliteit", "carriere", "horizon"]}
                     />
