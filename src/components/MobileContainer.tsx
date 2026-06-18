@@ -102,7 +102,7 @@ export default function MobileContainer({
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="absolute bottom-20 left-4 right-4 z-40 bg-[#2D2D2D]/95 text-white p-3.5 rounded-lg border border-white/10 shadow-lg flex items-center justify-between backdrop-blur-xs"
+            className="absolute bottom-32 left-4 right-4 z-40 bg-[#2D2D2D]/95 text-white p-3.5 rounded-lg border border-white/10 shadow-lg flex items-center justify-between backdrop-blur-xs"
           >
             <div className="flex items-center space-x-2.5">
               <Info className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
