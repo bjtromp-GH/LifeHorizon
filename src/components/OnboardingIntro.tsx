@@ -370,10 +370,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 <Play className="w-3.5 h-3.5 fill-current" />
               </motion.button>
             </motion.div>
-          ) : null}
-
-          {/* SLIDE 2: BASE DEMOGRAPHY */}
-          {!isTransitioning && step === 2 && (
+          ) : step === 2 ? (
             <motion.div
               key="demographics"
               initial={{ opacity: 0, x: 25 }}
@@ -563,10 +560,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
             </motion.div>
-          )}
-
-          {/* SLIDE 3: LIFESTYLE / BIO-SCORE */}
-          {!isTransitioning && step === 3 && (
+          ) : step === 3 ? (
             <motion.div
               key="lifestyle"
               initial={{ opacity: 0, x: 25 }}
@@ -689,10 +683,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
             </motion.div>
-          )}
-
-          {/* SLIDE 4: HEREDITARY / GENETICS */}
-          {!isTransitioning && step === 4 && (
+          ) : step === 4 ? (
             <motion.div
               key="genetics"
               initial={{ opacity: 0, x: 25 }}
@@ -852,10 +843,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
             </motion.div>
-          )}
-
-          {/* SLIDE 5: CAREER & FIRE TARGETS */}
-          {!isTransitioning && step === 5 && (
+          ) : step === 5 ? (
             <motion.div
               key="career_fire"
               initial={{ opacity: 0, x: 25 }}
@@ -980,10 +968,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </p>
               </div>
             </motion.div>
-          )}
-
-          {/* SLIDE 6: FINAL SUMMARY AND COMPLETE */}
-          {!isTransitioning && step === 6 && (
+          ) : step === 6 ? (
             <motion.div
               key="complete"
               initial={{ opacity: 0, scale: 0.95 }}
