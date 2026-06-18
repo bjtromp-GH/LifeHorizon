@@ -18,7 +18,8 @@ import {
   Moon,
   Brain,
   Cpu,
-  Edit3
+  Edit3,
+  Zap
 } from "lucide-react";
 
 interface OnboardingIntroProps {
