@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
 import { 
@@ -44,6 +44,47 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   const [geneticsInteracted, setGeneticsInteracted] = useState(false);
   
   const [showYearPicker, setShowYearPicker] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [focusedYear, setFocusedYear] = useState<number>(inputs.birthYear);
+  const yearsList = Array.from({ length: 2024 - 1940 + 1 }, (_, i) => 1940 + i);
+  const ITEM_HEIGHT = 64;
+
+  useEffect(() => {
+    if (showYearPicker && scrollContainerRef.current) {
+      const idx = yearsList.findIndex(y => y === inputs.birthYear);
+      if (idx >= 0) {
+        // slight delay to ensure render is complete
+        setTimeout(() => {
+          if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTop = idx * ITEM_HEIGHT;
+          }
+        }, 50);
+        setFocusedYear(inputs.birthYear);
+      }
+    }
+  }, [showYearPicker]);
+
+  const handleYearScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const scrollTop = e.currentTarget.scrollTop;
+    const idx = Math.round(scrollTop / ITEM_HEIGHT);
+    const newYear = yearsList[Math.min(Math.max(0, idx), yearsList.length - 1)];
+    if (newYear !== focusedYear) {
+      setFocusedYear(newYear);
+      if (navigator.vibrate) navigator.vibrate(10);
+    }
+  };
+
+  const confirmYearSelection = () => {
+    setAgeInteracted(true);
+    const calculatedAge = 2026 - focusedYear;
+    setLocalBirthYear(focusedYear.toString());
+    setLocalAge(calculatedAge.toString());
+    onInputChange({ 
+      birthYear: focusedYear,
+      currentAge: Math.max(2, Math.min(100, calculatedAge))
+    });
+    setShowYearPicker(false);
+  };
   
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
@@ -989,51 +1030,71 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
         <AnimatePresence>
           {showYearPicker && (
             <motion.div
-              initial={{ opacity: 0, y: "100%" }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: "100%" }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-[200] bg-gradient-to-br from-[#E25C26] to-[#B84E29] flex flex-col items-center overflow-hidden"
+              className="fixed inset-0 z-[200] bg-gradient-to-br from-[#E25C26] to-[#B84E29] flex flex-col items-center justify-center overflow-hidden"
             >
-              <div className="w-full max-w-md mx-auto h-full flex flex-col p-6 pt-12">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-2xl sm:text-3xl font-black text-white">Kies Geboortejaar</h3>
-                  <button onClick={() => setShowYearPicker(false)} className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white font-bold backdrop-blur-md transition-colors">
-                    X
-                  </button>
-                </div>
+              <div className="w-full max-w-md mx-auto p-6 flex flex-col items-center">
+                <h3 className="text-2xl sm:text-3xl font-black text-white mb-8">Kies Geboortejaar</h3>
                 
-                <div 
-                  className="flex-grow overflow-y-auto space-y-3 pb-32 pr-2"
-                  style={{ WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)", scrollbarWidth: "none" }}
-                >
-                  {Array.from({ length: 2024 - 1940 + 1 }, (_, i) => 2024 - i).map((year, idx) => (
-                    <motion.button
-                      key={year}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: Math.min(idx * 0.03, 0.5), duration: 0.3 }}
-                      onClick={() => {
-                        setAgeInteracted(true);
-                        const calculatedAge = 2026 - year;
-                        setLocalBirthYear(year.toString());
-                        setLocalAge(calculatedAge.toString());
-                        onInputChange({ 
-                          birthYear: year,
-                          currentAge: Math.max(2, Math.min(100, calculatedAge))
-                        });
-                        setTimeout(() => setShowYearPicker(false), 250);
-                      }}
-                      className={`w-full py-4 text-center rounded-2xl text-2xl font-mono font-black transition-all cursor-pointer ${
-                        inputs.birthYear === year 
-                          ? 'bg-white text-[#D56B45] scale-[1.02] shadow-xl' 
-                          : 'bg-white/10 text-white hover:bg-white/20'
-                      }`}
-                    >
-                      {year}
-                    </motion.button>
-                  ))}
+                <div className="relative w-full h-64 mx-auto flex justify-center">
+                  {/* Selection Indicator overlay */}
+                  <div className="absolute top-1/2 left-0 w-full h-[64px] -translate-y-1/2 border-y-2 border-white/20 bg-white/5 pointer-events-none rounded-xl"></div>
+                  
+                  {/* Scrollable Container */}
+                  <div 
+                    ref={scrollContainerRef}
+                    onScroll={handleYearScroll}
+                    className="w-full h-full overflow-y-auto snap-y snap-mandatory scrollbar-hide relative z-10"
+                    style={{ 
+                      scrollbarWidth: "none",
+                      paddingTop: "96px", 
+                      paddingBottom: "96px",
+                      WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)"
+                    }}
+                  >
+                    {yearsList.map((year) => {
+                      const isFocused = year === focusedYear;
+                      const dist = Math.abs(year - focusedYear);
+                      const scale = isFocused ? 1 : Math.max(0.7, 1 - dist * 0.1);
+                      const opacity = isFocused ? 1 : Math.max(0.2, 0.7 - dist * 0.2);
+                      
+                      return (
+                        <div
+                          key={year}
+                          className="h-[64px] snap-center flex items-center justify-center cursor-pointer select-none"
+                          onClick={() => {
+                            const idx = yearsList.indexOf(year);
+                            if (scrollContainerRef.current) {
+                              scrollContainerRef.current.scrollTo({ top: idx * ITEM_HEIGHT, behavior: 'smooth' });
+                            }
+                          }}
+                        >
+                          <span 
+                            className={`font-mono transition-all duration-200 ${isFocused ? 'text-4xl sm:text-5xl font-black text-white drop-shadow-lg' : 'text-3xl font-bold text-white'}`}
+                            style={{ 
+                              transform: `scale(${scale})`, 
+                              opacity: opacity 
+                            }}
+                          >
+                            {year}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={confirmYearSelection}
+                  className="mt-10 px-10 py-4 bg-white text-[#D56B45] font-black text-lg uppercase tracking-wider rounded-2xl shadow-xl border-2 border-white/50"
+                >
+                  Klaar
+                </motion.button>
               </div>
             </motion.div>
           )}
