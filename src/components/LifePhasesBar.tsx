@@ -27,11 +27,7 @@ export default function LifePhasesBar({
     <motion.div
       layout
       id="life-phases-bar-container"
-      className={`flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl cursor-pointer ${
-        isExpanded
-          ? "bg-amber-50"
-          : "bg-gradient-to-br from-amber-50/60 to-orange-50/30"
-      }`}
+      className={`flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl cursor-pointer bg-white`}
       style={{
         borderWidth: "1px",
         borderStyle: "solid"
