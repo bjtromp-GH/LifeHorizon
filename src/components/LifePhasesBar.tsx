@@ -167,10 +167,12 @@ export default function LifePhasesBar({
               {/* Label and Segment Bars */}
               <div className="h-6 w-full rounded-md flex overflow-hidden bg-[#EAE8E4] relative shadow-inner border border-black/5">
                 {/* Phase 1: Ontwikkeling */}
-                <div
+                <motion.div
                   id="phase-bar-basis"
-                  className="h-full bg-[#EAE8E4] transition-all duration-300 relative group"
-                  style={{ width: `${phases.basisPercent}%` }}
+                  className="h-full bg-[#EAE8E4] relative group"
+                  initial={{ width: "0%", opacity: 0 }}
+                  animate={{ width: `${phases.basisPercent}%`, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
                   title={`Ontwikkeling (0 - ${inputs.startWorkAge} jaar)`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -180,13 +182,15 @@ export default function LifePhasesBar({
                       </span>
                     )}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Phase 2: Accumulatie */}
-                <div
+                <motion.div
                   id="phase-bar-accumulatie"
-                  className="h-full bg-[#C8C5C0] border-l border-[#FFFFFF]/30 transition-all duration-300 relative group"
-                  style={{ width: `${phases.accumulationPercent}%` }}
+                  className="h-full bg-[#C8C5C0] border-l border-[#FFFFFF]/30 relative group"
+                  initial={{ width: "0%", opacity: 0 }}
+                  animate={{ width: `${phases.accumulationPercent}%`, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
                   title={`Accumulatie (${inputs.startWorkAge} - ${inputs.fireAge} jaar)`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -196,13 +200,15 @@ export default function LifePhasesBar({
                       </span>
                     )}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Phase 3: Vrijheid */}
-                <div
+                <motion.div
                   id="phase-bar-vrijheid"
-                  className="h-full bg-[#D56B45]/20 border-l border-[#FFFFFF]/30 transition-all duration-300 relative group"
-                  style={{ width: `${phases.freedomPercent}%` }}
+                  className="h-full bg-[#D56B45]/20 border-l border-[#FFFFFF]/30 relative group"
+                  initial={{ width: "0%", opacity: 0 }}
+                  animate={{ width: `${phases.freedomPercent}%`, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
                   title={`Vrijheid (${inputs.fireAge} - ${projectedLifeExpectancy} jaar)`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -212,7 +218,7 @@ export default function LifePhasesBar({
                       </span>
                     )}
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* Floating marker for Current Age */}
@@ -329,7 +335,12 @@ export default function LifePhasesBar({
           >
             {/* Vertical Version */}
             {/* Phase 1 */}
-            <div className="flex items-stretch group relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="flex items-stretch group relative"
+            >
               <div className="w-10 shrink-0 flex flex-col items-center">
                 <div className="w-7 h-7 rounded-full bg-[#EAE8E4] flex items-center justify-center text-xs font-bold text-[#767676] z-10 shadow-sm border border-white/50">1</div>
                 <div className="w-[2px] h-full bg-gradient-to-b from-[#EAE8E4] to-[#C8C5C0] group-last:hidden mt-[-2px] mb-[-2px]" />
@@ -346,10 +357,15 @@ export default function LifePhasesBar({
                   De fase van fysieke en mentale groei, scholing en het ontdekken van talenten. Tijd wordt voornamelijk geïnvesteerd in leren en ontwikkelen, met relatief weinig financiële verplichtingen of inkomsten.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Phase 2 */}
-            <div className="flex items-stretch group relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="flex items-stretch group relative"
+            >
               <div className="w-10 shrink-0 flex flex-col items-center">
                 <div className="w-7 h-7 rounded-full bg-[#C8C5C0] flex items-center justify-center text-xs font-bold text-[#2D2D2D] z-10 shadow-sm border border-white/50">2</div>
                 <div className="w-[2px] h-full bg-gradient-to-b from-[#C8C5C0] to-[#D56B45]/40 group-last:hidden mt-[-2px] mb-[-2px]" />
@@ -366,10 +382,15 @@ export default function LifePhasesBar({
                   Het actieve werkzame leven. De focus ligt op carrière maken, het opbouwen van vermogen (geld, netwerk, vaardigheden) en het dragen van verantwoordelijkheden. Hier wordt de basis gelegd voor financiële onafhankelijkheid.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Phase 3 */}
-            <div className="flex items-stretch group relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.5 }}
+              className="flex items-stretch group relative"
+            >
               <div className="w-10 shrink-0 flex flex-col items-center">
                 <div className="w-7 h-7 rounded-full bg-amber-100 flex items-center justify-center text-xs font-bold text-[#D56B45] z-10 shadow-sm border border-amber-200/50">3</div>
                 <div className="w-[2px] h-full bg-gradient-to-b from-amber-100 to-transparent group-last:hidden mt-[-2px] mb-[-2px]" />
@@ -389,7 +410,7 @@ export default function LifePhasesBar({
                   De oogstfase. Werk is optioneel geworden dankzij opgebouwd vermogen (FIRE). De nadruk verschuift naar zingeving, genieten, tijd doorbrengen met dierbaren en het najagen van persoonlijke passies in goede gezondheid.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
