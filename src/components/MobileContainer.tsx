@@ -413,17 +413,28 @@ export default function MobileContainer({
                     </p>
                   </div>
 
-                  {/* Highlights circle: Swap titles vertically */}
-                  <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs shrink-0 max-w-sm mx-auto w-full">
-                    <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1.5 text-center">
-                      resterende tijdsperspectief
-                    </span>
-                    <span className="text-4xl font-extrabold font-mono tracking-tight text-white mb-0.5">
-                      {totalRemaining.toFixed(1)} jaar
-                    </span>
-                    <span className="text-[9px] font-sans text-white/70 mt-1">
-                      ca. {Math.round(totalRemaining * 52.17).toLocaleString("nl-NL")} betekenisvolle weken over
-                    </span>
+                  {/* Highlights */}
+                  <div className="max-w-sm mx-auto w-full space-y-2.5">
+                    <div className="flex flex-col items-center justify-center py-3 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
+                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
+                        Geschatte Levensverwachting
+                      </span>
+                      <span className="text-3xl font-extrabold font-mono tracking-tight text-white">
+                        {projectedLifeExpectancy.toFixed(1)} jaar
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center py-3 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
+                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
+                        Resterende Tijdsperspectief
+                      </span>
+                      <span className="text-3xl font-extrabold font-mono tracking-tight text-white mb-0.5">
+                        {totalRemaining.toFixed(1)} jaar
+                      </span>
+                      <span className="text-[9px] font-sans text-white/70">
+                        ca. {Math.round(totalRemaining * 52.17).toLocaleString("nl-NL")} betekenisvolle weken over
+                      </span>
+                    </div>
                   </div>
 
                   {/* Quick summary statistics */}
@@ -431,10 +442,6 @@ export default function MobileContainer({
                     <div className="flex justify-between items-center border-b border-white/10 pb-2">
                       <span className="text-amber-100">Huidige Leeftijd:</span>
                       <span className="font-extrabold text-white text-sm">{inputs.currentAge} jaar</span>
-                    </div>
-                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                      <span className="text-amber-100">Prognose Levensduur:</span>
-                      <span className="font-extrabold text-white text-sm">{Math.round(projectedLifeExpectancy)} jaar</span>
                     </div>
                     <div className="flex justify-between items-center border-b border-white/10 pb-2">
                       <span className="text-amber-100">Actieve Carrière (tot {inputs.fireAge} jr):</span>
