@@ -95,6 +95,14 @@ export default function MobileContainer({
       id="mobile-viewport-root"
       className="flex flex-col h-[100dvh] bg-[#F9F8F6] text-[#2D2D2D] overflow-hidden select-none relative"
     >
+      {/* Initial screen flash on first load */}
+      <motion.div
+        initial={{ backgroundColor: "rgba(213, 107, 69, 0.3)", opacity: 1 }}
+        animate={{ backgroundColor: "rgba(213, 107, 69, 0)", opacity: 0 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute inset-0 pointer-events-none z-[100]"
+      />
+
       {/* Absolute hint of swiping gesture */}
       <AnimatePresence>
         {showSwipeHint && (
