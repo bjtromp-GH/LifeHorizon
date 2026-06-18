@@ -84,8 +84,15 @@ export default function DecadeGrid({
                     }
 
                     return (
-                      <div
+                      <motion.div
                         key={year}
+                        initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ 
+                          duration: 0.4, 
+                          delay: year * 0.015,
+                          ease: "easeOut"
+                        }}
                         className="relative group flex-1"
                         style={{ aspectRatio: "1/1" }}
                       >
@@ -118,19 +125,29 @@ export default function DecadeGrid({
                             {isCurrentYear && " (Huidige leeftijd!)"}
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
                     );
                   })}
 
                   {/* Pad row if it has fewer than 10 blocks (the very last decade) */}
                   {yearsInThisDecade.length < 10 &&
-                    Array.from({ length: 10 - yearsInThisDecade.length }).map((_, i) => (
-                      <div
-                        key={`pad-${i}`}
-                        className="flex-1 border border-dashed border-gray-200 bg-transparent opacity-30"
-                        style={{ aspectRatio: "1/1" }}
-                      />
-                    ))}
+                    Array.from({ length: 10 - yearsInThisDecade.length }).map((_, i) => {
+                      const padYear = (yearsInThisDecade[yearsInThisDecade.length - 1] || startYearOfDecade) + i + 1;
+                      return (
+                        <motion.div
+                          key={`pad-${i}`}
+                          initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                          animate={{ opacity: 0.3, scale: 1, y: 0 }}
+                          transition={{ 
+                            duration: 0.4, 
+                            delay: padYear * 0.015,
+                            ease: "easeOut"
+                          }}
+                          className="flex-1 border border-dashed border-gray-200 bg-transparent"
+                          style={{ aspectRatio: "1/1" }}
+                        />
+                      );
+                    })}
                 </div>
               </div>
             );
