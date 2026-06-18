@@ -96,11 +96,15 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
     }
     if (step < 6 && canProceed) {
       setShowValidation(false);
-      setIsTransitioning(true);
-      setTimeout(() => {
+      if (step === 0) {
         setStep((s) => s + 1);
-        setIsTransitioning(false);
-      }, 700);
+      } else {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setStep((s) => s + 1);
+          setIsTransitioning(false);
+        }, 700);
+      }
     } else if (step >= 6) {
       onComplete();
     }
