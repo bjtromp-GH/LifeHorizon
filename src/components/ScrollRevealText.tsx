@@ -15,6 +15,15 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden bg-gradient-to-br from-[#E25C26] to-[#B84E29] text-white">
       <div className="relative w-full h-full flex flex-col items-center justify-center p-8 sm:p-16 md:p-24 overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8, y: -20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="mb-8 sm:mb-12 z-10"
+        >
+          <img src="/img/olifant-bril.png" alt="Olifant Mascotte" className="w-24 h-24 sm:w-32 sm:h-32 object-contain" />
+        </motion.div>
+        
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-3 relative z-10 w-full content-center">
           {words.map((word, i) => {
             const delay = (i / words.length) * totalRevealTime;
