@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Settings, Edit3, ChevronDown, ChevronUp } from "lucide-react";
 import { LifePhases, UserInputs } from "../types";
@@ -10,7 +11,7 @@ interface LifePhasesBarProps {
   onInputChange?: (updates: Partial<UserInputs>) => void;
 }
 
-export default function LifePhasesBar({
+export default React.memo(function LifePhasesBar({
   inputs,
   projectedLifeExpectancy,
   phases,
@@ -417,5 +418,5 @@ export default function LifePhasesBar({
       </AnimatePresence>
     </motion.div>
   );
-}
+});
 

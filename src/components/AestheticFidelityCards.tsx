@@ -1,4 +1,5 @@
-import { Hourglass, ShieldCheck, Heart, Landmark } from "lucide-react";
+import { Hourglass, ShieldCheck, Heart, Landmark, Info, HelpCircle } from "lucide-react";
+import React from "react";
 import { UserInputs } from "../types";
 import { getBioScoreOffset } from "./BioScoreSection";
 
@@ -6,11 +7,11 @@ interface AestheticFidelityCardsProps {
   inputs: UserInputs;
   projectedLifeExpectancy: number;
   cbsBaseLife: number;
-  apiSource: string;
-  showOnly?: ("verbruikt" | "vitaliteit" | "carriere" | "horizon")[];
+  apiSource: "CBS API" | "CBS Cohort Model";
+  showOnly?: ("verbruikt" | "verwachting" | "carriere" | "vrijheid")[];
 }
 
-export default function AestheticFidelityCards({
+export default React.memo(function AestheticFidelityCards({
   inputs,
   projectedLifeExpectancy,
   cbsBaseLife,
@@ -369,4 +370,4 @@ export default function AestheticFidelityCards({
 
     </div>
   );
-}
+});

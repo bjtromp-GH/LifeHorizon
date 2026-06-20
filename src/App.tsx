@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { UserInputs, LifePhases } from "./types";
 import { getCBSLifeExpectancy } from "./api/cbs";
 import { getBioScoreOffset } from "./components/BioScoreSection";
@@ -80,7 +80,7 @@ export default function App() {
   }, [birthYearVal, genderVal, currentAgeVal, syncCBSLifeExpectancy]);
 
   // 5. Input update dispatch
-  const handleInputChange = (updates: Partial<UserInputs>) => {
+  const handleInputChange = useCallback((updates: Partial<UserInputs>) => {
     setInputs((prev) => {
       const merged = { ...prev, ...updates };
       // Safeguard start work age and fire age limits
@@ -92,57 +92,58 @@ export default function App() {
       }
       return merged;
     });
-  };
+  }, []);
 
   // 6. Realtime Calculations and Derived States
-  const bioOffset = getBioScoreOffset(inputs.bioAnswers);
+  const bioOffset = useMemo(() => getBioScoreOffset(inputs.bioAnswers), [inputs.bioAnswers]);
   
   // Calculate genetic hereditary offset based on parents' age of passing
-  let hereditaryOffset = 0;
-  if (inputs.fatherPassedAge !== null) {
-    if (inputs.fatherPassedAge < 65) {
-      hereditaryOffset -= 1.5;
-    } else if (inputs.fatherPassedAge >= 85) {
-      hereditaryOffset += 1.5;
+  const hereditaryOffset = useMemo(() => {
+    let offset = 0;
+    if (inputs.fatherPassedAge !== null) {
+      if (inputs.fatherPassedAge < 65) offset -= 1.5;
+      else if (inputs.fatherPassedAge >= 85) offset += 1.5;
     }
-  }
-  if (inputs.motherPassedAge !== null) {
-    if (inputs.motherPassedAge < 65) {
-      hereditaryOffset -= 1.5;
-    } else if (inputs.motherPassedAge >= 85) {
-      hereditaryOffset += 1.5;
+    if (inputs.motherPassedAge !== null) {
+      if (inputs.motherPassedAge < 65) offset -= 1.5;
+      else if (inputs.motherPassedAge >= 85) offset += 1.5;
     }
-  }
+    return offset;
+  }, [inputs.fatherPassedAge, inputs.motherPassedAge]);
 
   // Total projected life is the CBS base life plus both the bio lifestyle and hereditary modifiers,
   // unless overridden by user's custom estimate.
-  const calculatedLifeExpectancy = cbsBaseLife + bioOffset + hereditaryOffset;
-  const projectedLifeExpectancy = inputs.customLifeExpectancy !== null && inputs.customLifeExpectancy !== undefined
-    ? Math.max(inputs.currentAge + 1, inputs.customLifeExpectancy)
-    : calculatedLifeExpectancy;
+  const projectedLifeExpectancy = useMemo(() => {
+    const calculatedLifeExpectancy = cbsBaseLife + bioOffset + hereditaryOffset;
+    return inputs.customLifeExpectancy !== null && inputs.customLifeExpectancy !== undefined
+      ? Math.max(inputs.currentAge + 1, inputs.customLifeExpectancy)
+      : calculatedLifeExpectancy;
+  }, [cbsBaseLife, bioOffset, hereditaryOffset, inputs.customLifeExpectancy, inputs.currentAge]);
 
-  const basisYears = inputs.startWorkAge;
-  const accumulationYears = Math.max(0, inputs.fireAge - inputs.startWorkAge);
-  const freedomYears = Math.max(0, projectedLifeExpectancy - inputs.fireAge);
-  const totalYearsMax = basisYears + accumulationYears + freedomYears;
+  const phases: LifePhases = useMemo(() => {
+    const basisYears = inputs.startWorkAge;
+    const accumulationYears = Math.max(0, inputs.fireAge - inputs.startWorkAge);
+    const freedomYears = Math.max(0, projectedLifeExpectancy - inputs.fireAge);
+    const totalYearsMax = basisYears + accumulationYears + freedomYears;
 
-  const phases: LifePhases = {
-    basisYears,
-    accumulationYears,
-    freedomYears,
-    basisPercent: (basisYears / totalYearsMax) * 100,
-    accumulationPercent: (accumulationYears / totalYearsMax) * 100,
-    freedomPercent: (freedomYears / totalYearsMax) * 100,
-  };
+    return {
+      basisYears,
+      accumulationYears,
+      freedomYears,
+      basisPercent: (basisYears / totalYearsMax) * 100,
+      accumulationPercent: (accumulationYears / totalYearsMax) * 100,
+      freedomPercent: (freedomYears / totalYearsMax) * 100,
+    };
+  }, [inputs.startWorkAge, inputs.fireAge, projectedLifeExpectancy]);
 
-  const handleRefreshCBSManual = () => {
+  const handleRefreshCBSManual = useCallback(() => {
     syncCBSLifeExpectancy(inputs.birthYear, inputs.gender, inputs.currentAge);
-  };
+  }, [inputs.birthYear, inputs.gender, inputs.currentAge, syncCBSLifeExpectancy]);
 
-  const handleOnboardingComplete = () => {
+  const handleOnboardingComplete = useCallback(() => {
     localStorage.setItem("onboarding_completed", "true");
     setShowOnboarding(false);
-  };
+  }, []);
 
   // 7. Render Onboarding Screen if active
   if (showOnboarding) {

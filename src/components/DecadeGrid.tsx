@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 import { UserInputs } from "../types";
@@ -8,7 +8,7 @@ interface DecadeGridProps {
   projectedLifeExpectancy: number;
 }
 
-export default function DecadeGrid({
+export default React.memo(function DecadeGrid({
   inputs,
   projectedLifeExpectancy,
 }: DecadeGridProps) {
@@ -29,8 +29,8 @@ export default function DecadeGrid({
   };
 
   // Organize years into decades (rows of 10 items)
-  const decadesCount = Math.ceil(totalYears / 10);
-  const decadesArray = Array.from({ length: decadesCount }, (_, i) => i);
+  const decadesCount = useMemo(() => Math.ceil(totalYears / 10), [totalYears]);
+  const decadesArray = useMemo(() => Array.from({ length: decadesCount }, (_, i) => i), [decadesCount]);
 
   return (
     <div id="decade-grid-container" className="flex flex-col space-y-4">
@@ -381,4 +381,4 @@ export default function DecadeGrid({
       </AnimatePresence>
     </div>
   );
-}
+});
