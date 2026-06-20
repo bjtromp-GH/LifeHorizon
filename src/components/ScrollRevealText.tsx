@@ -51,7 +51,7 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
         <motion.div 
           animate={isMobile && showButton ? { y: -20 } : { y: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="max-w-4xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-3 relative z-10 w-full content-center"
+          className="max-w-4xl mx-auto flex flex-wrap justify-center text-center gap-x-2 sm:gap-x-3 relative z-10 w-full content-center"
         >
           {words.map((word, i) => {
             const delay = (i / words.length) * totalRevealTime;
@@ -62,7 +62,7 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
                   initial={{ opacity: 0.15 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1, delay, ease: "easeOut" }}
-                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-sans leading-tight tracking-tight text-white drop-shadow-sm"
+                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-sans leading-tight tracking-tight text-white py-1 sm:py-1.5"
                 >
                   {word}
                 </motion.span>
