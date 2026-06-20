@@ -38,11 +38,11 @@ export default function StatsCard({
     },
     werkend: {
       title: "Werkende Jaren",
-      content: "Dit is de tijd die je nog zult besteden aan de opbouw- en werkfase van je leven. Dit eindigt bij de door jou gekozen FIRE (of pensioen) leeftijd."
+      content: "Dit is de tijd die je nog zult besteden aan de opbouw- en werkfase van je leven. Dit eindigt bij de door jou gekozen pensioenleeftijd."
     },
     vrijheid: {
       title: "Vleugels (Vrijheid)",
-      content: "Dit is jouw vrije tijd (de 'oogstfase') zonder financiële verplichtingen, berekend vanaf je FIRE leeftijd tot aan je prognose leeftijd. In deze fase kun je je tijd volledig naar eigen inzicht besteden."
+      content: "Dit is jouw vrije tijd (de 'oogstfase') zonder financiële verplichtingen, berekend vanaf je pensioenleeftijd tot aan je prognose leeftijd. In deze fase kun je je tijd volledig naar eigen inzicht besteden."
     }
   };
 
@@ -96,7 +96,7 @@ export default function StatsCard({
           </p>
         </div>
 
-        {/* 3. Nog Werken tot FIRE */}
+        {/* 3. Nog Werken tot Pensioen */}
         <div 
           onClick={() => setActivePopup("werkend")}
           className="p-4 bg-white border border-[#EAEAEA] rounded-md flex flex-col justify-between cursor-pointer hover:border-[#D56B45]/40 hover:shadow-sm transition-all"
@@ -115,7 +115,7 @@ export default function StatsCard({
           </div>
           <span className="text-[9.5px] text-[#767676] mt-1 leading-tight">
             {currentAge >= fireAge
-              ? "FIRE / Vrijheid reeds behaald!"
+              ? "Pensioen / Vrijheid reeds behaald!"
               : `Fase eindigt op ${fireAge} jarige leeftijd`}
           </span>
         </div>

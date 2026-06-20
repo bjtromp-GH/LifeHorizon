@@ -98,7 +98,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
     { title: "Profiel", icon: User },
     { title: "Leefstijl", icon: Heart },
     { title: "Genetica", icon: Dna },
-    { title: "Carrière & FIRE", icon: Briefcase },
+    { title: "Carrière & Pensioen", icon: Briefcase },
     { title: "Klaar", icon: CheckCircle2 }
   ];
 
@@ -185,7 +185,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
             <span className="text-xl">🔥</span>
             <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
-              Levensloop & FIRE
+              Levensloop & Pensioen
             </h1>
           </div>
 
@@ -396,7 +396,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   Welkom bij uw Levensloop
                 </h2>
                 <p className="text-xs sm:text-sm text-[#767676] leading-relaxed">
-                  Hoeveel soevereine tijd heeft u echt te besteden? Ontdek uw statistische levensverwachting gebaseerd op het officiële CBS cohortmodel en zet dit af tegen uw FIRE ambities.
+                  Hoeveel soevereine tijd heeft u echt te besteden? Ontdek uw statistische levensverwachting gebaseerd op het officiële CBS cohortmodel en zet dit af tegen uw pensioenambities.
                 </p>
               </div>
 
@@ -862,10 +862,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
             >
               <div className="space-y-2 text-center sm:text-left">
                 <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
-                  Stap 4: Carrière & FIRE
+                  Stap 4: Carrière & Pensioen
                 </span>
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
-                  Wanneer begon u met werken en wat is uw FIRE doel?
+                  Wanneer begon u met werken en wat is uw pensioendoel?
                 </h2>
                 <p className="text-sm text-[#767676]">
                   De splitsing tussen verplichte werktijd en absolute tijdssoevereiniteit.
@@ -918,10 +918,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
 
-              {/* FIRE Target Age */}
+              {/* Pensioen Target Age */}
               <div className="space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#767676] uppercase tracking-wider">Doelleeftijd FIRE / Pensioen</span>
+                  <span className="font-bold text-[#767676] uppercase tracking-wider">Doelleeftijd Pensioen</span>
                   <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{inputs.fireAge} jaar</span>
                 </div>
                 <div className={`flex items-center space-x-3 bg-white p-2.5 rounded-xl border shadow-3xs transition-all duration-300 ${
@@ -1012,7 +1012,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">FIRE Doel</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Pensioendoel</span>
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge} jaar</span>
                 </div>
               </div>

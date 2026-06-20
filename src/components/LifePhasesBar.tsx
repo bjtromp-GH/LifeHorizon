@@ -258,14 +258,14 @@ export default function LifePhasesBar({
                   </span>
                 </div>
 
-                {/* FIRE Age tick */}
+                {/* Pensioen Age tick */}
                 <div 
                   className="absolute bottom-0 flex flex-col items-center -translate-x-1/2"
                   style={{ left: `${phases.basisPercent + phases.accumulationPercent}%` }}
                 >
                   <div className="w-[1.5px] h-2.5 bg-[#D56B45]" />
                   <span className="mt-0.5 font-extrabold text-[#D56B45] bg-[#FDFDFD] px-1 rounded border border-[#D56B45]/20 shadow-3xs whitespace-nowrap">
-                    {inputs.fireAge} jr <span className="font-semibold text-[#D56B45]/80 hidden sm:inline">(FIRE)</span>
+                    {inputs.fireAge} jr <span className="font-semibold text-[#D56B45]/80 hidden sm:inline">(Pensioen)</span>
                   </span>
                 </div>
 
@@ -401,14 +401,14 @@ export default function LifePhasesBar({
                   <div className="absolute top-1.5 -left-10 w-2.5 h-2.5 rounded-full bg-[#D56B45] animate-pulse shadow-[0_0_8px_rgba(213,107,69,0.8)] border border-white z-20" />
                 )}
                 <h5 className="text-[13px] font-extrabold text-[#D56B45] uppercase tracking-wide flex items-center gap-1.5">
-                  Vrijheid (FIRE)
+                  Vrijheid (Pensioen)
                   <span className="px-1.5 py-0.5 rounded bg-[#D56B45]/10 text-[#D56B45] text-[9px] border border-[#D56B45]/20">OOGSTFASE</span>
                 </h5>
                 <p className="text-[11px] font-mono text-[#D56B45]/80 mb-1.5 bg-amber-50/50 inline-block px-1.5 py-0.5 rounded shadow-3xs border border-amber-200/50 mt-1">
                   {inputs.fireAge} - {projectedLifeExpectancy.toFixed(1)} jr <span className="font-sans ml-1 opacity-70">({phases.freedomYears.toFixed(1)} jaar, {Math.round(phases.freedomPercent)}%)</span>
                 </p>
                 <p className="text-[11px] text-[#D56B45]/90 leading-relaxed bg-amber-50/40 p-2 rounded-md border border-amber-200/30">
-                  De oogstfase. Werk is optioneel geworden dankzij opgebouwd vermogen (FIRE). De nadruk verschuift naar zingeving, genieten, tijd doorbrengen met dierbaren en het najagen van persoonlijke passies in goede gezondheid.
+                  De oogstfase. Werk is optioneel geworden dankzij opgebouwd vermogen (pensioen). De nadruk verschuift naar zingeving, genieten, tijd doorbrengen met dierbaren en het najagen van persoonlijke passies in goede gezondheid.
                 </p>
               </div>
             </motion.div>

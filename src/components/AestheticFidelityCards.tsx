@@ -246,7 +246,7 @@ export default function AestheticFidelityCards({
             </section>
           )}
 
-          {/* CARD 3: CARRIÈRE RUNWAY (FIRE) */}
+          {/* CARD 3: CARRIÈRE RUNWAY (Pensioen) */}
           {showCarriere && (
             <section className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300 flex flex-col justify-between">
               <div>
@@ -254,7 +254,7 @@ export default function AestheticFidelityCards({
                   <div className="flex items-center space-x-2">
                     <Landmark className="w-4 h-4 text-[#D56B45]" />
                     <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#2D2D2D]">
-                      Carrière Runway (FIRE)
+                      Carrière Runway (Pensioen)
                     </h3>
                   </div>
                   <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
@@ -292,7 +292,7 @@ export default function AestheticFidelityCards({
               </div>
 
               <div className="mt-4 pt-3 border-t border-[#F3F2F0] text-xs text-[#767676] leading-relaxed">
-                Nog <span className="font-semibold text-[#2D2D2D]">{yearsRemainingWork} jaar</span> verplichte tijdsallocatie tot uw doel-FIRE leeftijd van {fireAge} jaar.
+                Nog <span className="font-semibold text-[#2D2D2D]">{yearsRemainingWork} jaar</span> verplichte tijdsallocatie tot uw pensioenleeftijd van {fireAge} jaar.
               </div>
             </section>
           )}
@@ -328,7 +328,7 @@ export default function AestheticFidelityCards({
                 <span className="text-xs text-[#767676] ml-1 font-medium">actieve jaren</span>
               </div>
               <p className="text-[11px] text-[#767676] leading-snug">
-                Het aantal jaren dat u soevereine beslissingen kunt nemen na uw geplande FIRE-leeftijd.
+                Het aantal jaren dat u soevereine beslissingen kunt nemen na uw geplande pensioenleeftijd.
               </p>
             </div>
 

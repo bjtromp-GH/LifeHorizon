@@ -187,11 +187,11 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
         </div>
       </div>
 
-      {/* 5. Doel Leeftijd FIRE / Pensioen */}
+      {/* 5. Doel Leeftijd Pensioen */}
       <div className="space-y-1.5 pb-2">
         <div className="flex justify-between items-center text-xs">
           <div className="flex flex-col">
-            <span className="font-medium text-[#2D2D2D]">Doel Leeftijd FIRE</span>
+            <span className="font-medium text-[#2D2D2D]">Doel Leeftijd Pensioen</span>
             <span className="text-[10px] text-[#767676]">Wanneer start de vrijheid-fase?</span>
           </div>
           <span className="font-mono text-[#D56B45] font-semibold">{inputs.fireAge} jr</span>
