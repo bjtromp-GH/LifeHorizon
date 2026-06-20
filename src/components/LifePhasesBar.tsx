@@ -284,10 +284,10 @@ export default function LifePhasesBar({
                   1. Ontwikkeling
                 </span>
                 <span className="text-sm font-semibold text-[#2D2D2D] font-mono">
-                  {phases.basisYears} yr{" "}
-                  <span className="text-[11px] text-[#767676] font-normal">
-                    ({Math.round(phases.basisPercent)}%)
-                  </span>
+                  {phases.basisYears} jaar
+                </span>
+                <span className="text-[11px] text-[#767676]">
+                  {Math.round(phases.basisPercent)}%
                 </span>
                 <span className="text-[10px] text-[#767676]">0 - {inputs.startWorkAge} jr</span>
               </div>
@@ -297,10 +297,10 @@ export default function LifePhasesBar({
                   2. Accumulatie
                 </span>
                 <span className="text-sm font-semibold text-[#2D2D2D] font-mono">
-                  {phases.accumulationYears} yr{" "}
-                  <span className="text-[11px] text-[#767676] font-normal">
-                    ({Math.round(phases.accumulationPercent)}%)
-                  </span>
+                  {phases.accumulationYears} jaar
+                </span>
+                <span className="text-[11px] text-[#767676]">
+                  {Math.round(phases.accumulationPercent)}%
                 </span>
                 <span className="text-[10px] text-[#767676]">
                   {inputs.startWorkAge} - {inputs.fireAge} jr
@@ -312,10 +312,10 @@ export default function LifePhasesBar({
                   3. Vrijheid
                 </span>
                 <span className="text-sm font-semibold text-[#D56B45] font-mono">
-                  {phases.freedomYears.toFixed(1)} yr{" "}
-                  <span className="text-[11px] text-[#767676] font-normal">
-                    ({Math.round(phases.freedomPercent)}%)
-                  </span>
+                  {phases.freedomYears.toFixed(1)} jaar
+                </span>
+                <span className="text-[11px] text-[#767676]">
+                  {Math.round(phases.freedomPercent)}%
                 </span>
                 <span className="text-[10px] text-[#767676]">
                   {inputs.fireAge} - {projectedLifeExpectancy.toFixed(1)} jr
