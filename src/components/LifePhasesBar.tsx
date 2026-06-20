@@ -230,8 +230,10 @@ export default function LifePhasesBar({
                   <motion.div
                     animate={{ y: [0, -3, 0] }}
                     transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                    className="w-3.5 h-3.5 bg-[#D56B45] rotate-45 border border-white shadow-[0_0_10px_rgba(213,107,69,0.6)] z-10"
-                  />
+                    className="z-10"
+                  >
+                    <div className="w-3.5 h-3.5 bg-[#D56B45] rotate-45 border border-white" />
+                  </motion.div>
                   {/* Visual indicator line extending through the bar */}
                   <div className="w-[2px] h-7 bg-[#D56B45] mt-1 z-10 shadow-sm" />
                 </div>
