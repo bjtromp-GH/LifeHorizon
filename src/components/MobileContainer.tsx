@@ -202,7 +202,6 @@ export default function MobileContainer({
               { id: 1, name: "2. Matrix" },
               { id: 2, name: "3. Vitaliteit" },
               { id: 3, name: "4. Overzicht" },
-              { id: 4, name: "5. Model" },
             ].map((s) => {
               const isActive = activeSlide === s.id;
               return (
