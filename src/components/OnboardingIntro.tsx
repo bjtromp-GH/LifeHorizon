@@ -1171,7 +1171,6 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               <ScrollRevealText onComplete={onComplete} />
             </motion.div>
           ) : null}
-
         </AnimatePresence>
       </main>
 
@@ -1235,37 +1234,43 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 {/* Selection Indicator overlay */}
                 <div className="absolute top-1/2 left-0 w-full h-[64px] -translate-y-1/2 border-y-2 border-white/20 bg-white/5 pointer-events-none rounded-xl"></div>
                 
+                {/* Scrollable Container */}
                 <div 
-                  id="year-scroll-container"
-                  className="w-full h-full overflow-y-auto scrollbar-hide snap-y snap-mandatory relative scroll-smooth mask-image-vertical"
-                  style={{ WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 30%, black 70%, transparent)' }}
+                  ref={scrollContainerRef}
+                  onScroll={handleYearScroll}
+                  className="w-full h-full overflow-y-auto snap-y snap-mandatory scrollbar-hide relative z-10"
+                  style={{ 
+                    scrollbarWidth: "none",
+                    paddingTop: "96px", 
+                    paddingBottom: "96px",
+                    WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)"
+                  }}
                 >
-                  {/* Padding blocks for centering the first item */}
-                  <div className="h-[96px] w-full shrink-0"></div>
-                  
-                  {years.map((year) => {
-                    const distance = Math.abs(year - parseInt(localBirthYear));
-                    const isSelected = year === parseInt(localBirthYear);
+                  {yearsList.map((year) => {
+                    const isFocused = year === focusedYear;
+                    const dist = Math.abs(year - focusedYear);
+                    const scale = isFocused ? 1 : Math.max(0.7, 1 - dist * 0.1);
+                    const opacity = isFocused ? 1 : Math.max(0.2, 0.7 - dist * 0.2);
                     
-                    let scale = 1;
-                    let opacity = 1;
-                    if (distance === 1) { scale = 0.8; opacity = 0.6; }
-                    else if (distance === 2) { scale = 0.6; opacity = 0.3; }
-                    else if (distance > 2) { scale = 0.5; opacity = 0.1; }
-
                     return (
-                      <div 
+                      <div
                         key={year}
-                        className="h-[64px] w-full flex items-center justify-center snap-center cursor-pointer"
+                        className="h-[64px] snap-center flex items-center justify-center cursor-pointer select-none"
                         onClick={() => {
-                          setLocalBirthYear(year.toString());
-                          const el = document.getElementById("year-scroll-container");
-                          const targetIndex = years.indexOf(year);
-                          if (el) el.scrollTo({ top: targetIndex * 64, behavior: 'smooth' });
+                          if (year === focusedYear) {
+                            confirmYearSelection(year);
+                          } else {
+                            const idx = yearsList.indexOf(year);
+                            if (scrollContainerRef.current) {
+                              scrollContainerRef.current.scrollTo({ top: idx * ITEM_HEIGHT, behavior: 'smooth' });
+                            }
+                            // Optionally auto-confirm after scrolling
+                            setTimeout(() => confirmYearSelection(year), 300);
+                          }
                         }}
                       >
                         <span 
-                          className={`font-mono transition-all duration-300 select-none ${isSelected ? 'text-4xl font-black text-white' : 'text-2xl font-bold text-white/70'}`}
+                          className={`font-mono transition-all duration-200 ${isFocused ? 'text-4xl sm:text-5xl font-black text-white drop-shadow-lg' : 'text-3xl font-bold text-white'}`}
                           style={{ 
                             transform: `scale(${scale})`, 
                             opacity: opacity 
@@ -1276,9 +1281,6 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       </div>
                     );
                   })}
-                  
-                  {/* Padding blocks for centering the last item */}
-                  <div className="h-[96px] w-full shrink-0"></div>
                 </div>
               </div>
             </div>
