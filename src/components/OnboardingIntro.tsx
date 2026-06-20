@@ -810,7 +810,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   </button>
                 </div>
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
-                  Hoe oud zijn uw biologische ouders geworden?
+                  Hoe oud zijn uw biologische <br className="block sm:hidden" />ouders geworden?
                 </h2>
                 <p className="text-sm text-[#767676]">
                   Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn (-1.5 tot +1.5 jaar per ouder).
