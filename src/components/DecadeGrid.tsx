@@ -232,8 +232,25 @@ export default function DecadeGrid({
                 </button>
               </div>
 
-              {/* Animated Bars */}
-              <div className="space-y-4 mb-6">
+              {/* Pie Chart & Animated Bars */}
+              {(() => {
+                const devPct = (startWorkAge / totalYears) * 100;
+                const workPct = ((fireAge - startWorkAge) / totalYears) * 100;
+                
+                return (
+                  <>
+                    <div className="flex justify-center mb-6 mt-2">
+                      <div 
+                        className="w-32 h-32 rounded-full relative flex items-center justify-center shadow-inner"
+                        style={{ background: `conic-gradient(#EAE8E4 0% ${devPct}%, #C8C5C0 ${devPct}% ${devPct + workPct}%, rgba(213,107,69,0.3) ${devPct + workPct}% 100%)` }}
+                      >
+                        <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden z-10 border border-[#EAE8E4]">
+                          <img src="/img/LR_Olifant_v2.png" alt="Olifant" className="w-12 h-12 object-contain opacity-80" />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4 mb-6">
                 <div>
                   <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
                     <span>Ontwikkeling</span>
@@ -279,6 +296,9 @@ export default function DecadeGrid({
                   </div>
                 </div>
               </div>
+                  </>
+                );
+              })()}
 
               <div className="bg-[#FAF9F8] p-4 rounded-lg text-sm text-[#767676] leading-relaxed border border-[#EAE8E4]">
                 <p>
