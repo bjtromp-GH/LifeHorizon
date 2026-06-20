@@ -292,7 +292,14 @@ export default function DecadeGrid({
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                           <div className="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#EAE8E4] z-10 transition-transform duration-300">
-                            <img src="/img/olifant-bril.png" alt="Olifant" className="w-24 h-24 object-contain opacity-100" />
+                            <motion.img 
+                              initial={{ opacity: 0, scale: 0.5 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.5 }}
+                              src="/img/olifant-bril.png" 
+                              alt="Olifant" 
+                              className="w-24 h-24 object-contain" 
+                            />
                           </div>
                         </div>
                       </div>
