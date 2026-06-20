@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useEffect } from "react";
-import { Sparkles, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info } from "lucide-react";
+import { Sparkles, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -35,6 +35,7 @@ export default function MobileContainer({
   const [showSwipeHint, setShowSwipeHint] = useState(true);
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   const [showElephantFact, setShowElephantFact] = useState(false);
+  const [showMatrixModal, setShowMatrixModal] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -478,11 +479,22 @@ export default function MobileContainer({
                       Jouw verwachte leefduur van <span className="font-bold text-white">{Math.round(projectedLifeExpectancy)} jaar</span> telt ca. <span className="font-bold text-white">{Math.round(projectedLifeExpectancy * 52.17).toLocaleString("nl-NL")} weken</span>. Elk hokje in de matrix vertegenwoordigt een unieke week.
                     </p>
                     <div className="flex items-start space-[#767676] space-x-2 pt-1 text-left">
-                      <Lightbulb className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
-                      <p className="font-bold text-white text-[11px] leading-snug">
-                        Tip: Met gezonde slaap, sport en gerichte stressreductie kun je actief jaren aan levenskwaliteit (Levenswinst) toevoegen!
+                      <Lightbulb className="w-4 h-4 text-amber-200 mt-0.5 shrink-0" />
+                      <p className="text-white/90">
+                        De kleurverdeling (Ontwikkeling, Werk, Vrijheid) verschuift mee met jouw persoonlijke Bio-Score!
                       </p>
                     </div>
+                  </div>
+
+                  {/* Button to show Matrix again */}
+                  <div className="flex justify-center max-w-sm mx-auto w-full mt-2 pb-2">
+                    <button
+                      onClick={() => setShowMatrixModal(true)}
+                      className="w-full flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 border border-white/20 py-3.5 rounded-xl font-sans font-bold text-white transition-all active:scale-95"
+                    >
+                      <Grid className="w-5 h-5" />
+                      <span>Bekijk Levensmatrix</span>
+                    </button>
                   </div>
                 </div>
 
@@ -663,6 +675,42 @@ export default function MobileContainer({
                 <div className="flex justify-center mt-6">
                   <img src="/img/olifant-bril.png" alt="Olifant" className="w-32 h-32 object-contain drop-shadow-lg" />
                 </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Matrix Popup Modal */}
+      <AnimatePresence>
+        {showMatrixModal && (
+          <div className="fixed inset-0 z-50 flex flex-col pointer-events-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-[#F9F8F6]"
+            />
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative w-full h-full flex flex-col bg-[#F9F8F6]"
+            >
+              <div className="flex justify-between items-center px-5 py-4 bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
+                <h3 className="text-lg font-black font-sans tracking-tight text-[#2D2D2D] uppercase">
+                  Jouw Levensmatrix
+                </h3>
+                <button
+                  onClick={() => setShowMatrixModal(false)}
+                  className="p-2 -mr-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors shrink-0"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-hidden relative">
+                <DecadeGrid inputs={inputs} projectedLifeExpectancy={projectedLifeExpectancy} />
               </div>
             </motion.div>
           </div>
