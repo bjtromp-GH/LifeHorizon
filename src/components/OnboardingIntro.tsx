@@ -1257,7 +1257,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     <Info className="w-5 h-5 text-[#D56B45]" />
                     Genetica vs. Leefstijl
                   </h3>
-                  <button onClick={() => setShowHeredityInfo(false)} className="p-1 text-gray-400 hover:text-gray-800 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
+                  <button onClick={() => setShowHeredityInfo(false)} className="p-1 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors cursor-pointer">
                     <X className="w-5 h-5" />
                   </button>
                 </div>

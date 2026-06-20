@@ -192,7 +192,7 @@ export default React.memo(function DecadeGrid({
                 </h3>
                 <button
                   onClick={() => setIsCurrentAgeModalOpen(false)}
-                  className="p-1 -mr-2 -mt-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-1 -mr-2 -mt-2 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -227,7 +227,7 @@ export default React.memo(function DecadeGrid({
                 </h3>
                 <button
                   onClick={() => setIsAnalyseModalOpen(false)}
-                  className="p-1 -mr-2 -mt-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-1 -mr-2 -mt-2 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>

@@ -461,7 +461,7 @@ export default function MobileContainer({
                   <div className="flex justify-center max-w-sm mx-auto w-full pt-1 pb-1">
                     <button
                       onClick={() => setShowMatrixModal(true)}
-                      className="w-full flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 border border-white/20 py-3.5 rounded-xl font-sans font-bold text-white transition-all active:scale-95"
+                      className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm"
                     >
                       <Grid className="w-5 h-5" />
                       <span>Bekijk Levensmatrix</span>
@@ -665,11 +665,11 @@ export default function MobileContainer({
                 <h3 className="text-xl font-bold font-sans tracking-tight text-[#D56B45]">
                   Mascotte
                 </h3>
-                <button
-                  onClick={() => setShowElephantFact(false)}
-                  className="p-2 -mr-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors shrink-0"
+                <button 
+                  onClick={() => setShowElephantFact(false)} 
+                  className="absolute right-4 sm:right-6 top-4 sm:top-6 p-1 bg-[#D56B45] hover:bg-[#B84E29] text-white rounded-md transition-colors cursor-pointer"
                 >
-                  <X className="w-5 h-5 text-white/70" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
               <div className="space-y-5 text-sm text-white/80 leading-relaxed font-sans">
@@ -708,9 +708,9 @@ export default function MobileContainer({
                 </h3>
                 <button
                   onClick={() => setShowMatrixModal(false)}
-                  className="p-2 -mr-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors shrink-0"
+                  className="p-1 -mr-2 -mt-2 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors"
                 >
-                  <X className="w-5 h-5 text-gray-600" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
               <div className="flex-1 overflow-hidden relative px-4 pt-4 pb-12">
