@@ -190,7 +190,7 @@ export default function LifePhasesBar({
                   className="h-full bg-[#C8C5C0] border-l border-[#FFFFFF]/30 relative group"
                   initial={{ width: "0%", opacity: 0 }}
                   animate={{ width: `${phases.accumulationPercent}%`, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+                  transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
                   title={`Accumulatie (${inputs.startWorkAge} - ${inputs.fireAge} jaar)`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -208,7 +208,7 @@ export default function LifePhasesBar({
                   className="h-full bg-[#D56B45]/20 border-l border-[#FFFFFF]/30 relative group"
                   initial={{ width: "0%", opacity: 0 }}
                   animate={{ width: `${phases.freedomPercent}%`, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
+                  transition={{ duration: 0.5, delay: 1.1, ease: "easeOut" }}
                   title={`Vrijheid (${inputs.fireAge} - ${projectedLifeExpectancy} jaar)`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -363,7 +363,7 @@ export default function LifePhasesBar({
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
+              transition={{ duration: 0.4, delay: 0.5 }}
               className="flex items-stretch group relative"
             >
               <div className="w-10 shrink-0 flex flex-col items-center">
@@ -388,7 +388,7 @@ export default function LifePhasesBar({
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
+              transition={{ duration: 0.4, delay: 0.9 }}
               className="flex items-stretch group relative"
             >
               <div className="w-10 shrink-0 flex flex-col items-center">
