@@ -66,8 +66,8 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
 
       {/* 1. Beweging (Movement) */}
       <div className="space-y-2.5">
-        <label className="text-[11px] uppercase tracking-wider font-semibold text-[#767676]">
-          1. Beweging & Fysieke Belasting
+        <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
+          1. Fysieke Activiteit
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {activityOptions.map((opt) => {
@@ -107,8 +107,8 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
 
       {/* 2. Slaap (Sleep) */}
       <div className="space-y-2.5">
-        <label className="text-[11px] uppercase tracking-wider font-semibold text-[#767676]">
-          2. Slaapduur & Ritme
+        <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
+          2. Slaappatroon
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {sleepOptions.map((opt) => {
@@ -148,8 +148,8 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
 
       {/* 3. Stress */}
       <div className="space-y-2.5">
-        <label className="text-[11px] uppercase tracking-wider font-semibold text-[#767676]">
-          3. Mentale Stress & Druk
+        <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
+          3. Stress / Werkdruk
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {stressOptions.map((opt) => {
