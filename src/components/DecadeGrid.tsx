@@ -224,19 +224,19 @@ export default React.memo(function DecadeGrid({
 
       <AnimatePresence>
         {isAnalyseModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center sm:p-4 overflow-y-auto bg-white sm:bg-transparent">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsAnalyseModalOpen(false)}
-              className="absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer"
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer hidden sm:block"
             />
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
-              className="relative bg-white rounded-xl shadow-xl w-full max-w-md p-6 overflow-hidden"
+              className="relative bg-white sm:rounded-xl shadow-none sm:shadow-xl w-full sm:max-w-md min-h-screen sm:min-h-0 p-6 sm:my-8 flex flex-col"
             >
               <div className="flex justify-between items-start mb-5">
                 <h3 className="text-lg font-bold text-[#2D2D2D] tracking-tight">
