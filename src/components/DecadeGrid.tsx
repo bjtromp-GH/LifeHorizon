@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 import { UserInputs } from "../types";
 import LifeProgressCircle from "./LifeProgressCircle";
+import HealthyMatrixModal from "./HealthyMatrixModal";
 
 interface DecadeGridProps {
   inputs: UserInputs;
@@ -16,6 +17,7 @@ export default React.memo(function DecadeGrid({
   const { currentAge, startWorkAge, fireAge } = inputs;
   const [isCurrentAgeModalOpen, setIsCurrentAgeModalOpen] = useState(false);
   const [isAnalyseModalOpen, setIsAnalyseModalOpen] = useState(false);
+  const [isHealthyModalOpen, setIsHealthyModalOpen] = useState(false);
   const [activeSlice, setActiveSlice] = useState<"dev" | "work" | "free" | null>(null);
   
   // Total years in the runway (e.g. 82 years = 82 boxes)
@@ -162,16 +164,27 @@ export default React.memo(function DecadeGrid({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center pt-2">
-        <button
-          onClick={() => setIsAnalyseModalOpen(true)}
-          className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#C05D3A] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
-        >
-          Levensmatrix Analyse
-        </button>
-        <span className="text-[10px] text-gray-500 mt-2 text-center max-w-xs">
-          Bekijk de inzichten en betekenis achter jouw matrix
-        </span>
+      <div className="flex flex-col items-center justify-center pt-2 gap-3">
+        <div className="flex flex-col items-center">
+          <button
+            onClick={() => setIsAnalyseModalOpen(true)}
+            className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#C05D3A] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
+          >
+            Levensmatrix Analyse
+          </button>
+          <span className="text-[10px] text-gray-500 mt-2 text-center max-w-xs">
+            Bekijk de inzichten en betekenis achter jouw matrix
+          </span>
+        </div>
+        
+        <div className="flex flex-col items-center">
+          <button
+            onClick={() => setIsHealthyModalOpen(true)}
+            className="px-4 py-2 bg-white border border-[#D56B45] text-[#D56B45] text-xs font-bold rounded-md hover:bg-[#FAF3F0] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
+          >
+            Gezonde Levensverwachting Matrix
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -395,6 +408,11 @@ export default React.memo(function DecadeGrid({
           </div>
         )}
       </AnimatePresence>
+
+      <HealthyMatrixModal 
+        isOpen={isHealthyModalOpen} 
+        onClose={() => setIsHealthyModalOpen(false)} 
+      />
     </div>
   );
 });
