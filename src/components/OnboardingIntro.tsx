@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
 import { playChimeSound } from "../utils/audio";
@@ -22,7 +22,9 @@ import {
   Flame,
   Zap,
   Activity,
-  Compass
+  Compass,
+  Cpu,
+  Edit3
 } from "lucide-react";
 import ScrollRevealText from "./ScrollRevealText";
 

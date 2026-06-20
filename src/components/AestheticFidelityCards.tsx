@@ -8,7 +8,7 @@ interface AestheticFidelityCardsProps {
   projectedLifeExpectancy: number;
   cbsBaseLife: number;
   apiSource: "CBS API" | "CBS Cohort Model";
-  showOnly?: ("verbruikt" | "verwachting" | "carriere" | "vrijheid")[];
+  showOnly?: ("verbruikt" | "vitaliteit" | "carriere" | "horizon")[];
 }
 
 export default React.memo(function AestheticFidelityCards({
