@@ -1173,135 +1173,11 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           ) : null}
 
         </AnimatePresence>
-        <AnimatePresence>
-          {showYearPicker && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-[200] bg-gradient-to-br from-[#E25C26] to-[#B84E29] flex flex-col items-center justify-center overflow-hidden"
-            >
-              <div className="w-full max-w-md mx-auto p-6 flex flex-col items-center">
-                <h3 className="text-2xl sm:text-3xl font-black text-white mb-8">Kies Geboortejaar</h3>
-                
-                <div className="relative w-full h-64 mx-auto flex justify-center">
-                  {/* Selection Indicator overlay */}
-                  <div className="absolute top-1/2 left-0 w-full h-[64px] -translate-y-1/2 border-y-2 border-white/20 bg-white/5 pointer-events-none rounded-xl"></div>
-                  
-                  {/* Scrollable Container */}
-                  <div 
-                    ref={scrollContainerRef}
-                    onScroll={handleYearScroll}
-                    className="w-full h-full overflow-y-auto snap-y snap-mandatory scrollbar-hide relative z-10"
-                    style={{ 
-                      scrollbarWidth: "none",
-                      paddingTop: "96px", 
-                      paddingBottom: "96px",
-                      WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)"
-                    }}
-                  >
-                    {yearsList.map((year) => {
-                      const isFocused = year === focusedYear;
-                      const dist = Math.abs(year - focusedYear);
-                      const scale = isFocused ? 1 : Math.max(0.7, 1 - dist * 0.1);
-                      const opacity = isFocused ? 1 : Math.max(0.2, 0.7 - dist * 0.2);
-                      
-                      return (
-                        <div
-                          key={year}
-                          className="h-[64px] snap-center flex items-center justify-center cursor-pointer select-none"
-                          onClick={() => {
-                            if (year === focusedYear) {
-                              confirmYearSelection(year);
-                            } else {
-                              const idx = yearsList.indexOf(year);
-                              if (scrollContainerRef.current) {
-                                scrollContainerRef.current.scrollTo({ top: idx * ITEM_HEIGHT, behavior: 'smooth' });
-                              }
-                              // Optionally auto-confirm after scrolling
-                              setTimeout(() => confirmYearSelection(year), 300);
-                            }
-                          }}
-                        >
-                          <span 
-                            className={`font-mono transition-all duration-200 ${isFocused ? 'text-4xl sm:text-5xl font-black text-white drop-shadow-lg' : 'text-3xl font-bold text-white'}`}
-                            style={{ 
-                              transform: `scale(${scale})`, 
-                              opacity: opacity 
-                            }}
-                          >
-                            {year}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <AnimatePresence>
-          {showHeredityInfo && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-[500] bg-black/60 flex items-center justify-center sm:p-6"
-            >
-              <div className="bg-white w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:rounded-2xl sm:max-w-lg shadow-2xl overflow-hidden flex flex-col">
-                <div className="p-4 pt-6 sm:pt-6 sm:p-6 flex justify-between items-center border-b border-gray-100">
-                  <h3 className="font-extrabold text-lg sm:text-xl text-[#2D2D2D] flex items-center gap-2">
-                    <Info className="w-5 h-5 text-[#D56B45]" />
-                    Genetica vs. Leefstijl
-                  </h3>
-                  <button onClick={() => setShowHeredityInfo(false)} className="p-1 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors cursor-pointer">
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="p-4 sm:p-6 overflow-y-auto text-sm sm:text-base text-[#4a4a4a] space-y-4">
-                  <p>
-                    Het feit dat beide ouders aan een ziekte zijn overleden heeft invloed op je statistische levensverwachting, maar je eigen levensloop staat <strong>niet</strong> vast.
-                  </p>
-                  <p>
-                    Onderzoek toont aan dat levensduur voor slechts <strong>10% tot 25% genetisch bepaald is</strong>. De overige 75% tot 90% stuur je grotendeels zelf aan met leefstijl en omgeving. Hoe zwaar genetica weegt, hangt af van:
-                  </p>
-                  
-                  <div className="bg-[#FAF3F0] p-4 rounded-xl border border-[#D56B45]/20 space-y-3">
-                    <div>
-                      <strong className="text-[#D56B45] block mb-1">1. Leeftijd van overlijden</strong>
-                      <p className="text-sm">Bij jong overlijden (vóór 60 jr) is de genetische component vaak sterker. Overlijden na 75-80 jaar komt veel vaker door natuurlijke celveroudering dan door een overdraagbare genetische fout.</p>
-                    </div>
-                    <div>
-                      <strong className="text-[#D56B45] block mb-1">2. Type ziekte</strong>
-                      <p className="text-sm">Sommige ziektes zijn sterk erfelijk. Andere ziektes hebben geen erfelijke component en ontstaan door externe factoren of levensstijl.</p>
-                    </div>
-                    <div>
-                      <strong className="text-[#D56B45] block mb-1">3. Gedeelde gewoontes</strong>
-                      <p className="text-sm">Gezinnen delen niet alleen genen, maar ook gewoontes! Voedingspatronen, beweging en omgang met stress worden doorgegeven. Wat soms voelt als een 'genetische vloek', is in feite een geërfde levensstijl die je zelf kunt doorbreken.</p>
-                    </div>
-                  </div>
-
-                  <p>
-                    <strong>Conclusie:</strong> Je DNA is de blauwdruk, maar jij bent de regisseur. Door epigenetica kan jouw eigen leefstijl (slaap, voeding, stress) bepalen welke genen zich uiten en welke 'uit' blijven.
-                  </p>
-                </div>
-                <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
-                  <button onClick={() => setShowHeredityInfo(false)} className="px-5 py-2.5 bg-[#2D2D2D] hover:bg-black text-white font-bold rounded-xl transition-colors cursor-pointer text-sm">
-                    Begrepen
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </main>
 
       {/* Navigation Footer */}
       {step >= 2 && step < 7 && !showYearPicker && (
-        <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] z-10">
+        <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] relative z-10">
           <div>
             {step > 2 && (
               <button
@@ -1333,6 +1209,130 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           </div>
         </footer>
       )}
+
+      {/* Modals placed outside of restricted stacking contexts */}
+      <AnimatePresence>
+        {showYearPicker && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[200] bg-gradient-to-br from-[#E25C26] to-[#B84E29] flex flex-col items-center justify-center overflow-hidden"
+          >
+            <div className="w-full max-w-md mx-auto p-6 flex flex-col items-center">
+              <h3 className="text-2xl sm:text-3xl font-black text-white mb-8">Kies Geboortejaar</h3>
+              
+              <div className="relative w-full h-64 mx-auto flex justify-center">
+                {/* Selection Indicator overlay */}
+                <div className="absolute top-1/2 left-0 w-full h-[64px] -translate-y-1/2 border-y-2 border-white/20 bg-white/5 pointer-events-none rounded-xl"></div>
+                
+                <div 
+                  id="year-scroll-container"
+                  className="w-full h-full overflow-y-auto scrollbar-hide snap-y snap-mandatory relative scroll-smooth mask-image-vertical"
+                  style={{ WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 30%, black 70%, transparent)' }}
+                >
+                  {/* Padding blocks for centering the first item */}
+                  <div className="h-[96px] w-full shrink-0"></div>
+                  
+                  {years.map((year) => {
+                    const distance = Math.abs(year - parseInt(localBirthYear));
+                    const isSelected = year === parseInt(localBirthYear);
+                    
+                    let scale = 1;
+                    let opacity = 1;
+                    if (distance === 1) { scale = 0.8; opacity = 0.6; }
+                    else if (distance === 2) { scale = 0.6; opacity = 0.3; }
+                    else if (distance > 2) { scale = 0.5; opacity = 0.1; }
+
+                    return (
+                      <div 
+                        key={year}
+                        className="h-[64px] w-full flex items-center justify-center snap-center cursor-pointer"
+                        onClick={() => {
+                          setLocalBirthYear(year.toString());
+                          const el = document.getElementById("year-scroll-container");
+                          const targetIndex = years.indexOf(year);
+                          if (el) el.scrollTo({ top: targetIndex * 64, behavior: 'smooth' });
+                        }}
+                      >
+                        <span 
+                          className={`font-mono transition-all duration-300 select-none ${isSelected ? 'text-4xl font-black text-white' : 'text-2xl font-bold text-white/70'}`}
+                          style={{ 
+                            transform: `scale(${scale})`, 
+                            opacity: opacity 
+                          }}
+                        >
+                          {year}
+                        </span>
+                      </div>
+                    );
+                  })}
+                  
+                  {/* Padding blocks for centering the last item */}
+                  <div className="h-[96px] w-full shrink-0"></div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showHeredityInfo && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[500] bg-black/60 flex items-center justify-center sm:p-6"
+          >
+            <div className="bg-white w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:rounded-2xl sm:max-w-lg shadow-2xl overflow-hidden flex flex-col">
+              <div className="p-4 pt-6 sm:pt-6 sm:p-6 flex justify-between items-center border-b border-gray-100">
+                <h3 className="font-extrabold text-lg sm:text-xl text-[#2D2D2D] flex items-center gap-2">
+                  <Info className="w-5 h-5 text-[#D56B45]" />
+                  Genetica vs. Leefstijl
+                </h3>
+                <button onClick={() => setShowHeredityInfo(false)} className="p-1 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors cursor-pointer">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="p-4 sm:p-6 overflow-y-auto text-sm sm:text-base text-[#4a4a4a] space-y-4">
+                <p>
+                  Het feit dat beide ouders aan een ziekte zijn overleden heeft invloed op je statistische levensverwachting, maar je eigen levensloop staat <strong>niet</strong> vast.
+                </p>
+                <p>
+                  Onderzoek toont aan dat levensduur voor slechts <strong>10% tot 25% genetisch bepaald is</strong>. De overige 75% tot 90% stuur je grotendeels zelf aan met leefstijl en omgeving. Hoe zwaar genetica weegt, hangt af van:
+                </p>
+                
+                <div className="bg-[#FAF3F0] p-4 rounded-xl border border-[#D56B45]/20 space-y-3">
+                  <div>
+                    <strong className="text-[#D56B45] block mb-1">1. Leeftijd van overlijden</strong>
+                    <p className="text-sm">Bij jong overlijden (vóór 60 jr) is de genetische component vaak sterker. Overlijden na 75-80 jaar komt veel vaker door natuurlijke celveroudering dan door een overdraagbare genetische fout.</p>
+                  </div>
+                  <div>
+                    <strong className="text-[#D56B45] block mb-1">2. Type ziekte</strong>
+                    <p className="text-sm">Sommige ziektes zijn sterk erfelijk. Andere ziektes hebben geen erfelijke component en ontstaan door externe factoren of levensstijl.</p>
+                  </div>
+                  <div>
+                    <strong className="text-[#D56B45] block mb-1">3. Gedeelde gewoontes</strong>
+                    <p className="text-sm">Gezinnen delen niet alleen genen, maar ook gewoontes! Voedingspatronen, beweging en omgang met stress worden doorgegeven. Wat soms voelt als een 'genetische vloek', is in feite een geërfde levensstijl die je zelf kunt doorbreken.</p>
+                  </div>
+                </div>
+
+                <p>
+                  <strong>Conclusie:</strong> Je DNA is de blauwdruk, maar jij bent de regisseur. Door epigenetica kan jouw eigen leefstijl (slaap, voeding, stress) bepalen welke genen zich uiten en welke 'uit' blijven.
+                </p>
+              </div>
+              <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
+                <button onClick={() => setShowHeredityInfo(false)} className="px-5 py-2.5 bg-[#2D2D2D] hover:bg-black text-white font-bold rounded-xl transition-colors cursor-pointer text-sm">
+                  Begrepen
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
