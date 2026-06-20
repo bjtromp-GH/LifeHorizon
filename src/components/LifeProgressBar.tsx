@@ -4,22 +4,25 @@ interface LifeProgressBarProps {
   currentAge: number;
   projectedLifeExpectancy: number;
   className?: string;
+  hideLabels?: boolean;
 }
 
-export default function LifeProgressBar({ currentAge, projectedLifeExpectancy, className = "" }: LifeProgressBarProps) {
+export default function LifeProgressBar({ currentAge, projectedLifeExpectancy, className = "", hideLabels = false }: LifeProgressBarProps) {
   const safeLife = Math.max(projectedLifeExpectancy, currentAge, 1);
   const percentage = Math.min(100, Math.max(0, (currentAge / safeLife) * 100));
   
   return (
     <div className={`flex flex-col w-full ${className}`}>
-      <div className="flex justify-between items-end mb-2">
-        <span className="text-xl sm:text-2xl font-black text-[#2D2D2D] font-mono tracking-tighter leading-none">
-          {Math.round(percentage)}%
-        </span>
-        <span className="text-[9px] sm:text-[10px] text-[#767676] font-semibold uppercase tracking-widest pb-0.5">
-          Voltooid
-        </span>
-      </div>
+      {!hideLabels && (
+        <div className="flex justify-between items-end mb-2">
+          <span className="text-xl sm:text-2xl font-black text-[#2D2D2D] font-mono tracking-tighter leading-none">
+            {Math.round(percentage)}%
+          </span>
+          <span className="text-[9px] sm:text-[10px] text-[#767676] font-semibold uppercase tracking-widest pb-0.5">
+            Voltooid
+          </span>
+        </div>
+      )}
       
       <div className="h-3 sm:h-4 bg-[#F3F2F0] rounded-full overflow-hidden w-full relative shadow-inner">
         <motion.div 
@@ -30,13 +33,15 @@ export default function LifeProgressBar({ currentAge, projectedLifeExpectancy, c
         />
       </div>
 
-      <div className="mt-4 text-center sm:text-left">
-        <h4 className="text-xs sm:text-sm font-bold text-[#2D2D2D] tracking-tight">Levensvoortgang</h4>
-        <p className="text-[10px] sm:text-[11px] text-[#767676] mt-1 leading-relaxed">
-          Je hebt al <strong className="text-[#D56B45]">{Math.round(percentage)}%</strong> van je voorspelde leven achter de rug. 
-          Maak het beste van de resterende <strong className="text-[#D56B45]">{100 - Math.round(percentage)}%</strong>.
-        </p>
-      </div>
+      {!hideLabels && (
+        <div className="mt-4 text-center sm:text-left">
+          <h4 className="text-xs sm:text-sm font-bold text-[#2D2D2D] tracking-tight">Levensvoortgang</h4>
+          <p className="text-[10px] sm:text-[11px] text-[#767676] mt-1 leading-relaxed">
+            Je hebt al <strong className="text-[#D56B45]">{Math.round(percentage)}%</strong> van je voorspelde leven achter de rug. 
+            Maak het beste van de resterende <strong className="text-[#D56B45]">{100 - Math.round(percentage)}%</strong>.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
