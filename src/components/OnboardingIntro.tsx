@@ -690,7 +690,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Slaappatroon</span>
                 </label>
-                <div className={`grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localSleep === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localSleep === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
                     { key: "kort", label: "Kort (<6u)", detail: "-1.5 jr" },
                     { key: "matig", label: "Matig (onrustig)", detail: "-0.5 jr" },
@@ -724,7 +724,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Fysieke Activiteit</span>
                 </label>
-                <div className={`grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localActivity === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localActivity === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
                     { key: "zittend", label: "Zittend (kantoor)", detail: "-1.5 jr" },
                     { key: "licht", label: "Lichte beweging", detail: "Neutraal" },
@@ -758,7 +758,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Stress / Werkdruk</span>
                 </label>
-                <div className={`grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localStress === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localStress === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
                     { key: "hoog", label: "Veel stress", detail: "-1.8 jr" },
                     { key: "gemiddeld", label: "Gemiddeld", detail: "Neutraal" },
@@ -1093,7 +1093,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </p>
               </div>
 
-              <div className="bg-[#FAF3F0] p-4 sm:p-5 rounded-2xl border border-[#D56B45]/20 text-left grid grid-cols-1 sm:grid-cols-2 gap-y-3.5 gap-x-4 shadow-3xs">
+              <div className="bg-[#FAF3F0] p-4 sm:p-5 rounded-2xl border border-[#D56B45]/20 text-left grid grid-cols-2 gap-y-3.5 gap-x-4 shadow-3xs">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Profiel</span>
                   <span className="text-sm font-black text-[#2D2D2D]">{inputs.gender === "man" ? "Man" : "Vrouw"}, {inputs.currentAge} jr</span>
