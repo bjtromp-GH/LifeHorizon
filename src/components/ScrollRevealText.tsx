@@ -49,10 +49,10 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
           className="absolute bottom-8 sm:bottom-16 w-full flex justify-center z-20"
         >
           <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(213,107,69,0.5)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(255,255,255,0.4)" }}
             whileTap={{ scale: 0.95 }}
             onClick={onComplete}
-            className="px-8 sm:px-12 py-4 sm:py-5 bg-[#D56B45] text-white font-black text-sm sm:text-lg tracking-widest uppercase rounded-2xl flex items-center space-x-4 transition-all duration-300"
+            className="px-8 sm:px-12 py-4 sm:py-5 bg-white text-[#D56B45] font-black text-sm sm:text-lg tracking-widest uppercase rounded-2xl flex items-center space-x-4 transition-all duration-300"
           >
             <span>Open Interactief Dashboard</span>
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
