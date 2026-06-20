@@ -294,11 +294,15 @@ export default React.memo(function DecadeGrid({
                           <div className="w-28 h-28 bg-[#D56B45] rounded-full flex items-center justify-center shadow-sm border border-[#B84E29] z-10 transition-transform duration-300">
                             <motion.img 
                               initial={{ opacity: 0, scale: 0.5 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.5 }}
+                              animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
+                              transition={{ 
+                                opacity: { duration: 0.5 },
+                                scale: { type: "spring", stiffness: 200, damping: 15 },
+                                y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                              }}
                               src="/img/olifant-bril.png" 
-                              alt="Olifant" 
-                              className="w-24 h-24 object-contain" 
+                              alt="Olifant Mascotte" 
+                              className="w-20 h-20 object-contain drop-shadow-md" 
                             />
                           </div>
                         </div>

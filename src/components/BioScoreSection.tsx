@@ -1,4 +1,5 @@
 import { ActivityLevel, BioScoreAnswers, SleepLevel, StressLevel } from "../types";
+import NumberTicker from "./NumberTicker";
 
 interface BioScoreSectionProps {
   answers: BioScoreAnswers;
@@ -50,13 +51,16 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
           <span className="text-xs uppercase tracking-wider text-[#767676] font-mono leading-none">
             Netto effect
           </span>
-          <span
+          <NumberTicker
+            value={totalOffset}
+            decimals={1}
+            duration={1}
+            prefix={totalOffset >= 0 ? "+" : ""}
+            suffix=" jaar"
             className={`text-base font-bold font-mono mt-1 ${
               totalOffset > 0 ? "text-[#D56B45]" : totalOffset < 0 ? "text-amber-700" : "text-[#767676]"
             }`}
-          >
-            {totalOffset >= 0 ? `+${totalOffset}` : totalOffset} jaar
-          </span>
+          />
         </div>
       </div>
 

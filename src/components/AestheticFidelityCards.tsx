@@ -1,5 +1,6 @@
 import { Hourglass, ShieldCheck, Heart, Landmark, Info, HelpCircle } from "lucide-react";
 import React from "react";
+import { motion } from "motion/react";
 import { UserInputs } from "../types";
 import { getBioScoreOffset } from "./BioScoreSection";
 
@@ -97,7 +98,11 @@ export default React.memo(function AestheticFidelityCards({
           
           {/* CARD 1: VERBRUIKT VS. RESTEREND */}
           {showVerbruikt && (
-            <section className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300 flex flex-col justify-between">
+            <motion.section 
+              whileHover={{ scale: 1.015, y: -4, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-colors duration-300 flex flex-col justify-between"
+            >
               <div>
                 <div className="flex items-center justify-between border-b border-[#F3F2F0] pb-3 mb-4">
                   <div className="flex items-center space-x-2">
@@ -151,12 +156,16 @@ export default React.memo(function AestheticFidelityCards({
               <div className="mt-4 pt-3 border-t border-[#F3F2F0] text-xs text-[#767676] leading-relaxed">
                 Op basis van uw leeftijd is <span className="font-semibold text-[#2D2D2D]">{orbitalPassedPct}%</span> van uw statistische levensorbit verstreken.
               </div>
-            </section>
+            </motion.section>
           )}
 
           {/* CARD 2: VITALITEIT & LEVENSWINST */}
           {showVitaliteit && (
-            <section className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300 flex flex-col justify-between">
+            <motion.section 
+              whileHover={{ scale: 1.015, y: -4, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-colors duration-300 flex flex-col justify-between"
+            >
               <div>
                 <div className="flex items-center justify-between border-b border-[#F3F2F0] pb-3 mb-4">
                   <div className="flex items-center space-x-2">
@@ -244,12 +253,16 @@ export default React.memo(function AestheticFidelityCards({
                   {projectedLifeExpectancy.toFixed(1)} j.
                 </span>
               </div>
-            </section>
+            </motion.section>
           )}
 
           {/* CARD 3: CARRIÈRE RUNWAY (Pensioen) */}
           {showCarriere && (
-            <section className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300 flex flex-col justify-between">
+            <motion.section 
+              whileHover={{ scale: 1.015, y: -4, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-colors duration-300 flex flex-col justify-between"
+            >
               <div>
                 <div className="flex items-center justify-between border-b border-[#F3F2F0] pb-3 mb-4">
                   <div className="flex items-center space-x-2">
@@ -295,7 +308,7 @@ export default React.memo(function AestheticFidelityCards({
               <div className="mt-4 pt-3 border-t border-[#F3F2F0] text-xs text-[#767676] leading-relaxed">
                 Nog <span className="font-semibold text-[#2D2D2D]">{yearsRemainingWork} jaar</span> verplichte tijdsallocatie tot uw pensioenleeftijd van {fireAge} jaar.
               </div>
-            </section>
+            </motion.section>
           )}
 
         </div>
@@ -303,7 +316,11 @@ export default React.memo(function AestheticFidelityCards({
 
       {/* CARD 4: DE ONGETEMDE HORIZON === */}
       {showHorizon && (
-        <section className="p-5 bg-[#FAFCEE]/20 border border-[#D56B45]/20 rounded-md transition-all duration-300">
+        <motion.section 
+          whileHover={{ scale: 1.015, y: -4, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="p-5 bg-[#FAFCEE]/20 border border-[#D56B45]/20 rounded-md transition-colors duration-300"
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#F3F2F0] pb-3 mb-4">
             <div className="flex items-center space-x-2">
               <span className="text-base select-none">🔥</span>
@@ -365,7 +382,7 @@ export default React.memo(function AestheticFidelityCards({
               </p>
             </div>
           </div>
-        </section>
+        </motion.section>
       )}
 
     </div>
