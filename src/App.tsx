@@ -5,6 +5,7 @@ import { getBioScoreOffset } from "./components/BioScoreSection";
 import DesktopDashboard from "./components/DesktopDashboard";
 import MobileContainer from "./components/MobileContainer";
 import OnboardingIntro from "./components/OnboardingIntro";
+import { setupGlobalClickListener } from "./utils/audio";
 
 export default function App() {
   // 1. Core State
@@ -31,14 +32,21 @@ export default function App() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
 
-  // 2. Responsive viewport check
+  // 2. Responsive viewport check and Global Audio
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    
+    // Setup global button click sounds
+    const cleanupAudio = setupGlobalClickListener();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (cleanupAudio) cleanupAudio();
+    };
   }, []);
 
   // 3. CBS Open Data Sync Function (Memoized to prevent recreation)
