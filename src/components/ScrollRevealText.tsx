@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 interface ScrollRevealTextProps {
   onComplete: () => void;
@@ -12,19 +12,47 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
   const totalRevealTime = 4.5; // Spread the word reveal over 4.5 seconds
   const buttonRevealTime = totalRevealTime + 1; // Show button shortly after text finishes
 
+  const [showButton, setShowButton] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 640);
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener('resize', handleResize);
+    
+    const t = setTimeout(() => setShowButton(true), buttonRevealTime * 1000);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(t);
+    };
+  }, [buttonRevealTime]);
+
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden bg-gradient-to-br from-[#E25C26] to-[#B84E29] text-white">
       <div className="relative w-full h-full flex flex-col items-center justify-center p-8 sm:p-16 md:p-24 overflow-hidden">
         <motion.div 
           initial={{ opacity: 0, scale: 0.8, y: -20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="mb-8 sm:mb-12 z-10"
+          animate={
+            isMobile && showButton 
+              ? { opacity: 0, height: 0, marginBottom: 0, scale: 0.5 }
+              : { opacity: 1, scale: 1, y: [-20, -10, -20], height: 'auto', marginBottom: isMobile ? 32 : 48 }
+          }
+          transition={{ 
+            duration: isMobile && showButton ? 0.8 : 4, 
+            repeat: isMobile && showButton ? 0 : Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="z-10 overflow-hidden"
         >
           <img src="/img/olifant-bril.png" alt="Olifant Mascotte" className="w-24 h-24 sm:w-32 sm:h-32 object-contain" />
         </motion.div>
         
-        <div className="max-w-4xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-3 relative z-10 w-full content-center">
+        <motion.div 
+          animate={isMobile && showButton ? { y: -20 } : { y: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="max-w-4xl mx-auto flex flex-wrap justify-center text-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-3 relative z-10 w-full content-center"
+        >
           {words.map((word, i) => {
             const delay = (i / words.length) * totalRevealTime;
 
@@ -40,7 +68,7 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
               </motion.span>
             );
           })}
-        </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 40, pointerEvents: "none" }}
