@@ -458,7 +458,7 @@ export default function MobileContainer({
                   </div>
 
                   {/* Button to show Matrix again */}
-                  <div className="flex justify-center max-w-sm mx-auto w-full pt-1 pb-1">
+                  <div className="flex flex-col items-center justify-center max-w-sm mx-auto w-full pt-1 pb-1">
                     <button
                       onClick={() => setShowMatrixModal(true)}
                       className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm"
@@ -466,6 +466,9 @@ export default function MobileContainer({
                       <Grid className="w-5 h-5" />
                       <span>Bekijk Levensmatrix</span>
                     </button>
+                    <span className="text-[10px] font-sans text-white/60 mt-2 text-center">
+                      Bekijk je persoonlijke levensloop in detail
+                    </span>
                   </div>
 
                   {/* Quick summary statistics */}
@@ -693,14 +696,14 @@ export default function MobileContainer({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-[#F9F8F6]"
+              className="absolute inset-0 bg-[#FAFCEE]"
             />
             <motion.div
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full h-full flex flex-col bg-[#F9F8F6]"
+              className="relative w-full h-full flex flex-col bg-[#FAFCEE]"
             >
               <div className="flex justify-between items-center px-5 py-4 bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
                 <h3 className="text-lg font-black font-sans tracking-tight text-[#2D2D2D] uppercase">
