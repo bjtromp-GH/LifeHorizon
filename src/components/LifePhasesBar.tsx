@@ -25,7 +25,6 @@ export default function LifePhasesBar({
 
   return (
     <motion.div
-      layout
       id="life-phases-bar-container"
       className={`flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl cursor-pointer bg-white`}
       style={{
