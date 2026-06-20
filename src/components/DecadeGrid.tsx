@@ -14,6 +14,7 @@ export default function DecadeGrid({
 }: DecadeGridProps) {
   const { currentAge, startWorkAge, fireAge } = inputs;
   const [isCurrentAgeModalOpen, setIsCurrentAgeModalOpen] = useState(false);
+  const [isAnalyseModalOpen, setIsAnalyseModalOpen] = useState(false);
   
   // Total years in the runway (e.g. 82 years = 82 boxes)
   const totalYears = Math.max(1, Math.ceil(projectedLifeExpectancy));
@@ -38,13 +39,13 @@ export default function DecadeGrid({
         </h4>
         <div className="flex items-center space-x-3 text-[10px] text-[#767676] font-mono">
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#EAE8E4]" /> Dev
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#EAE8E4]" /> Ontwikkeling
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#C8C5C0]" /> Work
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#C8C5C0]" /> Werk
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D56B45]/20 border border-[#D56B45]/30" /> Free
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D56B45]/20 border border-[#D56B45]/30" /> Vrijheid
           </span>
         </div>
       </div>
@@ -159,6 +160,15 @@ export default function DecadeGrid({
         </div>
       </div>
 
+      <div className="flex justify-center pt-2">
+        <button
+          onClick={() => setIsAnalyseModalOpen(true)}
+          className="px-4 py-2 bg-[#FAF3F0] text-[#D56B45] text-xs font-bold rounded-md border border-[#D56B45]/20 hover:bg-[#D56B45] hover:text-white transition-colors uppercase tracking-widest cursor-pointer"
+        >
+          Levensmatrix Analyse
+        </button>
+      </div>
+
       <AnimatePresence>
         {isCurrentAgeModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -189,6 +199,95 @@ export default function DecadeGrid({
               <p className="text-sm text-[#767676] leading-relaxed">
                 Je bevindt je nu hier in de levensmatrix! Dit blokje markeert jouw huidige leeftijd. De kleur geeft aan in welke fase van je leven je je momenteel bevindt: Ontwikkeling, Accumulatie of Vrijheid.
               </p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isAnalyseModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsAnalyseModalOpen(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              className="relative bg-white rounded-xl shadow-xl w-full max-w-md p-6 overflow-hidden"
+            >
+              <div className="flex justify-between items-start mb-5">
+                <h3 className="text-lg font-bold text-[#2D2D2D] tracking-tight">
+                  Levensmatrix Analyse
+                </h3>
+                <button
+                  onClick={() => setIsAnalyseModalOpen(false)}
+                  className="p-1 -mr-2 -mt-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Animated Bars */}
+              <div className="space-y-4 mb-6">
+                <div>
+                  <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
+                    <span>Ontwikkeling</span>
+                    <span>{startWorkAge} jr ({(startWorkAge / totalYears * 100).toFixed(0)}%)</span>
+                  </div>
+                  <div className="h-3 bg-[#F3F1ED] rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(startWorkAge / totalYears) * 100}%` }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                      className="h-full bg-[#D56B45]/40"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
+                    <span>Werk</span>
+                    <span>{fireAge - startWorkAge} jr ({((fireAge - startWorkAge) / totalYears * 100).toFixed(0)}%)</span>
+                  </div>
+                  <div className="h-3 bg-[#E6E4E0] rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${((fireAge - startWorkAge) / totalYears) * 100}%` }}
+                      transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                      className="h-full bg-[#D56B45]/70"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-xs font-semibold text-[#D56B45] mb-1 uppercase tracking-wider">
+                    <span>Vrijheid</span>
+                    <span>{totalYears - fireAge} jr ({((totalYears - fireAge) / totalYears * 100).toFixed(0)}%)</span>
+                  </div>
+                  <div className="h-3 bg-[#D56B45]/15 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${((totalYears - fireAge) / totalYears) * 100}%` }}
+                      transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+                      className="h-full bg-[#D56B45]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#FAF9F8] p-4 rounded-lg text-sm text-[#767676] leading-relaxed border border-[#EAE8E4]">
+                <p>
+                  Uit deze analyse blijkt dat <strong>{((totalYears - fireAge) / totalYears * 100).toFixed(0)}%</strong> van je 
+                  geprognotiseerde leven wordt besteed in volledige vrijheid, mits je op je <strong>{fireAge}e</strong> stopt met werken.
+                  Dat betekent dat je na je opbouw- en werkfase nog een aanzienlijk deel van de matrix ter vrije besteding hebt.
+                  Zorg ervoor dat je vitaliteit in deze laatste fase optimaal blijft door nu al de juiste leefstijlkeuzes te maken!
+                </p>
+              </div>
             </motion.div>
           </div>
         )}
