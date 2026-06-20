@@ -455,6 +455,17 @@ export default function MobileContainer({
                     </div>
                   </div>
 
+                  {/* Button to show Matrix again */}
+                  <div className="flex justify-center max-w-sm mx-auto w-full pt-1 pb-1">
+                    <button
+                      onClick={() => setShowMatrixModal(true)}
+                      className="w-full flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 border border-white/20 py-3.5 rounded-xl font-sans font-bold text-white transition-all active:scale-95"
+                    >
+                      <Grid className="w-5 h-5" />
+                      <span>Bekijk Levensmatrix</span>
+                    </button>
+                  </div>
+
                   {/* Quick summary statistics */}
                   <div className="bg-white/10 border border-white/15 rounded-xl p-4 space-y-3.5 max-w-sm mx-auto w-full backdrop-blur-xs text-xs font-mono">
                     <div className="flex justify-between items-center border-b border-white/10 pb-2">
@@ -486,16 +497,7 @@ export default function MobileContainer({
                     </div>
                   </div>
 
-                  {/* Button to show Matrix again */}
-                  <div className="flex justify-center max-w-sm mx-auto w-full mt-2 pb-2">
-                    <button
-                      onClick={() => setShowMatrixModal(true)}
-                      className="w-full flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 border border-white/20 py-3.5 rounded-xl font-sans font-bold text-white transition-all active:scale-95"
-                    >
-                      <Grid className="w-5 h-5" />
-                      <span>Bekijk Levensmatrix</span>
-                    </button>
-                  </div>
+
                 </div>
 
                 {/* Scroll Bottom Navigation controls */}
@@ -709,7 +711,7 @@ export default function MobileContainer({
                   <X className="w-5 h-5 text-gray-600" />
                 </button>
               </div>
-              <div className="flex-1 overflow-hidden relative">
+              <div className="flex-1 overflow-hidden relative px-4 pt-4 pb-12">
                 <DecadeGrid inputs={inputs} projectedLifeExpectancy={projectedLifeExpectancy} />
               </div>
             </motion.div>
