@@ -251,7 +251,7 @@ export default function DecadeGrid({
                 return (
                   <>
                     <div className="flex justify-center mb-6 mt-4">
-                      <div className="relative w-48 h-48 flex items-center justify-center">
+                      <div className="relative w-56 h-56 flex items-center justify-center">
                         <svg viewBox="0 0 42 42" className="w-full h-full -rotate-90 drop-shadow-sm overflow-visible">
                           {/* Dev Slice */}
                           <circle 
@@ -291,8 +291,8 @@ export default function DecadeGrid({
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#EAE8E4] z-10 transition-transform duration-300">
-                            <img src="/img/olifant-bril.png" alt="Olifant" className="w-16 h-16 object-contain opacity-85" />
+                          <div className="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#EAE8E4] z-10 transition-transform duration-300">
+                            <img src="/img/olifant-bril.png" alt="Olifant" className="w-24 h-24 object-contain opacity-100" />
                           </div>
                         </div>
                       </div>
