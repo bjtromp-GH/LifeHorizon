@@ -62,10 +62,8 @@ export default function MobileContainer({
   useEffect(() => {
     const mainEl = document.getElementById('mobile-main-scroll');
     if (mainEl) {
-      // Small timeout allows the exit animation to start, keeping the new content at the top.
-      setTimeout(() => {
-        mainEl.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 50);
+      // Instant scroll to top feels much better during page transitions than smooth scrolling
+      mainEl.scrollTop = 0;
     }
   }, [activeSlide]);
 
