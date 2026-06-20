@@ -184,7 +184,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-[#FAFCEE] blur-3xl opacity-60 pointer-events-none z-0" />
 
       {/* Top Header & Step Progress Bar */}
-      {step < 8 && (
+      {step >= 2 && step < 8 && (
         <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10">
           <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
             <span className="text-xl">🔥</span>
@@ -193,20 +193,20 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
             </h1>
           </div>
 
-          {step > 0 && (
+          {step > 1 && (
             <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
               <motion.div 
                 className="h-full bg-[#D56B45]"
                 initial={{ width: 0 }}
-                animate={{ width: `${(step / (stepsMeta.length - 1)) * 100}%` }}
+                animate={{ width: `${((step - 1) / (stepsMeta.length - 2)) * 100}%` }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               />
             </div>
           )}
 
-          {step > 0 && (
+          {step > 1 && (
             <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
-              <span>Stap {step} van {stepsMeta.length - 1}</span>
+              <span>Stap {step - 1} van {stepsMeta.length - 2}</span>
               <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
             </div>
           )}
@@ -363,34 +363,55 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           ) : step === 1 ? (
             <motion.div
               key="testimonials"
-              initial={{ opacity: 0, x: 25 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -25 }}
-              transition={{ duration: 0.4 }}
-              className="w-full space-y-4 sm:space-y-6 px-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-[#201F1D] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
             >
-              <div className="space-y-2 text-center sm:text-left">
-                <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
-                  Wat zeggen gebruikers over LifeRunway?
-                </h2>
-                <p className="text-sm text-[#767676]">
-                  Ontdek hoe anderen hun financiële en levensinzichten hebben vergroot.
-                </p>
+              {/* Decorative elements */}
+              <div className="absolute top-[-20%] right-[-10%] w-96 h-96 rounded-full bg-[#D56B45] blur-[120px] opacity-20 pointer-events-none" />
+              <div className="absolute bottom-[-10%] left-[-20%] w-96 h-96 rounded-full bg-blue-500 blur-[120px] opacity-10 pointer-events-none" />
+              
+              <div className="w-full flex justify-center pt-8 sm:pt-12 z-10">
+                <div className="flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full">
+                  <span className="text-lg">💬</span>
+                  <span className="font-sans font-bold text-xs sm:text-sm tracking-widest uppercase text-white/90">
+                    Ervaringen
+                  </span>
+                </div>
               </div>
 
-              <div className="space-y-3">
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-[#EAEAEA]">
-                  <p className="text-sm italic text-[#2D2D2D]">"Deze app heeft me echt de ogen geopend over hoeveel tijd ik daadwerkelijk over heb na mijn pensioen. Zeer confronterend maar ontzettend waardevol!"</p>
-                  <p className="text-xs font-bold text-[#D56B45] mt-2">- Jan-Willem (42)</p>
+              <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4">
+                <div className="space-y-4 w-full">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                    className="p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
+                  >
+                    <p className="text-sm sm:text-base italic text-white/90 leading-relaxed">"Deze app heeft me echt de ogen geopend over hoeveel tijd ik daadwerkelijk over heb na mijn pensioen. Zeer confronterend maar ontzettend waardevol!"</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-3">- Jan-Willem (42)</p>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+                    className="p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
+                  >
+                    <p className="text-sm sm:text-base italic text-white/90 leading-relaxed">"Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten."</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-3">- Sophie (35)</p>
+                  </motion.div>
                 </div>
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-[#EAEAEA]">
-                  <p className="text-sm italic text-[#2D2D2D]">"Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten."</p>
-                  <p className="text-xs font-bold text-[#D56B45] mt-2">- Sophie (35)</p>
-                </div>
-                <div className="p-4 bg-white rounded-2xl shadow-sm border border-[#EAEAEA]">
-                  <p className="text-sm italic text-[#2D2D2D]">"De visualisatie van tijd als schaarste helpt me om nu betere keuzes te maken voor later. Absolute aanrader!"</p>
-                  <p className="text-xs font-bold text-[#D56B45] mt-2">- Mark (50)</p>
-                </div>
+              </div>
+              
+              <div className="w-full max-w-md mx-auto pb-8 sm:pb-12 flex flex-col items-center z-10">
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={handleNext}
+                  className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-lg cursor-pointer transition-all duration-200"
+                >
+                  <span>Start de introductie</span>
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
+                </motion.button>
               </div>
             </motion.div>
           ) : step === 2 ? (
@@ -1158,10 +1179,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </main>
 
       {/* Navigation Footer */}
-      {step < 7 && !showYearPicker && (
+      {step >= 2 && step < 7 && !showYearPicker && (
         <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] z-10">
           <div>
-            {step > 0 && (
+            {step > 2 && (
               <button
                  type="button"
                  id="btn-onboarding-back"
@@ -1175,7 +1196,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-3">
-            {step > 0 && step < stepsMeta.length - 1 && (
+            {step >= 2 && step < stepsMeta.length - 1 && (
               <motion.button
                 type="button"
                 id="btn-onboarding-next"
