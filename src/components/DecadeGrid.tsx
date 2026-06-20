@@ -15,6 +15,7 @@ export default function DecadeGrid({
   const { currentAge, startWorkAge, fireAge } = inputs;
   const [isCurrentAgeModalOpen, setIsCurrentAgeModalOpen] = useState(false);
   const [isAnalyseModalOpen, setIsAnalyseModalOpen] = useState(false);
+  const [activeSlice, setActiveSlice] = useState<"dev" | "work" | "free" | null>(null);
   
   // Total years in the runway (e.g. 82 years = 82 boxes)
   const totalYears = Math.max(1, Math.ceil(projectedLifeExpectancy));
@@ -236,66 +237,125 @@ export default function DecadeGrid({
               {(() => {
                 const devPct = (startWorkAge / totalYears) * 100;
                 const workPct = ((fireAge - startWorkAge) / totalYears) * 100;
+                const freePct = ((totalYears - fireAge) / totalYears) * 100;
                 
+                const r = 15.91549431; // Circumference = 100
+                const workOffset = 100 - devPct;
+                const freeOffset = 100 - (devPct + workPct);
+
+                const getOpacity = (slice: "dev" | "work" | "free") => {
+                  if (!activeSlice) return "opacity-100";
+                  return activeSlice === slice ? "opacity-100 scale-[1.02]" : "opacity-40";
+                };
+
                 return (
                   <>
-                    <div className="flex justify-center mb-6 mt-2">
-                      <div 
-                        className="w-32 h-32 rounded-full relative flex items-center justify-center shadow-inner"
-                        style={{ background: `conic-gradient(#EAE8E4 0% ${devPct}%, #C8C5C0 ${devPct}% ${devPct + workPct}%, rgba(213,107,69,0.3) ${devPct + workPct}% 100%)` }}
-                      >
-                        <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden z-10 border border-[#EAE8E4]">
-                          <img src="/img/LR_Olifant_v2.png" alt="Olifant" className="w-12 h-12 object-contain opacity-80" />
+                    <div className="flex justify-center mb-6 mt-4">
+                      <div className="relative w-48 h-48 flex items-center justify-center">
+                        <svg viewBox="0 0 42 42" className="w-full h-full -rotate-90 drop-shadow-sm overflow-visible">
+                          {/* Dev Slice */}
+                          <circle 
+                            cx="21" cy="21" r={r} 
+                            fill="transparent" 
+                            stroke="#EAE8E4" 
+                            strokeWidth={activeSlice === "dev" ? 8 : 6} 
+                            strokeDasharray={`${devPct} ${100 - devPct}`}
+                            strokeDashoffset={0}
+                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[#DCD9D4]"
+                            onMouseEnter={() => setActiveSlice("dev")}
+                            onMouseLeave={() => setActiveSlice(null)}
+                          />
+                          {/* Work Slice */}
+                          <circle 
+                            cx="21" cy="21" r={r} 
+                            fill="transparent" 
+                            stroke="#C8C5C0" 
+                            strokeWidth={activeSlice === "work" ? 8 : 6} 
+                            strokeDasharray={`${workPct} ${100 - workPct}`}
+                            strokeDashoffset={workOffset}
+                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[#B5B2AC]"
+                            onMouseEnter={() => setActiveSlice("work")}
+                            onMouseLeave={() => setActiveSlice(null)}
+                          />
+                          {/* Free Slice */}
+                          <circle 
+                            cx="21" cy="21" r={r} 
+                            fill="transparent" 
+                            stroke="rgba(213,107,69,0.5)" 
+                            strokeWidth={activeSlice === "free" ? 8 : 6} 
+                            strokeDasharray={`${freePct} ${100 - freePct}`}
+                            strokeDashoffset={freeOffset}
+                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[rgba(213,107,69,0.7)]"
+                            onMouseEnter={() => setActiveSlice("free")}
+                            onMouseLeave={() => setActiveSlice(null)}
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#EAE8E4] z-10 transition-transform duration-300">
+                            <img src="/img/LR_Olifant_v2.png" alt="Olifant" className="w-16 h-16 object-contain opacity-85" />
+                          </div>
                         </div>
                       </div>
                     </div>
                     
                     <div className="space-y-4 mb-6">
-                <div>
-                  <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
-                    <span>Ontwikkeling</span>
-                    <span>{startWorkAge} jr ({(startWorkAge / totalYears * 100).toFixed(0)}%)</span>
-                  </div>
-                  <div className="h-3 bg-[#F3F1ED] rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${(startWorkAge / totalYears) * 100}%` }}
-                      transition={{ duration: 1, ease: "easeOut" }}
-                      className="h-full bg-[#D56B45]/40"
-                    />
-                  </div>
-                </div>
+                      <div 
+                        className={`transition-all duration-300 cursor-default ${getOpacity("dev")}`}
+                        onMouseEnter={() => setActiveSlice("dev")}
+                        onMouseLeave={() => setActiveSlice(null)}
+                      >
+                        <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
+                          <span>Ontwikkeling</span>
+                          <span>{startWorkAge} jr ({(startWorkAge / totalYears * 100).toFixed(0)}%)</span>
+                        </div>
+                        <div className="h-3 bg-[#F3F1ED] rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${(startWorkAge / totalYears) * 100}%` }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="h-full bg-[#D56B45]/40"
+                          />
+                        </div>
+                      </div>
 
-                <div>
-                  <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
-                    <span>Werk</span>
-                    <span>{fireAge - startWorkAge} jr ({((fireAge - startWorkAge) / totalYears * 100).toFixed(0)}%)</span>
-                  </div>
-                  <div className="h-3 bg-[#E6E4E0] rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${((fireAge - startWorkAge) / totalYears) * 100}%` }}
-                      transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                      className="h-full bg-[#D56B45]/70"
-                    />
-                  </div>
-                </div>
+                      <div 
+                        className={`transition-all duration-300 cursor-default ${getOpacity("work")}`}
+                        onMouseEnter={() => setActiveSlice("work")}
+                        onMouseLeave={() => setActiveSlice(null)}
+                      >
+                        <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
+                          <span>Werk</span>
+                          <span>{fireAge - startWorkAge} jr ({((fireAge - startWorkAge) / totalYears * 100).toFixed(0)}%)</span>
+                        </div>
+                        <div className="h-3 bg-[#E6E4E0] rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${((fireAge - startWorkAge) / totalYears) * 100}%` }}
+                            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                            className="h-full bg-[#D56B45]/70"
+                          />
+                        </div>
+                      </div>
 
-                <div>
-                  <div className="flex justify-between text-xs font-semibold text-[#D56B45] mb-1 uppercase tracking-wider">
-                    <span>Vrijheid</span>
-                    <span>{totalYears - fireAge} jr ({((totalYears - fireAge) / totalYears * 100).toFixed(0)}%)</span>
-                  </div>
-                  <div className="h-3 bg-[#D56B45]/15 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${((totalYears - fireAge) / totalYears) * 100}%` }}
-                      transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-                      className="h-full bg-[#D56B45]"
-                    />
-                  </div>
-                </div>
-              </div>
+                      <div 
+                        className={`transition-all duration-300 cursor-default ${getOpacity("free")}`}
+                        onMouseEnter={() => setActiveSlice("free")}
+                        onMouseLeave={() => setActiveSlice(null)}
+                      >
+                        <div className="flex justify-between text-xs font-semibold text-[#D56B45] mb-1 uppercase tracking-wider">
+                          <span>Vrijheid</span>
+                          <span>{totalYears - fireAge} jr ({((totalYears - fireAge) / totalYears * 100).toFixed(0)}%)</span>
+                        </div>
+                        <div className="h-3 bg-[#D56B45]/15 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${((totalYears - fireAge) / totalYears) * 100}%` }}
+                            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+                            className="h-full bg-[#D56B45]"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </>
                 );
               })()}
