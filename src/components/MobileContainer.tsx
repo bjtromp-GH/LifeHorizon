@@ -141,9 +141,12 @@ export default function MobileContainer({
       {!isSwipedFullscreen && (
         <>
           <header className="px-4 py-3 bg-white border-b border-[#EAEAEA] flex items-center justify-between shrink-0">
-            <div className="flex items-center space-x-2">
-              <Sparkles className="w-4 h-4 text-[#D56B45]" />
-              <span className="font-sans font-bold text-sm tracking-tight text-[#2D2D2D]">
+            <div 
+              className="flex items-center space-x-2 cursor-pointer group"
+              onClick={() => window.location.reload()}
+            >
+              <Sparkles className="w-4 h-4 text-[#D56B45] group-hover:scale-110 transition-transform" />
+              <span className="font-sans font-bold text-sm tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">
                 LifeRunway
               </span>
             </div>

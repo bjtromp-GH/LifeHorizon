@@ -40,12 +40,15 @@ export default function DesktopDashboard({
         
         {/* Header section */}
         <header className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#EAEAEA] pb-4">
-          <div className="flex items-center space-x-3 mb-2 sm:mb-0">
-            <div className="p-1.5 bg-[#D56B45]/10 rounded-md">
+          <div 
+            className="flex items-center space-x-3 mb-2 sm:mb-0 cursor-pointer group"
+            onClick={() => window.location.reload()}
+          >
+            <div className="p-1.5 bg-[#D56B45]/10 rounded-md group-hover:bg-[#D56B45]/20 transition-colors">
               <Sparkles className="w-5 h-5 text-[#D56B45]" />
             </div>
             <div>
-              <h1 className="font-sans text-xl font-bold tracking-tight text-[#2D2D2D]">
+              <h1 className="font-sans text-xl font-bold tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">
                 LifeRunway
               </h1>
               <p className="text-xs text-[#767676]">
