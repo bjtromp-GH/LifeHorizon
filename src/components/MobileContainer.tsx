@@ -409,9 +409,7 @@ export default function MobileContainer({
               <div className="space-y-5 flex flex-col justify-between h-full text-white">
                 <div className="space-y-5">
                   <div className="text-center space-y-2 mt-2">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full border border-white/35 backdrop-blur-xs shadow-3xs p-1">
-                      <img src="/img/olifant-bril.png" alt="Olifant" className="w-12 h-12 object-contain" />
-                    </div>
+                    <img src="/img/olifant-bril.png" alt="Olifant" className="w-28 h-28 object-contain mx-auto drop-shadow-md" />
                     <h3 className="text-lg font-black font-sans uppercase tracking-tight text-white">
                       Eindconclusie & Reflectie
                     </h3>
