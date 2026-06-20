@@ -373,13 +373,22 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               <div className="absolute top-[-20%] right-[-10%] w-96 h-96 rounded-full bg-[#D56B45] blur-[120px] opacity-20 pointer-events-none" />
               <div className="absolute bottom-[-10%] left-[-20%] w-96 h-96 rounded-full bg-blue-500 blur-[120px] opacity-10 pointer-events-none" />
               
-              <div className="w-full flex justify-center pt-8 sm:pt-12 z-10">
-                <div className="flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full">
+              <div className="w-full flex flex-col items-center pt-8 sm:pt-12 z-10 space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+                  className="flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full"
+                >
                   <span className="text-lg">💬</span>
                   <span className="font-sans font-bold text-xs sm:text-sm tracking-widest uppercase text-white/90">
                     Ervaringen
                   </span>
-                </div>
+                </motion.div>
+                <motion.h2 
+                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.5 }}
+                  className="text-xl sm:text-2xl font-black text-white tracking-tight text-center px-4"
+                >
+                  Wat gebruikers zeggen over onze app
+                </motion.h2>
               </div>
 
               <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4">
