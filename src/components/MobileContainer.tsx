@@ -59,7 +59,7 @@ export default function MobileContainer({
   const totalRoundedRemaining = Math.round(totalRemaining * 10) / 10;
 
   const goToSlide = (newIndex: number) => {
-    if (newIndex < 0 || newIndex > 3) return;
+    if (newIndex < 0 || newIndex > 4) return;
     setSlideDirection(newIndex > activeSlide ? 1 : -1);
     setActiveSlide(newIndex);
   };
