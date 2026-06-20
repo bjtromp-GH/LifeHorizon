@@ -383,12 +383,29 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     Ervaringen
                   </span>
                 </motion.div>
-                <motion.h2 
-                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.5 }}
-                  className="text-xl sm:text-2xl font-black text-white tracking-tight text-center px-4"
-                >
-                  Wat gebruikers zeggen over onze app
-                </motion.h2>
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug whitespace-pre-wrap">
+                  {Array.from("Wat gebruikers zeggen ").map((char, i) => (
+                    <motion.span
+                      key={`part1-${i}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.1 + i * 0.04, duration: 0.05 }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                  <br className="block sm:hidden" />
+                  {Array.from("over onze app").map((char, i) => (
+                    <motion.span
+                      key={`part2-${i}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.1 + ("Wat gebruikers zeggen ".length * 0.04) + i * 0.04, duration: 0.05 }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </h2>
               </div>
 
               <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4">
