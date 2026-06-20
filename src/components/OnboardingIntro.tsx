@@ -18,9 +18,11 @@ import {
   Target,
   Moon,
   Brain,
-  Cpu,
-  Edit3,
-  Zap
+  X,
+  Flame,
+  Zap,
+  Activity,
+  Compass
 } from "lucide-react";
 import ScrollRevealText from "./ScrollRevealText";
 
@@ -262,9 +264,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full"
                 >
-                  <Target className="w-3.5 h-3.5 text-white" />
+                  <Compass className="w-3.5 h-3.5 text-white" />
                   <span className="font-sans font-bold text-[10px] sm:text-[11px] tracking-widest uppercase text-white">
-                    DE GOUDEN RUNWAY
+                    BEPAAL JE KOERS
                   </span>
                 </motion.div>
               </div>
