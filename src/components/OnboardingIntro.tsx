@@ -820,12 +820,6 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
                     Stap 3: Erfelijkheid
                   </span>
-                  <button
-                    onClick={() => setShowHeredityInfo(true)}
-                    className="p-1.5 bg-[#D56B45] rounded-full text-white hover:bg-[#B84E29] transition-colors shadow-sm cursor-pointer"
-                  >
-                    <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  </button>
                 </div>
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   Hoe oud zijn uw biologische <br className="block sm:hidden" />ouders geworden?
@@ -833,6 +827,15 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 <p className="text-sm text-[#767676]">
                   Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn (-1.5 tot +1.5 jaar per ouder).
                 </p>
+                <div className="pt-2">
+                  <button
+                    onClick={() => setShowHeredityInfo(true)}
+                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#B84E29] transition-colors uppercase tracking-widest cursor-pointer shadow-sm inline-flex items-center mx-auto sm:mx-0"
+                  >
+                    <Info className="w-3.5 h-3.5 mr-1.5" />
+                    Lees dit eerst
+                  </button>
+                </div>
               </div>
 
               {/* Father */}
