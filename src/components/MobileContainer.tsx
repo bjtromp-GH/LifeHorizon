@@ -58,6 +58,17 @@ export default function MobileContainer({
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const totalRoundedRemaining = Math.round(totalRemaining * 10) / 10;
 
+  // Ensure scroll is reset to top when switching slides
+  useEffect(() => {
+    const mainEl = document.getElementById('mobile-main-scroll');
+    if (mainEl) {
+      // Small timeout allows the exit animation to start, keeping the new content at the top.
+      setTimeout(() => {
+        mainEl.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
+    }
+  }, [activeSlide]);
+
   const goToSlide = (newIndex: number) => {
     if (newIndex < 0 || newIndex > 4) return;
     setSlideDirection(newIndex > activeSlide ? 1 : -1);
@@ -216,6 +227,7 @@ export default function MobileContainer({
 
       {/* 2. Main Scrollable Dashboard Content */}
       <main
+        id="mobile-main-scroll"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onClick={(e) => {
