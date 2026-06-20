@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
 interface ScrollRevealTextProps {
@@ -57,15 +57,17 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
             const delay = (i / words.length) * totalRevealTime;
 
             return (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0.15 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay, ease: "easeOut" }}
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-sans leading-tight tracking-tight text-white drop-shadow-sm"
-              >
-                {word}
-              </motion.span>
+              <React.Fragment key={i}>
+                <motion.span
+                  initial={{ opacity: 0.15 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay, ease: "easeOut" }}
+                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-sans leading-tight tracking-tight text-white drop-shadow-sm"
+                >
+                  {word}
+                </motion.span>
+                {word === "ouder" && <div className="w-full sm:hidden" />}
+              </React.Fragment>
             );
           })}
         </motion.div>
