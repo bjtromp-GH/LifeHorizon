@@ -161,13 +161,16 @@ export default React.memo(function DecadeGrid({
         </div>
       </div>
 
-      <div className="flex justify-center pt-2">
+      <div className="flex flex-col items-center justify-center pt-2">
         <button
           onClick={() => setIsAnalyseModalOpen(true)}
           className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#C05D3A] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
         >
           Levensmatrix Analyse
         </button>
+        <span className="text-[10px] text-gray-500 mt-2 text-center max-w-xs">
+          Bekijk de inzichten en betekenis achter jouw matrix
+        </span>
       </div>
 
       <AnimatePresence>
