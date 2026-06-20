@@ -30,13 +30,14 @@ import ScrollRevealText from "./ScrollRevealText";
 import Confetti from "./Confetti";
 
 interface OnboardingIntroProps {
+  initialStep?: number;
   inputs: UserInputs;
   onInputChange: (updates: Partial<UserInputs>) => void;
   onComplete: () => void;
 }
 
-export default function OnboardingIntro({ inputs, onInputChange, onComplete }: OnboardingIntroProps) {
-  const [step, setStep] = useState<number>(0);
+export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange, onComplete }: OnboardingIntroProps) {
+  const [step, setStep] = useState<number>(initialStep);
   const [imgError, setImgError] = useState(false);
   
   const [localGender, setLocalGender] = useState<Gender | null>(null);

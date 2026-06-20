@@ -31,6 +31,7 @@ export default function App() {
   const [isLoadingCBS, setIsLoadingCBS] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
+  const [initialOnboardingStep, setInitialOnboardingStep] = useState<number>(0);
 
   // 2. Responsive viewport check and Global Audio
   useEffect(() => {
@@ -149,6 +150,7 @@ export default function App() {
   if (showOnboarding) {
     return (
       <OnboardingIntro
+        initialStep={initialOnboardingStep}
         inputs={inputs}
         onInputChange={handleInputChange}
         onComplete={handleOnboardingComplete}
@@ -167,7 +169,10 @@ export default function App() {
         phases={phases}
         apiSource={apiSource}
         onInputChange={handleInputChange}
-        onRestartOnboarding={() => setShowOnboarding(true)}
+        onRestartOnboarding={(step = 0) => {
+          setInitialOnboardingStep(step);
+          setShowOnboarding(true);
+        }}
       />
     );
   }

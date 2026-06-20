@@ -16,7 +16,7 @@ interface MobileContainerProps {
   phases: LifePhases;
   apiSource: string;
   onInputChange: (updates: Partial<UserInputs>) => void;
-  onRestartOnboarding: () => void;
+  onRestartOnboarding: (step?: number) => void;
 }
 
 export default function MobileContainer({
@@ -158,7 +158,7 @@ export default function MobileContainer({
               <button
                 type="button"
                 id="btn-mobile-config"
-                onClick={() => setShowConfig(true)}
+                onClick={() => onRestartOnboarding(1)}
                 className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1 animate-pulse"
               >
                 <Settings className="w-3.5 h-3.5 animate-spin-slow" />
@@ -177,7 +177,7 @@ export default function MobileContainer({
               <span>{inputs.gender === "man" ? "Man" : "Vrouw"} &bull; Geb. {inputs.birthYear} &bull; Work: {inputs.startWorkAge} - {inputs.fireAge} jr</span>
             </div>
             <button
-              onClick={() => setShowConfig(true)}
+              onClick={() => onRestartOnboarding(1)}
               className="text-[#D56B45] font-bold hover:underline cursor-pointer"
             >
               Wijzig
@@ -527,7 +527,7 @@ export default function MobileContainer({
                   </div>
 
                   <button
-                    onClick={() => setShowConfig(true)}
+                    onClick={() => onRestartOnboarding(1)}
                     className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5"
                   >
                     <Settings className="w-3.5 h-3.5" />
