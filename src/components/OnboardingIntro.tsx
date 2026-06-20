@@ -24,7 +24,8 @@ import {
   Activity,
   Compass,
   Cpu,
-  Edit3
+  Edit3,
+  Info
 } from "lucide-react";
 import ScrollRevealText from "./ScrollRevealText";
 
@@ -50,6 +51,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   const [geneticsInteracted, setGeneticsInteracted] = useState(false);
   
   const [showYearPicker, setShowYearPicker] = useState(false);
+  const [showHeredityInfo, setShowHeredityInfo] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [focusedYear, setFocusedYear] = useState<number>(inputs.birthYear);
   const yearsList = Array.from({ length: 2024 - 1940 + 1 }, (_, i) => 1940 + i);
@@ -796,9 +798,17 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               className="w-full space-y-4 sm:space-y-6 px-1"
             >
               <div className="space-y-2 text-center sm:text-left">
-                <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
-                  Stap 3: Erfelijkheid
-                </span>
+                <div className="flex items-center justify-center sm:justify-start gap-2">
+                  <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
+                    Stap 3: Erfelijkheid
+                  </span>
+                  <button
+                    onClick={() => setShowHeredityInfo(true)}
+                    className="p-1 rounded-full text-[#767676] hover:text-[#D56B45] hover:bg-[#FAF3F0] transition-colors cursor-pointer"
+                  >
+                    <Info className="w-4 h-4" />
+                  </button>
+                </div>
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   Hoe oud zijn uw biologische ouders geworden?
                 </h2>
@@ -1208,6 +1218,61 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       );
                     })}
                   </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {showHeredityInfo && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-0 z-[300] bg-black/60 flex items-center justify-center p-4 sm:p-6"
+            >
+              <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                <div className="p-4 sm:p-6 flex justify-between items-center border-b border-gray-100">
+                  <h3 className="font-extrabold text-lg sm:text-xl text-[#2D2D2D] flex items-center gap-2">
+                    <Info className="w-5 h-5 text-[#D56B45]" />
+                    Genetica vs. Leefstijl
+                  </h3>
+                  <button onClick={() => setShowHeredityInfo(false)} className="p-1 text-gray-400 hover:text-gray-800 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="p-4 sm:p-6 overflow-y-auto text-sm sm:text-base text-[#4a4a4a] space-y-4">
+                  <p>
+                    Het feit dat beide ouders aan een ziekte zijn overleden heeft invloed op je statistische levensverwachting, maar je eigen levensloop staat <strong>niet</strong> vast.
+                  </p>
+                  <p>
+                    Onderzoek toont aan dat levensduur voor slechts <strong>10% tot 25% genetisch bepaald is</strong>. De overige 75% tot 90% stuur je grotendeels zelf aan met leefstijl en omgeving. Hoe zwaar genetica weegt, hangt af van:
+                  </p>
+                  
+                  <div className="bg-[#FAF3F0] p-4 rounded-xl border border-[#D56B45]/20 space-y-3">
+                    <div>
+                      <strong className="text-[#D56B45] block mb-1">1. Leeftijd van overlijden</strong>
+                      <p className="text-sm">Bij jong overlijden (vóór 60 jr) is de genetische component vaak sterker. Overlijden na 75-80 jaar komt veel vaker door natuurlijke celveroudering dan door een overdraagbare genetische fout.</p>
+                    </div>
+                    <div>
+                      <strong className="text-[#D56B45] block mb-1">2. Type ziekte</strong>
+                      <p className="text-sm">Sommige ziektes zijn sterk erfelijk. Andere ziektes hebben geen erfelijke component en ontstaan door externe factoren of levensstijl.</p>
+                    </div>
+                    <div>
+                      <strong className="text-[#D56B45] block mb-1">3. Gedeelde gewoontes</strong>
+                      <p className="text-sm">Gezinnen delen niet alleen genen, maar ook gewoontes! Voedingspatronen, beweging en omgang met stress worden doorgegeven. Wat soms voelt als een 'genetische vloek', is in feite een geërfde levensstijl die je zelf kunt doorbreken.</p>
+                    </div>
+                  </div>
+
+                  <p>
+                    <strong>Conclusie:</strong> Je DNA is de blauwdruk, maar jij bent de regisseur. Door epigenetica kan jouw eigen leefstijl (slaap, voeding, stress) bepalen welke genen zich uiten en welke 'uit' blijven.
+                  </p>
+                </div>
+                <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
+                  <button onClick={() => setShowHeredityInfo(false)} className="px-5 py-2.5 bg-[#2D2D2D] hover:bg-black text-white font-bold rounded-xl transition-colors cursor-pointer text-sm">
+                    Begrepen
+                  </button>
                 </div>
               </div>
             </motion.div>
