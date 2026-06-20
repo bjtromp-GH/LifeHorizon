@@ -1221,7 +1221,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
           >
             <div className="w-full max-w-md mx-auto p-6 flex flex-col items-center">
               <motion.img 
-                src="/olifant-bril.png" 
+                src="/img/olifant-bril.png" 
                 alt="Olifant" 
                 className="w-24 sm:w-28 h-auto mb-4 drop-shadow-2xl"
                 initial={{ y: 20, opacity: 0, scale: 0.8 }}
