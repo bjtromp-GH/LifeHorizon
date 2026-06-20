@@ -34,6 +34,7 @@ export default function MobileContainer({
   const [isSwipedFullscreen, setIsSwipedFullscreen] = useState(false);
   const [showSwipeHint, setShowSwipeHint] = useState(true);
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
+  const [showElephantFact, setShowElephantFact] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -409,7 +410,18 @@ export default function MobileContainer({
               <div className="space-y-5 flex flex-col justify-between h-full text-white">
                 <div className="space-y-5">
                   <div className="text-center space-y-2 mt-2">
-                    <img src="/img/olifant-bril.png" alt="Olifant" className="w-28 h-28 object-contain mx-auto drop-shadow-md" />
+                    <button 
+                      onClick={() => setShowElephantFact(true)}
+                      className="block mx-auto cursor-pointer focus:outline-none focus:ring-0 active:scale-95 transition-transform"
+                    >
+                      <motion.img 
+                        src="/img/olifant-bril.png" 
+                        alt="Olifant" 
+                        className="w-28 h-28 object-contain"
+                        animate={{ filter: ['drop-shadow(0 0 2px rgba(255,255,255,0))', 'drop-shadow(0 0 15px rgba(255,255,255,0.7))', 'drop-shadow(0 0 2px rgba(255,255,255,0))'] }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                    </button>
                     <h3 className="text-lg font-black font-sans uppercase tracking-tight text-white">
                       Eindconclusie & Reflectie
                     </h3>
@@ -610,6 +622,48 @@ export default function MobileContainer({
                 </button>
               </div>
 
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      {/* Elephant Fact Modal */}
+      <AnimatePresence>
+        {showElephantFact && (
+          <div className="fixed inset-0 z-50 flex flex-col justify-end pointer-events-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowElephantFact(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+            />
+            <motion.div
+              initial={{ y: "100%", borderTopLeftRadius: "2rem", borderTopRightRadius: "2rem" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative w-full bg-[#1C1C1E] p-6 pb-12 overflow-y-auto max-h-[85vh] shadow-2xl rounded-t-3xl border-t border-white/10 text-white"
+            >
+              <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-6 shrink-0" />
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-bold font-sans tracking-tight text-[#D56B45]">
+                  Mascotte
+                </h3>
+                <button
+                  onClick={() => setShowElephantFact(false)}
+                  className="p-2 -mr-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors shrink-0"
+                >
+                  <X className="w-5 h-5 text-white/70" />
+                </button>
+              </div>
+              <div className="space-y-5 text-sm text-white/80 leading-relaxed font-sans">
+                <p>
+                  Wist je dat een olifant normaal gesproken een levensverwachting van 50-70 heeft maar in ideale omstandigheden zoals in een dierentuin wel 80 jaar kan worden? Vandaar de mascotte voor onze app!
+                </p>
+                <div className="flex justify-center mt-6">
+                  <img src="/img/olifant-bril.png" alt="Olifant" className="w-32 h-32 object-contain drop-shadow-lg" />
+                </div>
+              </div>
             </motion.div>
           </div>
         )}
