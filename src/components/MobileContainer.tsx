@@ -191,6 +191,7 @@ export default function MobileContainer({
               { id: 1, name: "2. Matrix" },
               { id: 2, name: "3. Vitaliteit" },
               { id: 3, name: "4. Overzicht" },
+              { id: 4, name: "5. Model" },
             ].map((s) => {
               const isActive = activeSlide === s.id;
               return (
@@ -281,7 +282,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3].map((idx) => (
+                    {[0, 1, 2, 3, 4].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -339,7 +340,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3].map((idx) => (
+                    {[0, 1, 2, 3, 4].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -386,7 +387,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3].map((idx) => (
+                    {[0, 1, 2, 3, 4].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -507,7 +508,7 @@ export default function MobileContainer({
 
                 <div className="flex justify-center max-w-sm mx-auto w-full pt-4 pb-2">
                   <button
-                    onClick={() => alert("Volgende fase van de app is in ontwikkeling!")}
+                    onClick={() => goToSlide(4)}
                     className="w-full flex items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                   >
                     Laten we verder gaan
@@ -524,7 +525,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3].map((idx) => (
+                    {[0, 1, 2, 3, 4].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -538,6 +539,140 @@ export default function MobileContainer({
                   <button
                     onClick={() => onRestartOnboarding(1)}
                     className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5"
+                  >
+                    <Settings className="w-3.5 h-3.5" />
+                    <span>Pas aan</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Screen 5: Modellen (White Screen) */}
+            {activeSlide === 4 && (
+              <div className="space-y-6 flex flex-col justify-between h-full text-[#2D2D2D] pb-4">
+                <div className="space-y-6">
+                  <div className="mt-4">
+                    <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
+                      Het Normale Leven vs. Het Optimaal Model
+                    </h3>
+                    <p className="text-sm mt-3 text-[#767676] leading-relaxed">
+                      Laten we nog eens even kijken naar de levensvoortgangsbalk van een normaal leven. 
+                      Je begint met werken op je 20ste, je werkt tot 69 en overlijdt op 80 jaar. Dit is dan je leven:
+                    </p>
+                  </div>
+
+                  {/* Table */}
+                  <div className="overflow-x-auto rounded-xl border border-[#EAEAEA] bg-white shadow-sm">
+                    <table className="w-full text-left border-collapse min-w-[300px]">
+                      <thead>
+                        <tr className="bg-[#FAF9F8] border-b border-[#EAEAEA] text-[10px] sm:text-xs uppercase tracking-wider text-[#767676]">
+                          <th className="p-2 sm:p-3 font-bold">Levensfase</th>
+                          <th className="p-2 sm:p-3 font-bold">Leeftijd</th>
+                          <th className="p-2 sm:p-3 font-bold">Jaren</th>
+                          <th className="p-2 sm:p-3 font-bold text-right">% Totaal</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-xs sm:text-sm">
+                        <tr className="border-b border-[#EAEAEA]">
+                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">Jeugd & Ontwikkeling</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">0 tot 20 jaar</td>
+                          <td className="p-2 sm:p-3 font-mono font-medium">20</td>
+                          <td className="p-2 sm:p-3 font-mono font-medium text-right">25%</td>
+                        </tr>
+                        <tr className="border-b border-[#EAEAEA]">
+                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">Werkend leven</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">20 tot 69 jaar</td>
+                          <td className="p-2 sm:p-3 font-mono font-medium">49</td>
+                          <td className="p-2 sm:p-3 font-mono font-medium text-right">61,25%</td>
+                        </tr>
+                        <tr className="border-b border-[#EAEAEA]">
+                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">Vrije tijd / Pensioen</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">69 tot 80 jaar</td>
+                          <td className="p-2 sm:p-3 font-mono font-medium">11</td>
+                          <td className="p-2 sm:p-3 font-mono font-medium text-right">13,75%</td>
+                        </tr>
+                        <tr className="bg-[#FAF9F8] font-bold">
+                          <td className="p-2 sm:p-3 text-[#2D2D2D]">Totaal</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">0 tot 80 jaar</td>
+                          <td className="p-2 sm:p-3 font-mono text-[#2D2D2D]">80</td>
+                          <td className="p-2 sm:p-3 font-mono text-[#2D2D2D] text-right">100%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="space-y-3 bg-[#FAF3F0] p-4 rounded-xl border border-[#D56B45]/20">
+                    <p className="text-sm font-bold text-[#D56B45]">
+                      Als inspiratie stellen wij een optimaal model voor: Het 25 / 50 / 25 model.
+                    </p>
+                    <ul className="text-sm text-[#D56B45]/90 space-y-1.5 list-disc list-inside font-medium ml-2">
+                      <li><strong>25%</strong> van je leven jeugd & ontwikkeling</li>
+                      <li><strong>50%</strong> van je leven werken</li>
+                      <li><strong>25%</strong> leven in vrijheid</li>
+                    </ul>
+                  </div>
+
+                  {/* Visual Comparison */}
+                  <div className="space-y-6 pt-4 pb-2">
+                    <div>
+                      <div className="flex justify-between text-xs font-bold text-[#2D2D2D] mb-2">
+                        <span className="uppercase tracking-wider">Normaal Leven</span>
+                        <span className="text-[#767676] font-mono">(61,25% Werkend)</span>
+                      </div>
+                      <div className="h-8 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#EAEAEA]">
+                        <div className="bg-[#EAE8E4] w-[25%] flex items-center justify-center text-[9px] font-bold text-[#767676]">25%</div>
+                        <div className="bg-[#2D2D2D]/80 w-[61.25%] flex items-center justify-center text-[9px] font-bold text-white">61%</div>
+                        <div className="bg-[#86A789] w-[13.75%] flex items-center justify-center text-[9px] font-bold text-white">13%</div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-xs font-bold text-[#D56B45] mb-2">
+                        <span className="uppercase tracking-wider">Het 25 / 50 / 25 Model</span>
+                        <span className="font-mono">(50% Werkend)</span>
+                      </div>
+                      <div className="h-8 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#D56B45]/20 ring-2 ring-[#D56B45]/20">
+                        <div className="bg-[#FAF3F0] w-[25%] flex items-center justify-center text-[9px] font-bold text-[#D56B45]">25%</div>
+                        <div className="bg-[#D56B45] w-[50%] flex items-center justify-center text-[9px] font-bold text-white">50%</div>
+                        <div className="bg-[#86A789] w-[25%] flex items-center justify-center text-[9px] font-bold text-white">25%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-auto">
+                  <button
+                    onClick={() => alert("Volgende stap (nog toe te voegen)")}
+                    className="w-full flex items-center justify-center bg-[#D56B45] hover:bg-[#C0562F] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
+                  >
+                    Ga verder
+                  </button>
+                </div>
+
+                {/* Scroll Bottom Navigation controls */}
+                <div className="flex items-center justify-between pt-4 border-t border-[#EAEAEA] mt-6 shrink-0">
+                  <button
+                    onClick={() => goToSlide(activeSlide - 1)}
+                    className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
+                  >
+                    ◀ Vorige
+                  </button>
+                  
+                  <div className="flex space-x-1.5">
+                    {[0, 1, 2, 3, 4].map((idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                          activeSlide === idx ? "w-4 bg-[#D56B45]" : "bg-[#D56B45]/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => onRestartOnboarding(1)}
+                    className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
                   >
                     <Settings className="w-3.5 h-3.5" />
                     <span>Pas aan</span>
