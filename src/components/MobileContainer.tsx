@@ -425,8 +425,8 @@ export default function MobileContainer({
                         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                       />
                     </button>
-                    <h3 className="text-lg font-black font-sans uppercase tracking-tight text-white">
-                      Eindconclusie & Reflectie
+                    <h3 className="text-[17px] sm:text-lg font-black font-sans uppercase tracking-tight text-white">
+                      Tussentijdse Conclusie & Reflectie
                     </h3>
                     <p className="text-[11px] text-white/80 max-w-xs mx-auto leading-normal">
                       Jouw CBS Levensrunway samengevat op een<br />soevereine rij.
@@ -503,6 +503,15 @@ export default function MobileContainer({
                   </div>
 
 
+                </div>
+
+                <div className="flex justify-center max-w-sm mx-auto w-full pt-4 pb-2">
+                  <button
+                    onClick={() => alert("Volgende fase van de app is in ontwikkeling!")}
+                    className="w-full flex items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
+                  >
+                    Laten we verder gaan
+                  </button>
                 </div>
 
                 {/* Scroll Bottom Navigation controls */}
