@@ -191,12 +191,12 @@ export default function AestheticFidelityCards({
                         strokeLinecap="round"
                       />
                     </svg>
-                    <img src="/img/olifant-bril.png" alt="Olifant" className="absolute w-9 h-9 object-contain" />
+                    <span className="absolute font-sans text-xs font-bold text-[#D56B45]">{vitalityPct}%</span>
                   </div>
 
                   <div className="space-y-1">
                     <span className="text-[10px] tracking-wider text-[#767676] uppercase font-semibold block">
-                      Lifestyle Impact ({vitalityPct}%)
+                      Lifestyle Impact
                     </span>
                     <span id="field-lifestyle-impact" className="text-lg font-bold text-[#D56B45] block leading-tight">
                       {bioOffset >= 0 ? `+${bioOffset.toFixed(1)}` : bioOffset.toFixed(1)} jaar {bioOffset >= 0 ? "winst" : "verlies"}
