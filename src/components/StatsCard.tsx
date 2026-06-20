@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Hourglass, ShieldCheck, Sun, Workflow, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs } from "../types";
+import LifeProgressCircle from "./LifeProgressCircle";
 
 interface StatsCardProps {
   inputs: UserInputs;
@@ -43,6 +44,10 @@ export default function StatsCard({
     vrijheid: {
       title: "Vleugels (Vrijheid)",
       content: "Dit is jouw vrije tijd (de 'oogstfase') zonder financiële verplichtingen, berekend vanaf je pensioenleeftijd tot aan je prognose leeftijd. In deze fase kun je je tijd volledig naar eigen inzicht besteden."
+    },
+    voortgang: {
+      title: "Levensvoortgang",
+      content: "Dit toont welk percentage van je verwachte leven al voltooid is. Het helpt om je tijd in perspectief te plaatsen en bewust om te gaan met de tijd die je nog rest."
     }
   };
 
@@ -138,8 +143,20 @@ export default function StatsCard({
             <span className="text-xs text-[#767676] ml-1">jaar</span>
           </div>
           <span className="text-[9.5px] text-[#767676] mt-1 leading-tight">
-            Tijd te besteden buiten verplichtingen ({Math.round((freeValue / lifeVal) * 100)}% levensloop)
+            De ultieme oogstfase van je leven.
           </span>
+        </div>
+
+        {/* 5. Levensvoortgang (Circle) */}
+        <div 
+          onClick={() => setActivePopup("voortgang")}
+          className="col-span-2 lg:col-span-1 p-4 bg-white border border-[#EAEAEA] rounded-md flex flex-col justify-center items-center cursor-pointer hover:border-[#D56B45]/40 hover:shadow-sm transition-all"
+        >
+          <LifeProgressCircle 
+            currentAge={currentAge} 
+            projectedLifeExpectancy={projectedLifeExpectancy} 
+            className="w-24 sm:w-28"
+          />
         </div>
       </div>
 
