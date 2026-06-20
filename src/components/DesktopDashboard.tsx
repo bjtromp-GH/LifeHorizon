@@ -44,8 +44,8 @@ export default function DesktopDashboard({
             className="flex items-center space-x-3 mb-2 sm:mb-0 cursor-pointer group"
             onClick={() => window.location.reload()}
           >
-            <div className="p-1.5 bg-[#D56B45]/10 rounded-md group-hover:bg-[#D56B45]/20 transition-colors">
-              <Compass className="w-5 h-5 text-[#D56B45]" />
+            <div className="p-1.5 bg-[#D56B45] rounded-full group-hover:bg-[#C0562F] transition-colors shadow-sm">
+              <Compass className="w-5 h-5 text-white" />
             </div>
             <div>
               <h1 className="font-sans text-xl font-bold tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">

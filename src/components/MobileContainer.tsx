@@ -147,7 +147,9 @@ export default function MobileContainer({
               className="flex items-center space-x-2 cursor-pointer group"
               onClick={() => window.location.reload()}
             >
-              <Compass className="w-4 h-4 text-[#D56B45] group-hover:scale-110 transition-transform" />
+              <div className="p-1.5 bg-[#D56B45] rounded-full group-hover:scale-110 transition-transform shadow-sm">
+                <Compass className="w-4 h-4 text-white" />
+              </div>
               <span className="font-sans font-bold text-sm tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">
                 LifeRunway
               </span>
