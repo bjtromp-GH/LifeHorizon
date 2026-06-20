@@ -429,7 +429,7 @@ export default function MobileContainer({
                       Eindconclusie & Reflectie
                     </h3>
                     <p className="text-[11px] text-white/80 max-w-xs mx-auto leading-normal">
-                      Jouw CBS Levensrunway samengevat op een soevereine rij.
+                      Jouw CBS Levensrunway samengevat op een<br />soevereine rij.
                     </p>
                   </div>
 
