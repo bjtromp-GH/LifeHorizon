@@ -409,27 +409,34 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               </div>
 
               <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4">
-                <div className="space-y-4 w-full">
+                <div className="space-y-3 sm:space-y-4 w-full">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                    className="p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
+                    className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
-                    <p className="text-sm sm:text-base italic text-white/90 leading-relaxed">"Deze app heeft me echt de ogen geopend over hoeveel tijd ik daadwerkelijk over heb na mijn pensioen. Zeer confronterend maar ontzettend waardevol!"</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-3">- Jan-Willem (42)</p>
+                    <p className="text-sm italic text-white/90 leading-relaxed">"Het leven is kort. De LifeRunway app heeft mij echt inzicht gegeven zodat ik de juiste keuzes kan maken voordat het te laat is."</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Jan-Willem (42)</p>
                   </motion.div>
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-                    className="p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
+                    className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
-                    <p className="text-sm sm:text-base italic text-white/90 leading-relaxed">"Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten."</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-3">- Sophie (35)</p>
+                    <p className="text-sm italic text-white/90 leading-relaxed">"Wow, dit is een echt een nuttige app. Serieus, maar heel gaaf en leuk om inzicht te krijgen in je levensloop."</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Mark (50)</p>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+                    className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
+                  >
+                    <p className="text-sm italic text-white/90 leading-relaxed">"Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten."</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Sophie (35)</p>
                   </motion.div>
                 </div>
               </div>
               
               <div className="w-full max-w-md mx-auto pb-8 sm:pb-12 flex flex-col items-center z-10">
                 <motion.button
-                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={handleNext}
