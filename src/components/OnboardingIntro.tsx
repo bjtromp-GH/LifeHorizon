@@ -20,7 +20,8 @@ import {
   Brain,
   Cpu,
   Edit3,
-  Zap
+  Zap,
+  Volume2
 } from "lucide-react";
 import ScrollRevealText from "./ScrollRevealText";
 
@@ -34,6 +35,25 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   const [step, setStep] = useState<number>(0);
   const [imgError, setImgError] = useState(false);
   
+  const [isPlayingId, setIsPlayingId] = useState<number | null>(null);
+
+  const playVoice = (id: number, text: string) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      if (isPlayingId === id) {
+        setIsPlayingId(null);
+        return; // Toggle stop
+      }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'nl-NL';
+      utterance.rate = 1.0;
+      utterance.onstart = () => setIsPlayingId(id);
+      utterance.onend = () => setIsPlayingId(null);
+      utterance.onerror = () => setIsPlayingId(null);
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   const [localGender, setLocalGender] = useState<Gender | null>(null);
   const [localBirthYear, setLocalBirthYear] = useState<string>(inputs.birthYear.toString());
   const [localAge, setLocalAge] = useState<string>(inputs.currentAge.toString());
@@ -415,21 +435,45 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                     className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
                     <p className="text-sm italic text-white/90 leading-relaxed">"Het leven is kort. De LifeRunway app heeft mij echt inzicht gegeven zodat ik de juiste keuzes kan maken voordat het te laat is."</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Jan-Willem (42)</p>
+                    <div className="flex items-center justify-between mt-3">
+                      <p className="text-xs font-bold text-[#D56B45]">- Jan-Willem (42)</p>
+                      <button 
+                        onClick={() => playVoice(1, "Het leven is kort. De LifeRunway app heeft mij echt inzicht gegeven zodat ik de juiste keuzes kan maken voordat het te laat is.")} 
+                        className={`p-1.5 rounded-full transition-colors cursor-pointer ${isPlayingId === 1 ? 'bg-[#D56B45]/20 text-[#D56B45]' : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'}`}
+                      >
+                        <Volume2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </motion.div>
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
                     className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
                     <p className="text-sm italic text-white/90 leading-relaxed">"Wow, dit is een echt een nuttige app. Serieus, maar heel gaaf en leuk om inzicht te krijgen in je levensloop."</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Mark (50)</p>
+                    <div className="flex items-center justify-between mt-3">
+                      <p className="text-xs font-bold text-[#D56B45]">- Mark (50)</p>
+                      <button 
+                        onClick={() => playVoice(2, "Wow, dit is een echt een nuttige app. Serieus, maar heel gaaf en leuk om inzicht te krijgen in je levensloop.")} 
+                        className={`p-1.5 rounded-full transition-colors cursor-pointer ${isPlayingId === 2 ? 'bg-[#D56B45]/20 text-[#D56B45]' : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'}`}
+                      >
+                        <Volume2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </motion.div>
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
                     className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
                     <p className="text-sm italic text-white/90 leading-relaxed">"Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten."</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Sophie (35)</p>
+                    <div className="flex items-center justify-between mt-3">
+                      <p className="text-xs font-bold text-[#D56B45]">- Sophie (35)</p>
+                      <button 
+                        onClick={() => playVoice(3, "Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten.")} 
+                        className={`p-1.5 rounded-full transition-colors cursor-pointer ${isPlayingId === 3 ? 'bg-[#D56B45]/20 text-[#D56B45]' : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'}`}
+                      >
+                        <Volume2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </motion.div>
                 </div>
               </div>
