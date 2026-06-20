@@ -191,7 +191,7 @@ export default function AestheticFidelityCards({
                         strokeLinecap="round"
                       />
                     </svg>
-                    <img src="/olifant-bril.png" alt="Olifant" className="absolute w-9 h-9 object-contain" />
+                    <img src="/img/olifant-bril.png" alt="Olifant" className="absolute w-9 h-9 object-contain" />
                   </div>
 
                   <div className="space-y-1">
