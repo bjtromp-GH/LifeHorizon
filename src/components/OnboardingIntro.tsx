@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
+import { playChimeSound } from "../utils/audio";
 import { 
   Sparkles, 
   ChevronRight, 
@@ -94,6 +95,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
     { title: "Intro", icon: Sparkles },
+    { title: "Ervaringen", icon: Sparkles },
     { title: "Welkom", icon: Sparkles },
     { title: "Profiel", icon: User },
     { title: "Leefstijl", icon: Heart },
@@ -122,13 +124,13 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   };
 
   let canProceed = true;
-  if (step === 2) {
+  if (step === 3) {
     canProceed = localGender !== null && ageInteracted;
-  } else if (step === 3) {
-    canProceed = localSleep !== null && localActivity !== null && localStress !== null;
   } else if (step === 4) {
-    canProceed = geneticsInteracted;
+    canProceed = localSleep !== null && localActivity !== null && localStress !== null;
   } else if (step === 5) {
+    canProceed = geneticsInteracted;
+  } else if (step === 6) {
     canProceed = localStartWorkAge !== "" && localFireAge !== "";
   }
 
@@ -137,22 +139,24 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   }, [canProceed]);
 
   const handleNext = () => {
-    if (step < 6 && !canProceed) {
+    if (step < 7 && !canProceed) {
       setShowValidation(true);
       return;
     }
-    if (step < 7 && canProceed) {
+    if (step < 8 && canProceed) {
       setShowValidation(false);
-      if (step === 0 || step === 1) {
+      if (step === 0 || step === 1 || step === 2) {
+        if (step === 0) playChimeSound();
         setStep((s) => s + 1);
       } else {
         setIsTransitioning(true);
+        playChimeSound();
         setTimeout(() => {
           setStep((s) => s + 1);
           setIsTransitioning(false);
         }, 1200);
       }
-    } else if (step >= 7) {
+    } else if (step >= 8) {
       onComplete();
     }
   };
@@ -180,7 +184,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-[#FAFCEE] blur-3xl opacity-60 pointer-events-none z-0" />
 
       {/* Top Header & Step Progress Bar */}
-      {step < 7 && (
+      {step < 8 && (
         <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10">
           <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
             <span className="text-xl">🔥</span>
@@ -273,7 +277,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   initial={{ opacity: 0, scale: 0.3, rotate: -15, y: 40 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
                   transition={{ duration: 1.2, type: "spring", bounce: 0.5, delay: 0.1 }}
-                  className="w-40 h-40 sm:w-48 sm:h-48 shrink-0 flex items-end justify-center bg-white/10 border border-white/25 rounded-xl pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-1"
+                  className="w-40 h-40 sm:w-48 sm:h-48 shrink-0 flex items-end justify-center bg-white/10 border border-white/25 rounded-xl pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-6"
                 >
                   <img
                     src="/img/Olifant.png"
@@ -358,6 +362,39 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
             </motion.div>
           ) : step === 1 ? (
             <motion.div
+              key="testimonials"
+              initial={{ opacity: 0, x: 25 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -25 }}
+              transition={{ duration: 0.4 }}
+              className="w-full space-y-4 sm:space-y-6 px-2"
+            >
+              <div className="space-y-2 text-center sm:text-left">
+                <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
+                  Wat zeggen gebruikers over LifeRunway?
+                </h2>
+                <p className="text-sm text-[#767676]">
+                  Ontdek hoe anderen hun financiële en levensinzichten hebben vergroot.
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <div className="p-4 bg-white rounded-2xl shadow-sm border border-[#EAEAEA]">
+                  <p className="text-sm italic text-[#2D2D2D]">"Deze app heeft me echt de ogen geopend over hoeveel tijd ik daadwerkelijk over heb na mijn pensioen. Zeer confronterend maar ontzettend waardevol!"</p>
+                  <p className="text-xs font-bold text-[#D56B45] mt-2">- Jan-Willem (42)</p>
+                </div>
+                <div className="p-4 bg-white rounded-2xl shadow-sm border border-[#EAEAEA]">
+                  <p className="text-sm italic text-[#2D2D2D]">"Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten."</p>
+                  <p className="text-xs font-bold text-[#D56B45] mt-2">- Sophie (35)</p>
+                </div>
+                <div className="p-4 bg-white rounded-2xl shadow-sm border border-[#EAEAEA]">
+                  <p className="text-sm italic text-[#2D2D2D]">"De visualisatie van tijd als schaarste helpt me om nu betere keuzes te maken voor later. Absolute aanrader!"</p>
+                  <p className="text-xs font-bold text-[#D56B45] mt-2">- Mark (50)</p>
+                </div>
+              </div>
+            </motion.div>
+          ) : step === 2 ? (
+            <motion.div
               key="welcome"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -418,7 +455,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 <Play className="w-3.5 h-3.5 fill-current" />
               </motion.button>
             </motion.div>
-          ) : step === 2 ? (
+          ) : step === 3 ? (
             <motion.div
               key="demographics"
               initial={{ opacity: 0, x: 25 }}
@@ -568,7 +605,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
             </motion.div>
-          ) : step === 3 ? (
+          ) : step === 4 ? (
             <motion.div
               key="lifestyle"
               initial={{ opacity: 0, x: 25 }}
@@ -691,7 +728,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
             </motion.div>
-          ) : step === 4 ? (
+          ) : step === 5 ? (
             <motion.div
               key="genetics"
               initial={{ opacity: 0, x: 25 }}
@@ -851,7 +888,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 )}
               </div>
             </motion.div>
-          ) : step === 5 ? (
+          ) : step === 6 ? (
             <motion.div
               key="career_fire"
               initial={{ opacity: 0, x: 25 }}
@@ -976,7 +1013,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </p>
               </div>
             </motion.div>
-          ) : step === 6 ? (
+          ) : step === 7 ? (
             <motion.div
               key="complete"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -1027,7 +1064,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
-                    setStep(7);
+                    setStep(8);
                   }}
                   className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-black text-sm tracking-wide rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
                 >
@@ -1036,7 +1073,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 </motion.button>
               </motion.div>
             </motion.div>
-          ) : step === 7 ? (
+          ) : step === 8 ? (
             <motion.div
               key="scroll-reveal"
               initial={{ opacity: 0 }}
@@ -1121,7 +1158,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
       </main>
 
       {/* Navigation Footer */}
-      {step < 6 && !showYearPicker && (
+      {step < 7 && !showYearPicker && (
         <footer className="w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 border-t border-[#F3F2F0] z-10">
           <div>
             {step > 0 && (
