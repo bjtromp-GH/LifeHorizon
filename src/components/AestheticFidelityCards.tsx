@@ -258,7 +258,7 @@ export default function AestheticFidelityCards({
                     </h3>
                   </div>
                   <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
-                    Actieve Accumulatie
+                    Actief Werk
                   </div>
                 </div>
 

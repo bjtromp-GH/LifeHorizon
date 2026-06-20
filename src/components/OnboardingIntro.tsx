@@ -1059,11 +1059,11 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               <div className="p-4 bg-neutral-50 rounded-2xl border border-[#EAEAEA] text-xs space-y-2 shadow-3xs">
                 <div className="flex justify-between font-extrabold text-sm text-[#2D2D2D]">
-                  <span className="text-[#767676]">Actieve Accumulatie:</span>
+                  <span className="text-[#767676]">Werk:</span>
                   <span className="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded border border-emerald-500/15">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
                 <p className="text-xs text-[#767676] leading-relaxed">
-                  Dit is het aantal jaren verplichte kapitaalaccumulatie dat u heeft ingepland voor uw financiële onafhankelijkheid.
+                  Dit is het aantal jaren verplicht werk dat u heeft ingepland voor uw financiële onafhankelijkheid of pensioen.
                 </p>
               </div>
             </motion.div>
@@ -1099,7 +1099,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.birthYear}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Accumulatie</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Werk</span>
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
                 <div>

@@ -127,7 +127,7 @@ export default function DecadeGrid({
                         {/* Custom Mini Tooltip */}
                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 pb-1.5 hidden group-hover:block z-20 pointer-events-none">
                           <div className="bg-[#2D2D2D] text-[#FAF9F8] text-[9.5px] px-2 py-0.5 rounded shadow-lg font-mono whitespace-nowrap leading-none">
-                            yr {year}: {phase === "basis" ? "Ontwikkeling" : phase === "accumulation" ? "Accumulatie" : "Vrijheid"}
+                            yr {year}: {phase === "basis" ? "Ontwikkeling" : phase === "accumulation" ? "Werk" : "Vrijheid"}
                             {isCurrentYear && " (Huidige leeftijd!)"}
                           </div>
                         </div>
@@ -198,7 +198,7 @@ export default function DecadeGrid({
                 </button>
               </div>
               <p className="text-sm text-[#767676] leading-relaxed">
-                Je bevindt je nu hier in de levensmatrix! Dit blokje markeert jouw huidige leeftijd. De kleur geeft aan in welke fase van je leven je je momenteel bevindt: Ontwikkeling, Accumulatie of Vrijheid.
+                Je bevindt je nu hier in de levensmatrix! Dit blokje markeert jouw huidige leeftijd. De kleur geeft aan in welke fase van je leven je je momenteel bevindt: Ontwikkeling, Werk of Vrijheid.
               </p>
             </motion.div>
           </div>

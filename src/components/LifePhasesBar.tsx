@@ -183,19 +183,19 @@ export default function LifePhasesBar({
                   </div>
                 </motion.div>
 
-                {/* Phase 2: Accumulatie */}
+                {/* Phase 2: Werk */}
                 <motion.div
-                  id="phase-bar-accumulatie"
+                  id="phase-bar-werk"
                   className="h-full bg-[#C8C5C0] border-l border-[#FFFFFF]/30 relative group"
                   initial={{ width: "0%", opacity: 0 }}
                   animate={{ width: `${phases.accumulationPercent}%`, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
-                  title={`Accumulatie (${inputs.startWorkAge} - ${inputs.fireAge} jaar)`}
+                  title={`Werk (${inputs.startWorkAge} - ${inputs.fireAge} jaar)`}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     {phases.accumulationPercent > 12 && (
                       <span className="text-[10px] uppercase tracking-wider text-[#2D2D2D]/80 font-bold hidden sm:inline">
-                        Accumulatie
+                        Werk
                       </span>
                     )}
                   </div>
@@ -296,7 +296,7 @@ export default function LifePhasesBar({
 
               <div className="flex flex-col border-l border-[#EAEAEA] pl-3">
                 <span className="text-[10px] uppercase tracking-wider text-[#767676]">
-                  2. Accumulatie
+                  2. Werk
                 </span>
                 <span className="text-sm font-semibold text-[#2D2D2D] font-mono">
                   {phases.accumulationYears} jaar
@@ -375,7 +375,7 @@ export default function LifePhasesBar({
                 {currentAge >= inputs.startWorkAge && currentAge < inputs.fireAge && (
                   <div className="absolute top-1.5 -left-10 w-2.5 h-2.5 rounded-full bg-[#D56B45] animate-pulse shadow-[0_0_8px_rgba(213,107,69,0.8)] border border-white z-20" />
                 )}
-                <h5 className="text-[13px] font-extrabold text-[#2D2D2D] uppercase tracking-wide">Accumulatie</h5>
+                <h5 className="text-[13px] font-extrabold text-[#2D2D2D] uppercase tracking-wide">Werk</h5>
                 <p className="text-[11px] font-mono text-[#767676] mb-1.5 bg-white/50 inline-block px-1.5 py-0.5 rounded shadow-3xs border border-[#EAEAEA]/50">
                   {inputs.startWorkAge} - {inputs.fireAge} jr <span className="font-sans ml-1 text-zinc-400">({phases.accumulationYears} jaar, {Math.round(phases.accumulationPercent)}%)</span>
                 </p>

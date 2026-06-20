@@ -153,7 +153,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
         <div className="flex justify-between items-center text-xs">
           <div className="flex flex-col">
             <span className="font-medium text-[#2D2D2D]">Startleeftijd Werken</span>
-            <span className="text-[10px] text-[#767676]">Wanneer begon de accumulatie?</span>
+            <span className="text-[10px] text-[#767676]">Wanneer begon je met werken?</span>
           </div>
           <span className="font-mono text-[#D56B45] font-semibold">{inputs.startWorkAge} jr</span>
         </div>
