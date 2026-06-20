@@ -1223,7 +1223,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               <motion.img 
                 src="/img/olifant-bril.png" 
                 alt="Olifant" 
-                className="w-24 sm:w-28 h-auto mb-4 drop-shadow-2xl"
+                className="w-32 sm:w-40 h-auto mb-6 drop-shadow-2xl"
                 initial={{ y: 20, opacity: 0, scale: 0.8 }}
                 animate={{ y: 0, opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.5, type: "spring" }}
