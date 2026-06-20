@@ -369,7 +369,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                 initial={{ opacity: 0, scale: 0.5, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.8, type: "spring", bounce: 0.5, delay: 0.2 }}
-                className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-end justify-center shadow-sm relative overflow-hidden group pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 mb-0.5"
+                className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-end justify-center shadow-sm relative overflow-hidden group pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 mb-4 sm:mb-6"
               >
                 <img
                   src="/img/Olifant.png"
