@@ -163,7 +163,7 @@ export default function DecadeGrid({
       <div className="flex justify-center pt-2">
         <button
           onClick={() => setIsAnalyseModalOpen(true)}
-          className="px-4 py-2 bg-[#FAF3F0] text-[#D56B45] text-xs font-bold rounded-md border border-[#D56B45]/20 hover:bg-[#D56B45] hover:text-white transition-colors uppercase tracking-widest cursor-pointer"
+          className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#C05D3A] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
         >
           Levensmatrix Analyse
         </button>
