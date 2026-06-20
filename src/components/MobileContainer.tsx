@@ -418,7 +418,7 @@ export default function MobileContainer({
                         src="/img/olifant-bril.png" 
                         alt="Olifant" 
                         className="w-28 h-28 object-contain"
-                        animate={{ filter: ['drop-shadow(0 0 2px rgba(255,255,255,0))', 'drop-shadow(0 0 15px rgba(255,255,255,0.7))', 'drop-shadow(0 0 2px rgba(255,255,255,0))'] }}
+                        animate={{ filter: ['drop-shadow(0 0 4px rgba(255,255,255,0.2))', 'drop-shadow(0 0 25px rgba(255,255,255,1))', 'drop-shadow(0 0 4px rgba(255,255,255,0.2))'] }}
                         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                       />
                     </button>
