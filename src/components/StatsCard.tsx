@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Hourglass, ShieldCheck, Sun, Workflow, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs } from "../types";
-import LifeProgressCircle from "./LifeProgressCircle";
+import LifeProgressBar from "./LifeProgressBar";
 
 interface StatsCardProps {
   inputs: UserInputs;
@@ -147,15 +147,15 @@ export default function StatsCard({
           </span>
         </div>
 
-        {/* 5. Levensvoortgang (Circle) */}
+        {/* 5. Levensvoortgang (Bar) */}
         <div 
           onClick={() => setActivePopup("voortgang")}
           className="col-span-2 lg:col-span-1 p-4 bg-white border border-[#EAEAEA] rounded-md flex flex-col justify-center items-center cursor-pointer hover:border-[#D56B45]/40 hover:shadow-sm transition-all"
         >
-          <LifeProgressCircle 
+          <LifeProgressBar 
             currentAge={currentAge} 
             projectedLifeExpectancy={projectedLifeExpectancy} 
-            className="w-24 sm:w-28"
+            className="w-full"
           />
         </div>
       </div>

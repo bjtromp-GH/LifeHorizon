@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 import { UserInputs } from "../types";
-import LifeProgressCircle from "./LifeProgressCircle";
+import LifeProgressBar from "./LifeProgressBar";
 import HealthyMatrixModal from "./HealthyMatrixModal";
 
 interface DecadeGridProps {
@@ -389,10 +389,10 @@ export default React.memo(function DecadeGrid({
               })()}
 
               <div className="border-t border-[#EAE8E4] pt-6 mt-2 mb-6">
-                <LifeProgressCircle 
+                <LifeProgressBar 
                   currentAge={currentAge} 
                   projectedLifeExpectancy={projectedLifeExpectancy} 
-                  className="w-40 sm:w-48 mx-auto"
+                  className="w-full"
                 />
               </div>
 
