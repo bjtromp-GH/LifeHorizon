@@ -70,7 +70,7 @@ export default function MobileContainer({
   }, [activeSlide]);
 
   const goToSlide = (newIndex: number) => {
-    if (newIndex < 0 || newIndex > 4) return;
+    if (newIndex < 0 || newIndex > 5) return;
     setSlideDirection(newIndex > activeSlide ? 1 : -1);
     setActiveSlide(newIndex);
   };
@@ -293,7 +293,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -351,7 +351,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -398,7 +398,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -536,7 +536,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -653,7 +653,7 @@ export default function MobileContainer({
 
                 <div className="pt-6 mt-auto">
                   <button
-                    onClick={() => alert("Volgende stap (nog toe te voegen)")}
+                    onClick={() => goToSlide(5)}
                     className="w-full flex items-center justify-center bg-[#D56B45] hover:bg-[#C0562F] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                   >
                     Ga verder
@@ -670,12 +670,109 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
                         className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
                           activeSlide === idx ? "w-4 bg-[#D56B45]" : "bg-[#D56B45]/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => onRestartOnboarding(1)}
+                    className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
+                  >
+                    <Settings className="w-3.5 h-3.5" />
+                    <span>Pas aan</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Screen 6: 25/50/25 Model Uitleg */}
+            {activeSlide === 5 && (
+              <div className="space-y-6 flex flex-col justify-between h-full text-[#2D2D2D] pb-4">
+                <div className="space-y-6">
+                  <div className="mt-4">
+                    <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#86A789]">
+                      Het 25 / 50 / 25 Model Uitgelegd
+                    </h3>
+                    <p className="text-sm mt-3 text-[#767676] leading-relaxed">
+                      Dit model stelt voor om je leven in drie duidelijke en evenwichtige fases te verdelen. 
+                      Als we uitgaan van een geprognotiseerde levensverwachting van {projectedLifeExpectancy} jaar, ziet dit er voor jou zo uit:
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-white border border-[#EAEAEA] p-4 rounded-xl shadow-sm flex items-start space-x-4">
+                      <div className="w-12 h-12 rounded-full bg-[#EAE8E4] flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#767676]">25%</span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-[#2D2D2D] text-sm uppercase tracking-wider">Jeugd & Ontwikkeling</h4>
+                        <p className="text-xs text-[#767676] mt-1 font-mono">0 tot {Math.round(projectedLifeExpectancy * 0.25)} jaar</p>
+                        <p className="text-sm text-[#767676] mt-2 leading-relaxed">
+                          De eerste kwart van je leven staat in het teken van spelen, leren en jezelf ontwikkelen. Hier leg je de basis voor de rest van je reis.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-white border border-[#EAEAEA] p-4 rounded-xl shadow-sm flex items-start space-x-4 border-l-4 border-l-[#D56B45]">
+                      <div className="w-12 h-12 rounded-full bg-[#D56B45]/10 flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#D56B45]">50%</span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-[#D56B45] text-sm uppercase tracking-wider">Werken & Opbouwen</h4>
+                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.25)} tot {Math.round(projectedLifeExpectancy * 0.75)} jaar</p>
+                        <p className="text-sm text-[#767676] mt-2 leading-relaxed">
+                          De kernfase. Je werkt aan je carrière, bouwt vermogen op en investeert. Deze 50% moet efficiënt worden benut zodat je de laatste fase in vrijheid kunt leven.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#86A789]/5 border border-[#86A789]/20 p-4 rounded-xl shadow-sm flex items-start space-x-4 border-l-4 border-l-[#86A789]">
+                      <div className="w-12 h-12 rounded-full bg-[#86A789]/10 flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#86A789]">25%</span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-[#86A789] text-sm uppercase tracking-wider">Vrijheid & Genieten</h4>
+                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.75)} tot {projectedLifeExpectancy} jaar</p>
+                        <p className="text-sm text-[#767676] mt-2 leading-relaxed">
+                          Volledige financiële onafhankelijkheid. Tijd voor jezelf, familie, reizen en passies, zonder de verplichting om nog te moeten werken voor geld.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-auto">
+                  <button
+                    onClick={() => alert("Einde demo flow!")}
+                    className="w-full flex items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
+                  >
+                    Ontwerp mijn plan
+                  </button>
+                </div>
+
+                {/* Scroll Bottom Navigation controls */}
+                <div className="flex items-center justify-between pt-4 border-t border-[#EAEAEA] mt-6 shrink-0">
+                  <button
+                    onClick={() => goToSlide(activeSlide - 1)}
+                    className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
+                  >
+                    ◀ Vorige
+                  </button>
+                  
+                  <div className="flex space-x-1.5">
+                    {[0, 1, 2, 3, 4, 5].map((idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => goToSlide(idx)}
+                        className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                          activeSlide === idx ? "w-4 bg-[#86A789]" : "bg-[#86A789]/30"
                         }`}
                       />
                     ))}
