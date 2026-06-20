@@ -1221,6 +1221,14 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
             className="fixed inset-0 z-[200] bg-gradient-to-br from-[#E25C26] to-[#B84E29] flex flex-col items-center justify-center overflow-hidden"
           >
             <div className="w-full max-w-md mx-auto p-6 flex flex-col items-center">
+              <motion.img 
+                src="/olifant-bril.png" 
+                alt="Olifant" 
+                className="w-24 sm:w-28 h-auto mb-4 drop-shadow-2xl"
+                initial={{ y: 20, opacity: 0, scale: 0.8 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1, duration: 0.5, type: "spring" }}
+              />
               <h3 className="text-2xl sm:text-3xl font-black text-white mb-8">Kies Geboortejaar</h3>
               
               <div className="relative w-full h-64 mx-auto flex justify-center">
