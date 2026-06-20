@@ -390,8 +390,8 @@ export default React.memo(function DecadeGrid({
 
               <div className="border-t border-[#EAE8E4] pt-6 mt-2 mb-6">
                 <div className="text-center mb-6">
-                  <h2 className="text-2xl sm:text-3xl font-black text-[#D56B45] tracking-tight leading-tight uppercase">
-                    Je hebt <span className="font-mono text-4xl">{Math.min(100, Math.round((currentAge / Math.max(projectedLifeExpectancy, currentAge, 1)) * 100))}%</span> van je leven geleefd!
+                  <h2 className="text-[14px] sm:text-lg font-black text-[#2D2D2D] tracking-tight uppercase whitespace-nowrap overflow-hidden text-ellipsis">
+                    Je hebt <span className="font-mono">{Math.min(100, Math.round((currentAge / Math.max(projectedLifeExpectancy, currentAge, 1)) * 100))}%</span> van je leven geleefd!
                   </h2>
                 </div>
                 <LifeProgressBar 
