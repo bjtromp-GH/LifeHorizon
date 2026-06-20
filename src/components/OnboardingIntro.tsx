@@ -804,9 +804,9 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                   </span>
                   <button
                     onClick={() => setShowHeredityInfo(true)}
-                    className="p-1 rounded-full text-[#767676] hover:text-[#D56B45] hover:bg-[#FAF3F0] transition-colors cursor-pointer"
+                    className="p-1.5 bg-[#D56B45] rounded-full text-white hover:bg-[#B84E29] transition-colors shadow-sm cursor-pointer"
                   >
-                    <Info className="w-4 h-4" />
+                    <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </button>
                 </div>
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
