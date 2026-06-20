@@ -1,4 +1,4 @@
-import { Sparkles, RefreshCw, HelpCircle } from "lucide-react";
+import { Compass, RefreshCw, HelpCircle } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -45,7 +45,7 @@ export default function DesktopDashboard({
             onClick={() => window.location.reload()}
           >
             <div className="p-1.5 bg-[#D56B45]/10 rounded-md group-hover:bg-[#D56B45]/20 transition-colors">
-              <Sparkles className="w-5 h-5 text-[#D56B45]" />
+              <Compass className="w-5 h-5 text-[#D56B45]" />
             </div>
             <div>
               <h1 className="font-sans text-xl font-bold tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">

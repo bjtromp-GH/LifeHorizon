@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useEffect } from "react";
-import { Sparkles, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid } from "lucide-react";
+import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -147,7 +147,7 @@ export default function MobileContainer({
               className="flex items-center space-x-2 cursor-pointer group"
               onClick={() => window.location.reload()}
             >
-              <Sparkles className="w-4 h-4 text-[#D56B45] group-hover:scale-110 transition-transform" />
+              <Compass className="w-4 h-4 text-[#D56B45] group-hover:scale-110 transition-transform" />
               <span className="font-sans font-bold text-sm tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">
                 LifeRunway
               </span>
