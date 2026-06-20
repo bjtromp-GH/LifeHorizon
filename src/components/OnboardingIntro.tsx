@@ -705,7 +705,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               {/* 1. Slaap */}
               <div className="space-y-1.5 sm:space-y-2">
-                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
                   <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Slaappatroon</span>
                 </label>
@@ -739,8 +739,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               {/* 2. Beweging */}
               <div className="space-y-1.5 sm:space-y-2">
-                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
-                  <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
+                  <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Fysieke Activiteit</span>
                 </label>
                 <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localActivity === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
@@ -773,8 +773,8 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
 
               {/* 3. Stress */}
               <div className="space-y-1.5 sm:space-y-2">
-                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
-                  <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
+                  <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Stress / Werkdruk</span>
                 </label>
                 <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localStress === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
