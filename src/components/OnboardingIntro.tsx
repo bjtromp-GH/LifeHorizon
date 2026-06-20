@@ -24,10 +24,10 @@ import {
   Activity,
   Compass,
   Cpu,
-  Edit3,
-  Info
+  Edit3
 } from "lucide-react";
 import ScrollRevealText from "./ScrollRevealText";
+import Confetti from "./Confetti";
 
 interface OnboardingIntroProps {
   inputs: UserInputs;
@@ -186,8 +186,25 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
   return (
     <div className="h-[100dvh] md:h-auto md:min-h-screen overflow-hidden bg-[#FDFDFD] flex flex-col justify-between p-3.5 sm:p-8 font-sans text-[#2D2D2D] select-none relative">
       {/* Abstract elegant background elements */}
-      <div className="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full bg-[#FAF3F0] blur-3xl opacity-60 pointer-events-none z-0" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-[#FAFCEE] blur-3xl opacity-60 pointer-events-none z-0" />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.5, 0.7, 0.5],
+          rotate: [0, 45, 0]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[-10%] right-[-10%] w-96 h-96 rounded-full bg-[#FAF3F0] blur-3xl pointer-events-none z-0" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.4, 0.7, 0.4],
+          x: [0, 40, 0],
+          y: [0, -30, 0]
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-[-10%] left-[-10%] w-96 h-96 rounded-full bg-[#FAFCEE] blur-3xl pointer-events-none z-0" 
+      />
 
       {/* Top Header & Step Progress Bar */}
       {step >= 2 && step < 8 && (
@@ -828,7 +845,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-father-alive"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: null }); }}
-                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
+                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
                         inputs.fatherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -840,7 +857,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-father-passed"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: 75 }); }}
-                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center ${
+                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer text-center ${
                         inputs.fatherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -896,7 +913,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-mother-alive"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: null }); }}
-                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
+                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
                         inputs.motherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -908,7 +925,7 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
                       type="button"
                       id="onboarding-mother-passed"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: 82 }); }}
-                      className={`px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer text-center ${
+                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer text-center ${
                         inputs.motherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -1088,9 +1105,11 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
-              className="text-center space-y-4 sm:space-y-6 max-w-md w-full px-1"
+              className="text-center space-y-4 sm:space-y-6 max-w-md w-full px-1 relative"
             >
-              <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#F0FAF3] border border-[#EAEAEA] flex items-center justify-center shadow-sm">
+              <Confetti />
+              
+              <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#F0FAF3] border border-[#EAEAEA] flex items-center justify-center shadow-sm relative z-10">
                 <Smile className="w-8 h-8 text-[#45D57C]" />
               </div>
 
@@ -1230,10 +1249,10 @@ export default function OnboardingIntro({ inputs, onInputChange, onComplete }: O
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-[300] bg-black/60 flex items-center justify-center p-4 sm:p-6"
+              className="fixed inset-0 z-[500] bg-black/60 flex items-center justify-center sm:p-6"
             >
-              <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-                <div className="p-4 sm:p-6 flex justify-between items-center border-b border-gray-100">
+              <div className="bg-white w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:rounded-2xl sm:max-w-lg shadow-2xl overflow-hidden flex flex-col">
+                <div className="p-4 pt-6 sm:pt-6 sm:p-6 flex justify-between items-center border-b border-gray-100">
                   <h3 className="font-extrabold text-lg sm:text-xl text-[#2D2D2D] flex items-center gap-2">
                     <Info className="w-5 h-5 text-[#D56B45]" />
                     Genetica vs. Leefstijl
