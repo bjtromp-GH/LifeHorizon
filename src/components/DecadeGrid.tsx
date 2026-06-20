@@ -404,6 +404,15 @@ export default React.memo(function DecadeGrid({
                   Zorg ervoor dat je vitaliteit in deze laatste fase optimaal blijft door nu al de juiste leefstijlkeuzes te maken!
                 </p>
               </div>
+
+              <div className="py-6 mt-2 text-center sm:hidden">
+                <button 
+                  onClick={() => setIsAnalyseModalOpen(false)} 
+                  className="w-full flex items-center justify-center bg-[#D56B45] hover:bg-[#B84E29] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
+                >
+                  Sluiten
+                </button>
+              </div>
             </motion.div>
           </div>
         )}
