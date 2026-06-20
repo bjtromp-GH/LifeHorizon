@@ -291,7 +291,7 @@ export default React.memo(function DecadeGrid({
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <div className="w-28 h-28 bg-[#2D2D2D] rounded-full flex items-center justify-center shadow-sm border border-[#3D3D3D] z-10 transition-transform duration-300">
+                          <div className="w-28 h-28 bg-[#D56B45] rounded-full flex items-center justify-center shadow-sm border border-[#B84E29] z-10 transition-transform duration-300">
                             <motion.img 
                               initial={{ opacity: 0, scale: 0.5 }}
                               animate={{ opacity: 1, scale: 1 }}
