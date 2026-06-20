@@ -29,9 +29,7 @@ export default function App() {
   const [apiSource, setApiSource] = useState<"CBS API" | "CBS Cohort Model">("CBS Cohort Model");
   const [isLoadingCBS, setIsLoadingCBS] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [showOnboarding, setShowOnboarding] = useState<boolean>(() => {
-    return localStorage.getItem("onboarding_completed") !== "true";
-  });
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
 
   // 2. Responsive viewport check
   useEffect(() => {
