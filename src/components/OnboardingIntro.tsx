@@ -1337,7 +1337,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </div>
               <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
                 <button onClick={() => setShowHeredityInfo(false)} className="px-5 py-2.5 bg-[#2D2D2D] hover:bg-black text-white font-bold rounded-xl transition-colors cursor-pointer text-sm">
-                  Begrepen
+                  {t('common.understood')}
                 </button>
               </div>
             </div>

@@ -7,7 +7,8 @@ export const nl = {
     man: "Man",
     woman: "Vrouw",
     prevStep: "Vorige",
-    nextStep: "Volgende"
+    nextStep: "Volgende",
+    understood: "Begrepen"
   },
   onboarding: {
     header: "Levensloop & Pensioen",

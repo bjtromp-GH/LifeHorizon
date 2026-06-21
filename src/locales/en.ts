@@ -9,7 +9,8 @@ export const en: Translations = {
     man: "Man",
     woman: "Woman",
     prevStep: "Previous",
-    nextStep: "Next"
+    nextStep: "Next",
+    understood: "Understood"
   },
   onboarding: {
     header: "Life Course & Retirement",
