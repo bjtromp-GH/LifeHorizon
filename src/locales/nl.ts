@@ -148,6 +148,33 @@ export const nl = {
     matrixSubtitle: "Hoe verhouden levensverwachting en gezondheid zich tot elkaar?",
     matrixDetailsBtn: "Matrix details",
     healthVsLife: "Gezondheidsduur (Healthspan) vs Levensduur (Lifespan)"
+  },
+  bioScore: {
+    title: "Lifestyle Bio-Score",
+    subtitle: "Modifiers beïnvloeden de prognose met -5 tot +5 jaar",
+    netEffect: "Netto effect",
+    years: "jaar",
+    activity: {
+      title: "1. Fysieke Activiteit",
+      sedentary: { label: "Zittend", desc: "Minimaal bewegen, kantoorbaan" },
+      light: { label: "Licht Actief", desc: "Dagelijkse wandeling of milde beweging" },
+      active: { label: "Actief", desc: "3x per week matige sport of fysiek werk" },
+      optimal: { label: "Optimaal/Kracht", desc: "Frequente krachttraining & cardio" }
+    },
+    sleep: {
+      title: "2. Slaappatroon",
+      short: { label: "< 6 uur", desc: "Chronisch slaaptekort of slechte kwaliteit" },
+      moderate: { label: "6 - 7 uur", desc: "Regelmatig te weinig, vaak gejaagd" },
+      good: { label: "7 - 8 uur", desc: "Wisselend voldoende rust en kwaliteit" },
+      optimal: { label: "Consistent goed", desc: "8 uur diepe herstellende slaap" }
+    },
+    stress: {
+      title: "3. Stress / Werkdruk",
+      high: { label: "Hoog", desc: "Chronische druk, wekelijkse overprikkeling" },
+      moderate: { label: "Gemiddeld", desc: "Gezonde stress met pieken, prima herstel" },
+      balanced: { label: "Goede balans", desc: "Gevoel van controle en ontspanning" },
+      low: { label: "Laag / Zen", desc: "Diepe rust, weinig externe druk" }
+    }
   }
 };
 export type Translations = typeof nl;

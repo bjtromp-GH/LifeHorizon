@@ -150,5 +150,32 @@ export const en: Translations = {
     matrixSubtitle: "How do life expectancy and health relate?",
     matrixDetailsBtn: "Matrix details",
     healthVsLife: "Healthspan vs Lifespan"
+  },
+  bioScore: {
+    title: "Lifestyle Bio-Score",
+    subtitle: "Modifiers influence prognosis by -5 to +5 years",
+    netEffect: "Net effect",
+    years: "years",
+    activity: {
+      title: "1. Physical Activity",
+      sedentary: { label: "Sedentary", desc: "Minimal movement, desk job" },
+      light: { label: "Lightly Active", desc: "Daily walk or mild movement" },
+      active: { label: "Active", desc: "3x per week moderate sports or physical work" },
+      optimal: { label: "Optimal/Strength", desc: "Frequent strength training & cardio" }
+    },
+    sleep: {
+      title: "2. Sleep Pattern",
+      short: { label: "< 6 hours", desc: "Chronic sleep deprivation or poor quality" },
+      moderate: { label: "6 - 7 hours", desc: "Regularly too little, often rushed" },
+      good: { label: "7 - 8 hours", desc: "Variably adequate rest and quality" },
+      optimal: { label: "Consistently good", desc: "8 hours deep restorative sleep" }
+    },
+    stress: {
+      title: "3. Stress / Workload",
+      high: { label: "High", desc: "Chronic pressure, weekly overstimulation" },
+      moderate: { label: "Average", desc: "Healthy stress with peaks, good recovery" },
+      balanced: { label: "Good balance", desc: "Sense of control and relaxation" },
+      low: { label: "Low / Zen", desc: "Deep rest, little external pressure" }
+    }
   }
 };

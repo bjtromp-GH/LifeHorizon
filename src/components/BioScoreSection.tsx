@@ -1,5 +1,6 @@
 import { ActivityLevel, BioScoreAnswers, SleepLevel, StressLevel } from "../types";
 import NumberTicker from "./NumberTicker";
+import { useLanguage } from "../context/LanguageContext";
 
 interface BioScoreSectionProps {
   answers: BioScoreAnswers;
@@ -7,26 +8,28 @@ interface BioScoreSectionProps {
 }
 
 export default function BioScoreSection({ answers, onChange }: BioScoreSectionProps) {
+  const { t } = useLanguage();
+
   // Option lists with labels, years, description
   const activityOptions: { value: ActivityLevel; label: string; offset: number; desc: string }[] = [
-    { value: "zittend", label: "Zittend", offset: -2.0, desc: "Minimaal bewegen, kantoorbaan" },
-    { value: "licht", label: "Licht Actief", offset: 0.0, desc: "Dagelijkse wandeling of milde beweging" },
-    { value: "actief", label: "Actief", offset: 1.0, desc: "3x per week matige sport of fysiek werk" },
-    { value: "optimaal", label: "Optimaal/Kracht", offset: 2.0, desc: "Frequente krachttraining & cardio" },
+    { value: "zittend", label: t('bioScore.activity.sedentary.label'), offset: -2.0, desc: t('bioScore.activity.sedentary.desc') },
+    { value: "licht", label: t('bioScore.activity.light.label'), offset: 0.0, desc: t('bioScore.activity.light.desc') },
+    { value: "actief", label: t('bioScore.activity.active.label'), offset: 1.0, desc: t('bioScore.activity.active.desc') },
+    { value: "optimaal", label: t('bioScore.activity.optimal.label'), offset: 2.0, desc: t('bioScore.activity.optimal.desc') },
   ];
 
   const sleepOptions: { value: SleepLevel; label: string; offset: number; desc: string }[] = [
-    { value: "kort", label: "< 6 uur", offset: -1.5, desc: "Chronisch slaaptekort of slechte kwaliteit" },
-    { value: "matig", label: "6 - 7 uur", offset: -0.5, desc: "Regelmatig te weinig, vaak gejaagd" },
-    { value: "goed", label: "7 - 8 uur", offset: 0.5, desc: "Wisselend voldoende rust en kwaliteit" },
-    { value: "optimaal", label: "Consistent goed", offset: 1.5, desc: "8 uur diepe herstellende slaap" },
+    { value: "kort", label: t('bioScore.sleep.short.label'), offset: -1.5, desc: t('bioScore.sleep.short.desc') },
+    { value: "matig", label: t('bioScore.sleep.moderate.label'), offset: -0.5, desc: t('bioScore.sleep.moderate.desc') },
+    { value: "goed", label: t('bioScore.sleep.good.label'), offset: 0.5, desc: t('bioScore.sleep.good.desc') },
+    { value: "optimaal", label: t('bioScore.sleep.optimal.label'), offset: 1.5, desc: t('bioScore.sleep.optimal.desc') },
   ];
 
   const stressOptions: { value: StressLevel; label: string; offset: number; desc: string }[] = [
-    { value: "hoog", label: "Hoog", offset: -1.5, desc: "Chronische druk, wekelijkse overprikkeling" },
-    { value: "gemiddeld", label: "Gemiddeld", offset: -0.5, desc: "Gezonde stress met pieken, prima herstel" },
-    { value: "balans", label: "Goede balans", offset: 0.5, desc: "Gevoel van controle en ontspanning" },
-    { value: "laag", label: "Laag / Zen", offset: 1.5, desc: "Diepe rust, weinig externe druk" },
+    { value: "hoog", label: t('bioScore.stress.high.label'), offset: -1.5, desc: t('bioScore.stress.high.desc') },
+    { value: "gemiddeld", label: t('bioScore.stress.moderate.label'), offset: -0.5, desc: t('bioScore.stress.moderate.desc') },
+    { value: "balans", label: t('bioScore.stress.balanced.label'), offset: 0.5, desc: t('bioScore.stress.balanced.desc') },
+    { value: "laag", label: t('bioScore.stress.low.label'), offset: 1.5, desc: t('bioScore.stress.low.desc') },
   ];
 
   // Calculate cumulative local score
@@ -41,22 +44,22 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
       <div className="flex items-center justify-between border-b border-[#EAEAEA] pb-3">
         <div>
           <h3 className="font-sans font-medium text-sm text-[#2D2D2D] uppercase tracking-wide">
-            Lifestyle Bio-Score
+            {t('bioScore.title')}
           </h3>
           <p className="text-[11px] text-[#767676]">
-            Modifiers beïnvloeden de prognose met -5 tot +5 jaar
+            {t('bioScore.subtitle')}
           </p>
         </div>
         <div className="flex flex-col items-end">
           <span className="text-xs uppercase tracking-wider text-[#767676] font-mono leading-none">
-            Netto effect
+            {t('bioScore.netEffect')}
           </span>
           <NumberTicker
             value={totalOffset}
             decimals={1}
             duration={1}
             prefix={totalOffset >= 0 ? "+" : ""}
-            suffix=" jaar"
+            suffix={` ${t('bioScore.years')}`}
             className={`text-base font-bold font-mono mt-1 ${
               totalOffset > 0 ? "text-[#D56B45]" : totalOffset < 0 ? "text-amber-700" : "text-[#767676]"
             }`}
@@ -67,7 +70,7 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
       {/* 1. Beweging (Movement) */}
       <div className="space-y-2.5">
         <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
-          1. Fysieke Activiteit
+          {t('bioScore.activity.title')}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {activityOptions.map((opt) => {
@@ -108,7 +111,7 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
       {/* 2. Slaap (Sleep) */}
       <div className="space-y-2.5">
         <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
-          2. Slaappatroon
+          {t('bioScore.sleep.title')}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {sleepOptions.map((opt) => {
@@ -149,7 +152,7 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
       {/* 3. Stress */}
       <div className="space-y-2.5">
         <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
-          3. Stress / Werkdruk
+          {t('bioScore.stress.title')}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {stressOptions.map((opt) => {
