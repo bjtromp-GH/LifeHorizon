@@ -309,7 +309,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   initial={{ opacity: 0, scale: 0.3, rotate: -15, y: 40 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
                   transition={{ duration: 1.2, type: "spring", bounce: 0.5, delay: 0.1 }}
-                  className="w-48 h-48 sm:w-60 sm:h-60 shrink-0 flex items-end justify-center bg-white/10 border border-white/25 rounded-xl pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 backdrop-blur-xs shadow-[0_0_50px_rgba(255,255,255,0.35)] relative overflow-hidden group mb-6"
+                  className="w-48 h-48 sm:w-60 sm:h-60 shrink-0 flex items-end justify-center bg-white/10 border border-white/25 rounded-xl pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-6"
                 >
                   <img
                     src="/img/Olifant.png"
