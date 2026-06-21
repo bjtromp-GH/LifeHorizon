@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { UserInputs } from "../types";
 import LifeProgressBar from "./LifeProgressBar";
 import HealthyMatrixModal from "./HealthyMatrixModal";
+import { useLanguage } from "../context/LanguageContext";
 
 interface DecadeGridProps {
   inputs: UserInputs;
@@ -14,6 +15,7 @@ export default React.memo(function DecadeGrid({
   inputs,
   projectedLifeExpectancy,
 }: DecadeGridProps) {
+  const { t } = useLanguage();
   const { currentAge, startWorkAge, fireAge } = inputs;
   const [isCurrentAgeModalOpen, setIsCurrentAgeModalOpen] = useState(false);
   const [isAnalyseModalOpen, setIsAnalyseModalOpen] = useState(false);
@@ -39,17 +41,17 @@ export default React.memo(function DecadeGrid({
     <div id="decade-grid-container" className="flex flex-col space-y-4">
       <div className="flex items-center justify-between">
         <h4 className="text-xs font-semibold uppercase tracking-wider text-[#767676]">
-          Levensmatrix
+          {t('decadeGrid.title')}
         </h4>
         <div className="flex items-center space-x-3 text-[10px] text-[#767676] font-mono">
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#EAE8E4]" /> Ontwikkeling
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#EAE8E4]" /> {t('decadeGrid.development')}
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#C8C5C0]" /> Werk
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#C8C5C0]" /> {t('decadeGrid.work')}
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D56B45]/20 border border-[#D56B45]/30" /> Vrijheid
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D56B45]/20 border border-[#D56B45]/30" /> {t('decadeGrid.freedom')}
           </span>
         </div>
       </div>
@@ -67,7 +69,7 @@ export default React.memo(function DecadeGrid({
               <div key={decadeIndex} className="flex items-center space-x-3 min-w-[280px]">
                 {/* Decade indicator label on the left */}
                 <div className="w-10 text-right text-[11px] font-mono tracking-tight text-[#767676] select-none">
-                  {startYearOfDecade} jr
+                  {startYearOfDecade} {t('decadeGrid.yr')}
                 </div>
 
                 {/* Grid row containing 10 column items representing years */}
@@ -130,8 +132,8 @@ export default React.memo(function DecadeGrid({
                         {/* Custom Mini Tooltip */}
                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 pb-1.5 hidden group-hover:block z-20 pointer-events-none">
                           <div className="bg-[#2D2D2D] text-[#FAF9F8] text-[9.5px] px-2 py-0.5 rounded shadow-lg font-mono whitespace-nowrap leading-none">
-                            yr {year}: {phase === "basis" ? "Ontwikkeling" : phase === "accumulation" ? "Werk" : "Vrijheid"}
-                            {isCurrentYear && " (Huidige leeftijd!)"}
+                            {t('decadeGrid.yr')} {year}: {phase === "basis" ? t('decadeGrid.development') : phase === "accumulation" ? t('decadeGrid.work') : t('decadeGrid.freedom')}
+                            {isCurrentYear && t('decadeGrid.currentAgeMarker')}
                           </div>
                         </div>
                       </motion.div>
@@ -170,10 +172,10 @@ export default React.memo(function DecadeGrid({
             onClick={() => setIsAnalyseModalOpen(true)}
             className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#C05D3A] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
           >
-            Levensmatrix Analyse
+            {t('decadeGrid.analysisBtn')}
           </button>
           <span className="text-[10px] text-gray-500 mt-2 text-center max-w-xs">
-            Bekijk de inzichten en betekenis achter jouw matrix
+            {t('decadeGrid.analysisSubtitle')}
           </span>
         </div>
         
@@ -182,7 +184,7 @@ export default React.memo(function DecadeGrid({
             onClick={() => setIsHealthyModalOpen(true)}
             className="px-4 py-2 bg-white border border-[#D56B45] text-[#D56B45] text-xs font-bold rounded-md hover:bg-[#FAF3F0] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
           >
-            Gezonde Levensverwachting Matrix
+            {t('decadeGrid.healthyMatrixBtn')}
           </button>
         </div>
       </div>
@@ -205,7 +207,7 @@ export default React.memo(function DecadeGrid({
             >
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-lg font-bold text-[#2D2D2D] tracking-tight">
-                  Jouw Huidige Positie
+                  {t('decadeGrid.currentPositionTitle')}
                 </h3>
                 <button
                   onClick={() => setIsCurrentAgeModalOpen(false)}
@@ -215,7 +217,7 @@ export default React.memo(function DecadeGrid({
                 </button>
               </div>
               <p className="text-sm text-[#767676] leading-relaxed">
-                Je bevindt je nu hier in de levensmatrix! Dit blokje markeert jouw huidige leeftijd. De kleur geeft aan in welke fase van je leven je je momenteel bevindt: Ontwikkeling, Werk of Vrijheid.
+                {t('decadeGrid.currentPositionDesc')}
               </p>
             </motion.div>
           </div>
@@ -240,7 +242,7 @@ export default React.memo(function DecadeGrid({
             >
               <div className="flex justify-between items-start mb-5">
                 <h3 className="text-lg font-bold text-[#2D2D2D] tracking-tight">
-                  Levensmatrix Analyse
+                  {t('decadeGrid.analysisBtn')}
                 </h3>
                 <button
                   onClick={() => setIsAnalyseModalOpen(false)}
@@ -333,8 +335,8 @@ export default React.memo(function DecadeGrid({
                         onMouseLeave={() => setActiveSlice(null)}
                       >
                         <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
-                          <span>Ontwikkeling</span>
-                          <span>{startWorkAge} jr ({(startWorkAge / totalYears * 100).toFixed(0)}%)</span>
+                          <span>{t('decadeGrid.development')}</span>
+                          <span>{startWorkAge} {t('decadeGrid.yr')} ({(startWorkAge / totalYears * 100).toFixed(0)}%)</span>
                         </div>
                         <div className="h-3 bg-[#F3F1ED] rounded-full overflow-hidden">
                           <motion.div
@@ -352,8 +354,8 @@ export default React.memo(function DecadeGrid({
                         onMouseLeave={() => setActiveSlice(null)}
                       >
                         <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
-                          <span>Werk</span>
-                          <span>{fireAge - startWorkAge} jr ({((fireAge - startWorkAge) / totalYears * 100).toFixed(0)}%)</span>
+                          <span>{t('decadeGrid.work')}</span>
+                          <span>{fireAge - startWorkAge} {t('decadeGrid.yr')} ({((fireAge - startWorkAge) / totalYears * 100).toFixed(0)}%)</span>
                         </div>
                         <div className="h-3 bg-[#E6E4E0] rounded-full overflow-hidden">
                           <motion.div
@@ -371,8 +373,8 @@ export default React.memo(function DecadeGrid({
                         onMouseLeave={() => setActiveSlice(null)}
                       >
                         <div className="flex justify-between text-xs font-semibold text-[#D56B45] mb-1 uppercase tracking-wider">
-                          <span>Vrijheid</span>
-                          <span>{totalYears - fireAge} jr ({((totalYears - fireAge) / totalYears * 100).toFixed(0)}%)</span>
+                          <span>{t('decadeGrid.freedom')}</span>
+                          <span>{totalYears - fireAge} {t('decadeGrid.yr')} ({((totalYears - fireAge) / totalYears * 100).toFixed(0)}%)</span>
                         </div>
                         <div className="h-3 bg-[#D56B45]/15 rounded-full overflow-hidden">
                           <motion.div
@@ -390,9 +392,10 @@ export default React.memo(function DecadeGrid({
 
               <div className="border-t border-[#EAE8E4] pt-6 mt-2 mb-6">
                 <div className="text-center mb-6">
-                  <h2 className="text-[14px] sm:text-lg font-black text-[#2D2D2D] tracking-tight uppercase whitespace-nowrap overflow-hidden text-ellipsis">
-                    Je hebt <span className="font-mono">{Math.min(100, Math.round((currentAge / Math.max(projectedLifeExpectancy, currentAge, 1)) * 100))}%</span> van je leven geleefd!
-                  </h2>
+                  <h2 
+                    className="text-[14px] sm:text-lg font-black text-[#2D2D2D] tracking-tight uppercase whitespace-nowrap overflow-hidden text-ellipsis"
+                    dangerouslySetInnerHTML={{ __html: t('decadeGrid.livedPercentage').replace('{{pct}}', Math.min(100, Math.round((currentAge / Math.max(projectedLifeExpectancy, currentAge, 1)) * 100)).toString()) }}
+                  />
                 </div>
                 <LifeProgressBar 
                   currentAge={currentAge} 
@@ -402,21 +405,21 @@ export default React.memo(function DecadeGrid({
                 />
               </div>
 
-              <div className="bg-[#FAF9F8] p-4 rounded-lg text-sm text-[#767676] leading-relaxed border border-[#EAE8E4]">
-                <p>
-                  Uit deze analyse blijkt dat <strong>{((totalYears - fireAge) / totalYears * 100).toFixed(0)}%</strong> van je 
-                  geprognotiseerde leven wordt besteed in volledige vrijheid, mits je op je <strong>{fireAge}e</strong> stopt met werken.
-                  Dat betekent dat je na je opbouw- en werkfase nog een aanzienlijk deel van de matrix ter vrije besteding hebt.
-                  Zorg ervoor dat je vitaliteit in deze laatste fase optimaal blijft door nu al de juiste leefstijlkeuzes te maken!
-                </p>
-              </div>
+              <div 
+                className="bg-[#FAF9F8] p-4 rounded-lg text-sm text-[#767676] leading-relaxed border border-[#EAE8E4]"
+                dangerouslySetInnerHTML={{ 
+                  __html: t('decadeGrid.analysisDesc')
+                    .replace('{{freePct}}', ((totalYears - fireAge) / totalYears * 100).toFixed(0))
+                    .replace('{{fireAge}}', fireAge.toString())
+                }}
+              />
 
               <div className="py-6 mt-2 text-center sm:hidden">
                 <button 
                   onClick={() => setIsAnalyseModalOpen(false)} 
                   className="w-full flex items-center justify-center bg-[#D56B45] hover:bg-[#B84E29] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                 >
-                  Sluiten
+                  {t('decadeGrid.close')}
                 </button>
               </div>
             </motion.div>

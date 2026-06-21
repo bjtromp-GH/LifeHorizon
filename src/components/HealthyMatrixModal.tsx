@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import { X, Heart, HeartOff } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface HealthyMatrixModalProps {
   isOpen: boolean;
@@ -7,6 +8,7 @@ interface HealthyMatrixModalProps {
 }
 
 export default function HealthyMatrixModal({ isOpen, onClose }: HealthyMatrixModalProps) {
+  const { t } = useLanguage();
   // Stats (Approximate based on NL averages)
   const stats = {
     man: { total: 80, healthy: 65 },
@@ -50,10 +52,10 @@ export default function HealthyMatrixModal({ isOpen, onClose }: HealthyMatrixMod
             <div className="flex justify-between items-start mb-8 sm:mb-12 pt-4">
               <div>
                 <h3 className="text-2xl sm:text-4xl font-black text-[#2D2D2D] tracking-tight">
-                  Gezonde Levensverwachting Matrix
+                  {t('healthyMatrixModal.title')}
                 </h3>
                 <p className="text-sm sm:text-base text-[#767676] mt-2 max-w-2xl leading-relaxed">
-                  Het verschil tussen levensduur en "gezondheidsduur" (healthspan). We worden gemiddeld ouder, maar onze gezonde jaren groeien helaas niet in hetzelfde tempo mee.
+                  {t('healthyMatrixModal.subtitle')}
                 </p>
               </div>
               <button
@@ -68,8 +70,8 @@ export default function HealthyMatrixModal({ isOpen, onClose }: HealthyMatrixMod
               {/* Man */}
               <div className="bg-[#FAF9F8] p-6 sm:p-8 rounded-2xl border-2 border-[#EAE8E4] shadow-sm flex flex-col">
                 <div className="flex justify-between items-center mb-6">
-                  <h4 className="font-black text-[#2D2D2D] uppercase tracking-widest text-lg">Man</h4>
-                  <span className="text-sm font-mono font-bold text-[#767676] bg-white px-3 py-1 rounded-md border border-[#EAE8E4]">{stats.man.total} jaar totaal</span>
+                  <h4 className="font-black text-[#2D2D2D] uppercase tracking-widest text-lg">{t('healthyMatrixModal.men')}</h4>
+                  <span className="text-sm font-mono font-bold text-[#767676] bg-white px-3 py-1 rounded-md border border-[#EAE8E4]">{stats.man.total} {t('healthyMatrixModal.yearsTotal')}</span>
                 </div>
                 <div className="flex-1 mb-8">
                   {renderMiniGrid(stats.man.total, stats.man.healthy)}
@@ -78,14 +80,14 @@ export default function HealthyMatrixModal({ isOpen, onClose }: HealthyMatrixMod
                   <div className="flex justify-between items-center">
                     <span className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-sm bg-[#86A789]"></span>
-                      Gezonde jaren
+                      {t('healthyMatrixModal.healthyYears')}
                     </span>
                     <span className="font-black text-lg text-[#86A789]">{stats.man.healthy}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-sm bg-[#D56B45]"></span>
-                      Jaren met klachten
+                      {t('healthyMatrixModal.yearsWithComplaints')}
                     </span>
                     <span className="font-black text-lg text-[#D56B45]">{stats.man.total - stats.man.healthy}</span>
                   </div>
@@ -95,8 +97,8 @@ export default function HealthyMatrixModal({ isOpen, onClose }: HealthyMatrixMod
               {/* Vrouw */}
               <div className="bg-[#FAF9F8] p-6 sm:p-8 rounded-2xl border-2 border-[#EAE8E4] shadow-sm flex flex-col">
                 <div className="flex justify-between items-center mb-6">
-                  <h4 className="font-black text-[#2D2D2D] uppercase tracking-widest text-lg">Vrouw</h4>
-                  <span className="text-sm font-mono font-bold text-[#767676] bg-white px-3 py-1 rounded-md border border-[#EAE8E4]">{stats.vrouw.total} jaar totaal</span>
+                  <h4 className="font-black text-[#2D2D2D] uppercase tracking-widest text-lg">{t('healthyMatrixModal.women')}</h4>
+                  <span className="text-sm font-mono font-bold text-[#767676] bg-white px-3 py-1 rounded-md border border-[#EAE8E4]">{stats.vrouw.total} {t('healthyMatrixModal.yearsTotal')}</span>
                 </div>
                 <div className="flex-1 mb-8">
                   {renderMiniGrid(stats.vrouw.total, stats.vrouw.healthy)}
@@ -105,14 +107,14 @@ export default function HealthyMatrixModal({ isOpen, onClose }: HealthyMatrixMod
                   <div className="flex justify-between items-center">
                     <span className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-sm bg-[#86A789]"></span>
-                      Gezonde jaren
+                      {t('healthyMatrixModal.healthyYears')}
                     </span>
                     <span className="font-black text-lg text-[#86A789]">{stats.vrouw.healthy}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="flex items-center gap-2">
                       <span className="w-3 h-3 rounded-sm bg-[#D56B45]"></span>
-                      Jaren met klachten
+                      {t('healthyMatrixModal.yearsWithComplaints')}
                     </span>
                     <span className="font-black text-lg text-[#D56B45]">{stats.vrouw.total - stats.vrouw.healthy}</span>
                   </div>
@@ -125,18 +127,17 @@ export default function HealthyMatrixModal({ isOpen, onClose }: HealthyMatrixMod
                 <HeartOff className="w-8 h-8 text-[#D56B45]" />
               </div>
               <div>
-                <h5 className="font-black text-[#2D2D2D] text-lg sm:text-xl mb-2 tracking-tight">De verborgen realiteit</h5>
-                <p className="text-sm sm:text-base text-[#767676] leading-relaxed">
-                  We worden gemiddeld ouder, maar onze <em>gezonde</em> levensverwachting stijgt niet even hard mee. 
-                  Dit betekent dat we aan het einde van ons leven gemiddeld zo'n 15 tot 18 jaar kampen met chronische ziekten 
-                  en beperkingen. <strong>Met de LifeRunway Bio-Score kun je zelf actie ondernemen om dat gat te dichten!</strong>
-                </p>
+                <h5 className="font-black text-[#2D2D2D] text-lg sm:text-xl mb-2 tracking-tight">{t('healthyMatrixModal.hiddenRealityTitle')}</h5>
+                <p 
+                  className="text-sm sm:text-base text-[#767676] leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: t('healthyMatrixModal.hiddenRealityDesc') }}
+                />
               </div>
             </div>
             
             <div className="py-8 text-center sm:hidden">
               <button onClick={onClose} className="px-8 py-3 bg-[#D56B45] text-white font-bold rounded-xl shadow-md">
-                Sluiten
+                {t('healthyMatrixModal.close')}
               </button>
             </div>
           </div>

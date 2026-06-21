@@ -1,0 +1,50 @@
+const fs = require('fs');
+
+let content = fs.readFileSync('src/components/MobileContainer.tsx', 'utf8');
+
+// Replacements
+content = content.replace(/Laten we verder gaan/g, "{t('mobileContainer.continueBtn')}");
+content = content.replace(/Ga verder/g, "{t('dashboard.nav.next')}");
+content = content.replace(/Pas aan/g, "{t('mobileContainer.adjustBtn')}");
+content = content.replace(/Het Normale Leven vs. Het Optimaal Model/g, "{t('mobileContainer.modelsTitle')}");
+content = content.replace(/Laten we nog eens even kijken naar de levensvoortgangsbalk van een normaal leven. Je begint met werken op je 20ste, je werkt tot 69 en overlijdt op 80 jaar. Dit is dan je leven:/g, "{t('mobileContainer.modelsDesc')}");
+content = content.replace(/Levensfase/g, "{t('mobileContainer.tablePhase')}");
+content = content.replace(/Leeftijd/g, "{t('mobileContainer.tableAge')}");
+content = content.replace(/Jaren/g, "{t('mobileContainer.tableYears')}");
+content = content.replace(/% Totaal/g, "{t('mobileContainer.tableTotal')}");
+content = content.replace(/Jeugd & Ontwikkeling/g, "{t('mobileContainer.youthPhase')}");
+content = content.replace(/Werkend leven/g, "{t('mobileContainer.workPhase')}");
+content = content.replace(/Vrije tijd \/ Pensioen/g, "{t('mobileContainer.freePhase')}");
+content = content.replace(/Totaal/g, "{t('mobileContainer.totalLabel')}");
+content = content.replace(/Als inspiratie stellen wij een optimaal model voor: Het 25 \/ 50 \/ 25 model./g, "{t('mobileContainer.modelInspiration')}");
+content = content.replace(/van je leven jeugd & ontwikkeling/g, "{t('mobileContainer.modelYouth')}");
+content = content.replace(/van je leven werken/g, "{t('mobileContainer.modelWork')}");
+content = content.replace(/leven in vrijheid/g, "{t('mobileContainer.modelFree')}");
+content = content.replace(/Normaal Leven/g, "{t('mobileContainer.normalLife')}");
+content = content.replace(/Het 25 \/ 50 \/ 25 Model/g, "{t('mobileContainer.optimalModel')}");
+content = content.replace(/Werkend/g, "{t('mobileContainer.working')}");
+content = content.replace(/Het 25 \/ 50 \/ 25 Model Uitgelegd/g, "{t('mobileContainer.modelExplainedTitle')}");
+content = content.replace(/Dit model stelt voor om je leven in drie duidelijke en evenwichtige fases te verdelen. Als we uitgaan van een geprognotiseerde levensverwachting van \{Math.round\(projectedLifeExpectancy\)\} jaar, ziet dit er voor jou zo uit:/g, "{t('mobileContainer.modelExplainedDesc').replace('{{age}}', Math.round(projectedLifeExpectancy).toString())}");
+content = content.replace(/De eerste kwart van je leven staat in het teken van spelen, leren en jezelf ontwikkelen. Hier leg je de basis voor de rest van je reis./g, "{t('mobileContainer.youthDesc')}");
+content = content.replace(/Werken & Opbouwen/g, "{t('mobileContainer.workTitle')}");
+content = content.replace(/De kernfase. Je werkt aan je carrière, bouwt vermogen op en investeert. Deze 50% moet efficiënt worden benut zodat je de laatste fase in vrijheid kunt leven./g, "{t('mobileContainer.workDesc')}");
+content = content.replace(/Vrijheid & Genieten/g, "{t('mobileContainer.freeTitle')}");
+content = content.replace(/Volledige financiële onafhankelijkheid. Tijd voor jezelf, familie, reizen en passies, zonder de verplichting om nog te moeten werken voor geld./g, "{t('mobileContainer.freeDesc')}");
+content = content.replace(/Jouw Financiële Runway/g, "{t('mobileContainer.financialRunwayTitle')}");
+content = content.replace(/Wil je weten hoe je het 25 \/ 50 \/ 25 model of beter kunt bereiken\?/g, "{t('mobileContainer.financialRunwayQuestion')}");
+content = content.replace(/We hebben nog een app gebouwd die je helpt je financiële runway uit te stippelen en je doelstellingen te bereiken: de Financiële Runway App./g, "{t('mobileContainer.financialRunwayDesc')}");
+content = content.replace(/Ontdek hoe je de benodigde jaren opbouwt om eerder met pensioen te kunnen en meer vrijheid te ervaren in je leven./g, "{t('mobileContainer.financialRunwayPromo')}");
+content = content.replace(/Bezoek de website/g, "{t('mobileContainer.visitWebsite')}");
+content = content.replace(/Onboarding Configuratie/g, "{t('mobileContainer.configTitle')}");
+content = content.replace(/Wijzig hier uw ingevoerde levensloopparameters/g, "{t('mobileContainer.configSubtitle')}");
+content = content.replace(/1. Basis Profiel/g, "{t('mobileContainer.basicProfile')}");
+content = content.replace(/2. Vitaliteit & Leefstijl Modifiers/g, "{t('mobileContainer.modifiersTitle')}");
+content = content.replace(/Actuele CBS Cohort prognose:/g, "{t('mobileContainer.cbsPrognosis')}");
+content = content.replace(/jaar oud/g, "{t('mobileContainer.yearsOld')}");
+content = content.replace(/Gecompileerd op basis van jouw actieve leefstijlscore en erfelijke parameters./g, "{t('mobileContainer.compiledBasedOn')}");
+content = content.replace(/Toon Levensmatrix/g, "{t('mobileContainer.showMatrix')}");
+content = content.replace(/Mascotte/g, "{t('mobileContainer.mascotTitle')}");
+content = content.replace(/Wist je dat een olifant normaal gesproken een levensverwachting van 50-70 heeft maar in ideale omstandigheden zoals in een dierentuin wel 80 jaar kan worden\? Vandaar de mascotte voor onze app!/g, "{t('mobileContainer.mascotDesc')}");
+content = content.replace(/Jouw Levensmatrix/g, "{t('mobileContainer.matrixTitle')}");
+
+fs.writeFileSync('src/components/MobileContainer.tsx', content);

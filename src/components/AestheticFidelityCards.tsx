@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { UserInputs } from "../types";
 import { getBioScoreOffset } from "./BioScoreSection";
+import { useLanguage } from "../context/LanguageContext";
 
 interface AestheticFidelityCardsProps {
   inputs: UserInputs;
@@ -19,6 +20,7 @@ export default React.memo(function AestheticFidelityCards({
   apiSource,
   showOnly,
 }: AestheticFidelityCardsProps) {
+  const { t } = useLanguage();
   const { currentAge, startWorkAge, fireAge, fatherPassedAge, motherPassedAge, bioAnswers } = inputs;
 
   // Let's compute actual remaining life and other milestones
@@ -108,11 +110,11 @@ export default React.memo(function AestheticFidelityCards({
                   <div className="flex items-center space-x-2">
                     <Hourglass className="w-4 h-4 text-[#D56B45]" />
                     <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#2D2D2D]">
-                      Verbruikt vs. Resterend
+                      {t('cards.consumedVsRemaining.title')}
                     </h3>
                   </div>
                   <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
-                    Zwakste Schakel: Tijd
+                    {t('cards.consumedVsRemaining.badge')}
                   </div>
                 </div>
 
@@ -120,42 +122,40 @@ export default React.memo(function AestheticFidelityCards({
                   {/* Gerealiseerd */}
                   <div className="space-y-1">
                     <span className="text-[10px] tracking-wider text-[#767676] uppercase font-semibold">
-                      Gerealiseerd
+                      {t('cards.consumedVsRemaining.realised')}
                     </span>
                     <div className="flex items-baseline">
                       <span id="field-realised-years" className="text-3.5xl font-bold font-sans tracking-tight text-[#2D2D2D]">
                         {currentAge}
                       </span>
-                      <span className="text-sm font-sans font-medium text-[#767676] ml-0.5">j.</span>
+                      <span className="text-sm font-sans font-medium text-[#767676] ml-0.5">{t('cards.consumedVsRemaining.yr')}</span>
                     </div>
                     <div className="text-xs text-[#767676] space-y-0.5 leading-normal">
-                      <div>{Math.round(currentAge * 52.177).toLocaleString("nl-NL")} weken</div>
-                      <div>{Math.round(currentAge * 365.242).toLocaleString("nl-NL")} dagen</div>
+                      <div>{Math.round(currentAge * 52.177).toLocaleString()} {t('cards.consumedVsRemaining.weeks')}</div>
+                      <div>{Math.round(currentAge * 365.242).toLocaleString()} {t('cards.consumedVsRemaining.days')}</div>
                     </div>
                   </div>
 
                   {/* Resterend (Prognose) */}
                   <div className="space-y-1 border-l border-[#F3F2F0] pl-4">
                     <span className="text-[10px] tracking-wider text-[#767676] uppercase font-semibold">
-                      Resterend (Prognose)
+                      {t('cards.consumedVsRemaining.remaining')}
                     </span>
                     <div className="flex items-baseline">
                       <span id="field-remaining-years" className="text-3.5xl font-bold font-sans tracking-tight text-[#D56B45]">
                         {totalRemaining.toFixed(1)}
                       </span>
-                      <span className="text-sm font-sans font-medium text-[#D56B45] ml-0.5">j.</span>
+                      <span className="text-sm font-sans font-medium text-[#D56B45] ml-0.5">{t('cards.consumedVsRemaining.yr')}</span>
                     </div>
                     <div className="text-xs text-[#767676] space-y-0.5 leading-normal">
-                      <div>{Math.round(totalRemaining * 52.177).toLocaleString("nl-NL")} weken</div>
-                      <div>{Math.round(totalRemaining * 365.242).toLocaleString("nl-NL")} dagen</div>
+                      <div>{Math.round(totalRemaining * 52.177).toLocaleString()} {t('cards.consumedVsRemaining.weeks')}</div>
+                      <div>{Math.round(totalRemaining * 365.242).toLocaleString()} {t('cards.consumedVsRemaining.days')}</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-[#F3F2F0] text-xs text-[#767676] leading-relaxed">
-                Op basis van uw leeftijd is <span className="font-semibold text-[#2D2D2D]">{orbitalPassedPct}%</span> van uw statistische levensorbit verstreken.
-              </div>
+              <div className="mt-4 pt-3 border-t border-[#F3F2F0] text-xs text-[#767676] leading-relaxed" dangerouslySetInnerHTML={{__html: t('cards.consumedVsRemaining.orbitPassed', { pct: orbitalPassedPct })}} />
             </motion.section>
           )}
 
@@ -171,11 +171,11 @@ export default React.memo(function AestheticFidelityCards({
                   <div className="flex items-center space-x-2">
                     <Heart className="w-4 h-4 text-[#D56B45]" />
                     <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#2D2D2D]">
-                      Vitaliteit & Levenswinst
+                      {t('cards.vitality.title')}
                     </h3>
                   </div>
                   <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
-                    Bio-Score
+                    {t('cards.vitality.badge')}
                   </div>
                 </div>
 
@@ -206,13 +206,13 @@ export default React.memo(function AestheticFidelityCards({
 
                   <div className="space-y-1">
                     <span className="text-[10px] tracking-wider text-[#767676] uppercase font-semibold block">
-                      Lifestyle Impact
+                      {t('cards.vitality.lifestyleImpact')}
                     </span>
                     <span id="field-lifestyle-impact" className="text-lg font-bold text-[#D56B45] block leading-tight">
-                      {bioOffset >= 0 ? `+${bioOffset.toFixed(1)}` : bioOffset.toFixed(1)} jaar {bioOffset >= 0 ? "winst" : "verlies"}
+                      {bioOffset >= 0 ? `+${bioOffset.toFixed(1)}` : bioOffset.toFixed(1)} {bioOffset >= 0 ? t('cards.vitality.yearsGain') : t('cards.vitality.yearsLoss')}
                     </span>
                     <p className="text-[11px] text-[#767676] leading-tight">
-                      Uw keuzes rond slaap, stress en sport veranderen de prognose ten opzichte van de CBS basis.
+                      {t('cards.vitality.description')}
                     </p>
                   </div>
                 </div>
@@ -220,27 +220,27 @@ export default React.memo(function AestheticFidelityCards({
                 {/* List of variables contributing to Life expectancy */}
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between items-center py-1 border-b border-[#F3F2F0]">
-                    <span className="text-[#767676]">Basis CBS cohort:</span>
-                    <span className="font-mono text-[#2D2D2D] font-medium">{cbsBaseExpectancy.toFixed(1)} j.</span>
+                    <span className="text-[#767676]">{t('cards.vitality.cbsBase')}</span>
+                    <span className="font-mono text-[#2D2D2D] font-medium">{cbsBaseExpectancy.toFixed(1)} {t('cards.consumedVsRemaining.yr')}</span>
                   </div>
                   <div className="flex justify-between items-center py-1 border-b border-[#F3F2F0]">
-                    <span className="text-[#767676]">Familiale genetica (vader/moeder):</span>
+                    <span className="text-[#767676]">{t('cards.vitality.genetics')}</span>
                     <span className="font-mono text-[#2D2D2D] font-medium">
-                      {hereditaryOffset >= 0 ? `+${hereditaryOffset.toFixed(1)}` : hereditaryOffset.toFixed(1)} j.
+                      {hereditaryOffset >= 0 ? `+${hereditaryOffset.toFixed(1)}` : hereditaryOffset.toFixed(1)} {t('cards.consumedVsRemaining.yr')}
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-1 border-b border-[#F3F2F0]">
-                    <span className="text-[#767676]">Lifestyle (Bio-Score):</span>
+                    <span className="text-[#767676]">{t('cards.vitality.lifestyle')}</span>
                     <span className="font-mono text-[#2D2D2D] font-medium">
-                      {bioOffset >= 0 ? `+${bioOffset.toFixed(1)}` : bioOffset.toFixed(1)} j.
+                      {bioOffset >= 0 ? `+${bioOffset.toFixed(1)}` : bioOffset.toFixed(1)} {t('cards.consumedVsRemaining.yr')}
                     </span>
                   </div>
                   {inputs.customLifeExpectancy !== null && inputs.customLifeExpectancy !== undefined && (
                     <div className="flex justify-between items-center py-1 border-b border-[#F3F2F0] text-[#D56B45]">
-                      <span>Zelf aangepast (overrule):</span>
+                      <span>{t('cards.vitality.custom')}</span>
                       <span className="font-mono font-medium">
                         {(projectedLifeExpectancy - (cbsBaseExpectancy + hereditaryOffset + bioOffset)) >= 0 ? "+" : ""}
-                        {(projectedLifeExpectancy - (cbsBaseExpectancy + hereditaryOffset + bioOffset)).toFixed(1)} j.
+                        {(projectedLifeExpectancy - (cbsBaseExpectancy + hereditaryOffset + bioOffset)).toFixed(1)} {t('cards.consumedVsRemaining.yr')}
                       </span>
                     </div>
                   )}
@@ -248,9 +248,9 @@ export default React.memo(function AestheticFidelityCards({
               </div>
 
               <div className="flex justify-between items-center py-2 px-2.5 bg-[#FAF3F0]/60 rounded border border-[#EAEAEA]/80 font-bold mt-4">
-                <span className="text-[#2D2D2D] text-xs">Totale Verwachte Leeftijd:</span>
+                <span className="text-[#2D2D2D] text-xs">{t('cards.vitality.totalExpected')}</span>
                 <span id="field-total-projected-expectation" className="font-mono text-[#D56B45] text-sm">
-                  {projectedLifeExpectancy.toFixed(1)} j.
+                  {projectedLifeExpectancy.toFixed(1)} {t('cards.consumedVsRemaining.yr')}
                 </span>
               </div>
             </motion.section>
@@ -268,19 +268,19 @@ export default React.memo(function AestheticFidelityCards({
                   <div className="flex items-center space-x-2">
                     <Landmark className="w-4 h-4 text-[#D56B45]" />
                     <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#2D2D2D]">
-                      Carrière Runway (Pensioen)
+                      {t('cards.career.title')}
                     </h3>
                   </div>
                   <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
-                    Actief Werk
+                    {t('cards.career.badge')}
                   </div>
                 </div>
 
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-[11px] text-[#767676]">
-                    <span>Start: {startWorkAge} jr</span>
-                    <span className="font-bold text-[#D56B45]">{workedPercentage}% voltooid</span>
-                    <span>Doel: {fireAge} jr</span>
+                    <span>{t('cards.career.start')} {startWorkAge} {t('cards.consumedVsRemaining.yr')}</span>
+                    <span className="font-bold text-[#D56B45]">{workedPercentage}% {t('cards.career.completed')}</span>
+                    <span>{t('cards.career.goal')} {fireAge} {t('cards.consumedVsRemaining.yr')}</span>
                   </div>
                   {/* Horizontal progress */}
                   <div className="w-full h-2 bg-[#EAE8E4] rounded-full overflow-hidden">
@@ -293,21 +293,19 @@ export default React.memo(function AestheticFidelityCards({
 
                 <div className="grid grid-cols-2 gap-4 text-xs">
                   <div>
-                    <span className="text-[#767676] block text-[10px] uppercase font-semibold">Gewerkt</span>
-                    <span className="text-base font-bold text-[#2D2D2D] font-mono">{yearsWorked} jaar</span>
+                    <span className="text-[#767676] block text-[10px] uppercase font-semibold">{t('cards.career.worked')}</span>
+                    <span className="text-base font-bold text-[#2D2D2D] font-mono">{yearsWorked} {t('cards.career.years')}</span>
                   </div>
                   <div className="border-l border-[#F3F2F0] pl-4">
-                    <span className="text-[#767676] block text-[10px] uppercase font-semibold">Resterende werkjaren</span>
+                    <span className="text-[#767676] block text-[10px] uppercase font-semibold">{t('cards.career.remaining')}</span>
                     <span id="field-remaining-workyears" className="text-base font-bold text-[#D56B45] font-mono">
-                      {yearsRemainingWork} jaar
+                      {yearsRemainingWork} {t('cards.career.years')}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-[#F3F2F0] text-xs text-[#767676] leading-relaxed">
-                Nog <span className="font-semibold text-[#2D2D2D]">{yearsRemainingWork} jaar</span> verplichte tijdsallocatie tot uw pensioenleeftijd van {fireAge} jaar.
-              </div>
+              <div className="mt-4 pt-3 border-t border-[#F3F2F0] text-xs text-[#767676] leading-relaxed" dangerouslySetInnerHTML={{__html: t('cards.career.description', { remaining: yearsRemainingWork.toString(), fireAge: fireAge.toString() })}} />
             </motion.section>
           )}
 
@@ -325,11 +323,11 @@ export default React.memo(function AestheticFidelityCards({
             <div className="flex items-center space-x-2">
               <span className="text-base select-none">🔥</span>
               <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#2D2D2D]">
-                De Ongetemde Horizon (Vrijheidsoogst)
+                {t('cards.horizon.title')}
               </h3>
             </div>
             <span className="text-[10px] text-[#767676] font-medium italic mt-1 sm:mt-0">
-              Maximale Tijdsonafhankelijkheid
+              {t('cards.horizon.badge')}
             </span>
           </div>
 
@@ -337,48 +335,48 @@ export default React.memo(function AestheticFidelityCards({
             {/* Totale levensvrijheid */}
             <div className="space-y-1 bg-white p-3 rounded border border-[#EAEAEA]/60">
               <span className="text-[9px] text-[#767676] uppercase font-bold tracking-wider block">
-                Totale Levensvrijheid
+                {t('cards.horizon.totalFreedom')}
               </span>
               <div className="flex items-baseline">
                 <span id="field-total-levensvrijheid" className="text-2xl font-bold text-[#D56B45] font-mono">
                   {totalFreedom.toFixed(1)}
                 </span>
-                <span className="text-xs text-[#767676] ml-1 font-medium">actieve jaren</span>
+                <span className="text-xs text-[#767676] ml-1 font-medium">{t('cards.horizon.activeYears')}</span>
               </div>
               <p className="text-[11px] text-[#767676] leading-snug">
-                Het aantal jaren dat u soevereine beslissingen kunt nemen na uw geplande pensioenleeftijd.
+                {t('cards.horizon.freedomDesc')}
               </p>
             </div>
 
             {/* Gereserveerde vrijheid */}
             <div className="space-y-1 bg-white p-3 rounded border border-[#EAEAEA]/60">
               <span className="text-[9px] text-[#767676] uppercase font-bold tracking-wider block">
-                Gereserveerde Vrijheid
+                {t('cards.horizon.reservedFreedom')}
               </span>
               <div className="flex items-baseline">
                 <span className="text-2xl font-bold text-[#2D2D2D] font-mono">
-                  {Math.round(totalFreedom * 52.177).toLocaleString("nl-NL")}
+                  {Math.round(totalFreedom * 52.177).toLocaleString()}
                 </span>
-                <span className="text-xs text-[#767676] ml-1 font-medium">weken</span>
+                <span className="text-xs text-[#767676] ml-1 font-medium">{t('cards.consumedVsRemaining.weeks')}</span>
               </div>
               <p className="text-[11px] text-[#767676] leading-snug font-sans">
-                De totale voorraad weken onvoorwaardelijke vrijheid die u statistisch in het verschiet heeft.
+                {t('cards.horizon.reservedDesc')}
               </p>
             </div>
 
             {/* Noch te realiseren vrijheid */}
             <div className="space-y-1 bg-white p-3 rounded border border-[#EAEAEA]/60">
               <span className="text-[9px] text-[#767676] uppercase font-bold tracking-wider block">
-                Noch te realiseren vrijheid
+                {t('cards.horizon.unrealized')}
               </span>
               <div className="flex items-baseline">
                 <span className="text-2xl font-bold font-mono text-[#D56B45]">
-                  {Math.round(totalFreedom * 52.177).toLocaleString("nl-NL")}
+                  {Math.round(totalFreedom * 52.177).toLocaleString()}
                 </span>
-                <span className="text-xs text-[#767676] ml-1 font-medium">te gaan</span>
+                <span className="text-xs text-[#767676] ml-1 font-medium">{t('cards.horizon.toGo')}</span>
               </div>
               <p className="text-[11px] text-[#767676] leading-snug font-sans">
-                Weken die nog volledig overstaan na pensionering (uitgaande van uw huidige leeftijd).
+                {t('cards.horizon.unrealizedDesc')}
               </p>
             </div>
           </div>

@@ -6,6 +6,7 @@ import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
 import StatsCard from "./StatsCard";
+import { useLanguage } from "../context/LanguageContext";
 
 interface DesktopDashboardProps {
   inputs: UserInputs;
@@ -30,6 +31,7 @@ export default function DesktopDashboard({
   onRefreshCBS,
   onRestartOnboarding,
 }: DesktopDashboardProps) {
+  const { t } = useLanguage();
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const roundedRemaining = Math.round(totalRemaining * 10) / 10;
 
@@ -52,7 +54,7 @@ export default function DesktopDashboard({
                 LifeRunway
               </h1>
               <p className="text-xs text-[#767676]">
-                Confronteer je schaarste. Visualiseer je vitaliteit en levensfases.
+                {t('desktopDashboard.subtitle')}
               </p>
             </div>
           </div>
@@ -63,11 +65,11 @@ export default function DesktopDashboard({
               type="button"
               id="btn-restart-onboarding"
               onClick={onRestartOnboarding}
-              title="Start de geanimeerde introductie opnieuw"
+              title={t('desktopDashboard.restartIntroTitle')}
               className="flex items-center space-x-1.5 px-3 py-1.5 border border-[#EAEAEA] bg-white text-xs text-[#767676] rounded hover:bg-gray-100 transition-all duration-200 cursor-pointer"
             >
               <HelpCircle className="w-3.5 h-3.5 text-[#D56B45]" />
-              <span>Introductie</span>
+              <span>{t('desktopDashboard.intro')}</span>
             </button>
 
             {/* CBS Sync Indicator */}
@@ -75,16 +77,16 @@ export default function DesktopDashboard({
               type="button"
               id="btn-sync-cbs"
               onClick={onRefreshCBS}
-              title="Synchroniseer met CBS Open Data"
+              title={t('desktopDashboard.syncTitle')}
               className="flex items-center space-x-1.5 px-3 py-1.5 border border-[#EAEAEA] bg-white text-xs text-[#767676] rounded hover:bg-gray-100 transition-all duration-200 cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isLoadingCBS ? "animate-spin" : ""}`} />
-              <span>Sync CBS</span>
+              <span>{t('desktopDashboard.sync')}</span>
             </button>
 
             {/* General countdown pill */}
             <div className="bg-[#D56B45]/10 text-[#D56B45] font-mono text-xs font-semibold px-3.5 py-1.5 rounded border border-[#D56B45]/10 shadow-xs select-none">
-              {roundedRemaining} Jaren Resterend
+              {roundedRemaining} {t('desktopDashboard.yearsRemaining')}
             </div>
           </div>
         </header>
@@ -156,7 +158,7 @@ export default function DesktopDashboard({
 
       {/* Modern, minimalist workspace footer */}
       <footer className="mt-8 pt-4 border-t border-[#EAEAEA]/85 max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-center text-[11px] text-[#767676] font-sans">
-        <span>© 2026 LifeRunway — Tijd, Lucht & Vitaliteit</span>
+        <span>{t('desktopDashboard.footerText')}</span>
         <div className="flex space-x-4 mt-2 sm:mt-0 font-mono">
           <span>OData v3: Dataset 80333NED</span>
           <span>Dutch Life Expectancy Standard</span>

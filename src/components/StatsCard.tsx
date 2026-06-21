@@ -3,6 +3,7 @@ import { Hourglass, ShieldCheck, Sun, Workflow, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs } from "../types";
 import LifeProgressBar from "./LifeProgressBar";
+import { useLanguage } from "../context/LanguageContext";
 
 interface StatsCardProps {
   inputs: UserInputs;
@@ -15,6 +16,7 @@ export default function StatsCard({
   projectedLifeExpectancy,
   apiSource,
 }: StatsCardProps) {
+  const { t } = useLanguage();
   const { currentAge, fireAge } = inputs;
   const [activePopup, setActivePopup] = useState<string | null>(null);
 
@@ -30,24 +32,24 @@ export default function StatsCard({
 
   const popups: Record<string, { title: string; content: string }> = {
     prognose: {
-      title: "Prognose Leeftijd",
-      content: "Dit is jouw statistische levensverwachting. Het start met een basisverwachting uit het CBS cohortmodel, inclusief een overlevingsbonus voor je huidige leeftijd. Daarna is het gecorrigeerd aan de hand van je persoonlijke Bio-Score (leefstijl) en eventuele genetica."
+      title: t('statsCard.popups.prognosisTitle'),
+      content: t('statsCard.popups.prognosisDesc')
     },
     resterend: {
-      title: "Resterende Tijd",
-      content: "Dit is de tijd die je statistisch gezien nog over hebt op aarde, berekend vanaf je huidige leeftijd tot aan je prognose leeftijd. Zie dit als je resterende 'budget' aan tijd om de dingen te doen die je belangrijk vindt."
+      title: t('statsCard.popups.remainingTitle'),
+      content: t('statsCard.popups.remainingDesc')
     },
     werkend: {
-      title: "Werkende Jaren",
-      content: "Dit is de tijd die je nog zult besteden aan de opbouw- en werkfase van je leven. Dit eindigt bij de door jou gekozen pensioenleeftijd."
+      title: t('statsCard.popups.workingTitle'),
+      content: t('statsCard.popups.workingDesc')
     },
     vrijheid: {
-      title: "Vleugels (Vrijheid)",
-      content: "Dit is jouw vrije tijd (de 'oogstfase') zonder financiële verplichtingen, berekend vanaf je pensioenleeftijd tot aan je prognose leeftijd. In deze fase kun je je tijd volledig naar eigen inzicht besteden."
+      title: t('statsCard.popups.freedomTitle'),
+      content: t('statsCard.popups.freedomDesc')
     },
     voortgang: {
-      title: "Levensvoortgang",
-      content: "Dit toont welk percentage van je verwachte leven al voltooid is. Het helpt om je tijd in perspectief te plaatsen en bewust om te gaan met de tijd die je nog rest."
+      title: t('statsCard.popups.progressTitle'),
+      content: t('statsCard.popups.progressDesc')
     }
   };
 
@@ -61,7 +63,7 @@ export default function StatsCard({
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              Prognose Leeftijd
+              {t('statsCard.popups.prognosisTitle')}
             </span>
             <ShieldCheck className="w-4 h-4 text-[#D56B45]/80" />
           </div>
@@ -69,10 +71,10 @@ export default function StatsCard({
             <span id="stat-life-expectancy" className="text-3xl font-bold text-[#2D2D2D] font-mono tracking-tight">
               {lifeVal}
             </span>
-            <span className="text-xs text-[#767676] ml-1 font-sans">jaar</span>
+            <span className="text-xs text-[#767676] ml-1 font-sans">{t('statsCard.years')}</span>
           </div>
           <div className="mt-2.5 pt-2 border-t border-[#F8F7F5] flex flex-wrap items-center justify-between gap-1 text-[10px] text-[#767676]">
-            <span className="text-[#8E8C88] font-medium">Gecalibreerd met:</span>
+            <span className="text-[#8E8C88] font-medium">{t('statsCard.calibratedWith')}</span>
             <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[8.5px] font-extrabold uppercase tracking-widest bg-[#FAF3F0] text-[#D56B45] border border-[#D56B45]/15 whitespace-nowrap">
               {apiSource}
             </span>
@@ -86,7 +88,7 @@ export default function StatsCard({
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              Resterende Tijd
+              {t('statsCard.popups.remainingTitle')}
             </span>
             <Hourglass className="w-4 h-4 text-[#D56B45]" />
           </div>
@@ -94,10 +96,10 @@ export default function StatsCard({
             <span id="stat-remaining-years" className="text-3xl font-bold text-[#D56B45] font-mono tracking-tight">
               {remValue}
             </span>
-            <span className="text-xs text-[#767676] ml-1 font-sans">jaar</span>
+            <span className="text-xs text-[#767676] ml-1 font-sans">{t('statsCard.years')}</span>
           </div>
           <p className="text-[9.5px] text-[#767676] mt-1 select-none leading-tight">
-            Je resterende budget op aarde.
+            {t('statsCard.remainingBudget')}
           </p>
         </div>
 
@@ -108,7 +110,7 @@ export default function StatsCard({
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              Werkende Jaren
+              {t('statsCard.popups.workingTitle')}
             </span>
             <Workflow className="w-4 h-4 text-[#767676]/80" />
           </div>
@@ -116,12 +118,12 @@ export default function StatsCard({
             <span id="stat-working-years" className="text-3xl font-bold text-[#2D2D2D] font-mono tracking-tight">
               {workValue}
             </span>
-            <span className="text-xs text-[#767676] ml-1 font-sans">jaar</span>
+            <span className="text-xs text-[#767676] ml-1 font-sans">{t('statsCard.years')}</span>
           </div>
           <span className="text-[9.5px] text-[#767676] mt-1 leading-tight">
             {currentAge >= fireAge
-              ? "Pensioen / Vrijheid reeds behaald!"
-              : `Fase eindigt op ${fireAge} jarige leeftijd`}
+              ? t('statsCard.freedomAchieved')
+              : t('statsCard.phaseEndsAt').replace('{{age}}', fireAge.toString())}
           </span>
         </div>
 
@@ -132,7 +134,7 @@ export default function StatsCard({
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              Vleugels (Vrijheid)
+              {t('statsCard.popups.freedomTitle')}
             </span>
             <Sun className="w-4 h-4 text-amber-500/80" />
           </div>
@@ -140,10 +142,10 @@ export default function StatsCard({
             <span id="stat-freedom-years" className="text-3xl font-bold text-[#2D2D2D] font-mono tracking-tight">
               {freeValue}
             </span>
-            <span className="text-xs text-[#767676] ml-1">jaar</span>
+            <span className="text-xs text-[#767676] ml-1">{t('statsCard.years')}</span>
           </div>
           <span className="text-[9.5px] text-[#767676] mt-1 leading-tight">
-            De ultieme oogstfase van je leven.
+            {t('statsCard.harvestPhase')}
           </span>
         </div>
 

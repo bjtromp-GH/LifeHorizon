@@ -423,26 +423,24 @@ export default function MobileContainer({
             {/* Screen 4: Overview */}
             {activeSlide === 3 && (
               <div className="space-y-4 pt-2">
-                {showElephantFact && (
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="fixed inset-0 z-[500] bg-black/60 flex flex-col items-center justify-center p-4"
-                  >
-                    <div className="bg-white rounded-2xl p-6 w-full max-w-sm relative shadow-2xl flex flex-col items-center text-center">
-                      <motion.img 
-                        src="/img/olifant-bril.png" 
-                        alt="Olifant" 
-
+                <div className="flex-1 flex flex-col items-center justify-center min-h-[340px]">
+                  {/* Grid Container matching original */}
+                  <div className="h-[280px] w-full max-w-sm mx-auto px-4 mt-2 mb-2 select-none relative group">
+                    <DecadeGrid inputs={inputs} projectedLifeExpectancy={projectedLifeExpectancy} compact />
+                  </div>
                   {/* Dutch insights summary */}
                   <div className="bg-[#5c2411]/20 p-4 rounded-xl border border-white/10 text-xs text-stone-100 max-w-sm mx-auto w-full leading-relaxed space-y-2">
-                    <p>
-                      Jouw verwachte leefduur van <span className="font-bold text-white">{Math.round(projectedLifeExpectancy)} jaar</span> telt ca. <span className="font-bold text-white">{Math.round(projectedLifeExpectancy * 52.17).toLocaleString("nl-NL")} weken</span>. Elk hokje in de matrix vertegenwoordigt een unieke week.
-                    </p>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: t('mobileContainer.overviewTitle')
+                          .replace('{{years}}', Math.round(projectedLifeExpectancy).toString())
+                          .replace('{{weeks}}', Math.round(projectedLifeExpectancy * 52.17).toLocaleString(t('dashboard.lang')))
+                      }}
+                    />
                     <div className="flex items-start space-[#767676] space-x-2 pt-1 text-left">
                       <Lightbulb className="w-4 h-4 text-amber-200 mt-0.5 shrink-0" />
                       <p className="text-white/90">
-                        De kleurverdeling (Ontwikkeling, Werk, Vrijheid) verschuift mee met jouw persoonlijke Bio-Score!
+                        {t('mobileContainer.overviewDesc')}
                       </p>
                     </div>
                   </div>
@@ -455,7 +453,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(4)}
                     className="w-full flex items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                   >
-                    Laten we verder gaan
+                    {t('mobileContainer.continueBtn')}
                   </button>
                 </div>
 
@@ -465,7 +463,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-white/30 text-white hover:bg-white/10 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ Vorige
+                    ◀ {t('dashboard.nav.prev')}
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -485,7 +483,7 @@ export default function MobileContainer({
                     className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5"
                   >
                     <Settings className="w-3.5 h-3.5" />
-                    <span>Pas aan</span>
+                    <span>{t('mobileContainer.adjustBtn')}</span>
                   </button>
                 </div>
               </div>
@@ -497,11 +495,10 @@ export default function MobileContainer({
                 <div className="space-y-6">
                   <div className="mt-4">
                     <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
-                      Het Normale Leven vs. Het Optimaal Model
+                      {t('mobileContainer.modelsTitle')}
                     </h3>
-                    <p className="text-sm mt-3 text-[#767676] leading-relaxed">
-                      Laten we nog eens even kijken naar de levensvoortgangsbalk van een normaal leven. 
-                      Je begint met werken op je 20ste, je werkt tot 69 en overlijdt op 80 jaar. Dit is dan je leven:
+                    <p className="text-sm mt-4 text-[#767676] leading-relaxed">
+                      {t('mobileContainer.modelsDesc')}
                     </p>
                   </div>
 
@@ -510,34 +507,34 @@ export default function MobileContainer({
                     <table className="w-full text-left border-collapse min-w-[300px]">
                       <thead>
                         <tr className="bg-[#FAF9F8] border-b border-[#EAEAEA] text-[10px] sm:text-xs uppercase tracking-wider text-[#767676]">
-                          <th className="p-2 sm:p-3 font-bold">Levensfase</th>
-                          <th className="p-2 sm:p-3 font-bold">Leeftijd</th>
-                          <th className="p-2 sm:p-3 font-bold">Jaren</th>
-                          <th className="p-2 sm:p-3 font-bold text-right">% Totaal</th>
+                          <th className="p-2 sm:p-3 font-bold">{t('mobileContainer.tablePhase')}</th>
+                          <th className="p-2 sm:p-3 font-bold">{t('mobileContainer.tableAge')}</th>
+                          <th className="p-2 sm:p-3 font-bold">{t('mobileContainer.tableYears')}</th>
+                          <th className="p-2 sm:p-3 font-bold text-right">{t('mobileContainer.tableTotal')}</th>
                         </tr>
                       </thead>
                       <tbody className="text-xs sm:text-sm">
                         <tr className="border-b border-[#EAEAEA]">
-                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">Jeugd & Ontwikkeling</td>
-                          <td className="p-2 sm:p-3 text-[#767676]">0 tot 20 jaar</td>
+                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">{t('mobileContainer.youthPhase')}</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">0 {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} 20 {t('onboardingPanel.years')}</td>
                           <td className="p-2 sm:p-3 font-mono font-medium">20</td>
                           <td className="p-2 sm:p-3 font-mono font-medium text-right">25%</td>
                         </tr>
                         <tr className="border-b border-[#EAEAEA]">
-                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">Werkend leven</td>
-                          <td className="p-2 sm:p-3 text-[#767676]">20 tot 69 jaar</td>
+                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">{t('mobileContainer.workPhase')}</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">20 {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} 69 {t('onboardingPanel.years')}</td>
                           <td className="p-2 sm:p-3 font-mono font-medium">49</td>
                           <td className="p-2 sm:p-3 font-mono font-medium text-right">61,25%</td>
                         </tr>
                         <tr className="border-b border-[#EAEAEA]">
-                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">Vrije tijd / Pensioen</td>
-                          <td className="p-2 sm:p-3 text-[#767676]">69 tot 80 jaar</td>
+                          <td className="p-2 sm:p-3 font-semibold text-[#2D2D2D]">{t('mobileContainer.freePhase')}</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">69 {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} 80 {t('onboardingPanel.years')}</td>
                           <td className="p-2 sm:p-3 font-mono font-medium">11</td>
                           <td className="p-2 sm:p-3 font-mono font-medium text-right">13,75%</td>
                         </tr>
                         <tr className="bg-[#FAF9F8] font-bold">
-                          <td className="p-2 sm:p-3 text-[#2D2D2D]">Totaal</td>
-                          <td className="p-2 sm:p-3 text-[#767676]">0 tot 80 jaar</td>
+                          <td className="p-2 sm:p-3 text-[#2D2D2D]">{t('mobileContainer.totalLabel')}</td>
+                          <td className="p-2 sm:p-3 text-[#767676]">0 {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} 80 {t('onboardingPanel.years')}</td>
                           <td className="p-2 sm:p-3 font-mono text-[#2D2D2D]">80</td>
                           <td className="p-2 sm:p-3 font-mono text-[#2D2D2D] text-right">100%</td>
                         </tr>
@@ -547,12 +544,12 @@ export default function MobileContainer({
 
                   <div className="space-y-3 bg-[#FAF3F0] p-4 rounded-xl border border-[#D56B45]/20">
                     <p className="text-sm font-bold text-[#D56B45]">
-                      Als inspiratie stellen wij een optimaal model voor: Het 25 / 50 / 25 model.
+                      {t('mobileContainer.modelInspiration')}
                     </p>
                     <ul className="text-sm text-[#D56B45]/90 space-y-1.5 list-disc list-inside font-medium ml-2">
-                      <li><strong>25%</strong> van je leven jeugd & ontwikkeling</li>
-                      <li><strong>50%</strong> van je leven werken</li>
-                      <li><strong>25%</strong> leven in vrijheid</li>
+                      <li><strong>25%</strong> {t('mobileContainer.modelYouth')}</li>
+                      <li><strong>50%</strong> {t('mobileContainer.modelWork')}</li>
+                      <li><strong>25%</strong> {t('mobileContainer.modelFree')}</li>
                     </ul>
                   </div>
 
@@ -560,8 +557,8 @@ export default function MobileContainer({
                   <div className="space-y-6 pt-4 pb-2">
                     <div>
                       <div className="flex justify-between text-xs font-bold text-[#2D2D2D] mb-2">
-                        <span className="uppercase tracking-wider">Normaal Leven</span>
-                        <span className="text-[#767676] font-mono">(61,25% Werkend)</span>
+                        <span className="uppercase tracking-wider">{t('mobileContainer.normalLife')}</span>
+                        <span className="text-[#767676] font-mono">(61,25% {t('mobileContainer.working')})</span>
                       </div>
                       <div className="h-8 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#EAEAEA]">
                         <div className="bg-[#EAE8E4] w-[25%] flex items-center justify-center text-[9px] font-bold text-[#767676]">25%</div>
@@ -572,8 +569,8 @@ export default function MobileContainer({
 
                     <div>
                       <div className="flex justify-between text-xs font-bold text-[#D56B45] mb-2">
-                        <span className="uppercase tracking-wider">Het 25 / 50 / 25 Model</span>
-                        <span className="font-mono">(50% Werkend)</span>
+                        <span className="uppercase tracking-wider">{t('mobileContainer.optimalModel')}</span>
+                        <span className="font-mono">(50% {t('mobileContainer.working')})</span>
                       </div>
                       <div className="h-8 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#D56B45]/20 ring-2 ring-[#D56B45]/20">
                         <div className="bg-[#FAF3F0] w-[25%] flex items-center justify-center text-[9px] font-bold text-[#D56B45]">25%</div>
@@ -589,7 +586,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(5)}
                     className="w-full flex items-center justify-center bg-[#D56B45] hover:bg-[#C0562F] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                   >
-                    Ga verder
+                    {t('dashboard.nav.next')}
                   </button>
                 </div>
 
@@ -599,7 +596,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ Vorige
+                    ◀ {t('dashboard.nav.prev')}
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -619,7 +616,7 @@ export default function MobileContainer({
                     className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
                   >
                     <Settings className="w-3.5 h-3.5" />
-                    <span>Pas aan</span>
+                    <span>{t('mobileContainer.adjustBtn')}</span>
                   </button>
                 </div>
               </div>
@@ -631,11 +628,10 @@ export default function MobileContainer({
                 <div className="space-y-6">
                   <div className="mt-4">
                     <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#86A789]">
-                      Het 25 / 50 / 25 Model Uitgelegd
+                      {t('mobileContainer.optimalModel')} Uitgelegd
                     </h3>
-                    <p className="text-sm mt-3 text-[#767676] leading-relaxed">
-                      Dit model stelt voor om je leven in drie duidelijke en evenwichtige fases te verdelen. 
-                      Als we uitgaan van een geprognotiseerde levensverwachting van {projectedLifeExpectancy} jaar, ziet dit er voor jou zo uit:
+                    <p className="text-sm mt-4 text-[#767676] leading-relaxed">
+                      {t('mobileContainer.modelExplainedDesc').replace('{{age}}', projectedLifeExpectancy.toString())}
                     </p>
                   </div>
 
@@ -645,10 +641,10 @@ export default function MobileContainer({
                         <span className="font-bold text-[#767676]">25%</span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#2D2D2D] text-sm uppercase tracking-wider">Jeugd & Ontwikkeling</h4>
-                        <p className="text-xs text-[#767676] mt-1 font-mono">0 tot {Math.round(projectedLifeExpectancy * 0.25)} jaar</p>
+                        <h4 className="font-bold text-[#2D2D2D] text-sm uppercase tracking-wider">{t('mobileContainer.youthPhase')}</h4>
+                        <p className="text-xs text-[#767676] mt-1 font-mono">0 {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {Math.round(projectedLifeExpectancy * 0.25)} {t('onboardingPanel.years')}</p>
                         <p className="text-sm text-[#767676] mt-2 leading-relaxed">
-                          De eerste kwart van je leven staat in het teken van spelen, leren en jezelf ontwikkelen. Hier leg je de basis voor de rest van je reis.
+                          {t('mobileContainer.youthDesc')}
                         </p>
                       </div>
                     </div>
@@ -658,10 +654,10 @@ export default function MobileContainer({
                         <span className="font-bold text-[#D56B45]">50%</span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#D56B45] text-sm uppercase tracking-wider">Werken & Opbouwen</h4>
-                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.25)} tot {Math.round(projectedLifeExpectancy * 0.75)} jaar</p>
+                        <h4 className="font-bold text-[#D56B45] text-sm uppercase tracking-wider">{t('mobileContainer.workTitle')}</h4>
+                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.25)} {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {Math.round(projectedLifeExpectancy * 0.75)} {t('onboardingPanel.years')}</p>
                         <p className="text-sm text-[#767676] mt-2 leading-relaxed">
-                          De kernfase. Je werkt aan je carrière, bouwt vermogen op en investeert. Deze 50% moet efficiënt worden benut zodat je de laatste fase in vrijheid kunt leven.
+                          {t('mobileContainer.workDesc')}
                         </p>
                       </div>
                     </div>
@@ -671,10 +667,10 @@ export default function MobileContainer({
                         <span className="font-bold text-[#86A789]">25%</span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#86A789] text-sm uppercase tracking-wider">Vrijheid & Genieten</h4>
-                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.75)} tot {projectedLifeExpectancy} jaar</p>
+                        <h4 className="font-bold text-[#86A789] text-sm uppercase tracking-wider">{t('mobileContainer.freeTitle')}</h4>
+                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.75)} {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {projectedLifeExpectancy} {t('onboardingPanel.years')}</p>
                         <p className="text-sm text-[#767676] mt-2 leading-relaxed">
-                          Volledige financiële onafhankelijkheid. Tijd voor jezelf, familie, reizen en passies, zonder de verplichting om nog te moeten werken voor geld.
+                          {t('mobileContainer.freeDesc')}
                         </p>
                       </div>
                     </div>
@@ -686,7 +682,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(6)}
                     className="w-full flex items-center justify-center bg-[#D56B45] hover:bg-[#C0562F] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                   >
-                    Ga verder
+                    {t('dashboard.nav.next')}
                   </button>
                 </div>
 
@@ -696,7 +692,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ Vorige
+                    ◀ {t('dashboard.nav.prev')}
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -716,7 +712,7 @@ export default function MobileContainer({
                     className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
                   >
                     <Settings className="w-3.5 h-3.5" />
-                    <span>Pas aan</span>
+                    <span>{t('mobileContainer.adjustBtn')}</span>
                   </button>
                 </div>
               </div>
@@ -728,19 +724,19 @@ export default function MobileContainer({
                 <div className="space-y-6">
                   <div className="mt-4">
                     <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
-                      Jouw Financiële Runway
+                      {t('mobileContainer.financialRunwayTitle')}
                     </h3>
                     <p className="text-sm mt-4 text-[#2D2D2D] font-bold leading-relaxed">
-                      Wil je weten hoe je het 25 / 50 / 25 model of beter kunt bereiken?
+                      {t('mobileContainer.financialRunwayQuestion')}
                     </p>
                     <p className="text-sm mt-3 text-[#767676] leading-relaxed">
-                      We hebben nog een app gebouwd die je helpt je financiële runway uit te stippelen en je doelstellingen te bereiken: de Financiële Runway App.
+                      {t('mobileContainer.financialRunwayDesc')}
                     </p>
                   </div>
 
                   <div className="bg-[#FAF9F8] border border-[#EAEAEA] p-6 rounded-xl shadow-sm text-center">
                     <p className="text-sm text-[#767676] mb-4">
-                      Ontdek hoe je de benodigde jaren opbouwt om eerder met pensioen te kunnen en meer vrijheid te ervaren in je leven.
+                      {t('mobileContainer.financialRunwayPromo')}
                     </p>
                     <a
                       href="https://financiele-runway-promo.vercel.app/"
@@ -748,7 +744,7 @@ export default function MobileContainer({
                       rel="noopener noreferrer"
                       className="inline-flex w-full items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                     >
-                      Bezoek de website
+                      {t('mobileContainer.visitWebsite')}
                     </a>
                   </div>
                 </div>
@@ -759,7 +755,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ Vorige
+                    ◀ {t('dashboard.nav.prev')}
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -779,7 +775,7 @@ export default function MobileContainer({
                     className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
                   >
                     <Settings className="w-3.5 h-3.5" />
-                    <span>Pas aan</span>
+                    <span>{t('mobileContainer.adjustBtn')}</span>
                   </button>
                 </div>
               </div>
@@ -817,10 +813,10 @@ export default function MobileContainer({
                   </span>
                   <div>
                     <h3 className="font-sans font-bold text-sm text-[#2D2D2D]">
-                      Onboarding Configuratie
+                      {t('mobileContainer.configTitle')}
                     </h3>
                     <p className="text-[10px] text-[#767676]">
-                      Wijzig hier uw ingevoerde levensloopparameters
+                      {t('mobileContainer.configSubtitle')}
                     </p>
                   </div>
                 </div>
@@ -841,7 +837,7 @@ export default function MobileContainer({
                   <div className="flex items-center space-x-2 mb-1">
                     <span className="text-xs">👤</span>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-[#D56B45]">
-                      1. Basis Profiel
+                      {t('mobileContainer.basicProfile')}
                     </h4>
                   </div>
                   <OnboardingPanel inputs={inputs} onChange={onInputChange} />
@@ -852,7 +848,7 @@ export default function MobileContainer({
                   <div className="flex items-center space-x-2 mb-1">
                     <span className="text-xs">🌱</span>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-[#D56B45]">
-                      2. Vitaliteit & Leefstijl Modifiers
+                      {t('mobileContainer.modifiersTitle')}
                     </h4>
                   </div>
                   <BioScoreSection
@@ -867,12 +863,12 @@ export default function MobileContainer({
 
                 {/* Custom genetic overview widget */}
                 <div className="bg-[#FAF9F6] p-3.5 rounded-lg border border-[#EAEAEA] space-y-1 text-center font-mono">
-                  <span className="text-xs text-[#767676]">Actuele CBS Cohort prognose:</span>
+                  <span className="text-xs text-[#767676]">{t('mobileContainer.cbsPrognosis')}</span>
                   <div className="text-xl font-black text-[#D56B45]">
-                    {projectedLifeExpectancy.toFixed(1)} <span className="text-xs font-normal text-[#2D2D2D]">jaar oud</span>
+                    {projectedLifeExpectancy.toFixed(1)} <span className="text-xs font-normal text-[#2D2D2D]">{t('mobileContainer.yearsOld')}</span>
                   </div>
                   <p className="text-[10px] text-[#767676] max-w-xs mx-auto leading-normal">
-                    Gecompileerd op basis van jouw actieve leefstijlscore en erfelijke parameters.
+                    {t('mobileContainer.compiledBasedOn')}
                   </p>
                 </div>
 
@@ -885,7 +881,7 @@ export default function MobileContainer({
                   onClick={() => setShowConfig(false)}
                   className="w-full py-3.5 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white font-extrabold text-xs tracking-wider uppercase rounded-xl shadow-md transition-all cursor-pointer text-center"
                 >
-                  Toon Levensmatrix
+                  {t('mobileContainer.showMatrix')}
                 </button>
               </div>
 
@@ -914,7 +910,7 @@ export default function MobileContainer({
               <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-6 shrink-0" />
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold font-sans tracking-tight text-[#D56B45]">
-                  Mascotte
+                  {t('mobileContainer.mascotTitle')}
                 </h3>
                 <button 
                   onClick={() => setShowElephantFact(false)} 
@@ -925,7 +921,7 @@ export default function MobileContainer({
               </div>
               <div className="space-y-5 text-sm text-white/80 leading-relaxed font-sans">
                 <p>
-                  Wist je dat een olifant normaal gesproken een levensverwachting van 50-70 heeft maar in ideale omstandigheden zoals in een dierentuin wel 80 jaar kan worden? Vandaar de mascotte voor onze app!
+                  {t('mobileContainer.mascotDesc')}
                 </p>
                 <div className="flex justify-center mt-6">
                   <img src="/img/olifant-bril.png" alt="Olifant" className="w-32 h-32 object-contain drop-shadow-lg" />
@@ -955,7 +951,7 @@ export default function MobileContainer({
             >
               <div className="flex justify-between items-center px-5 py-4 bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
                 <h3 className="text-lg font-black font-sans tracking-tight text-[#2D2D2D] uppercase">
-                  Jouw Levensmatrix
+                  {t('mobileContainer.matrixTitle')}
                 </h3>
                 <button
                   onClick={() => setShowMatrixModal(false)}

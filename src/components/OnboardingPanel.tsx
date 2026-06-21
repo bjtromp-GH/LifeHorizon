@@ -1,4 +1,5 @@
 import { Gender, UserInputs } from "../types";
+import { useLanguage } from "../context/LanguageContext";
 
 interface OnboardingPanelProps {
   inputs: UserInputs;
@@ -6,6 +7,7 @@ interface OnboardingPanelProps {
 }
 
 export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelProps) {
+  const { t } = useLanguage();
   const currentYear = 2026;
 
   // Handle Birth Year change
@@ -31,17 +33,17 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
       {/* Title */}
       <div className="border-b border-[#EAEAEA] pb-3">
         <h3 className="font-sans font-medium text-sm text-[#2D2D2D] uppercase tracking-wide">
-          Persoonlijke Meetlat
+          {t('onboardingPanel.personalYardstick')}
         </h3>
         <p className="text-[11px] text-[#767676]">
-          Stel je basis parameters in om je levensduur te calibreren
+          {t('onboardingPanel.calibrateLifeSpan')}
         </p>
       </div>
 
       {/* 1. Geboortejaar */}
       <div className="space-y-1.5">
         <div className="flex justify-between items-center text-xs">
-          <label className="font-medium text-[#2D2D2D]">Geboortejaar</label>
+          <label className="font-medium text-[#2D2D2D]">{t('onboardingPanel.birthYear')}</label>
           <span className="font-mono text-[#D56B45] font-semibold">{inputs.birthYear}</span>
         </div>
         <div className="flex space-x-2 items-center">
@@ -68,7 +70,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
 
       {/* 2. Geslacht (Gender Selector) */}
       <div className="space-y-1.5">
-        <label className="text-xs font-medium text-[#2D2D2D]">Geslacht</label>
+        <label className="text-xs font-medium text-[#2D2D2D]">{t('onboardingPanel.gender')}</label>
         <div id="gender-button-group" className="grid grid-cols-2 gap-2">
           <button
             type="button"
@@ -80,7 +82,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
                 : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50 hover:border-gray-300"
             }`}
           >
-            Man (Statistisch korter)
+            {t('onboardingPanel.manStat')}
           </button>
           <button
             type="button"
@@ -92,7 +94,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
                 : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50 hover:border-gray-300"
             }`}
           >
-            Vrouw (Statistisch langer)
+            {t('onboardingPanel.womanStat')}
           </button>
         </div>
       </div>
@@ -100,8 +102,8 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
       {/* 3. Huidige Leeftijd (autocalculated but slider manual override) */}
       <div className="space-y-1.5">
         <div className="flex justify-between items-center text-xs">
-          <label className="font-medium text-[#2D2D2D]">Huidige Leeftijd (Gecorrigeerd)</label>
-          <span className="font-mono text-[#D56B45] font-semibold">{inputs.currentAge} jaar</span>
+          <label className="font-medium text-[#2D2D2D]">{t('onboardingPanel.currentAge')}</label>
+          <span className="font-mono text-[#D56B45] font-semibold">{inputs.currentAge} {t('onboardingPanel.years')}</span>
         </div>
         <div className="flex items-center space-x-2 w-full">
           <input
@@ -143,7 +145,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
             className="w-full sm:w-16 text-center border border-[#EAEAEA] rounded text-sm sm:text-xs py-1.5 sm:py-0.5 font-mono text-[#2D2D2D]"
           />
           <span className="text-[10px] text-[#767676] font-mono whitespace-nowrap">
-            berekend: {currentYear - inputs.birthYear} jr
+            {t('onboardingPanel.calculated')} {currentYear - inputs.birthYear} {t('onboardingPanel.yr')}
           </span>
         </div>
       </div>
@@ -152,10 +154,10 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
       <div className="space-y-1.5">
         <div className="flex justify-between items-center text-xs">
           <div className="flex flex-col">
-            <span className="font-medium text-[#2D2D2D]">Startleeftijd Werken</span>
-            <span className="text-[10px] text-[#767676]">Wanneer begon je met werken?</span>
+            <span className="font-medium text-[#2D2D2D]">{t('onboardingPanel.startWorkAge')}</span>
+            <span className="text-[10px] text-[#767676]">{t('onboardingPanel.whenDidYouStart')}</span>
           </div>
-          <span className="font-mono text-[#D56B45] font-semibold">{inputs.startWorkAge} jr</span>
+          <span className="font-mono text-[#D56B45] font-semibold">{inputs.startWorkAge} {t('onboardingPanel.yr')}</span>
         </div>
         <div className="flex space-x-2 items-center">
           <input
@@ -191,10 +193,10 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
       <div className="space-y-1.5 pb-2">
         <div className="flex justify-between items-center text-xs">
           <div className="flex flex-col">
-            <span className="font-medium text-[#2D2D2D]">Doel Leeftijd Pensioen</span>
-            <span className="text-[10px] text-[#767676]">Wanneer start de vrijheid-fase?</span>
+            <span className="font-medium text-[#2D2D2D]">{t('onboardingPanel.targetRetirementAge')}</span>
+            <span className="text-[10px] text-[#767676]">{t('onboardingPanel.whenStartsFreedom')}</span>
           </div>
-          <span className="font-mono text-[#D56B45] font-semibold">{inputs.fireAge} jr</span>
+          <span className="font-mono text-[#D56B45] font-semibold">{inputs.fireAge} {t('onboardingPanel.yr')}</span>
         </div>
         <div className="flex space-x-2 items-center">
           <input
@@ -225,17 +227,17 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
       <div className="pt-3 border-t border-[#EAEAEA] space-y-3">
         <div className="flex flex-col">
           <span className="text-[11px] uppercase tracking-wider font-semibold text-[#767676]">
-            6. Erfelijkheid (Levensduur Ouders)
+            {t('onboardingPanel.hereditaryFactors')}
           </span>
           <span className="text-[10px] text-[#767676]">
-            Hereditaire factoren passen de prognose aan met -1.5 tot +1.5 jaar per ouder.
+            {t('onboardingPanel.hereditaryDesc')}
           </span>
         </div>
 
         {/* Father Section */}
         <div className="space-y-1.5 p-2 bg-gray-50 rounded border border-[#EAEAEA]/60">
           <div className="flex justify-between items-center text-xs">
-            <span className="font-medium text-[#2D2D2D]">Vader</span>
+            <span className="font-medium text-[#2D2D2D]">{t('onboardingPanel.father')}</span>
             <div className="flex space-x-1">
               <button
                 type="button"
@@ -247,7 +249,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
                     : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-100"
                 }`}
               >
-                In leven / Neutraal
+                {t('onboardingPanel.aliveNeutral')}
               </button>
               <button
                 type="button"
@@ -259,7 +261,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
                     : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-100"
                 }`}
               >
-                Overleden
+                {t('onboardingPanel.passedAway')}
               </button>
             </div>
           </div>
@@ -267,11 +269,11 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
           {inputs.fatherPassedAge !== null && (
             <div className="space-y-1 mt-2">
               <div className="flex justify-between items-center text-[11px]">
-                <span className="text-[#767676]">Leeftijd van overlijden:</span>
+                <span className="text-[#767676]">{t('onboardingPanel.ageOfPassing')}</span>
                 <span className="font-mono text-[#D56B45] font-semibold">
-                  {inputs.fatherPassedAge} jaar{" "}
+                  {inputs.fatherPassedAge} {t('onboardingPanel.years')}{" "}
                   <span className="text-[9px] text-[#767676] font-normal">
-                    ({inputs.fatherPassedAge < 65 ? "-1.5 jr" : inputs.fatherPassedAge >= 85 ? "+1.5 jr" : "Neutraal"})
+                    ({inputs.fatherPassedAge < 65 ? `-1.5 ${t('onboardingPanel.yr')}` : inputs.fatherPassedAge >= 85 ? `+1.5 ${t('onboardingPanel.yr')}` : t('onboardingPanel.neutral')})
                   </span>
                 </span>
               </div>
@@ -305,7 +307,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
         {/* Mother Section */}
         <div className="space-y-1.5 p-2 bg-gray-50 rounded border border-[#EAEAEA]/60">
           <div className="flex justify-between items-center text-xs">
-            <span className="font-medium text-[#2D2D2D]">Moeder</span>
+            <span className="font-medium text-[#2D2D2D]">{t('onboardingPanel.mother')}</span>
             <div className="flex space-x-1">
               <button
                 type="button"
@@ -317,7 +319,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
                     : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-100"
                 }`}
               >
-                In leven / Neutraal
+                {t('onboardingPanel.aliveNeutral')}
               </button>
               <button
                 type="button"
@@ -329,7 +331,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
                     : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-100"
                 }`}
               >
-                Overleden
+                {t('onboardingPanel.passedAway')}
               </button>
             </div>
           </div>
@@ -337,11 +339,11 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
           {inputs.motherPassedAge !== null && (
             <div className="space-y-1 mt-2">
               <div className="flex justify-between items-center text-[11px]">
-                <span className="text-[#767676]">Leeftijd van overlijden:</span>
+                <span className="text-[#767676]">{t('onboardingPanel.ageOfPassing')}</span>
                 <span className="font-mono text-[#D56B45] font-semibold">
-                  {inputs.motherPassedAge} jaar{" "}
+                  {inputs.motherPassedAge} {t('onboardingPanel.years')}{" "}
                   <span className="text-[9px] text-[#767676] font-normal">
-                    ({inputs.motherPassedAge < 65 ? "-1.5 jr" : inputs.motherPassedAge >= 85 ? "+1.5 jr" : "Neutraal"})
+                    ({inputs.motherPassedAge < 65 ? `-1.5 ${t('onboardingPanel.yr')}` : inputs.motherPassedAge >= 85 ? `+1.5 ${t('onboardingPanel.yr')}` : t('onboardingPanel.neutral')})
                   </span>
                 </span>
               </div>
