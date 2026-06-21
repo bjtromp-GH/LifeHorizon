@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLanguage } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
 import { playChimeSound } from "../utils/audio";
@@ -31,15 +30,13 @@ import ScrollRevealText from "./ScrollRevealText";
 import Confetti from "./Confetti";
 
 interface OnboardingIntroProps {
-  initialStep?: number;
   inputs: UserInputs;
   onInputChange: (updates: Partial<UserInputs>) => void;
   onComplete: () => void;
 }
 
-export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange, onComplete }: OnboardingIntroProps) {
-  const { t, language, setLanguage } = useLanguage();
-  const [step, setStep] = useState<number>(initialStep);
+export default function OnboardingIntro({ inputs, onInputChange, onComplete }: OnboardingIntroProps) {
+  const [step, setStep] = useState<number>(0);
   const [imgError, setImgError] = useState(false);
   
   const [localGender, setLocalGender] = useState<Gender | null>(null);
@@ -104,12 +101,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
   // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
     { title: "Intro", icon: Sparkles },
-    { title: t('onboarding.testimonials.badge'), icon: Sparkles },
+    { title: "Ervaringen", icon: Sparkles },
     { title: "Welkom", icon: Sparkles },
     { title: "Profiel", icon: User },
     { title: "Leefstijl", icon: Heart },
     { title: "Genetica", icon: Dna },
-    { title: "Carrière", icon: Briefcase },
+    { title: "Carrière & Pensioen", icon: Briefcase },
     { title: "Klaar", icon: CheckCircle2 }
   ];
 
@@ -210,42 +207,34 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
       />
 
       {/* Top Header & Step Progress Bar */}
-      <AnimatePresence>
-        {step >= 2 && step < 8 && (
-          <motion.header 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10"
-          >
-            <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
-              <span className="text-xl">🔥</span>
-              <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
-                {t('onboarding.header')}
-              </h1>
+      {step >= 2 && step < 8 && (
+        <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10">
+          <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
+            <span className="text-xl">🔥</span>
+            <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
+              Levensloop & Pensioen
+            </h1>
+          </div>
+
+          {step > 1 && (
+            <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
+              <motion.div 
+                className="h-full bg-[#D56B45]"
+                initial={{ width: 0 }}
+                animate={{ width: `${((step - 1) / (stepsMeta.length - 2)) * 100}%` }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              />
             </div>
+          )}
 
-            {step > 1 && (
-              <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
-                <motion.div 
-                  className="h-full bg-[#D56B45]"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${((step - 1) / (stepsMeta.length - 2)) * 100}%` }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                />
-              </div>
-            )}
-
-            {step > 1 && (
-              <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
-                <span>{t('common.step')} {step - 1} {t('common.of')} {stepsMeta.length - 2}</span>
-                <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
-              </div>
-            )}
-          </motion.header>
-        )}
-      </AnimatePresence>
+          {step > 1 && (
+            <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
+              <span>Stap {step - 1} van {stepsMeta.length - 2}</span>
+              <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
+            </div>
+          )}
+        </header>
+      )}
 
       {/* Main Interactive Slides container */}
       <main className={`flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto pr-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
@@ -272,8 +261,8 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 transition={{ delay: 0.2, duration: 0.4 }}
                 className="text-center"
               >
-                <h2 className="text-xl sm:text-3xl font-black text-[#D56B45] uppercase tracking-wider mb-2 drop-shadow-sm">{t('onboarding.transition.goodJob')}</h2>
-                <p className="text-sm sm:text-lg font-bold text-[#767676]">{t('onboarding.transition.nextStep', { step: step.toString() })}</p>
+                <h2 className="text-xl sm:text-3xl font-black text-[#D56B45] uppercase tracking-wider mb-2 drop-shadow-sm">Goed bezig!</h2>
+                <p className="text-sm sm:text-lg font-bold text-[#767676]">Door naar stap {step}</p>
               </motion.div>
             </motion.div>
           ) : step === 0 ? (
@@ -289,13 +278,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               <div className="absolute inset-x-0 top-0 h-96 bg-radial-gradient from-white/10 to-transparent blur-2xl pointer-events-none" />
               
               {/* Logo/Badge at Top */}
-              <div className="w-full flex justify-center pt-4 sm:pt-8 z-10 relative">
-                {/* Language Switch */}
-                <div className="absolute left-0 sm:left-4 flex space-x-2">
-                  <button onClick={() => setLanguage('nl')} className={`transition-opacity ${language === 'nl' ? 'opacity-100 grayscale-0 scale-110' : 'opacity-50 grayscale scale-100'} text-xl sm:text-2xl cursor-pointer hover:opacity-100`}>🇳🇱</button>
-                  <button onClick={() => setLanguage('en')} className={`transition-opacity ${language === 'en' ? 'opacity-100 grayscale-0 scale-110' : 'opacity-50 grayscale scale-100'} text-xl sm:text-2xl cursor-pointer hover:opacity-100`}>🇬🇧</button>
-                </div>
-                
+              <div className="w-full flex justify-center pt-4 sm:pt-8 z-10">
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -304,7 +287,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 >
                   <Compass className="w-3.5 h-3.5 text-white" />
                   <span className="font-sans font-bold text-[10px] sm:text-[11px] tracking-widest uppercase text-white">
-                    {t('onboarding.splash.badge')}
+                    BEPAAL JE KOERS
                   </span>
                 </motion.div>
               </div>
@@ -317,7 +300,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   initial={{ opacity: 0, scale: 0.3, rotate: -15, y: 40 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0, y: 0 }}
                   transition={{ duration: 1.2, type: "spring", bounce: 0.5, delay: 0.1 }}
-                  className="w-48 h-48 sm:w-60 sm:h-60 shrink-0 flex items-end justify-center bg-white/10 border border-white/25 rounded-xl pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-6"
+                  className="w-40 h-40 sm:w-48 sm:h-48 shrink-0 flex items-end justify-center bg-white/10 border border-white/25 rounded-xl pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 backdrop-blur-xs shadow-lg relative overflow-hidden group mb-6"
                 >
                   <img
                     src="/img/Olifant.png"
@@ -368,7 +351,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   className="space-y-2 sm:space-y-4"
                 >
                   <p className="text-sm min-[375px]:text-base sm:text-2xl font-serif italic text-white/95 max-w-lg leading-relaxed font-semibold">
-                    {t('onboarding.splash.quote')}
+                    "Confronteer je schaarste. Visualiseer je vitaliteit en levensfases."
                   </p>
                   <div className="w-12 h-[2px] bg-white/30 mx-auto rounded" />
                 </motion.div>
@@ -386,7 +369,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   onClick={handleNext}
                   className="w-full py-3 px-5 sm:py-4 sm:px-6 bg-white hover:bg-[#FFF8F5] text-[#D56B45] font-extrabold text-xs sm:text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-xl border border-white/10 cursor-pointer transition-all duration-200"
                 >
-                  <span>{t('common.next')}</span>
+                  <span>Ga verder</span>
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
                 </motion.button>
                 
@@ -396,7 +379,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   transition={{ delay: 1.5 }}
                   className="text-[9px] sm:text-[10px] uppercase tracking-widest text-white/80 font-mono"
                 >
-                  {t('onboarding.splash.footer')}
+                  Bereken je overgebleven tijd &bull; CBS Cohort Model 2026
                 </motion.span>
               </div>
             </motion.div>
@@ -420,11 +403,11 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 >
                   <span className="text-lg">💬</span>
                   <span className="font-sans font-bold text-xs sm:text-sm tracking-widest uppercase text-white/90">
-                    {t('onboarding.testimonials.badge')}
+                    Ervaringen
                   </span>
                 </motion.div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug whitespace-pre-wrap">
-                  {Array.from(t('onboarding.testimonials.title1')).map((char, i) => (
+                  {Array.from("Wat gebruikers zeggen ").map((char, i) => (
                     <motion.span
                       key={`part1-${i}`}
                       initial={{ opacity: 0 }}
@@ -435,12 +418,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     </motion.span>
                   ))}
                   <br className="block sm:hidden" />
-                  {Array.from(t('onboarding.testimonials.title2')).map((char, i) => (
+                  {Array.from("over onze app").map((char, i) => (
                     <motion.span
                       key={`part2-${i}`}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ delay: 0.1 + (t('onboarding.testimonials.title1').length * 0.04) + i * 0.04, duration: 0.05 }}
+                      transition={{ delay: 0.1 + ("Wat gebruikers zeggen ".length * 0.04) + i * 0.04, duration: 0.05 }}
                     >
                       {char}
                     </motion.span>
@@ -454,22 +437,22 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
                     className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
-                    <p className="text-sm italic text-white/90 leading-relaxed">{t('onboarding.testimonials.t1_quote')}</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-2">{t('onboarding.testimonials.t1_author')}</p>
+                    <p className="text-sm italic text-white/90 leading-relaxed">"Het leven is kort. De LifeRunway app heeft mij echt inzicht gegeven zodat ik de juiste keuzes kan maken voordat het te laat is."</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Jan-Willem (42)</p>
                   </motion.div>
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
                     className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
-                    <p className="text-sm italic text-white/90 leading-relaxed">{t('onboarding.testimonials.t2_quote')}</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-2">{t('onboarding.testimonials.t2_author')}</p>
+                    <p className="text-sm italic text-white/90 leading-relaxed">"Wow, dit is echt een nuttige app. Serieus, maar heel gaaf en leuk om inzicht te krijgen in je levensloop."</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Mark (50)</p>
                   </motion.div>
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
                     className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
-                    <p className="text-sm italic text-white/90 leading-relaxed">{t('onboarding.testimonials.t3_quote')}</p>
-                    <p className="text-xs font-bold text-[#D56B45] mt-2">{t('onboarding.testimonials.t3_author')}</p>
+                    <p className="text-sm italic text-white/90 leading-relaxed">"Door het CBS model en mijn eigen leefstijlfactoren te combineren heb ik een veel beter beeld van mijn toekomst. Ik ben direct actiever gaan sporten."</p>
+                    <p className="text-xs font-bold text-[#D56B45] mt-2">- Sophie (35)</p>
                   </motion.div>
                 </div>
               </div>
@@ -482,7 +465,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   onClick={handleNext}
                   className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-lg cursor-pointer transition-all duration-200"
                 >
-                  <span>{t('onboarding.testimonials.button')}</span>
+                  <span>Start de introductie</span>
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
                 </motion.button>
               </div>
@@ -524,17 +507,17 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
 
               <div className="space-y-1.5 sm:space-y-3">
                 <h2 className="text-xl sm:text-3xl font-extrabold font-sans tracking-tight text-[#2D2D2D]">
-                  {t('onboarding.welcome.title')}
+                  Welkom bij uw Levensloop
                 </h2>
                 <p className="text-xs sm:text-sm text-[#767676] leading-relaxed">
-                  {t('onboarding.welcome.desc')}
+                  Hoeveel soevereine tijd heeft u echt te besteden? Ontdek uw statistische levensverwachting gebaseerd op het officiële CBS cohortmodel en zet dit af tegen uw pensioenambities.
                 </p>
               </div>
 
               <div className="p-2.5 sm:p-3.5 bg-gray-50 rounded-lg border border-[#EAEAEA] text-[11px] sm:text-xs text-left flex items-start space-x-2">
                 <Info className="w-4 h-4 text-[#D56B45] shrink-0 mt-0.5" />
                 <p className="text-[#767676] leading-snug">
-                  {t('onboarding.welcome.info')}
+                  Dit model berekent uw prognose dynamisch overlevingsstatistieken, leefstijlfactoren en genetische hereditaire aanpassingen.
                 </p>
               </div>
 
@@ -545,7 +528,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 onClick={handleNext}
                 className="w-full py-2.5 sm:py-3.5 font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md transition-colors duration-200 bg-[#201F1D] hover:bg-[#1A1A1A] text-white cursor-pointer"
               >
-                <span>{t('onboarding.welcome.button')}</span>
+                <span>Start de Levensmeting</span>
                 <Play className="w-3.5 h-3.5 fill-current" />
               </motion.button>
             </motion.div>
@@ -560,20 +543,20 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
             >
               <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
                 <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-                  {t('onboarding.demographics.badge')}
+                  Stap 1: Demografie
                 </span>
                 <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
-                  {t('onboarding.demographics.title')}
+                  Wat is uw biologische basisprofiel?
                 </h2>
                 <p className="text-[11px] sm:text-xs text-[#767676]">
-                  {t('onboarding.demographics.desc')}
+                  Biologischer geslacht en geboortejaar bepalen de startprognose van het CBS cohortmodel.
                 </p>
               </div>
 
               {/* Gender selection */}
               <div className="space-y-1 sm:space-y-2">
                 <label className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#767676]">
-                  {t('onboarding.demographics.gender')}
+                  Biologisch Geslacht
                 </label>
                 <div className={`grid grid-cols-2 gap-2 sm:gap-3 p-1 rounded-xl transition-all duration-300 ${showValidation && localGender === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {(["man", "vrouw"] as Gender[]).map((g) => (
@@ -588,19 +571,19 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                            : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
                       }`}
                     >
-                      <span>{g === "man" ? t('common.man') : t('common.woman')}</span>
+                      <span>{g === "man" ? "Man" : "Vrouw"}</span>
                     </button>
                   ))}
                 </div>
                 {showValidation && localGender === null && (
-                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('common.required')}</p>
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
                 )}
               </div>
 
               {/* Birth Year selection */}
               <div className="space-y-1 sm:space-y-3">
                 <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                  <span className="font-semibold text-[#767676] uppercase tracking-wider">{t('onboarding.demographics.birthYear')}</span>
+                  <span className="font-semibold text-[#767676] uppercase tracking-wider">Geboortejaar</span>
                   <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
                 </div>
                 <div 
@@ -611,26 +594,26 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     {inputs.birthYear}
                   </span>
                   <span className="ml-3 text-xs sm:text-sm font-bold text-[#767676] uppercase tracking-wider">
-                    {t('onboarding.demographics.tapToChange')}
+                    Tik om te wijzigen
                   </span>
                 </div>
                 {showValidation && !ageInteracted && (
-                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('onboarding.demographics.selectYear')}</p>
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Kies a.u.b. uw geboortejaar</p>
                 )}
               </div>
 
               {/* Current Age display and tweak */}
               <div className="space-y-1 sm:space-y-3 pt-0.5 sm:pt-2 pb-1">
                 <div className="flex justify-between items-center text-[10px] sm:text-xs bg-[#FAF3F0] p-2.5 rounded-lg border border-[#D56B45]/15">
-                  <span className="font-semibold text-[#D56B45] uppercase tracking-wider">{t('onboarding.demographics.currentAge')}</span>
-                  <span className="font-mono text-sm sm:text-base font-black text-[#D56B45]">{t('onboarding.demographics.ageYears', { age: inputs.currentAge.toString() })}</span>
+                  <span className="font-semibold text-[#D56B45] uppercase tracking-wider">Huidige Leeftijd (in 2026)</span>
+                  <span className="font-mono text-sm sm:text-base font-black text-[#D56B45]">{inputs.currentAge} jaar</span>
                 </div>
               </div>
 
               {/* Own Expected Age Option */}
               <div className="space-y-1.5 sm:space-y-3 pt-1.5 sm:pt-2 border-t border-[#EAEAEA]/60 mt-1 sm:mt-2">
                 <label className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#767676] block">
-                  {t('onboarding.demographics.lifeExpectancyTitle')}
+                  Levensverwachting Instellen
                 </label>
                 <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   <button
@@ -644,7 +627,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     }`}
                   >
                     <Cpu className="w-3.5 h-3.5" />
-                    <span>{t('onboarding.demographics.cbsModel')}</span>
+                    <span>CBS model + Leefstijl</span>
                   </button>
                   <button
                     type="button"
@@ -657,16 +640,16 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     }`}
                   >
                     <Edit3 className="w-3.5 h-3.5" />
-                    <span>{t('onboarding.demographics.customModel')}</span>
+                    <span>Zelf inschatten</span>
                   </button>
                 </div>
 
                 {inputs.customLifeExpectancy !== null && (
                   <div className="space-y-1 sm:space-y-2 pt-1 sm:pt-2 bg-amber-50/50 p-1.5 sm:p-2.5 rounded-lg border border-amber-200/50">
                     <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                      <span className="text-[#666] font-medium">{t('onboarding.demographics.customDesc')}</span>
+                      <span className="text-[#666] font-medium">Hoe oud denkt u te worden?</span>
                       <span className="font-mono font-extrabold text-[#D56B45]">
-                        {t('onboarding.demographics.ageYears', { age: inputs.customLifeExpectancy.toString() })}
+                        {inputs.customLifeExpectancy} jaar
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -693,7 +676,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       />
                     </div>
                     <p className="text-[9px] sm:text-[10px] text-[#767676] italic">
-                      {t('onboarding.demographics.customOverrideInfo')}
+                      Deze waarde overschrijft het biologische/CBS cohort prognosemodel in de grafieken.
                     </p>
                   </div>
                 )}
@@ -710,28 +693,28 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
             >
               <div className="space-y-0.5 sm:space-y-2 text-center sm:text-left">
                 <span className="hidden sm:inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
-                  {t('onboarding.lifestyle.badge')}
+                  Stap 2: Bio-Score Leefstijl
                 </span>
                 <h2 className="text-lg sm:text-2xl font-black tracking-tight text-[#2D2D2D] leading-tight">
-                  {t('onboarding.lifestyle.title')}
+                  Wat zijn uw dagelijkse gewoonten?
                 </h2>
                 <p className="text-[11px] sm:text-sm text-[#767676] leading-tight">
-                  {t('onboarding.lifestyle.desc')}
+                  Leefstijlfactoren beïnvloeden de levensverwachting met jaren winst of verlies.
                 </p>
               </div>
 
               {/* 1. Slaap */}
               <div className="space-y-1.5 sm:space-y-2">
-                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
+                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
                   <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
-                  <span>{t('onboarding.lifestyle.sleep.title')}</span>
+                  <span>Slaappatroon</span>
                 </label>
                 <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localSleep === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
-                    { key: "kort", label: t('onboarding.lifestyle.sleep.short'), detail: "-1.5" },
-                    { key: "matig", label: t('onboarding.lifestyle.sleep.moderate'), detail: "-0.5" },
-                    { key: "goed", label: t('onboarding.lifestyle.sleep.good'), detail: "+1.0" },
-                    { key: "optimaal", label: t('onboarding.lifestyle.sleep.optimal'), detail: "+2.0" }
+                    { key: "kort", label: "Kort (<6u)", detail: "-1.5 jr" },
+                    { key: "matig", label: "Matig (onrustig)", detail: "-0.5 jr" },
+                    { key: "goed", label: "Goed (7-8u)", detail: "+1.0 jr" },
+                    { key: "optimaal", label: "Perfect (diep)", detail: "+2.0 jr" }
                   ].map((item) => (
                     <button
                       key={item.key}
@@ -745,27 +728,27 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       }`}
                     >
                       <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
-                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
+                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
                 {showValidation && localSleep === null && (
-                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('common.required')}</p>
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
                 )}
               </div>
 
               {/* 2. Beweging */}
               <div className="space-y-1.5 sm:space-y-2">
-                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
-                  <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
-                  <span>{t('onboarding.lifestyle.activity.title')}</span>
+                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                  <span>Fysieke Activiteit</span>
                 </label>
                 <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localActivity === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
-                    { key: "zittend", label: t('onboarding.lifestyle.activity.sedentary'), detail: "-1.5" },
-                    { key: "licht", label: t('onboarding.lifestyle.activity.light'), detail: t('onboarding.lifestyle.neutral') },
-                    { key: "actief", label: t('onboarding.lifestyle.activity.active'), detail: "+1.2" },
-                    { key: "optimaal", label: t('onboarding.lifestyle.activity.optimal'), detail: "+2.5" }
+                    { key: "zittend", label: "Zittend (kantoor)", detail: "-1.5 jr" },
+                    { key: "licht", label: "Lichte beweging", detail: "Neutraal" },
+                    { key: "actief", label: "Actief (sportief)", detail: "+1.2 jr" },
+                    { key: "optimaal", label: "Atleet / Optimaal", detail: "+2.5 jr" }
                   ].map((item) => (
                     <button
                       key={item.key}
@@ -779,19 +762,19 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       }`}
                     >
                       <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
-                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "licht" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
+                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail}</span>
                     </button>
                   ))}
                 </div>
                 {showValidation && localActivity === null && (
-                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('common.required')}</p>
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
                 )}
               </div>
 
               {/* 3. Stress */}
               <div className="space-y-1.5 sm:space-y-2">
-                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
-                  <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                <label className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-[#767676] flex items-center space-x-1.5">
+                  <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>Stress / Werkdruk</span>
                 </label>
                 <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localStress === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
@@ -834,24 +817,21 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               <div className="space-y-2 text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start gap-2">
                   <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
-                    {t('onboarding.genetics.badge')}
+                    Stap 3: Erfelijkheid
                   </span>
-                </div>
-                <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
-                  {t('onboarding.genetics.title1')} <br className="block sm:hidden" />{t('onboarding.genetics.title2')}
-                </h2>
-                <p className="text-sm text-[#767676]">
-                  {t('onboarding.genetics.desc')}
-                </p>
-                <div className="pt-2">
                   <button
                     onClick={() => setShowHeredityInfo(true)}
-                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#B84E29] transition-colors uppercase tracking-widest cursor-pointer shadow-sm inline-flex items-center mx-auto sm:mx-0"
+                    className="p-1.5 bg-[#D56B45] rounded-full text-white hover:bg-[#B84E29] transition-colors shadow-sm cursor-pointer"
                   >
-                    <Info className="w-3.5 h-3.5 mr-1.5" />
-                    {t('onboarding.genetics.readFirst')}
+                    <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </button>
                 </div>
+                <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
+                  Hoe oud zijn uw biologische <br className="block sm:hidden" />ouders geworden?
+                </h2>
+                <p className="text-sm text-[#767676]">
+                  Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn (-1.5 tot +1.5 jaar per ouder).
+                </p>
               </div>
 
               {/* Father */}
@@ -859,7 +839,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 showValidation && !geneticsInteracted ? "border-red-400 bg-red-50/50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
               }`}>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2.5">
-                  <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">{t('onboarding.genetics.father')}</span>
+                  <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">Vader</span>
                   <div className="grid grid-cols-2 sm:flex sm:space-x-1 gap-2">
                     <button
                       type="button"
@@ -871,7 +851,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
-                      {t('onboarding.genetics.alive')}
+                      In leven / Neutraal
                     </button>
                     <button
                       type="button"
@@ -883,7 +863,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
-                      {t('onboarding.genetics.passed')}
+                      Overleden
                     </button>
                   </div>
                 </div>
@@ -891,8 +871,8 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 {inputs.fatherPassedAge !== null && (
                   <div className="space-y-2.5 pt-1.5 border-t border-[#EAEAEA]/60">
                     <div className="flex justify-between items-center text-xs font-bold">
-                      <span className="text-[#767676]">{t('onboarding.genetics.passedAge', { parent: t('onboarding.genetics.father').toLowerCase() })}</span>
-                      <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.fatherPassedAge.toString() })}</span>
+                      <span className="text-[#767676]">Geleefde leeftijd van vader:</span>
+                      <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{inputs.fatherPassedAge} jaar</span>
                     </div>
                     <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
                       <input
@@ -927,7 +907,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 showValidation && !geneticsInteracted ? "border-red-400 bg-red-50/50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
               }`}>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2.5">
-                  <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">{t('onboarding.genetics.mother')}</span>
+                  <span className="font-black text-sm text-[#2D2D2D] uppercase tracking-wider">Moeder</span>
                   <div className="grid grid-cols-2 sm:flex sm:space-x-1 gap-2">
                     <button
                       type="button"
@@ -939,7 +919,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
-                      {t('onboarding.genetics.alive')}
+                      In leven / Neutraal
                     </button>
                     <button
                       type="button"
@@ -951,7 +931,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                           : "border-[#EAEAEA] bg-white text-[#767676]"
                       }`}
                     >
-                      {t('onboarding.genetics.passed')}
+                      Overleden
                     </button>
                   </div>
                 </div>
@@ -959,8 +939,8 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 {inputs.motherPassedAge !== null && (
                   <div className="space-y-2.5 pt-1.5 border-t border-[#EAEAEA]/60">
                     <div className="flex justify-between items-center text-xs font-bold">
-                      <span className="text-[#767676]">{t('onboarding.genetics.passedAge', { parent: t('onboarding.genetics.mother').toLowerCase() })}</span>
-                      <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.motherPassedAge.toString() })}</span>
+                      <span className="text-[#767676]">Geleefde leeftijd van moeder:</span>
+                      <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{inputs.motherPassedAge} jaar</span>
                     </div>
                     <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
                       <input
@@ -1004,21 +984,21 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
             >
               <div className="space-y-2 text-center sm:text-left">
                 <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
-                  {t('onboarding.career.badge')}
+                  Stap 4: Carrière & Pensioen
                 </span>
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
-                  {t('onboarding.career.title')}
+                  Wanneer begon u met werken en wat is uw pensioendoel?
                 </h2>
                 <p className="text-sm text-[#767676]">
-                  {t('onboarding.career.desc')}
+                  De splitsing tussen verplichte werktijd en absolute tijdssoevereiniteit.
                 </p>
               </div>
 
               {/* Start of working life */}
               <div className="space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.startWork')}</span>
-                  <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.startWorkAge.toString() })}</span>
+                  <span className="font-bold text-[#767676] uppercase tracking-wider">Startleeftijd Carrière</span>
+                  <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{inputs.startWorkAge} jaar</span>
                 </div>
                 <div className={`flex items-center space-x-3 bg-white p-2.5 rounded-xl border shadow-3xs transition-all duration-300 ${
                   showValidation && localStartWorkAge === "" ? "border-red-400 bg-red-50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
@@ -1056,15 +1036,15 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   />
                 </div>
                 {showValidation && localStartWorkAge === "" && (
-                  <p className="text-red-500 text-xs font-bold px-1 mt-1">{t('common.required')}</p>
+                  <p className="text-red-500 text-xs font-bold px-1 mt-1">Vul dit a.u.b. in</p>
                 )}
               </div>
 
               {/* Pensioen Target Age */}
               <div className="space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.fireAge')}</span>
-                  <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.fireAge.toString() })}</span>
+                  <span className="font-bold text-[#767676] uppercase tracking-wider">Doelleeftijd Pensioen</span>
+                  <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{inputs.fireAge} jaar</span>
                 </div>
                 <div className={`flex items-center space-x-3 bg-white p-2.5 rounded-xl border shadow-3xs transition-all duration-300 ${
                   showValidation && localFireAge === "" ? "border-red-400 bg-red-50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
@@ -1111,7 +1091,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               <div className="p-4 bg-neutral-50 rounded-2xl border border-[#EAEAEA] text-xs space-y-2 shadow-3xs">
                 <div className="flex justify-between font-extrabold text-sm text-[#2D2D2D]">
                   <span className="text-[#767676]">Werk:</span>
-                  <span className="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded border border-emerald-500/15">{t('onboarding.career.yearsDiff', { val: (inputs.fireAge - inputs.startWorkAge).toString() })}</span>
+                  <span className="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded border border-emerald-500/15">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
                 <p className="text-xs text-[#767676] leading-relaxed">
                   Dit is het aantal jaren verplicht werk dat u heeft ingepland voor uw financiële onafhankelijkheid of pensioen.
@@ -1135,29 +1115,29 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
 
               <div className="space-y-2">
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
-                  {t('onboarding.ready.title')}
+                  Klaar om te ontdekken!
                 </h2>
                 <p className="text-sm text-[#767676]">
-                  {t('onboarding.ready.desc')}
+                  Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.
                 </p>
               </div>
 
               <div className="bg-[#FAF3F0] p-4 sm:p-5 rounded-2xl border border-[#D56B45]/20 text-left grid grid-cols-2 gap-y-3.5 gap-x-4 shadow-3xs">
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Profiel</span>
-                  <span className="text-sm font-black text-[#2D2D2D]">{inputs.gender === "man" ? t('common.man') : t('common.woman')}, {inputs.currentAge} jr</span>
+                  <span className="text-sm font-black text-[#2D2D2D]">{inputs.gender === "man" ? "Man" : "Vrouw"}, {inputs.currentAge} jr</span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">{t('onboarding.demographics.birthYear')}</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Geboortejaar</span>
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.birthYear}</span>
                 </div>
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Werk</span>
-                  <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge - inputs.startWorkAge} jr</span>
+                  <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge - inputs.startWorkAge} jaar</span>
                 </div>
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Pensioendoel</span>
-                  <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge} jr</span>
+                  <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge} jaar</span>
                 </div>
               </div>
 
@@ -1175,7 +1155,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   }}
                   className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-black text-sm tracking-wide rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
                 >
-                  <span>{t('onboarding.ready.generating')}</span>
+                  <span>Eerst nog even dit...</span>
                   <ChevronRight className="w-5 h-5" />
                 </motion.button>
               </motion.div>
@@ -1191,6 +1171,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               <ScrollRevealText onComplete={onComplete} />
             </motion.div>
           ) : null}
+
         </AnimatePresence>
       </main>
 
@@ -1240,57 +1221,43 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
             className="fixed inset-0 z-[200] bg-gradient-to-br from-[#E25C26] to-[#B84E29] flex flex-col items-center justify-center overflow-hidden"
           >
             <div className="w-full max-w-md mx-auto p-6 flex flex-col items-center">
-              <motion.img 
-                src="/img/olifant-bril.png" 
-                alt="Olifant" 
-                className="w-32 sm:w-40 h-auto mb-6 drop-shadow-2xl"
-                initial={{ y: 20, opacity: 0, scale: 0.8 }}
-                animate={{ y: 0, opacity: 1, scale: 1 }}
-                transition={{ delay: 0.1, duration: 0.5, type: "spring" }}
-              />
               <h3 className="text-2xl sm:text-3xl font-black text-white mb-8">Kies Geboortejaar</h3>
               
               <div className="relative w-full h-64 mx-auto flex justify-center">
                 {/* Selection Indicator overlay */}
                 <div className="absolute top-1/2 left-0 w-full h-[64px] -translate-y-1/2 border-y-2 border-white/20 bg-white/5 pointer-events-none rounded-xl"></div>
                 
-                {/* Scrollable Container */}
                 <div 
-                  ref={scrollContainerRef}
-                  onScroll={handleYearScroll}
-                  className="w-full h-full overflow-y-auto snap-y snap-mandatory scrollbar-hide relative z-10"
-                  style={{ 
-                    scrollbarWidth: "none",
-                    paddingTop: "96px", 
-                    paddingBottom: "96px",
-                    WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)"
-                  }}
+                  id="year-scroll-container"
+                  className="w-full h-full overflow-y-auto scrollbar-hide snap-y snap-mandatory relative scroll-smooth mask-image-vertical"
+                  style={{ WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 30%, black 70%, transparent)' }}
                 >
-                  {yearsList.map((year) => {
-                    const isFocused = year === focusedYear;
-                    const dist = Math.abs(year - focusedYear);
-                    const scale = isFocused ? 1 : Math.max(0.7, 1 - dist * 0.1);
-                    const opacity = isFocused ? 1 : Math.max(0.2, 0.7 - dist * 0.2);
+                  {/* Padding blocks for centering the first item */}
+                  <div className="h-[96px] w-full shrink-0"></div>
+                  
+                  {years.map((year) => {
+                    const distance = Math.abs(year - parseInt(localBirthYear));
+                    const isSelected = year === parseInt(localBirthYear);
                     
+                    let scale = 1;
+                    let opacity = 1;
+                    if (distance === 1) { scale = 0.8; opacity = 0.6; }
+                    else if (distance === 2) { scale = 0.6; opacity = 0.3; }
+                    else if (distance > 2) { scale = 0.5; opacity = 0.1; }
+
                     return (
-                      <div
+                      <div 
                         key={year}
-                        className="h-[64px] snap-center flex items-center justify-center cursor-pointer select-none"
+                        className="h-[64px] w-full flex items-center justify-center snap-center cursor-pointer"
                         onClick={() => {
-                          if (year === focusedYear) {
-                            confirmYearSelection(year);
-                          } else {
-                            const idx = yearsList.indexOf(year);
-                            if (scrollContainerRef.current) {
-                              scrollContainerRef.current.scrollTo({ top: idx * ITEM_HEIGHT, behavior: 'smooth' });
-                            }
-                            // Optionally auto-confirm after scrolling
-                            setTimeout(() => confirmYearSelection(year), 300);
-                          }
+                          setLocalBirthYear(year.toString());
+                          const el = document.getElementById("year-scroll-container");
+                          const targetIndex = years.indexOf(year);
+                          if (el) el.scrollTo({ top: targetIndex * 64, behavior: 'smooth' });
                         }}
                       >
                         <span 
-                          className={`font-mono transition-all duration-200 ${isFocused ? 'text-4xl sm:text-5xl font-black text-white drop-shadow-lg' : 'text-3xl font-bold text-white'}`}
+                          className={`font-mono transition-all duration-300 select-none ${isSelected ? 'text-4xl font-black text-white' : 'text-2xl font-bold text-white/70'}`}
                           style={{ 
                             transform: `scale(${scale})`, 
                             opacity: opacity 
@@ -1301,6 +1268,9 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       </div>
                     );
                   })}
+                  
+                  {/* Padding blocks for centering the last item */}
+                  <div className="h-[96px] w-full shrink-0"></div>
                 </div>
               </div>
             </div>
@@ -1321,7 +1291,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               <div className="p-4 pt-6 sm:pt-6 sm:p-6 flex justify-between items-center border-b border-gray-100">
                 <h3 className="font-extrabold text-lg sm:text-xl text-[#2D2D2D] flex items-center gap-2">
                   <Info className="w-5 h-5 text-[#D56B45]" />
-                  {t('onboarding.genetics.modalTitle')}
+                  Genetica vs. Leefstijl
                 </h3>
                 <button onClick={() => setShowHeredityInfo(false)} className="p-1 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors cursor-pointer">
                   <X className="w-5 h-5" />
@@ -1329,10 +1299,29 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </div>
               <div className="p-4 sm:p-6 overflow-y-auto text-sm sm:text-base text-[#4a4a4a] space-y-4">
                 <p>
-                  {t('onboarding.genetics.modalDesc1')}
+                  Het feit dat beide ouders aan een ziekte zijn overleden heeft invloed op je statistische levensverwachting, maar je eigen levensloop staat <strong>niet</strong> vast.
                 </p>
                 <p>
-                  {t('onboarding.genetics.modalDesc2')}
+                  Onderzoek toont aan dat levensduur voor slechts <strong>10% tot 25% genetisch bepaald is</strong>. De overige 75% tot 90% stuur je grotendeels zelf aan met leefstijl en omgeving. Hoe zwaar genetica weegt, hangt af van:
+                </p>
+                
+                <div className="bg-[#FAF3F0] p-4 rounded-xl border border-[#D56B45]/20 space-y-3">
+                  <div>
+                    <strong className="text-[#D56B45] block mb-1">1. Leeftijd van overlijden</strong>
+                    <p className="text-sm">Bij jong overlijden (vóór 60 jr) is de genetische component vaak sterker. Overlijden na 75-80 jaar komt veel vaker door natuurlijke celveroudering dan door een overdraagbare genetische fout.</p>
+                  </div>
+                  <div>
+                    <strong className="text-[#D56B45] block mb-1">2. Type ziekte</strong>
+                    <p className="text-sm">Sommige ziektes zijn sterk erfelijk. Andere ziektes hebben geen erfelijke component en ontstaan door externe factoren of levensstijl.</p>
+                  </div>
+                  <div>
+                    <strong className="text-[#D56B45] block mb-1">3. Gedeelde gewoontes</strong>
+                    <p className="text-sm">Gezinnen delen niet alleen genen, maar ook gewoontes! Voedingspatronen, beweging en omgang met stress worden doorgegeven. Wat soms voelt als een 'genetische vloek', is in feite een geërfde levensstijl die je zelf kunt doorbreken.</p>
+                  </div>
+                </div>
+
+                <p>
+                  <strong>Conclusie:</strong> Je DNA is de blauwdruk, maar jij bent de regisseur. Door epigenetica kan jouw eigen leefstijl (slaap, voeding, stress) bepalen welke genen zich uiten en welke 'uit' blijven.
                 </p>
               </div>
               <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
