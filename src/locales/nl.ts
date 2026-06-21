@@ -46,6 +46,7 @@ export const nl = {
       birthYear: "Geboortejaar",
       tapToChange: "Tik om te wijzigen",
       selectYear: "Kies a.u.b. uw geboortejaar",
+      chooseBirthYear: "Kies Geboortejaar",
       currentAge: "Huidige Leeftijd (in 2026)",
       ageYears: "{{age}} jaar",
       lifeExpectancyTitle: "Levensverwachting Instellen",

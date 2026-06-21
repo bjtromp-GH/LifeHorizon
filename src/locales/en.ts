@@ -48,6 +48,7 @@ export const en: Translations = {
       birthYear: "Birth Year",
       tapToChange: "Tap to change",
       selectYear: "Please select your birth year",
+      chooseBirthYear: "Choose Birth Year",
       currentAge: "Current Age (in 2026)",
       ageYears: "{{age}} years",
       lifeExpectancyTitle: "Set Life Expectancy",

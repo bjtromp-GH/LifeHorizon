@@ -1248,7 +1248,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 animate={{ y: 0, opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.5, type: "spring" }}
               />
-              <h3 className="text-2xl sm:text-3xl font-black text-white mb-8">Kies Geboortejaar</h3>
+              <h3 className="text-2xl sm:text-3xl font-black text-white mb-8">{t('onboarding.demographics.chooseBirthYear')}</h3>
               
               <div className="relative w-full h-64 mx-auto flex justify-center">
                 {/* Selection Indicator overlay */}
