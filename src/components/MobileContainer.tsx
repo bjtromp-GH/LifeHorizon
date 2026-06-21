@@ -467,22 +467,8 @@ export default function MobileContainer({
                     </div>
                   </div>
 
-                  {/* Button to show Matrix again */}
-                  <div className="flex flex-col items-center justify-center max-w-sm mx-auto w-full pt-1 pb-1">
-                    <button
-                      onClick={() => setShowMatrixModal(true)}
-                      className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm"
-                    >
-                      <Grid className="w-5 h-5" />
-                      <span>Bekijk Levensmatrix</span>
-                    </button>
-                    <span className="text-[10px] font-sans text-white/60 mt-2 text-center">
-                      Bekijk je persoonlijke levensloop in detail
-                    </span>
-                  </div>
-
                   {/* Phase blocks */}
-                  <div className="grid grid-cols-3 gap-2 max-w-sm mx-auto w-full">
+                  <div className="grid grid-cols-3 gap-2 max-w-sm mx-auto w-full pt-2">
                     <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
                       <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Jeugd</span>
                       <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">20 jr</span>
@@ -495,6 +481,20 @@ export default function MobileContainer({
                       <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Vrijheid</span>
                       <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">{(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} jr</span>
                     </div>
+                  </div>
+
+                  {/* Button to show Matrix again */}
+                  <div className="flex flex-col items-center justify-center max-w-sm mx-auto w-full pt-1 pb-1">
+                    <button
+                      onClick={() => setShowMatrixModal(true)}
+                      className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm"
+                    >
+                      <Grid className="w-5 h-5" />
+                      <span>Bekijk Levensmatrix</span>
+                    </button>
+                    <span className="text-[10px] font-sans text-white/60 mt-2 text-center">
+                      Bekijk je persoonlijke levensloop in detail
+                    </span>
                   </div>
 
 
