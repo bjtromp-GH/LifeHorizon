@@ -425,7 +425,7 @@ export default function MobileContainer({
               <div className="space-y-4 pt-2">
                 <div className="flex-1 flex flex-col items-center justify-center min-h-[340px]">
                   {/* Grid Container matching original */}
-                  <div className="h-[280px] w-full max-w-sm mx-auto px-4 mt-2 mb-2 select-none relative group">
+                  <div className="w-full max-w-sm mx-auto px-4 mt-2 mb-4 select-none relative group overflow-hidden">
                     <DecadeGrid inputs={inputs} projectedLifeExpectancy={projectedLifeExpectancy} compact />
                   </div>
                   {/* Dutch insights summary */}

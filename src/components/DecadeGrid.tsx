@@ -9,11 +9,13 @@ import { useLanguage } from "../context/LanguageContext";
 interface DecadeGridProps {
   inputs: UserInputs;
   projectedLifeExpectancy: number;
+  compact?: boolean;
 }
 
 export default React.memo(function DecadeGrid({
   inputs,
   projectedLifeExpectancy,
+  compact = false,
 }: DecadeGridProps) {
   const { t } = useLanguage();
   const { currentAge, startWorkAge, fireAge } = inputs;
@@ -166,7 +168,8 @@ export default React.memo(function DecadeGrid({
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center pt-2 gap-3">
+      {!compact && (
+        <div className="flex flex-col items-center justify-center pt-2 gap-3">
         <div className="flex flex-col items-center">
           <button
             onClick={() => setIsAnalyseModalOpen(true)}
@@ -187,8 +190,8 @@ export default React.memo(function DecadeGrid({
             {t('decadeGrid.healthyMatrixBtn')}
           </button>
         </div>
-      </div>
-
+        </div>
+      )}
       <AnimatePresence>
         {isCurrentAgeModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
