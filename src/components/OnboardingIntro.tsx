@@ -288,12 +288,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               {/* Subtle animated light orb background */}
               <div className="absolute inset-x-0 top-0 h-96 bg-radial-gradient from-white/10 to-transparent blur-2xl pointer-events-none" />
               
-              {/* Logo/Badge at Top */}
-              <div className="w-full flex justify-center pt-4 sm:pt-8 z-10 relative">
+              {/* Top Section: Language & Badge */}
+              <div className="w-full flex flex-col items-center pt-4 sm:pt-6 z-10 relative space-y-3 sm:space-y-4">
                 {/* Language Switch */}
-                <div className="absolute left-0 sm:left-4 flex space-x-2">
-                  <button onClick={() => setLanguage('nl')} className={`transition-opacity ${language === 'nl' ? 'opacity-100 grayscale-0 scale-110' : 'opacity-50 grayscale scale-100'} text-xl sm:text-2xl cursor-pointer hover:opacity-100`}>🇳🇱</button>
-                  <button onClick={() => setLanguage('en')} className={`transition-opacity ${language === 'en' ? 'opacity-100 grayscale-0 scale-110' : 'opacity-50 grayscale scale-100'} text-xl sm:text-2xl cursor-pointer hover:opacity-100`}>🇬🇧</button>
+                <div className="flex space-x-3">
+                  <button onClick={() => setLanguage('nl')} className={`transition-opacity ${language === 'nl' ? 'opacity-100 grayscale-0 scale-110' : 'opacity-50 grayscale scale-100'} text-2xl sm:text-3xl cursor-pointer hover:opacity-100`}>🇳🇱</button>
+                  <button onClick={() => setLanguage('en')} className={`transition-opacity ${language === 'en' ? 'opacity-100 grayscale-0 scale-110' : 'opacity-50 grayscale scale-100'} text-2xl sm:text-3xl cursor-pointer hover:opacity-100`}>🇬🇧</button>
                 </div>
                 
                 <motion.div 
