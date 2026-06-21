@@ -14,6 +14,11 @@ export const nl = {
     retirementGoal: "Pensioendoel",
     welcome: "Welkom"
   },
+  lifeProgress: {
+    completed: "Voltooid",
+    title: "Levensvoortgang",
+    description: "Je hebt al <strong className=\"text-[#D56B45]\">{{passed}}%</strong> van je voorspelde leven achter de rug. Maak het beste van de resterende <strong className=\"text-[#D56B45]\">{{remaining}}%</strong>."
+  },
   onboarding: {
     header: "Levensloop & Pensioen",
     transition: {

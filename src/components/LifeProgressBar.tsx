@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface LifeProgressBarProps {
   currentAge: number;
@@ -8,6 +9,7 @@ interface LifeProgressBarProps {
 }
 
 export default function LifeProgressBar({ currentAge, projectedLifeExpectancy, className = "", hideLabels = false }: LifeProgressBarProps) {
+  const { t } = useLanguage();
   const safeLife = Math.max(projectedLifeExpectancy, currentAge, 1);
   const percentage = Math.min(100, Math.max(0, (currentAge / safeLife) * 100));
   
@@ -19,7 +21,7 @@ export default function LifeProgressBar({ currentAge, projectedLifeExpectancy, c
             {Math.round(percentage)}%
           </span>
           <span className="text-[9px] sm:text-[10px] text-[#767676] font-semibold uppercase tracking-widest pb-0.5">
-            Voltooid
+            {t('lifeProgress.completed')}
           </span>
         </div>
       )}
@@ -35,11 +37,15 @@ export default function LifeProgressBar({ currentAge, projectedLifeExpectancy, c
 
       {!hideLabels && (
         <div className="mt-4 text-center sm:text-left">
-          <h4 className="text-xs sm:text-sm font-bold text-[#2D2D2D] tracking-tight">Levensvoortgang</h4>
-          <p className="text-[10px] sm:text-[11px] text-[#767676] mt-1 leading-relaxed">
-            Je hebt al <strong className="text-[#D56B45]">{Math.round(percentage)}%</strong> van je voorspelde leven achter de rug. 
-            Maak het beste van de resterende <strong className="text-[#D56B45]">{100 - Math.round(percentage)}%</strong>.
-          </p>
+          <h4 className="text-xs sm:text-sm font-bold text-[#2D2D2D] tracking-tight">{t('lifeProgress.title')}</h4>
+          <p 
+            className="text-[10px] sm:text-[11px] text-[#767676] mt-1 leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html: t('lifeProgress.description')
+                .replace('{{passed}}', Math.round(percentage).toString())
+                .replace('{{remaining}}', (100 - Math.round(percentage)).toString())
+            }}
+          />
         </div>
       )}
     </div>

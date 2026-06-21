@@ -16,6 +16,11 @@ export const en: Translations = {
     retirementGoal: "Retirement Goal",
     welcome: "Welcome"
   },
+  lifeProgress: {
+    completed: "Completed",
+    title: "Life Progress",
+    description: "You have already completed <strong className=\"text-[#D56B45]\">{{passed}}%</strong> of your predicted life. Make the best of the remaining <strong className=\"text-[#D56B45]\">{{remaining}}%</strong>."
+  },
   onboarding: {
     header: "Life Course & Retirement",
     transition: {
