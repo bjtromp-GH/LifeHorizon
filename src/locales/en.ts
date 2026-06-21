@@ -139,6 +139,7 @@ export const en: Translations = {
     revealText: "We are living longer than ever before. Our life expectancy continues to rise. But there is a hidden reality. Our 'healthy' life expectancy is not increasing at the same pace. This means that at the end of our lives, we suffer from chronic diseases, fatigue, or disabilities for a longer average time. Your goal is not simply to live as long as possible. Your true goal is to live a real, vital, and independent life for as long as possible. This is what the Bio-Score is all about. Take control of your healthy years."
   },
   dashboard: {
+    lang: "en-US",
     swipeHint: "Tip: Swipe left or right to switch between the 4 screens, or click the navigation buttons.",
     ok: "OK",
     showMenu: "Show Menu ☰",
