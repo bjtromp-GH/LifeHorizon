@@ -483,17 +483,17 @@ export default function MobileContainer({
 
                   {/* Phase blocks */}
                   <div className="grid grid-cols-3 gap-2 max-w-sm mx-auto w-full">
-                    <div className="bg-[#EAE8E4]/10 border border-[#EAE8E4]/20 rounded-xl p-2 flex flex-col items-center justify-center text-center backdrop-blur-xs">
-                      <span className="text-[8px] sm:text-[9px] font-sans font-bold uppercase tracking-widest text-[#EAE8E4]">Jeugd</span>
-                      <span className="text-sm font-extrabold font-mono text-white mt-1">20 jr</span>
+                    <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
+                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Jeugd</span>
+                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">20 jr</span>
                     </div>
-                    <div className="bg-white/20 border border-white/30 rounded-xl p-2 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
-                      <span className="text-[8px] sm:text-[9px] font-sans font-bold uppercase tracking-widest text-white">Werk</span>
-                      <span className="text-sm font-extrabold font-mono text-white mt-1">{Math.max(0, inputs.fireAge - 20)} jr</span>
+                    <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
+                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Werk</span>
+                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">{Math.max(0, inputs.fireAge - 20)} jr</span>
                     </div>
-                    <div className="bg-[#86A789]/20 border border-[#86A789]/40 rounded-xl p-2 flex flex-col items-center justify-center text-center backdrop-blur-xs">
-                      <span className="text-[8px] sm:text-[9px] font-sans font-bold uppercase tracking-widest text-[#86A789]">Vrijheid</span>
-                      <span className="text-sm font-extrabold font-mono text-white mt-1">{(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} jr</span>
+                    <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
+                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Vrijheid</span>
+                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">{(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} jr</span>
                     </div>
                   </div>
 
