@@ -445,7 +445,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
                     className="p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
                   >
-                    <p className="text-sm italic text-white/90 leading-relaxed">"Wow, dit is echt een nuttige app. Serieus, maar heel gaaf en leuk om inzicht te krijgen in je levensloop."</p>
+                    <p className="text-sm italic text-white/90 leading-relaxed">"Wow, dit is echt een nuttige app. Serieus, maar heel gaaf en interessant om inzicht te krijgen in je levensloop."</p>
                     <p className="text-xs font-bold text-[#D56B45] mt-2">- Mark (50)</p>
                   </motion.div>
                   <motion.div 
