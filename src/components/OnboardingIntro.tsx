@@ -208,34 +208,42 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
       />
 
       {/* Top Header & Step Progress Bar */}
-      {step >= 2 && step < 8 && (
-        <header className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10">
-          <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
-            <span className="text-xl">🔥</span>
-            <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
-              Levensloop & Pensioen
-            </h1>
-          </div>
-
-          {step > 1 && (
-            <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
-              <motion.div 
-                className="h-full bg-[#D56B45]"
-                initial={{ width: 0 }}
-                animate={{ width: `${((step - 1) / (stepsMeta.length - 2)) * 100}%` }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              />
+      <AnimatePresence>
+        {step >= 2 && step < 8 && (
+          <motion.header 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10"
+          >
+            <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
+              <span className="text-xl">🔥</span>
+              <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
+                Levensloop & Pensioen
+              </h1>
             </div>
-          )}
 
-          {step > 1 && (
-            <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
-              <span>Stap {step - 1} van {stepsMeta.length - 2}</span>
-              <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
-            </div>
-          )}
-        </header>
-      )}
+            {step > 1 && (
+              <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
+                <motion.div 
+                  className="h-full bg-[#D56B45]"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${((step - 1) / (stepsMeta.length - 2)) * 100}%` }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                />
+              </div>
+            )}
+
+            {step > 1 && (
+              <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
+                <span>Stap {step - 1} van {stepsMeta.length - 2}</span>
+                <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
+              </div>
+            )}
+          </motion.header>
+        )}
+      </AnimatePresence>
 
       {/* Main Interactive Slides container */}
       <main className={`flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto pr-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
