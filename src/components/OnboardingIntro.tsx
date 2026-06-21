@@ -792,14 +792,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               <div className="space-y-1.5 sm:space-y-2">
                 <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
                   <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
-                  <span>Stress / Werkdruk</span>
+                  <span>{t('onboarding.lifestyle.stress.title')}</span>
                 </label>
                 <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localStress === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
                   {[
-                    { key: "hoog", label: "Veel stress", detail: "-1.8 jr" },
-                    { key: "gemiddeld", label: "Gemiddeld", detail: "Neutraal" },
-                    { key: "balans", label: "In balans", detail: "+0.8 jr" },
-                    { key: "laag", label: "Grootmoedig / Zen", detail: "+1.5 jr" }
+                    { key: "hoog", label: t('onboarding.lifestyle.stress.high'), detail: "-1.8" },
+                    { key: "gemiddeld", label: t('onboarding.lifestyle.stress.moderate'), detail: t('onboarding.lifestyle.neutral') },
+                    { key: "balans", label: t('onboarding.lifestyle.stress.balanced'), detail: "+0.8" },
+                    { key: "laag", label: t('onboarding.lifestyle.stress.low'), detail: "+1.5" }
                   ].map((item) => (
                     <button
                       key={item.key}
@@ -813,12 +813,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       }`}
                     >
                       <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
-                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail}</span>
+                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "gemiddeld" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
                     </button>
                   ))}
                 </div>
                 {showValidation && localStress === null && (
-                  <p className="text-red-500 text-xs font-bold mt-1 px-1">Vul dit a.u.b. in</p>
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('common.required')}</p>
                 )}
               </div>
             </motion.div>
