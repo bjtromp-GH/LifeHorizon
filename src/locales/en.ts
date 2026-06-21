@@ -7,7 +7,9 @@ export const en: Translations = {
     of: "of",
     required: "Please fill this in",
     man: "Man",
-    woman: "Woman"
+    woman: "Woman",
+    prevStep: "Previous",
+    nextStep: "Next"
   },
   onboarding: {
     header: "Life Course & Retirement",
@@ -93,25 +95,26 @@ export const en: Translations = {
       alive: "Alive / Neutral",
       passed: "Passed away",
       passedAge: "Lived age of {{parent}}:",
-      modalTitle: "Heredity & CBS",
-      modalDesc1: "The baseline CBS Cohort model assumes averages. For individual accuracy, we apply a compensation factor for the age at which biological parents (naturally) passed away.",
-      modalDesc2: "We understand this can be confronting or sensitive. You can leave this at 'Alive / Neutral'. Parents passing away younger than 65 yields a slight penalty (-1.5yr), parents living past 85 give a bonus (+1.5yr)."
+      modalTitle: "Genetics vs. Lifestyle",
+      modalDesc1: "The fact that both parents died of an illness impacts your statistical life expectancy, but your own timeline is not fixed.",
+      modalDesc2: "Research shows that lifespan is only 10% to 25% genetically determined. The other 75% to 90% is largely controlled by your own lifestyle and environment. Conclusion: Your DNA is the blueprint, but you are the director."
     },
     career: {
-      badge: "Step 4: Career",
-      title: "When are you financially free?",
-      desc: "At what age did you start working full-time, and at what age do you hope to retire (early)?",
-      startWork: "Start Working Life",
-      fireAge: "Goal: Retirement / F.I.R.E.",
+      badge: "Step 4: Career & Retirement",
+      title: "When did you start working and what is your retirement goal?",
+      desc: "The split between mandatory working time and absolute time sovereignty.",
+      startWork: "Career Start Age",
+      fireAge: "Target Retirement Age",
       ageYears: "{{val}} years",
-      yearsDiff: "{{val}} working years"
+      yearsDiff: "{{val}} years"
     },
     ready: {
-      badge: "Analysis Complete",
-      title: "Your life plan is ready.",
-      desc: "We have calculated your prognosis. Continue to the dashboard for your personalized insights.",
+      badge: "Ready to explore!",
+      title: "Ready to explore!",
+      desc: "All factors are compiled. We will route your demographic data live into the CBS model to determine your exact survival curve.",
       button: "View Life Matrix",
-      generating: "Generating Matrix..."
-    }
+      generating: "Just one more thing..."
+    },
+    revealText: "We are living longer than ever before. Our life expectancy continues to rise. But there is a hidden reality. Our 'healthy' life expectancy is not increasing at the same pace. This means that at the end of our lives, we suffer from chronic diseases, fatigue, or disabilities for a longer average time. Your goal is not simply to live as long as possible. Your true goal is to live a real, vital, and independent life for as long as possible. This is what the Bio-Score is all about. Take control of your healthy years."
   }
 };

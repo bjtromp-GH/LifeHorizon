@@ -1206,7 +1206,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                  className="px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-extrabold text-[#767676] hover:text-[#2D2D2D] flex items-center space-x-1 transition-colors duration-150 cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
-                <span>Vorige</span>
+                <span>{t('common.prevStep')}</span>
               </button>
             )}
           </div>
@@ -1221,7 +1221,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 onClick={handleNext}
                 className="px-5 sm:px-6 py-2.5 sm:py-3 font-extrabold text-xs sm:text-sm rounded-xl flex items-center space-x-1 shadow-sm transition-colors duration-150 bg-[#2D2D2D] hover:bg-[#1A1A1A] text-white cursor-pointer"
               >
-                <span>Volgende</span>
+                <span>{t('common.nextStep')}</span>
                 <ChevronRight className="w-4 h-4" />
               </motion.button>
             )}

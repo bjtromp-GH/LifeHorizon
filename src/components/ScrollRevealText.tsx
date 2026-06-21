@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from "motion/react";
+import { useLanguage } from '../context/LanguageContext';
 
 interface ScrollRevealTextProps {
   onComplete: () => void;
 }
 
 export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) {
-  const text = "We worden gemiddeld ouder dan ooit tevoren. Onze levensverwachting blijft stijgen. Maar er is een verborgen realiteit. Onze 'gezonde' levensverwachting stijgt niet in hetzelfde tempo mee. Dit betekent dat we aan het einde van ons leven gemiddeld langer kampen met chronische ziekten, vermoeidheid of beperkingen. Je doel is niet simpelweg zo oud mogelijk worden. Je ware doel is zo lang mogelijk reëel, vitaal en onafhankelijk leven. Hier draait de Bio-Score om. Neem de regie over je gezonde jaren.";
+  const { t } = useLanguage();
+  const text = t('onboarding.revealText');
   const words = text.split(" ");
   
   const totalRevealTime = 4.5; // Spread the word reveal over 4.5 seconds

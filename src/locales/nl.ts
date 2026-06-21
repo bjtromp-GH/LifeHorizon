@@ -5,7 +5,9 @@ export const nl = {
     of: "van",
     required: "Vul dit a.u.b. in",
     man: "Man",
-    woman: "Vrouw"
+    woman: "Vrouw",
+    prevStep: "Vorige",
+    nextStep: "Volgende"
   },
   onboarding: {
     header: "Levensloop & Pensioen",
@@ -91,26 +93,27 @@ export const nl = {
       alive: "In leven / Neutraal",
       passed: "Overleden",
       passedAge: "Geleefde leeftijd van {{parent}}:",
-      modalTitle: "Erfelijkheid & CBS",
-      modalDesc1: "Het basale CBS Cohort model gaat uit van gemiddelden. Voor individuele nauwkeurigheid rekenen wij een compensatiefactor voor de leeftijd waarop biologische ouders (natuurlijk) zijn overleden.",
-      modalDesc2: "We snappen dat dit confronterend of gevoelig kan zijn. U kunt dit ook op 'In leven / Neutraal' laten staan. Ouders jonger overleden dan 65 jaar geeft een lichte penalty (-1.5jr), ouders ouder dan 85 een bonus (+1.5jr)."
+      modalTitle: "Genetica vs. Leefstijl",
+      modalDesc1: "Het feit dat beide ouders aan een ziekte zijn overleden heeft invloed op je statistische levensverwachting, maar je eigen levensloop staat niet vast.",
+      modalDesc2: "Onderzoek toont aan dat levensduur voor slechts 10% tot 25% genetisch bepaald is. De overige 75% tot 90% stuur je grotendeels zelf aan met leefstijl en omgeving. Conclusie: Je DNA is de blauwdruk, maar jij bent de regisseur."
     },
     career: {
-      badge: "Stap 4: Carrière",
-      title: "Wanneer bent u financieel vrij?",
-      desc: "Vanaf welke leeftijd ging u fulltime werken en vanaf welke leeftijd hoopt u (vroeg) met pensioen te kunnen?",
-      startWork: "Start Werkend Leven",
-      fireAge: "Doel: Pensioen / F.I.R.E.",
+      badge: "Stap 4: Carrière & Pensioen",
+      title: "Wanneer begon u met werken en wat is uw pensioendoel?",
+      desc: "De splitsing tussen verplichte werktijd en absolute tijdssoevereiniteit.",
+      startWork: "Startleeftijd Carrière",
+      fireAge: "Doelleeftijd Pensioen",
       ageYears: "{{val}} jaar",
-      yearsDiff: "{{val}} werkende jaren"
+      yearsDiff: "{{val}} jaar"
     },
     ready: {
-      badge: "Analyse Compleet",
-      title: "Uw levensplan staat klaar.",
-      desc: "Wij hebben uw prognose berekend. Ga door naar het dashboard voor uw gepersonaliseerde inzichten.",
+      badge: "Klaar om te ontdekken!",
+      title: "Klaar om te ontdekken!",
+      desc: "Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.",
       button: "Bekijk Levensmatrix",
-      generating: "Matrix Genereren..."
-    }
+      generating: "Eerst nog even dit..."
+    },
+    revealText: "We worden gemiddeld ouder dan ooit tevoren. Onze levensverwachting blijft stijgen. Maar er is een verborgen realiteit. Onze 'gezonde' levensverwachting stijgt niet in hetzelfde tempo mee. Dit betekent dat we aan het einde van ons leven gemiddeld langer kampen met chronische ziekten, vermoeidheid of beperkingen. Je doel is niet simpelweg zo oud mogelijk worden. Je ware doel is zo lang mogelijk reëel, vitaal en onafhankelijk leven. Hier draait de Bio-Score om. Neem de regie over je gezonde jaren."
   }
 };
 export type Translations = typeof nl;
