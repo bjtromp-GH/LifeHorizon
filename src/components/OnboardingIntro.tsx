@@ -1110,11 +1110,11 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
 
               <div className="p-4 bg-neutral-50 rounded-2xl border border-[#EAEAEA] text-xs space-y-2 shadow-3xs">
                 <div className="flex justify-between font-extrabold text-sm text-[#2D2D2D]">
-                  <span className="text-[#767676]">Werk:</span>
+                  <span className="text-[#767676]">{t('common.work')}:</span>
                   <span className="bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded border border-emerald-500/15">{t('onboarding.career.yearsDiff', { val: (inputs.fireAge - inputs.startWorkAge).toString() })}</span>
                 </div>
                 <p className="text-xs text-[#767676] leading-relaxed">
-                  Dit is het aantal jaren verplicht werk dat u heeft ingepland voor uw financiële onafhankelijkheid of pensioen.
+                  {t('onboarding.career.workDesc')}
                 </p>
               </div>
             </motion.div>
@@ -1144,7 +1144,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
 
               <div className="bg-[#FAF3F0] p-4 sm:p-5 rounded-2xl border border-[#D56B45]/20 text-left grid grid-cols-2 gap-y-3.5 gap-x-4 shadow-3xs">
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Profiel</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">{t('common.profile')}</span>
                   <span className="text-sm font-black text-[#2D2D2D]">{inputs.gender === "man" ? t('common.man') : t('common.woman')}, {inputs.currentAge} jr</span>
                 </div>
                 <div>
@@ -1152,11 +1152,11 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.birthYear}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Werk</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">{t('common.work')}</span>
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge - inputs.startWorkAge} jr</span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">Pensioendoel</span>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#767676] block mb-0.5">{t('common.retirementGoal')}</span>
                   <span className="text-sm font-black text-[#2D2D2D] font-mono">{inputs.fireAge} jr</span>
                 </div>
               </div>

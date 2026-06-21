@@ -86,7 +86,7 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
             onClick={onComplete}
             className="px-8 sm:px-12 py-4 sm:py-5 bg-white text-[#D56B45] font-black text-sm sm:text-base md:text-lg tracking-widest uppercase rounded-2xl flex items-center space-x-4 transition-all duration-300"
           >
-            <span>Open Interactief Dashboard</span>
+            <span>{t('onboarding.ready.openDashboard')}</span>
             <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>

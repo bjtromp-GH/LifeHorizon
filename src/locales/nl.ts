@@ -8,7 +8,10 @@ export const nl = {
     woman: "Vrouw",
     prevStep: "Vorige",
     nextStep: "Volgende",
-    understood: "Begrepen"
+    understood: "Begrepen",
+    work: "Werk",
+    profile: "Profiel",
+    retirementGoal: "Pensioendoel"
   },
   onboarding: {
     header: "Levensloop & Pensioen",
@@ -106,16 +109,45 @@ export const nl = {
       startWork: "Startleeftijd Carrière",
       fireAge: "Doelleeftijd Pensioen",
       ageYears: "{{val}} jaar",
-      yearsDiff: "{{val}} jaar"
+      yearsDiff: "{{val}} jaar",
+      workDesc: "Dit is het aantal jaren verplicht werk dat u heeft ingepland voor uw financiële onafhankelijkheid of pensioen."
     },
     ready: {
       badge: "Klaar om te ontdekken!",
       title: "Klaar om te ontdekken!",
       desc: "Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.",
       button: "Bekijk Levensmatrix",
-      generating: "Eerst nog even dit..."
+      generating: "Eerst nog even dit...",
+      openDashboard: "Open Interactief Dashboard"
     },
     revealText: "We worden gemiddeld ouder dan ooit tevoren. Onze levensverwachting blijft stijgen. Maar er is een verborgen realiteit. Onze 'gezonde' levensverwachting stijgt niet in hetzelfde tempo mee. Dit betekent dat we aan het einde van ons leven gemiddeld langer kampen met chronische ziekten, vermoeidheid of beperkingen. Je doel is niet simpelweg zo oud mogelijk worden. Je ware doel is zo lang mogelijk reëel, vitaal en onafhankelijk leven. Hier draait de Bio-Score om. Neem de regie over je gezonde jaren."
+  },
+  dashboard: {
+    swipeHint: "Tip: Swipe naar links of rechts om tussen de 4 schermen te wisselen, of klik op de navigatieknoppen.",
+    ok: "OK",
+    showMenu: "Toon Menu ☰",
+    restoreMenuTitle: "Herstel navigatie bar",
+    config: "Configuratie",
+    yearsRemaining: "{{val}} jr restant",
+    born: "Geb.",
+    change: "Wijzig",
+    tabs: {
+      runway: "1. Runway",
+      matrix: "2. Matrix",
+      vitality: "3. Vitaliteit",
+      overview: "4. Overzicht"
+    },
+    nav: {
+      prev: "◀ Vorige",
+      next: "Volgende ▶"
+    },
+    explorePhases: "Verken je fases",
+    deepInsight: "Diepgaand inzicht in uw levensfases",
+    elephantFactTitle: "Olifantenweetje!",
+    matrixTitle: "Levensmatrix",
+    matrixSubtitle: "Hoe verhouden levensverwachting en gezondheid zich tot elkaar?",
+    matrixDetailsBtn: "Matrix details",
+    healthVsLife: "Gezondheidsduur (Healthspan) vs Levensduur (Lifespan)"
   }
 };
 export type Translations = typeof nl;

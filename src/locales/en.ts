@@ -10,7 +10,10 @@ export const en: Translations = {
     woman: "Woman",
     prevStep: "Previous",
     nextStep: "Next",
-    understood: "Understood"
+    understood: "Understood",
+    work: "Work",
+    profile: "Profile",
+    retirementGoal: "Retirement Goal"
   },
   onboarding: {
     header: "Life Course & Retirement",
@@ -108,15 +111,44 @@ export const en: Translations = {
       startWork: "Career Start Age",
       fireAge: "Target Retirement Age",
       ageYears: "{{val}} years",
-      yearsDiff: "{{val}} years"
+      yearsDiff: "{{val}} years",
+      workDesc: "This is the number of mandatory work years you have planned for your financial independence or retirement."
     },
     ready: {
       badge: "Ready to explore!",
       title: "Ready to explore!",
       desc: "All factors are compiled. We will route your demographic data live into the CBS model to determine your exact survival curve.",
       button: "View Life Matrix",
-      generating: "Just one more thing..."
+      generating: "Just one more thing...",
+      openDashboard: "Open Interactive Dashboard"
     },
     revealText: "We are living longer than ever before. Our life expectancy continues to rise. But there is a hidden reality. Our 'healthy' life expectancy is not increasing at the same pace. This means that at the end of our lives, we suffer from chronic diseases, fatigue, or disabilities for a longer average time. Your goal is not simply to live as long as possible. Your true goal is to live a real, vital, and independent life for as long as possible. This is what the Bio-Score is all about. Take control of your healthy years."
+  },
+  dashboard: {
+    swipeHint: "Tip: Swipe left or right to switch between the 4 screens, or click the navigation buttons.",
+    ok: "OK",
+    showMenu: "Show Menu ☰",
+    restoreMenuTitle: "Restore navigation bar",
+    config: "Configuration",
+    yearsRemaining: "{{val}} yrs remaining",
+    born: "Born",
+    change: "Edit",
+    tabs: {
+      runway: "1. Runway",
+      matrix: "2. Matrix",
+      vitality: "3. Vitality",
+      overview: "4. Overview"
+    },
+    nav: {
+      prev: "◀ Previous",
+      next: "Next ▶"
+    },
+    explorePhases: "Explore phases",
+    deepInsight: "In-depth insight into your life phases",
+    elephantFactTitle: "Elephant Fact!",
+    matrixTitle: "Life Matrix",
+    matrixSubtitle: "How do life expectancy and health relate?",
+    matrixDetailsBtn: "Matrix details",
+    healthVsLife: "Healthspan vs Lifespan"
   }
 };

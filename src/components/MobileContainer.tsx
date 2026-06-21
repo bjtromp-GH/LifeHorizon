@@ -8,6 +8,7 @@ import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
 import StatsCard from "./StatsCard";
+import { useLanguage } from "../context/LanguageContext";
 
 interface MobileContainerProps {
   inputs: UserInputs;
@@ -36,6 +37,7 @@ export default function MobileContainer({
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   const [showElephantFact, setShowElephantFact] = useState(false);
   const [showMatrixModal, setShowMatrixModal] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -120,14 +122,14 @@ export default function MobileContainer({
             <div className="flex items-center space-x-2.5">
               <Info className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
               <span className="text-xs font-medium leading-tight text-white">
-                Tip: Swipe naar links of rechts om tussen de 4 schermen te wisselen, of klik op de navigatieknoppen.
+                {t('dashboard.swipeHint')}
               </span>
             </div>
             <button
               onClick={() => setShowSwipeHint(false)}
               className="text-white/70 hover:text-white p-1 px-2.5 bg-white/10 hover:bg-white/20 rounded-md text-[10px] font-black cursor-pointer transition-all uppercase shrink-0 ml-2"
             >
-              OK
+              {t('dashboard.ok')}
             </button>
           </motion.div>
         )}
@@ -140,10 +142,10 @@ export default function MobileContainer({
             type="button"
             onClick={() => setIsSwipedFullscreen(false)}
             className="py-1.5 px-3 bg-zinc-900/90 hover:bg-zinc-900 text-white border border-white/10 rounded-full shadow-lg flex items-center space-x-1 transition-all cursor-pointer active:scale-95"
-            title="Herstel navigatie bar"
+            title={t('dashboard.restoreMenuTitle')}
           >
             <Minimize2 className="w-3.5 h-3.5 mr-0.5 text-[#D56B45]" />
-            <span className="text-[10px] font-extrabold uppercase tracking-wide">Toon Menu ☰</span>
+            <span className="text-[10px] font-extrabold uppercase tracking-wide">{t('dashboard.showMenu')}</span>
           </button>
         </div>
       )}
@@ -171,10 +173,10 @@ export default function MobileContainer({
                 className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1 animate-pulse"
               >
                 <Settings className="w-3.5 h-3.5 animate-spin-slow" />
-                <span>Configuratie</span>
+                <span>{t('dashboard.config')}</span>
               </button>
               <div className="font-mono text-[11px] text-[#D56B45] font-semibold bg-[#D56B45]/10 px-2.5 py-1 rounded-full">
-                {totalRoundedRemaining} jr restant
+                {t('dashboard.yearsRemaining', { val: totalRoundedRemaining.toString() })}
               </div>
             </div>
           </header>
@@ -182,24 +184,24 @@ export default function MobileContainer({
           {/* Quick Info bar triggering configuration */}
           <div className="bg-white border-b border-[#EAEAEA]/80 px-4 py-1.5 flex items-center justify-between text-[11px] text-[#767676] shrink-0">
             <div className="flex items-center space-x-1">
-              <span className="font-bold text-[#2D2D2D]">Profiel:</span>
-              <span>{inputs.gender === "man" ? "Man" : "Vrouw"} &bull; Geb. {inputs.birthYear} &bull; Work: {inputs.startWorkAge} - {inputs.fireAge} jr</span>
+              <span className="font-bold text-[#2D2D2D]">{t('common.profile')}:</span>
+              <span>{inputs.gender === "man" ? t('common.man') : t('common.woman')} &bull; {t('dashboard.born')} {inputs.birthYear} &bull; {t('common.work')}: {inputs.startWorkAge} - {inputs.fireAge}</span>
             </div>
             <button
               onClick={() => onRestartOnboarding(1)}
               className="text-[#D56B45] font-bold hover:underline cursor-pointer"
             >
-              Wijzig
+              {t('dashboard.change')}
             </button>
           </div>
 
           {/* 1.5 Custom Dashboard Segmented Navigation Tabs */}
           <div className="px-4 py-2 bg-white border-b border-[#EAEAEA] flex justify-between gap-1 overflow-x-auto shrink-0 scrollbar-none select-none">
             {[
-              { id: 0, name: "1. Runway" },
-              { id: 1, name: "2. Matrix" },
-              { id: 2, name: "3. Vitaliteit" },
-              { id: 3, name: "4. Overzicht" },
+              { id: 0, name: t('dashboard.tabs.runway') },
+              { id: 1, name: t('dashboard.tabs.matrix') },
+              { id: 2, name: t('dashboard.tabs.vitality') },
+              { id: 3, name: t('dashboard.tabs.overview') },
             ].map((s) => {
               const isActive = activeSlide === s.id;
               return (
@@ -287,7 +289,7 @@ export default function MobileContainer({
                         : "border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 cursor-pointer"
                     }`}
                   >
-                    ◀ Vorige
+                    {t('dashboard.nav.prev')}
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -306,7 +308,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide + 1)}
                     className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
                   >
-                    <span>Volgende</span>
+                    <span>{t('dashboard.nav.next')}</span>
                     <span>▶</span>
                   </button>
                 </div>
@@ -345,7 +347,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 rounded-lg text-xs font-bold transition-all cursor-pointer"
                   >
-                    ◀ Vorige
+                    ◀ {t('dashboard.nav.prev')}
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -364,7 +366,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide + 1)}
                     className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
                   >
-                    <span>Volgende</span>
+                    <span>{t('dashboard.nav.next')}</span>
                     <span>▶</span>
                   </button>
                 </div>
@@ -392,7 +394,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 rounded-lg text-xs font-bold transition-all cursor-pointer"
                   >
-                    ◀ Vorige
+                    ◀ {t('dashboard.nav.prev')}
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -411,93 +413,26 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide + 1)}
                     className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
                   >
-                    <span>Conclusie</span>
+                    <span>{t('dashboard.nav.next')}</span>
                     <span>▶</span>
                   </button>
                 </div>
               </div>
             )}
 
-            {/* Screen 4: Conclusie (Orange Screen) */}
+            {/* Screen 4: Overview */}
             {activeSlide === 3 && (
-              <div className="space-y-5 flex flex-col justify-between h-full text-white">
-                <div className="space-y-5">
-                  <div className="text-center space-y-2 mt-2">
-                    <button 
-                      onClick={() => setShowElephantFact(true)}
-                      className="block mx-auto cursor-pointer focus:outline-none focus:ring-0 active:scale-95 transition-transform"
-                    >
+              <div className="space-y-4 pt-2">
+                {showElephantFact && (
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="fixed inset-0 z-[500] bg-black/60 flex flex-col items-center justify-center p-4"
+                  >
+                    <div className="bg-white rounded-2xl p-6 w-full max-w-sm relative shadow-2xl flex flex-col items-center text-center">
                       <motion.img 
                         src="/img/olifant-bril.png" 
                         alt="Olifant" 
-                        className="w-28 h-28 object-contain"
-                        animate={{ filter: ['drop-shadow(0 0 4px rgba(255,255,255,0.2))', 'drop-shadow(0 0 25px rgba(255,255,255,1))', 'drop-shadow(0 0 4px rgba(255,255,255,0.2))'] }}
-                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                      />
-                    </button>
-                    <h3 className="text-[17px] sm:text-lg font-black font-sans uppercase tracking-tight text-white">
-                      Tussentijdse Conclusie & Reflectie
-                    </h3>
-                    <p className="text-[11px] text-white/80 max-w-xs mx-auto leading-normal">
-                      Jouw CBS Levensrunway samengevat op een<br />soevereine rij.
-                    </p>
-                  </div>
-
-                  {/* Highlights */}
-                  <div className="max-w-sm mx-auto w-full space-y-2.5">
-                    <div className="flex flex-col items-center justify-center py-3 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
-                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
-                        Geschatte Levensverwachting
-                      </span>
-                      <span className="text-3xl font-extrabold font-mono tracking-tight text-white">
-                        {projectedLifeExpectancy.toFixed(1)} jaar
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-center py-3 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
-                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
-                        Resterende Tijdsperspectief
-                      </span>
-                      <span className="text-3xl font-extrabold font-mono tracking-tight text-white mb-0.5">
-                        {totalRemaining.toFixed(1)} jaar
-                      </span>
-                      <span className="text-[9px] font-sans text-white/70">
-                        ca. {Math.round(totalRemaining * 52.17).toLocaleString("nl-NL")} betekenisvolle weken over
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Phase blocks */}
-                  <div className="grid grid-cols-3 gap-2 max-w-sm mx-auto w-full pt-2">
-                    <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
-                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Jeugd</span>
-                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">20 jr</span>
-                    </div>
-                    <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
-                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Werk</span>
-                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">{Math.max(0, inputs.fireAge - 20)} jr</span>
-                    </div>
-                    <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
-                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">Vrijheid</span>
-                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">{(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} jr</span>
-                    </div>
-                  </div>
-
-                  {/* Button to show Matrix again */}
-                  <div className="flex flex-col items-center justify-center max-w-sm mx-auto w-full pt-1 pb-1">
-                    <button
-                      onClick={() => setShowMatrixModal(true)}
-                      className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm"
-                    >
-                      <Grid className="w-5 h-5" />
-                      <span>Bekijk Levensmatrix</span>
-                    </button>
-                    <span className="text-[10px] font-sans text-white/60 mt-2 text-center">
-                      Bekijk je persoonlijke levensloop in detail
-                    </span>
-                  </div>
-
-
 
                   {/* Dutch insights summary */}
                   <div className="bg-[#5c2411]/20 p-4 rounded-xl border border-white/10 text-xs text-stone-100 max-w-sm mx-auto w-full leading-relaxed space-y-2">
