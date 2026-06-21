@@ -32,12 +32,12 @@ De applicatie maakt gebruik van aardse, warme kleuren die rust uitstralen maar t
 
 ## 🔤 Typografie
 
-De typografie leunt sterk op contrast in font-weights in plaats van verschillende font-families. We gebruiken standaard Tailwind fonts, specifiek vormgegeven door grootte en tracking.
+De typografie leunt op twee specifieke, geïmporteerde Google Fonts. We gebruiken deze via de standaard Tailwind font-families die we in `index.css` hebben overschreven:
 
-- **Primaire Font:** `font-sans` (Standaard sans-serif stack van Tailwind: Inter, system-ui, etc.)
-- **Cijfers & Percentages:** Vaak `font-mono` voor een strakke, datagedreven en moderne uitstraling.
-- **Koppen:** Vaak `font-black` of `font-extrabold` in combinatie met `tracking-tight` of `tracking-tighter`.
-- **Knoppen (Buttons):** Vaak `font-black uppercase tracking-widest` voor maximale leesbaarheid en een premium "app" gevoel.
+- **Primaire Font (Sora):** `font-sans` is gekoppeld aan de **Sora** font-family. Dit is een uiterst moderne, vriendelijke en goed leesbare schreefloze letter die overal in de app wordt gebruikt voor een heldere uitstraling.
+- **Cijfers & Percentages (JetBrains Mono):** `font-mono` is gekoppeld aan **JetBrains Mono**. We gebruiken dit lettertype voor datagedreven getallen, percentages en de "levensvoortgangsbalk" voor een strakke, technische en betrouwbare look.
+- **Koppen:** Vaak in **Sora** met `font-black` of `font-extrabold` in combinatie met `tracking-tight` of `tracking-tighter`.
+- **Knoppen (Buttons):** Vaak in **Sora** met `font-black uppercase tracking-widest` voor maximale leesbaarheid en een premium "app" gevoel.
 
 ## 📐 Vormgeving & Spacing
 
