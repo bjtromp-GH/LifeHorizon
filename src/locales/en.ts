@@ -13,7 +13,8 @@ export const en: Translations = {
     understood: "Understood",
     work: "Work",
     profile: "Profile",
-    retirementGoal: "Retirement Goal"
+    retirementGoal: "Retirement Goal",
+    welcome: "Welcome"
   },
   onboarding: {
     header: "Life Course & Retirement",

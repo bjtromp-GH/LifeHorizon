@@ -103,16 +103,15 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
 
-  // List of step metadata including the new Intro Splash screen at index 0
   const stepsMeta = [
-    { title: "Intro", icon: Sparkles },
+    { title: t('onboarding.demographics.steps.intro'), icon: Sparkles },
     { title: t('onboarding.testimonials.badge'), icon: Sparkles },
-    { title: "Welkom", icon: Sparkles },
+    { title: t('common.welcome'), icon: Sparkles },
     { title: t('common.profile'), icon: User },
-    { title: "Leefstijl", icon: Heart },
-    { title: "Genetica", icon: Dna },
-    { title: "Carrière", icon: Briefcase },
-    { title: "Klaar", icon: CheckCircle2 }
+    { title: t('onboarding.demographics.steps.lifestyle'), icon: Heart },
+    { title: t('onboarding.demographics.steps.genetics'), icon: Dna },
+    { title: t('onboarding.demographics.steps.career'), icon: Briefcase },
+    { title: t('onboarding.demographics.steps.ready'), icon: CheckCircle2 }
   ];
 
   const steps = [

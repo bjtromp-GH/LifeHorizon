@@ -11,7 +11,8 @@ export const nl = {
     understood: "Begrepen",
     work: "Werk",
     profile: "Profiel",
-    retirementGoal: "Pensioendoel"
+    retirementGoal: "Pensioendoel",
+    welcome: "Welkom"
   },
   onboarding: {
     header: "Levensloop & Pensioen",
