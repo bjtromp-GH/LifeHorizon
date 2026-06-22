@@ -196,7 +196,7 @@ export default React.memo(function LifePhasesBar({
                 {/* Phase 1: Ontwikkeling */}
                 <motion.div
                   id="phase-bar-basis"
-                  className="h-full bg-[#EAE8E4] relative group"
+                  className="h-full bg-[#2D2D2D] relative group"
                   initial={{ width: "0%", opacity: 0 }}
                   animate={{ width: `${phases.basisPercent}%`, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
@@ -204,7 +204,7 @@ export default React.memo(function LifePhasesBar({
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     {phases.basisPercent > 8 && (
-                      <span className="text-[10px] uppercase tracking-wider text-[#767676] font-medium hidden sm:inline">
+                      <span className="text-[10px] uppercase tracking-wider text-white/90 font-medium hidden sm:inline">
                         {t('lifePhasesBar.development')}
                       </span>
                     )}
@@ -214,7 +214,7 @@ export default React.memo(function LifePhasesBar({
                 {/* Phase 2: Werk */}
                 <motion.div
                   id="phase-bar-werk"
-                  className="h-full bg-[#C8C5C0] border-l border-[#FFFFFF]/30 relative group"
+                  className="h-full bg-[#D56B45] border-l border-[#FFFFFF]/30 relative group"
                   initial={{ width: "0%", opacity: 0 }}
                   animate={{ width: `${phases.accumulationPercent}%`, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
@@ -222,7 +222,7 @@ export default React.memo(function LifePhasesBar({
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     {phases.accumulationPercent > 12 && (
-                      <span className="text-[10px] uppercase tracking-wider text-[#2D2D2D]/80 font-bold hidden sm:inline">
+                      <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold hidden sm:inline">
                         {t('lifePhasesBar.work')}
                       </span>
                     )}
@@ -232,7 +232,7 @@ export default React.memo(function LifePhasesBar({
                 {/* Phase 3: Vrijheid */}
                 <motion.div
                   id="phase-bar-vrijheid"
-                  className="h-full bg-[#D56B45]/20 border-l border-[#FFFFFF]/30 relative group"
+                  className="h-full bg-[#84A98C] border-l border-[#FFFFFF]/30 relative group"
                   initial={{ width: "0%", opacity: 0 }}
                   animate={{ width: `${phases.freedomPercent}%`, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 1.1, ease: "easeOut" }}
@@ -240,7 +240,7 @@ export default React.memo(function LifePhasesBar({
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     {phases.freedomPercent > 12 && (
-                      <span className="text-[10px] uppercase tracking-wider text-[#D56B45] font-bold hidden sm:inline">
+                      <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold hidden sm:inline">
                         {t('lifePhasesBar.freedom')}
                       </span>
                     )}
@@ -280,8 +280,8 @@ export default React.memo(function LifePhasesBar({
                   className="absolute bottom-0 flex flex-col items-center -translate-x-1/2"
                   style={{ left: `${phases.basisPercent}%` }}
                 >
-                  <div className="w-[1.5px] h-2.5 bg-[#8E8B87]" />
-                  <span className="mt-0.5 font-extrabold text-[#2D2D2D] bg-[#FDFDFD] px-1 rounded border border-[#EAEAEA] shadow-3xs whitespace-nowrap">
+                  <div className="w-[1.5px] h-2.5 bg-[#D56B45]" />
+                  <span className="mt-0.5 font-extrabold text-[#D56B45] bg-[#FDFDFD] px-1 rounded border border-[#EAEAEA] shadow-3xs whitespace-nowrap">
                     {inputs.startWorkAge} {t('lifePhasesBar.yr')} <span className="font-normal text-[#767676] hidden sm:inline">({t('lifePhasesBar.startWork')})</span>
                   </span>
                 </div>
@@ -291,16 +291,16 @@ export default React.memo(function LifePhasesBar({
                   className="absolute bottom-0 flex flex-col items-center -translate-x-1/2"
                   style={{ left: `${phases.basisPercent + phases.accumulationPercent}%` }}
                 >
-                  <div className="w-[1.5px] h-2.5 bg-[#D56B45]" />
-                  <span className="mt-0.5 font-extrabold text-[#D56B45] bg-[#FDFDFD] px-1 rounded border border-[#D56B45]/20 shadow-3xs whitespace-nowrap">
-                    {inputs.fireAge} {t('lifePhasesBar.yr')} <span className="font-semibold text-[#D56B45]/80 hidden sm:inline">({t('lifePhasesBar.retirement')})</span>
+                  <div className="w-[1.5px] h-2.5 bg-[#84A98C]" />
+                  <span className="mt-0.5 font-extrabold text-[#84A98C] bg-[#FDFDFD] px-1 rounded border border-[#84A98C]/20 shadow-3xs whitespace-nowrap">
+                    {inputs.fireAge} {t('lifePhasesBar.yr')} <span className="font-semibold text-[#84A98C]/80 hidden sm:inline">({t('lifePhasesBar.retirement')})</span>
                   </span>
                 </div>
 
                 {/* End Age tick */}
                 <div className="absolute right-0 bottom-0 flex flex-col items-end">
-                  <div className="w-[1.5px] h-2.5 bg-[#D56B45]/40" />
-                  <span className="mt-0.5 font-bold text-[#D56B45] whitespace-nowrap">
+                  <div className="w-[1.5px] h-2.5 bg-[#84A98C]/40" />
+                  <span className="mt-0.5 font-bold text-[#84A98C] whitespace-nowrap">
                     {Math.round(projectedLifeExpectancy)} {t('lifePhasesBar.yr')}
                   </span>
                 </div>
@@ -326,7 +326,7 @@ export default React.memo(function LifePhasesBar({
                 <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#767676]">
                   2. {t('lifePhasesBar.work')}
                 </span>
-                <span className="text-sm font-semibold text-[#2D2D2D] font-mono">
+                <span className="text-sm font-semibold text-[#D56B45] font-mono">
                   {phases.accumulationYears} {t('lifePhasesBar.years')}
                 </span>
                 <span className="text-[11px] sm:text-xs text-[#767676]">
@@ -341,7 +341,7 @@ export default React.memo(function LifePhasesBar({
                 <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#767676]">
                   3. {t('lifePhasesBar.freedom')}
                 </span>
-                <span className="text-sm font-semibold text-[#D56B45] font-mono">
+                <span className="text-sm font-semibold text-[#84A98C] font-mono">
                   {phases.freedomYears.toFixed(1)} {t('lifePhasesBar.years')}
                 </span>
                 <span className="text-[11px] sm:text-xs text-[#767676]">
@@ -371,8 +371,8 @@ export default React.memo(function LifePhasesBar({
               className="flex items-stretch group relative"
             >
               <div className="w-10 shrink-0 flex flex-col items-center">
-                <div className="w-8 h-8 rounded-full bg-[#EAE8E4] flex items-center justify-center text-sm font-bold text-[#767676] z-10 shadow-sm border border-white/50">1</div>
-                <div className="w-[2px] h-full bg-gradient-to-b from-[#EAE8E4] to-[#C8C5C0] group-last:hidden mt-[-2px] mb-[-2px]" />
+                <div className="w-8 h-8 rounded-full bg-[#2D2D2D] flex items-center justify-center text-sm font-bold text-white z-10 shadow-sm border border-[#2D2D2D]">1</div>
+                <div className="w-[2px] h-full bg-gradient-to-b from-[#2D2D2D] to-[#D56B45] group-last:hidden mt-[-2px] mb-[-2px]" />
               </div>
               <div className="pb-5 pl-3 flex-1 relative mt-1">
                 {currentAge < inputs.startWorkAge && (
@@ -396,14 +396,14 @@ export default React.memo(function LifePhasesBar({
               className="flex items-stretch group relative"
             >
               <div className="w-10 shrink-0 flex flex-col items-center">
-                <div className="w-8 h-8 rounded-full bg-[#C8C5C0] flex items-center justify-center text-sm font-bold text-[#2D2D2D] z-10 shadow-sm border border-white/50">2</div>
-                <div className="w-[2px] h-full bg-gradient-to-b from-[#C8C5C0] to-[#D56B45]/40 group-last:hidden mt-[-2px] mb-[-2px]" />
+                <div className="w-8 h-8 rounded-full bg-[#D56B45] flex items-center justify-center text-sm font-bold text-white z-10 shadow-sm border border-[#D56B45]">2</div>
+                <div className="w-[2px] h-full bg-gradient-to-b from-[#D56B45] to-[#84A98C] group-last:hidden mt-[-2px] mb-[-2px]" />
               </div>
               <div className="pb-5 pl-3 flex-1 relative mt-1">
                 {currentAge >= inputs.startWorkAge && currentAge < inputs.fireAge && (
                   <div className="absolute top-1.5 -left-10 w-3 h-3 rounded-full bg-[#D56B45] animate-pulse shadow-[0_0_8px_rgba(213,107,69,0.8)] border border-white z-20" />
                 )}
-                <h5 className="text-sm font-extrabold text-[#2D2D2D] uppercase tracking-wide">{t('lifePhasesBar.work')}</h5>
+                <h5 className="text-sm font-extrabold text-[#D56B45] uppercase tracking-wide">{t('lifePhasesBar.work')}</h5>
                 <p className="text-xs font-mono text-[#5c5c5c] mb-1.5 bg-white/50 inline-block px-1.5 py-0.5 rounded shadow-3xs border border-[#EAEAEA]/50">
                   {inputs.startWorkAge} - {inputs.fireAge} {t('lifePhasesBar.yr')} <span className="font-sans ml-1 text-zinc-400">({phases.accumulationYears} {t('lifePhasesBar.years')}, {Math.round(phases.accumulationPercent)}%)</span>
                 </p>
@@ -421,21 +421,21 @@ export default React.memo(function LifePhasesBar({
               className="flex items-stretch group relative"
             >
               <div className="w-10 shrink-0 flex flex-col items-center">
-                <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm font-bold text-[#D56B45] z-10 shadow-sm border border-amber-200/50">3</div>
-                <div className="w-[2px] h-full bg-gradient-to-b from-amber-100 to-transparent group-last:hidden mt-[-2px] mb-[-2px]" />
+                <div className="w-8 h-8 rounded-full bg-[#84A98C] flex items-center justify-center text-sm font-bold text-white z-10 shadow-sm border border-[#84A98C]">3</div>
+                <div className="w-[2px] h-full bg-gradient-to-b from-[#84A98C] to-transparent group-last:hidden mt-[-2px] mb-[-2px]" />
               </div>
               <div className="pb-2 pl-3 flex-1 relative mt-1">
                 {currentAge >= inputs.fireAge && (
                   <div className="absolute top-1.5 -left-10 w-3 h-3 rounded-full bg-[#D56B45] animate-pulse shadow-[0_0_8px_rgba(213,107,69,0.8)] border border-white z-20" />
                 )}
-                <h5 className="text-sm font-extrabold text-[#D56B45] uppercase tracking-wide flex items-center gap-1.5">
+                <h5 className="text-sm font-extrabold text-[#84A98C] uppercase tracking-wide flex items-center gap-1.5">
                   {t('lifePhasesBar.freedomRetirement')}
-                  <span className="px-1.5 py-0.5 rounded bg-[#D56B45]/10 text-[#D56B45] text-[10px] border border-[#D56B45]/20">{t('lifePhasesBar.harvestPhase')}</span>
+                  <span className="px-1.5 py-0.5 rounded bg-[#84A98C]/10 text-[#84A98C] text-[10px] border border-[#84A98C]/20">{t('lifePhasesBar.harvestPhase')}</span>
                 </h5>
-                <p className="text-xs font-mono text-[#D56B45]/90 mb-1.5 bg-amber-50/50 inline-block px-1.5 py-0.5 rounded shadow-3xs border border-amber-200/50 mt-1">
+                <p className="text-xs font-mono text-[#84A98C]/90 mb-1.5 bg-[#84A98C]/10 inline-block px-1.5 py-0.5 rounded shadow-3xs border border-[#84A98C]/20 mt-1">
                   {inputs.fireAge} - {projectedLifeExpectancy.toFixed(1)} {t('lifePhasesBar.yr')} <span className="font-sans ml-1 opacity-70">({phases.freedomYears.toFixed(1)} {t('lifePhasesBar.years')}, {Math.round(phases.freedomPercent)}%)</span>
                 </p>
-                <p className="text-xs text-[#D56B45]/90 leading-relaxed bg-amber-50/40 p-2 rounded-md border border-amber-200/30">
+                <p className="text-xs text-[#84A98C] leading-relaxed bg-[#84A98C]/10 p-2 rounded-md border border-[#84A98C]/20">
                   {t('lifePhasesBar.phase3Desc')}
                 </p>
               </div>
