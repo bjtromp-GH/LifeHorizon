@@ -828,7 +828,7 @@ export default function MobileContainer({
                       {t('mobileContainer.financialRunwayPromo')}
                     </p>
                     <a
-                      href="https://financiele-runway-promo.vercel.app/"
+                      href="https://financiele-horizon.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex w-full items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
