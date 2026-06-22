@@ -236,20 +236,20 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </h1>
             </div>
 
-            {step > 1 && (
+            {step > 2 && (
               <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
                 <motion.div 
                   className="h-full bg-[#D56B45]"
                   initial={{ width: 0 }}
-                  animate={{ width: `${((step - 1) / (stepsMeta.length - 2)) * 100}%` }}
+                  animate={{ width: `${((step - 2) / (stepsMeta.length - 3)) * 100}%` }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 />
               </div>
             )}
 
-            {step > 1 && (
+            {step > 2 && (
               <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
-                <span>{t('common.step')} {step - 1} {t('common.of')} {stepsMeta.length - 2}</span>
+                <span>{t('common.step')} {step - 2} {t('common.of')} {stepsMeta.length - 3}</span>
                 <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
               </div>
             )}
