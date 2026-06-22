@@ -47,13 +47,13 @@ export default React.memo(function DecadeGrid({
         </h4>
         <div className="flex items-center space-x-3 text-[10px] text-[#767676] font-mono">
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#EAE8E4]" /> {t('decadeGrid.development')}
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#2D2D2D]" /> {t('decadeGrid.development')}
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#C8C5C0]" /> {t('decadeGrid.work')}
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D56B45]" /> {t('decadeGrid.work')}
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D56B45]/20 border border-[#D56B45]/30" /> {t('decadeGrid.freedom')}
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#84A98C]" /> {t('decadeGrid.freedom')}
           </span>
         </div>
       </div>
@@ -86,13 +86,15 @@ export default React.memo(function DecadeGrid({
                     let borderStyle = "border-transparent";
 
                     if (phase === "basis") {
-                      bgStyle = isPast ? "bg-[#EAE8E4]" : "bg-[#F3F1ED]";
+                      bgStyle = isPast ? "bg-[#2D2D2D]" : "bg-[#2D2D2D]/40";
+                      borderStyle = isPast ? "border-[#2D2D2D]" : "border-transparent";
                     } else if (phase === "accumulation") {
-                      bgStyle = isPast ? "bg-[#C8C5C0]" : "bg-[#E6E4E0]";
+                      bgStyle = isPast ? "bg-[#D56B45]" : "bg-[#D56B45]/40";
+                      borderStyle = isPast ? "border-[#D56B45]" : "border-transparent";
                     } else {
                       // Freedom / Retirement phase
-                      bgStyle = isPast ? "bg-[#D56B45]/35" : "bg-[#D56B45]/15";
-                      borderStyle = "border-[#D56B45]/20";
+                      bgStyle = isPast ? "bg-[#84A98C]" : "bg-[#84A98C]/40";
+                      borderStyle = isPast ? "border-[#84A98C]" : "border-transparent";
                     }
 
                     return (
@@ -122,10 +124,10 @@ export default React.memo(function DecadeGrid({
                           </motion.div>
                         ) : (
                           <div
-                            className={`w-full h-full rounded-[3px] transition-all duration-300 border ${borderStyle} ${bgStyle} hover:border-[#D56B45]/70 flex items-center justify-center cursor-default group/box`}
+                            className={`w-full h-full rounded-[3px] transition-all duration-300 border ${borderStyle} ${bgStyle} hover:border-white/50 flex items-center justify-center cursor-default group/box`}
                           >
                             {/* Age label always visible but subtle, gets slightly larger and high contrast on hover */}
-                            <span className="text-[9px] md:text-[10px] font-mono text-[#2D2D2D]/45 group-hover/box:text-[#D56B45] group-hover/box:font-extrabold group-hover/box:scale-110 transition-all duration-150 select-none font-medium">
+                            <span className={`text-[9px] md:text-[10px] font-mono transition-all duration-150 select-none font-medium ${isPast ? 'text-white/40 group-hover/box:text-white' : 'text-[#2D2D2D]/40 group-hover/box:text-[#2D2D2D]'} group-hover/box:font-extrabold group-hover/box:scale-110`}>
                               {year}
                             </span>
                           </div>
@@ -279,11 +281,11 @@ export default React.memo(function DecadeGrid({
                           <circle 
                             cx="21" cy="21" r={r} 
                             fill="transparent" 
-                            stroke="#EAE8E4" 
+                            stroke="#2D2D2D" 
                             strokeWidth={activeSlice === "dev" ? 8 : 6} 
                             strokeDasharray={`${devPct} ${100 - devPct}`}
                             strokeDashoffset={0}
-                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[#DCD9D4]"
+                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[#4A4A4A]"
                             onMouseEnter={() => setActiveSlice("dev")}
                             onMouseLeave={() => setActiveSlice(null)}
                           />
@@ -291,11 +293,11 @@ export default React.memo(function DecadeGrid({
                           <circle 
                             cx="21" cy="21" r={r} 
                             fill="transparent" 
-                            stroke="#C8C5C0" 
+                            stroke="#D56B45" 
                             strokeWidth={activeSlice === "work" ? 8 : 6} 
                             strokeDasharray={`${workPct} ${100 - workPct}`}
                             strokeDashoffset={workOffset}
-                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[#B5B2AC]"
+                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[#E08565]"
                             onMouseEnter={() => setActiveSlice("work")}
                             onMouseLeave={() => setActiveSlice(null)}
                           />
@@ -303,11 +305,11 @@ export default React.memo(function DecadeGrid({
                           <circle 
                             cx="21" cy="21" r={r} 
                             fill="transparent" 
-                            stroke="rgba(213,107,69,0.5)" 
+                            stroke="#84A98C" 
                             strokeWidth={activeSlice === "free" ? 8 : 6} 
                             strokeDasharray={`${freePct} ${100 - freePct}`}
                             strokeDashoffset={freeOffset}
-                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[rgba(213,107,69,0.7)]"
+                            className="transition-all duration-300 ease-in-out cursor-pointer hover:stroke-[#9BBAA2]"
                             onMouseEnter={() => setActiveSlice("free")}
                             onMouseLeave={() => setActiveSlice(null)}
                           />
@@ -341,12 +343,12 @@ export default React.memo(function DecadeGrid({
                           <span>{t('decadeGrid.development')}</span>
                           <span>{startWorkAge} {t('decadeGrid.yr')} ({(startWorkAge / totalYears * 100).toFixed(0)}%)</span>
                         </div>
-                        <div className="h-3 bg-[#F3F1ED] rounded-full overflow-hidden">
+                        <div className="h-3 bg-[#2D2D2D]/20 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${(startWorkAge / totalYears) * 100}%` }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="h-full bg-[#D56B45]/40"
+                            className="h-full bg-[#2D2D2D]"
                           />
                         </div>
                       </div>
@@ -360,12 +362,12 @@ export default React.memo(function DecadeGrid({
                           <span>{t('decadeGrid.work')}</span>
                           <span>{fireAge - startWorkAge} {t('decadeGrid.yr')} ({((fireAge - startWorkAge) / totalYears * 100).toFixed(0)}%)</span>
                         </div>
-                        <div className="h-3 bg-[#E6E4E0] rounded-full overflow-hidden">
+                        <div className="h-3 bg-[#D56B45]/20 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${((fireAge - startWorkAge) / totalYears) * 100}%` }}
                             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                            className="h-full bg-[#D56B45]/70"
+                            className="h-full bg-[#D56B45]"
                           />
                         </div>
                       </div>
@@ -375,16 +377,16 @@ export default React.memo(function DecadeGrid({
                         onMouseEnter={() => setActiveSlice("free")}
                         onMouseLeave={() => setActiveSlice(null)}
                       >
-                        <div className="flex justify-between text-xs font-semibold text-[#D56B45] mb-1 uppercase tracking-wider">
+                        <div className="flex justify-between text-xs font-semibold text-[#84A98C] mb-1 uppercase tracking-wider">
                           <span>{t('decadeGrid.freedom')}</span>
                           <span>{totalYears - fireAge} {t('decadeGrid.yr')} ({((totalYears - fireAge) / totalYears * 100).toFixed(0)}%)</span>
                         </div>
-                        <div className="h-3 bg-[#D56B45]/15 rounded-full overflow-hidden">
+                        <div className="h-3 bg-[#84A98C]/20 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${((totalYears - fireAge) / totalYears) * 100}%` }}
                             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-                            className="h-full bg-[#D56B45]"
+                            className="h-full bg-[#84A98C]"
                           />
                         </div>
                       </div>
