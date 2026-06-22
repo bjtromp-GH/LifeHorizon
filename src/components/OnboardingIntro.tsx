@@ -569,7 +569,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               className="w-full space-y-3 sm:space-y-5 px-1"
             >
               <div className="space-y-0.5 sm:space-y-1.5 text-center sm:text-left">
-                <span className="text-[10px] bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                <span className="inline-block text-[11px] sm:text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-3 py-1 sm:py-1.5 rounded-md font-extrabold uppercase tracking-wider mb-1 sm:mb-2">
                   {t('onboarding.demographics.badge')}
                 </span>
                 <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight text-[#2D2D2D]">
@@ -719,7 +719,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               className="w-full space-y-2 sm:space-y-6 px-1"
             >
               <div className="space-y-0.5 sm:space-y-2 text-center sm:text-left">
-                <span className="hidden sm:inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
+                <span className="inline-block text-[11px] sm:text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-3 py-1 sm:py-1.5 rounded-md font-extrabold uppercase tracking-wider mb-1 sm:mb-2">
                   {t('onboarding.lifestyle.badge')}
                 </span>
                 <h2 className="text-lg sm:text-2xl font-black tracking-tight text-[#2D2D2D] leading-tight">
@@ -843,7 +843,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
             >
               <div className="space-y-2 text-center sm:text-left">
                 <div className="flex items-center justify-center sm:justify-start gap-2">
-                  <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
+                  <span className="inline-block text-[11px] sm:text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-3 py-1 sm:py-1.5 rounded-md font-extrabold uppercase tracking-wider mb-1 sm:mb-2">
                     {t('onboarding.genetics.badge')}
                   </span>
                 </div>
@@ -1013,7 +1013,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               className="w-full space-y-4 sm:space-y-6 px-1"
             >
               <div className="space-y-2 text-center sm:text-left">
-                <span className="inline-block text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-2.5 py-1 rounded-md font-extrabold uppercase tracking-wider">
+                <span className="inline-block text-[11px] sm:text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-3 py-1 sm:py-1.5 rounded-md font-extrabold uppercase tracking-wider mb-1 sm:mb-2">
                   {t('onboarding.career.badge')}
                 </span>
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
