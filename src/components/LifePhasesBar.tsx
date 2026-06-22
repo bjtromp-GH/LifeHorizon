@@ -22,6 +22,14 @@ export default React.memo(function LifePhasesBar({
   const { currentAge } = inputs;
   const [isEditingExpectancy, setIsEditingExpectancy] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showHand, setShowHand] = useState(true);
+
+  React.useEffect(() => {
+    if (showHand) {
+      const timer = setTimeout(() => setShowHand(false), 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [showHand]);
 
   // Calculate current age percentage position relative to the entire life runway.
   const currentAgePercent = (currentAge / projectedLifeExpectancy) * 100;
@@ -29,7 +37,7 @@ export default React.memo(function LifePhasesBar({
   return (
     <motion.div
       id="life-phases-bar-container"
-      className={`flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl cursor-pointer bg-white`}
+      className={`relative flex flex-col space-y-4 p-3.5 -m-3.5 rounded-xl cursor-pointer bg-white`}
       style={{
         borderWidth: "1px",
         borderStyle: "solid"
@@ -71,8 +79,25 @@ export default React.memo(function LifePhasesBar({
         const target = e.target as HTMLElement;
         if (target.closest("button") || target.closest("input")) return;
         setIsExpanded(!isExpanded);
+        setShowHand(false);
       }}
     >
+      <AnimatePresence>
+        {showHand && !isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: [0, -6, 0] }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{
+              opacity: { duration: 0.3 },
+              y: { repeat: Infinity, duration: 1.2, ease: "easeInOut" }
+            }}
+            className="absolute -top-3 right-6 z-50 text-2xl sm:text-3xl drop-shadow-lg pointer-events-none"
+          >
+            👇
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h4 className="text-xs font-bold uppercase tracking-wider text-[#D56B45] flex items-center gap-1.5 drop-shadow-sm">
           {t('lifePhasesBar.title')}
