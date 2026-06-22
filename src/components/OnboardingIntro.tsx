@@ -133,13 +133,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
     }
   };
   const letterVars = {
-    hidden: { opacity: 0, filter: "blur(12px)", scale: 1.15, y: 8 },
+    hidden: { opacity: 0, y: 25, scale: 0.9 },
     visible: { 
       opacity: 1, 
-      filter: "blur(0px)",
-      scale: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] } 
+      scale: 1,
+      transition: { type: "spring", damping: 12, stiffness: 250, mass: 0.8 } 
     }
   };
 
