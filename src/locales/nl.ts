@@ -27,14 +27,14 @@ export const nl = {
     },
     splash: {
       badge: "BEPAAL JE KOERS",
-      quote: "\"Confronteer je schaarste. Visualiseer je vitaliteit en levensfases.\"",
+      quote: "\"Ontdek je gezonde jaren, vrijheidsdatum en levensloop.\"",
       footer: "Bereken je overgebleven tijd • CBS Cohort Model 2026"
     },
     testimonials: {
       badge: "Ervaringen",
       title1: "Wat gebruikers zeggen ",
       title2: "over onze app",
-      t1_quote: "\"Het leven is kort. De LifeRunway app heeft mij echt inzicht gegeven zodat ik de juiste keuzes kan maken voordat het te laat is.\"",
+      t1_quote: "\"Het leven is kort. De Life Horizon app heeft mij echt inzicht gegeven zodat ik de juiste keuzes kan maken voordat het te laat is.\"",
       t1_author: "- Jan-Willem (42)",
       t2_quote: "\"Wow, dit is echt een nuttige app. Serieus, maar heel gaaf en interessant om inzicht te krijgen in je levensloop.\"",
       t2_author: "- Mark (50)",
@@ -288,17 +288,17 @@ export const nl = {
     healthyYears: "Gezonde jaren",
     yearsWithComplaints: "Jaren met klachten",
     hiddenRealityTitle: "De verborgen realiteit",
-    hiddenRealityDesc: "We worden gemiddeld ouder, maar onze <em>gezonde</em> levensverwachting stijgt niet even hard mee. Dit betekent dat we aan het einde van ons leven gemiddeld zo'n 15 tot 18 jaar kampen met chronische ziekten en beperkingen. <strong>Met de LifeRunway Bio-Score kun je zelf actie ondernemen om dat gat te dichten!</strong>",
+    hiddenRealityDesc: "We worden gemiddeld ouder, maar onze <em>gezonde</em> levensverwachting stijgt niet even hard mee. Dit betekent dat we aan het einde van ons leven gemiddeld zo'n 15 tot 18 jaar kampen met chronische ziekten en beperkingen. <strong>Met de Life Horizon Bio-Score kun je zelf actie ondernemen om dat gat te dichten!</strong>",
     close: "Sluiten"
   },
   desktopDashboard: {
-    subtitle: "Confronteer je schaarste. Visualiseer je vitaliteit en levensfases.",
+    subtitle: "Ontdek je gezonde jaren, vrijheidsdatum en levensloop.",
     restartIntroTitle: "Start de geanimeerde introductie opnieuw",
     intro: "Introductie",
     syncTitle: "Synchroniseer met CBS Open Data",
     sync: "Sync CBS",
     yearsRemaining: "Jaren Resterend",
-    footerText: "© 2026 LifeRunway — Tijd, Lucht & Vitaliteit"
+    footerText: "© 2026 Life Horizon — Tijd, Lucht & Vitaliteit"
   },
   statsCard: {
     popups: {

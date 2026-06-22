@@ -123,7 +123,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
     { title: t('onboarding.demographics.steps.ready'), icon: CheckCircle2 }
   ];
 
-  const titleLetters = Array.from("LifeRunway");
+  const titleLetters = Array.from("Life Horizon");
   const containerVars = {
     hidden: {},
     visible: {

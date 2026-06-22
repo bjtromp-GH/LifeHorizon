@@ -51,7 +51,7 @@ export default function DesktopDashboard({
             </div>
             <div>
               <h1 className="font-sans text-xl font-bold tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">
-                LifeRunway
+                Life Horizon
               </h1>
               <p className="text-xs text-[#767676]">
                 {t('desktopDashboard.subtitle')}

@@ -162,7 +162,7 @@ export default function MobileContainer({
                 <Compass className="w-4 h-4 text-white" />
               </div>
               <span className="font-sans font-bold text-sm tracking-tight text-[#2D2D2D] group-hover:text-[#D56B45] transition-colors">
-                LifeRunway
+                Life Horizon
               </span>
             </div>
             <div className="flex items-center space-x-2">

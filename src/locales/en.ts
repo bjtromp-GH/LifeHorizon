@@ -29,14 +29,14 @@ export const en: Translations = {
     },
     splash: {
       badge: "CHART YOUR COURSE",
-      quote: "\"Confront your scarcity. Visualize your vitality and life phases.\"",
+      quote: "\"Discover your healthy years, freedom date and life course.\"",
       footer: "Calculate your remaining time • CBS Cohort Model 2026"
     },
     testimonials: {
       badge: "Experiences",
       title1: "What users say ",
       title2: "about our app",
-      t1_quote: "\"Life is short. The LifeRunway app really gave me the insights to make the right choices before it's too late.\"",
+      t1_quote: "\"Life is short. The Life Horizon app really gave me the insights to make the right choices before it's too late.\"",
       t1_author: "- Jan-Willem (42)",
       t2_quote: "\"Wow, this is a genuinely useful app. Serious, but very cool and interesting to gain insight into your life course.\"",
       t2_author: "- Mark (50)",
@@ -290,17 +290,17 @@ export const en: Translations = {
     healthyYears: "Healthy years",
     yearsWithComplaints: "Years with complaints",
     hiddenRealityTitle: "The hidden reality",
-    hiddenRealityDesc: "We are living longer on average, but our <em>healthy</em> life expectancy is not increasing as fast. This means that at the end of our lives we average about 15 to 18 years struggling with chronic diseases and limitations. <strong>With the LifeRunway Bio-Score you can take action yourself to close that gap!</strong>",
+    hiddenRealityDesc: "We are living longer on average, but our <em>healthy</em> life expectancy is not increasing as fast. This means that at the end of our lives we average about 15 to 18 years struggling with chronic diseases and limitations. <strong>With the Life Horizon Bio-Score you can take action yourself to close that gap!</strong>",
     close: "Close"
   },
   desktopDashboard: {
-    subtitle: "Confront your scarcity. Visualize your vitality and life phases.",
+    subtitle: "Discover your healthy years, freedom date and life course.",
     restartIntroTitle: "Restart the animated introduction",
     intro: "Introduction",
     syncTitle: "Synchronize with CBS Open Data",
     sync: "Sync CBS",
     yearsRemaining: "Years Remaining",
-    footerText: "© 2026 LifeRunway — Time, Air & Vitality"
+    footerText: "© 2026 Life Horizon — Time, Air & Vitality"
   },
   statsCard: {
     popups: {
