@@ -57,97 +57,149 @@ export default function StatsCard({
     <>
       <div id="stats-dashboard-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {/* 1. Geprognosticeerde Levensverwachting */}
-        <div 
+        <motion.div 
           onClick={() => setActivePopup("prognose")}
-          className="p-4 bg-white border border-[#EAEAEA] rounded-md flex flex-col justify-between cursor-pointer hover:border-[#D56B45]/40 hover:shadow-sm transition-all"
+          className="relative overflow-hidden p-4 rounded-md flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow group bg-white border border-[#EAEAEA]"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              {t('statsCard.popups.prognosisTitle')}
-            </span>
-            <ShieldCheck className="w-4 h-4 text-[#D56B45]/80" />
-          </div>
-          <div className="mt-2.5">
-            <span id="stat-life-expectancy" className="text-3xl font-bold text-[#2D2D2D] font-mono tracking-tight">
-              {lifeVal}
-            </span>
-            <span className="text-xs text-[#767676] ml-1 font-sans">{t('statsCard.years')}</span>
-          </div>
-          <div className="mt-2.5 pt-2 border-t border-[#F8F7F5] flex flex-wrap items-center justify-between gap-1 text-[10px] text-[#767676]">
-            <span className="text-[#8E8C88] font-medium">{t('statsCard.calibratedWith')}</span>
-            <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[8.5px] font-extrabold uppercase tracking-widest bg-[#FAF3F0] text-[#D56B45] border border-[#D56B45]/15 whitespace-nowrap">
-              {apiSource}
-            </span>
-          </div>
-        </div>
+          <motion.div 
+            initial={{ height: "0%" }}
+            animate={{ height: "100%" }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
+            className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            className="relative z-10 flex flex-col h-full"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+                {t('statsCard.popups.prognosisTitle')}
+              </span>
+              <ShieldCheck className="w-4 h-4 text-white" />
+            </div>
+            <div className="mt-2.5 flex-1">
+              <span id="stat-life-expectancy" className="text-3xl font-bold text-white font-mono tracking-tight">
+                {lifeVal}
+              </span>
+              <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
+            </div>
+            <div className="mt-2.5 pt-2 border-t border-white/20 flex flex-wrap items-center justify-between gap-1 text-[10px] text-white/80">
+              <span className="font-medium">{t('statsCard.calibratedWith')}</span>
+              <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[8.5px] font-extrabold uppercase tracking-widest bg-white text-[#D56B45] border border-white/30 whitespace-nowrap">
+                {apiSource}
+              </span>
+            </div>
+          </motion.div>
+        </motion.div>
 
         {/* 2. Resterende Levensduur */}
-        <div 
+        <motion.div 
           onClick={() => setActivePopup("resterend")}
-          className="p-4 bg-white border border-[#EAEAEA] rounded-md flex flex-col justify-between cursor-pointer hover:border-[#D56B45]/40 hover:shadow-sm transition-all"
+          className="relative overflow-hidden p-4 rounded-md flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow group bg-white border border-[#EAEAEA]"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              {t('statsCard.popups.remainingTitle')}
-            </span>
-            <Hourglass className="w-4 h-4 text-[#D56B45]" />
-          </div>
-          <div className="mt-2.5">
-            <span id="stat-remaining-years" className="text-3xl font-bold text-[#D56B45] font-mono tracking-tight">
-              {remValue}
-            </span>
-            <span className="text-xs text-[#767676] ml-1 font-sans">{t('statsCard.years')}</span>
-          </div>
-          <p className="text-[9.5px] text-[#767676] mt-1 select-none leading-tight">
-            {t('statsCard.remainingBudget')}
-          </p>
-        </div>
+          <motion.div 
+            initial={{ height: "0%" }}
+            animate={{ height: "100%" }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
+            className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.1 }}
+            className="relative z-10 flex flex-col h-full"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+                {t('statsCard.popups.remainingTitle')}
+              </span>
+              <Hourglass className="w-4 h-4 text-white" />
+            </div>
+            <div className="mt-2.5 flex-1">
+              <span id="stat-remaining-years" className="text-3xl font-bold text-white font-mono tracking-tight">
+                {remValue}
+              </span>
+              <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
+            </div>
+            <p className="text-[9.5px] text-white/80 mt-1 select-none leading-tight pt-2 border-t border-transparent">
+              {t('statsCard.remainingBudget')}
+            </p>
+          </motion.div>
+        </motion.div>
 
         {/* 3. Nog Werken tot Pensioen */}
-        <div 
+        <motion.div 
           onClick={() => setActivePopup("werkend")}
-          className="p-4 bg-white border border-[#EAEAEA] rounded-md flex flex-col justify-between cursor-pointer hover:border-[#D56B45]/40 hover:shadow-sm transition-all"
+          className="relative overflow-hidden p-4 rounded-md flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow group bg-white border border-[#EAEAEA]"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              {t('statsCard.popups.workingTitle')}
+          <motion.div 
+            initial={{ height: "0%" }}
+            animate={{ height: "100%" }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.5 }}
+            className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.3 }}
+            className="relative z-10 flex flex-col h-full"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+                {t('statsCard.popups.workingTitle')}
+              </span>
+              <Workflow className="w-4 h-4 text-white" />
+            </div>
+            <div className="mt-2.5 flex-1">
+              <span id="stat-working-years" className="text-3xl font-bold text-white font-mono tracking-tight">
+                {workValue}
+              </span>
+              <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
+            </div>
+            <span className="text-[9.5px] text-white/80 mt-1 leading-tight pt-2 border-t border-transparent">
+              {currentAge >= fireAge
+                ? t('statsCard.freedomAchieved')
+                : t('statsCard.phaseEndsAt').replace('{{age}}', fireAge.toString())}
             </span>
-            <Workflow className="w-4 h-4 text-[#767676]/80" />
-          </div>
-          <div className="mt-2.5">
-            <span id="stat-working-years" className="text-3xl font-bold text-[#2D2D2D] font-mono tracking-tight">
-              {workValue}
-            </span>
-            <span className="text-xs text-[#767676] ml-1 font-sans">{t('statsCard.years')}</span>
-          </div>
-          <span className="text-[9.5px] text-[#767676] mt-1 leading-tight">
-            {currentAge >= fireAge
-              ? t('statsCard.freedomAchieved')
-              : t('statsCard.phaseEndsAt').replace('{{age}}', fireAge.toString())}
-          </span>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* 4. Totaal Vrijheid in Jaren */}
-        <div 
+        <motion.div 
           onClick={() => setActivePopup("vrijheid")}
-          className="p-4 bg-white border border-[#EAEAEA] rounded-md flex flex-col justify-between cursor-pointer hover:border-[#D56B45]/40 hover:shadow-sm transition-all"
+          className="relative overflow-hidden p-4 rounded-md flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow group bg-white border border-[#EAEAEA]"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase tracking-wider text-[#767676] font-semibold">
-              {t('statsCard.popups.freedomTitle')}
+          <motion.div 
+            initial={{ height: "0%" }}
+            animate={{ height: "100%" }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.7 }}
+            className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.5 }}
+            className="relative z-10 flex flex-col h-full"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+                {t('statsCard.popups.freedomTitle')}
+              </span>
+              <Sun className="w-4 h-4 text-white" />
+            </div>
+            <div className="mt-2.5 flex-1">
+              <span id="stat-freedom-years" className="text-3xl font-bold text-white font-mono tracking-tight">
+                {freeValue}
+              </span>
+              <span className="text-xs text-white/80 ml-1">{t('statsCard.years')}</span>
+            </div>
+            <span className="text-[9.5px] text-white/80 mt-1 leading-tight pt-2 border-t border-transparent">
+              {t('statsCard.harvestPhase')}
             </span>
-            <Sun className="w-4 h-4 text-amber-500/80" />
-          </div>
-          <div className="mt-2.5">
-            <span id="stat-freedom-years" className="text-3xl font-bold text-[#2D2D2D] font-mono tracking-tight">
-              {freeValue}
-            </span>
-            <span className="text-xs text-[#767676] ml-1">{t('statsCard.years')}</span>
-          </div>
-          <span className="text-[9.5px] text-[#767676] mt-1 leading-tight">
-            {t('statsCard.harvestPhase')}
-          </span>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* 5. Levensvoortgang (Bar) */}
         <div 
