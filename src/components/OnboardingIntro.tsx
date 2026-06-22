@@ -360,7 +360,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     <motion.span
                       key={index}
                       variants={letterVars}
-                      className={`text-[32px] min-[375px]:text-[38px] min-[415px]:text-[42px] sm:text-7xl font-sans font-black tracking-tight select-none inline-block ${char === " " ? "w-2 sm:w-4" : "text-white"}`}
+                      className={`text-[32px] min-[375px]:text-[38px] min-[415px]:text-[42px] sm:text-7xl font-sans font-black tracking-tight select-none inline-block ${char === " " ? "w-2 sm:w-4" : "text-white"} ${index === 8 ? "ml-0.5 sm:ml-1" : ""}`}
                       style={{
                         textShadow: char === " " ? "none" : "0 4px 12px rgba(0,0,0,0.15)"
                       }}
