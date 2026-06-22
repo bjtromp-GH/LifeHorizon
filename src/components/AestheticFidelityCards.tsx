@@ -113,7 +113,7 @@ export default React.memo(function AestheticFidelityCards({
                       {t('cards.consumedVsRemaining.title')}
                     </h3>
                   </div>
-                  <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
+                  <div className="px-2 py-0.5 rounded text-[11px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
                     {t('cards.consumedVsRemaining.badge')}
                   </div>
                 </div>
@@ -121,7 +121,7 @@ export default React.memo(function AestheticFidelityCards({
                 <div className="grid grid-cols-2 gap-4">
                   {/* Gerealiseerd */}
                   <div className="space-y-1">
-                    <span className="text-[10px] tracking-wider text-[#767676] uppercase font-semibold">
+                    <span className="text-[11px] tracking-wider text-[#767676] uppercase font-semibold">
                       {t('cards.consumedVsRemaining.realised')}
                     </span>
                     <div className="flex items-baseline">
@@ -138,7 +138,7 @@ export default React.memo(function AestheticFidelityCards({
 
                   {/* Resterend (Prognose) */}
                   <div className="space-y-1 border-l border-[#F3F2F0] pl-4">
-                    <span className="text-[10px] tracking-wider text-[#767676] uppercase font-semibold">
+                    <span className="text-[11px] tracking-wider text-[#767676] uppercase font-semibold">
                       {t('cards.consumedVsRemaining.remaining')}
                     </span>
                     <div className="flex items-baseline">
@@ -174,7 +174,7 @@ export default React.memo(function AestheticFidelityCards({
                       {t('cards.vitality.title')}
                     </h3>
                   </div>
-                  <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
+                  <div className="px-2 py-0.5 rounded text-[11px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
                     {t('cards.vitality.badge')}
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export default React.memo(function AestheticFidelityCards({
                   </div>
 
                   <div className="space-y-1">
-                    <span className="text-[10px] tracking-wider text-[#767676] uppercase font-semibold block">
+                    <span className="text-[11px] tracking-wider text-[#767676] uppercase font-semibold block">
                       {t('cards.vitality.lifestyleImpact')}
                     </span>
                     <span id="field-lifestyle-impact" className="text-lg font-bold text-[#D56B45] block leading-tight">
@@ -271,7 +271,7 @@ export default React.memo(function AestheticFidelityCards({
                       {t('cards.career.title')}
                     </h3>
                   </div>
-                  <div className="px-2 py-0.5 rounded text-[10px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
+                  <div className="px-2 py-0.5 rounded text-[11px] font-semibold font-sans bg-[#FAF3F0] text-[#D56B45] border border-[#EAEAEA]">
                     {t('cards.career.badge')}
                   </div>
                 </div>
@@ -293,11 +293,11 @@ export default React.memo(function AestheticFidelityCards({
 
                 <div className="grid grid-cols-2 gap-4 text-xs">
                   <div>
-                    <span className="text-[#767676] block text-[10px] uppercase font-semibold">{t('cards.career.worked')}</span>
+                    <span className="text-[#767676] block text-[11px] uppercase font-semibold">{t('cards.career.worked')}</span>
                     <span className="text-base font-bold text-[#2D2D2D] font-mono">{yearsWorked} {t('cards.career.years')}</span>
                   </div>
                   <div className="border-l border-[#F3F2F0] pl-4">
-                    <span className="text-[#767676] block text-[10px] uppercase font-semibold">{t('cards.career.remaining')}</span>
+                    <span className="text-[#767676] block text-[11px] uppercase font-semibold">{t('cards.career.remaining')}</span>
                     <span id="field-remaining-workyears" className="text-base font-bold text-[#D56B45] font-mono">
                       {yearsRemainingWork} {t('cards.career.years')}
                     </span>
@@ -326,7 +326,7 @@ export default React.memo(function AestheticFidelityCards({
                 {t('cards.horizon.title')}
               </h3>
             </div>
-            <span className="text-[10px] text-[#767676] font-medium italic mt-1 sm:mt-0">
+            <span className="text-[11px] text-[#767676] font-medium italic mt-1 sm:mt-0">
               {t('cards.horizon.badge')}
             </span>
           </div>
@@ -334,7 +334,7 @@ export default React.memo(function AestheticFidelityCards({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {/* Totale levensvrijheid */}
             <div className="space-y-1 bg-white p-3 rounded border border-[#EAEAEA]/60">
-              <span className="text-[9px] text-[#767676] uppercase font-bold tracking-wider block">
+              <span className="text-[10px] text-[#767676] uppercase font-bold tracking-wider block">
                 {t('cards.horizon.totalFreedom')}
               </span>
               <div className="flex items-baseline">
@@ -350,7 +350,7 @@ export default React.memo(function AestheticFidelityCards({
 
             {/* Gereserveerde vrijheid */}
             <div className="space-y-1 bg-white p-3 rounded border border-[#EAEAEA]/60">
-              <span className="text-[9px] text-[#767676] uppercase font-bold tracking-wider block">
+              <span className="text-[10px] text-[#767676] uppercase font-bold tracking-wider block">
                 {t('cards.horizon.reservedFreedom')}
               </span>
               <div className="flex items-baseline">
@@ -366,7 +366,7 @@ export default React.memo(function AestheticFidelityCards({
 
             {/* Noch te realiseren vrijheid */}
             <div className="space-y-1 bg-white p-3 rounded border border-[#EAEAEA]/60">
-              <span className="text-[9px] text-[#767676] uppercase font-bold tracking-wider block">
+              <span className="text-[10px] text-[#767676] uppercase font-bold tracking-wider block">
                 {t('cards.horizon.unrealized')}
               </span>
               <div className="flex items-baseline">

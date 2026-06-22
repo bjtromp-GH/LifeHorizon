@@ -76,7 +76,7 @@ export default function StatsCard({
             className="relative z-10 flex flex-col h-full"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
                 {t('statsCard.popups.prognosisTitle')}
               </span>
               <ShieldCheck className="w-4 h-4 text-white" />
@@ -87,9 +87,9 @@ export default function StatsCard({
               </span>
               <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
             </div>
-            <div className="mt-2.5 pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-1 text-[10px] text-white/80">
+            <div className="mt-2.5 pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-1 text-[11px] text-white/80">
               <span className="font-medium">{t('statsCard.calibratedWith')}</span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[8.5px] font-extrabold uppercase tracking-widest bg-white/10 text-white border border-white/20 whitespace-nowrap">
+              <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[10px] font-extrabold uppercase tracking-widest bg-white/10 text-white border border-white/20 whitespace-nowrap">
                 {apiSource}
               </span>
             </div>
@@ -116,7 +116,7 @@ export default function StatsCard({
             className="relative z-10 flex flex-col h-full"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
                 {t('statsCard.popups.remainingTitle')}
               </span>
               <Hourglass className="w-4 h-4 text-white" />
@@ -127,7 +127,7 @@ export default function StatsCard({
               </span>
               <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
             </div>
-            <p className="text-[9.5px] text-white/80 mt-1 select-none leading-tight pt-2 border-t border-transparent">
+            <p className="text-[11px] text-white/80 mt-1 select-none leading-tight pt-2 border-t border-transparent">
               {t('statsCard.remainingBudget')}
             </p>
           </motion.div>
@@ -153,7 +153,7 @@ export default function StatsCard({
             className="relative z-10 flex flex-col h-full"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
                 {t('statsCard.popups.workingTitle')}
               </span>
               <Workflow className="w-4 h-4 text-white" />
@@ -164,7 +164,7 @@ export default function StatsCard({
               </span>
               <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
             </div>
-            <span className="text-[9.5px] text-white/80 mt-1 leading-tight pt-2 border-t border-transparent">
+            <span className="text-[11px] text-white/80 mt-1 leading-tight pt-2 border-t border-transparent">
               {currentAge >= fireAge
                 ? t('statsCard.freedomAchieved')
                 : t('statsCard.phaseEndsAt').replace('{{age}}', fireAge.toString())}
@@ -192,7 +192,7 @@ export default function StatsCard({
             className="relative z-10 flex flex-col h-full"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase tracking-wider text-white/90 font-bold">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
                 {t('statsCard.popups.freedomTitle')}
               </span>
               <Sun className="w-4 h-4 text-white" />
@@ -203,7 +203,7 @@ export default function StatsCard({
               </span>
               <span className="text-xs text-white/80 ml-1">{t('statsCard.years')}</span>
             </div>
-            <span className="text-[9.5px] text-white/80 mt-1 leading-tight pt-2 border-t border-transparent">
+            <span className="text-[11px] text-white/80 mt-1 leading-tight pt-2 border-t border-transparent">
               {t('statsCard.harvestPhase')}
             </span>
           </motion.div>

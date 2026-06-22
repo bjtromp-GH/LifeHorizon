@@ -144,8 +144,8 @@ export default function MobileContainer({
             className="py-1.5 px-3 bg-zinc-900/90 hover:bg-zinc-900 text-white border border-white/10 rounded-full shadow-lg flex items-center space-x-1 transition-all cursor-pointer active:scale-95"
             title={t('dashboard.restoreMenuTitle')}
           >
-            <Minimize2 className="w-3.5 h-3.5 mr-0.5 text-[#D56B45]" />
-            <span className="text-[10px] font-extrabold uppercase tracking-wide">{t('dashboard.showMenu')}</span>
+            <Minimize2 className="w-4 h-4 mr-0.5 text-[#D56B45]" />
+            <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-wide">{t('dashboard.showMenu')}</span>
           </button>
         </div>
       )}
@@ -170,19 +170,19 @@ export default function MobileContainer({
                 type="button"
                 id="btn-mobile-config"
                 onClick={() => onRestartOnboarding(1)}
-                className="p-1 px-2.5 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-[11px] font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1 animate-pulse"
+                className="p-1.5 px-3 bg-[#D56B45]/10 hover:bg-[#D56B45]/15 border border-[#D56B45]/20 text-xs font-extrabold text-[#D56B45] rounded-md transition-all cursor-pointer flex items-center space-x-1 animate-pulse"
               >
-                <Settings className="w-3.5 h-3.5 animate-spin-slow" />
+                <Settings className="w-4 h-4 animate-spin-slow" />
                 <span>{t('dashboard.config')}</span>
               </button>
-              <div className="font-mono text-[11px] text-[#D56B45] font-semibold bg-[#D56B45]/10 px-2.5 py-1 rounded-full">
+              <div className="font-mono text-xs text-[#D56B45] font-semibold bg-[#D56B45]/10 px-2.5 py-1.5 rounded-full">
                 {t('dashboard.yearsRemaining', { val: totalRoundedRemaining.toString() })}
               </div>
             </div>
           </header>
 
           {/* Quick Info bar triggering configuration */}
-          <div className="bg-white border-b border-[#EAEAEA]/80 px-4 py-1.5 flex items-center justify-between text-[11px] text-[#767676] shrink-0">
+          <div className="bg-white border-b border-[#EAEAEA]/80 px-4 py-2 flex items-center justify-between text-xs text-[#5c5c5c] shrink-0">
             <div className="flex items-center space-x-1">
               <span className="font-bold text-[#2D2D2D]">{t('common.profile')}:</span>
               <span>{inputs.gender === "man" ? t('common.man') : t('common.woman')} &bull; {t('dashboard.born')} {inputs.birthYear} &bull; {t('common.work')}: {inputs.startWorkAge} - {inputs.fireAge}</span>
@@ -216,7 +216,7 @@ export default function MobileContainer({
                       : "bg-zinc-50 border-zinc-100 text-[#767676] hover:bg-zinc-100 font-medium"
                   }`}
                 >
-                  <span className="text-[10px] uppercase tracking-wider leading-none">{s.name}</span>
+                  <span className="text-[11px] uppercase tracking-wider leading-none">{s.name}</span>
                 </button>
               );
             })}
@@ -448,8 +448,8 @@ export default function MobileContainer({
 
                   {/* Highlights */}
                   <div className="max-w-sm mx-auto w-full space-y-2.5">
-                    <div className="flex flex-col items-center justify-center py-3 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
-                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
+                    <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
                         {t('mobileContainer.conclusion.estLifeSpan')}
                       </span>
                       <span className="text-3xl font-extrabold font-mono tracking-tight text-white">
@@ -457,14 +457,14 @@ export default function MobileContainer({
                       </span>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center py-3 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
-                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
+                    <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
                         {t('mobileContainer.conclusion.remainingTime')}
                       </span>
                       <span className="text-3xl font-extrabold font-mono tracking-tight text-white mb-0.5">
                         {totalRemaining.toFixed(1)} {t('decadeGrid.yr')}
                       </span>
-                      <span className="text-[9px] font-sans text-white/70">
+                      <span className="text-[10px] font-sans text-white/80">
                         {t('mobileContainer.conclusion.weeksLeft').replace('{{weeks}}', Math.round(totalRemaining * 52.17).toLocaleString(t('dashboard.lang')))}
                       </span>
                     </div>
@@ -473,16 +473,16 @@ export default function MobileContainer({
                   {/* Phase blocks */}
                   <div className="grid grid-cols-3 gap-2 max-w-sm mx-auto w-full pt-2">
                     <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
-                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">{t('mobileContainer.conclusion.youth')}</span>
-                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">20 {t('decadeGrid.yr')}</span>
+                      <span className="text-[11px] sm:text-xs font-sans font-extrabold uppercase tracking-widest text-amber-100">{t('mobileContainer.conclusion.youth')}</span>
+                      <span className="text-xl sm:text-2xl font-black font-mono text-white mt-1">20 {t('decadeGrid.yr')}</span>
                     </div>
                     <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
-                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">{t('mobileContainer.conclusion.work')}</span>
-                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">{Math.max(0, inputs.fireAge - 20)} {t('decadeGrid.yr')}</span>
+                      <span className="text-[11px] sm:text-xs font-sans font-extrabold uppercase tracking-widest text-amber-100">{t('mobileContainer.conclusion.work')}</span>
+                      <span className="text-xl sm:text-2xl font-black font-mono text-white mt-1">{Math.max(0, inputs.fireAge - 20)} {t('decadeGrid.yr')}</span>
                     </div>
                     <div className="bg-white/10 border border-white/20 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-xs shadow-sm">
-                      <span className="text-[9px] sm:text-[10px] font-sans font-extrabold uppercase tracking-widest text-amber-100">{t('mobileContainer.conclusion.freedom')}</span>
-                      <span className="text-lg sm:text-xl font-black font-mono text-white mt-1">{(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} {t('decadeGrid.yr')}</span>
+                      <span className="text-[11px] sm:text-xs font-sans font-extrabold uppercase tracking-widest text-amber-100">{t('mobileContainer.conclusion.freedom')}</span>
+                      <span className="text-xl sm:text-2xl font-black font-mono text-white mt-1">{(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} {t('decadeGrid.yr')}</span>
                     </div>
                   </div>
 
@@ -495,31 +495,31 @@ export default function MobileContainer({
                       <Grid className="w-5 h-5" />
                       <span>{t('mobileContainer.conclusion.viewMatrix')}</span>
                     </button>
-                    <span className="text-[10px] font-sans text-white/60 mt-2 text-center">
+                    <span className="text-[11px] font-sans text-white/80 mt-2 text-center">
                       {t('mobileContainer.conclusion.viewMatrixDesc')}
                     </span>
                   </div>
 
                   {/* Quick summary statistics */}
-                  <div className="bg-white/10 border border-white/15 rounded-xl p-4 space-y-3.5 max-w-sm mx-auto w-full backdrop-blur-xs text-xs font-mono">
-                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                  <div className="bg-white/10 border border-white/15 rounded-xl p-4 space-y-4 max-w-sm mx-auto w-full backdrop-blur-xs text-[13px] font-mono">
+                    <div className="flex justify-between items-center border-b border-white/10 pb-2.5">
                       <span className="text-amber-100">{t('mobileContainer.conclusion.currentAge')}</span>
-                      <span className="font-extrabold text-white text-sm">{inputs.currentAge} {t('decadeGrid.yr')}</span>
+                      <span className="font-extrabold text-white text-[15px]">{inputs.currentAge} {t('decadeGrid.yr')}</span>
                     </div>
-                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                    <div className="flex justify-between items-center border-b border-white/10 pb-2.5">
                       <span className="text-amber-100">{t('mobileContainer.conclusion.activeCareer').replace('{{age}}', inputs.fireAge.toString())}</span>
-                      <span className="font-extrabold text-white text-sm">{t('mobileContainer.conclusion.yearsLeft').replace('{{years}}', Math.max(0, inputs.fireAge - inputs.currentAge).toString())}</span>
+                      <span className="font-extrabold text-white text-[15px]">{t('mobileContainer.conclusion.yearsLeft').replace('{{years}}', Math.max(0, inputs.fireAge - inputs.currentAge).toString())}</span>
                     </div>
                     <div className="flex justify-between items-center pt-1">
-                      <span className="text-white font-sans font-extrabold uppercase tracking-wide text-[10px]">{t('mobileContainer.conclusion.freeHorizon')}</span>
-                      <span className="font-extrabold text-white text-sm text-right bg-white/20 px-2 py-0.5 rounded">
+                      <span className="text-white font-sans font-extrabold uppercase tracking-wide text-xs">{t('mobileContainer.conclusion.freeHorizon')}</span>
+                      <span className="font-extrabold text-white text-[15px] text-right bg-white/20 px-2 py-0.5 rounded">
                         {(projectedLifeExpectancy - inputs.fireAge).toFixed(1)} {t('decadeGrid.yr')}
                       </span>
                     </div>
                   </div>
 
                   {/* Dutch insights summary */}
-                  <div className="bg-[#5c2411]/20 p-4 rounded-xl border border-white/10 text-xs text-stone-100 max-w-sm mx-auto w-full leading-relaxed space-y-2">
+                  <div className="bg-[#5c2411]/20 p-4 rounded-xl border border-white/10 text-[13px] text-stone-50 max-w-sm mx-auto w-full leading-relaxed space-y-2">
                     <p
                       dangerouslySetInnerHTML={{
                         __html: t('mobileContainer.overviewTitle')
@@ -529,7 +529,7 @@ export default function MobileContainer({
                     />
                     <div className="flex items-start space-[#767676] space-x-2 pt-1 text-left">
                       <Lightbulb className="w-4 h-4 text-amber-200 mt-0.5 shrink-0" />
-                      <p className="text-white/90">
+                      <p className="text-white">
                         {t('mobileContainer.overviewDesc')}
                       </p>
                     </div>
@@ -595,7 +595,7 @@ export default function MobileContainer({
                   <div className="overflow-x-auto rounded-xl border border-[#EAEAEA] bg-white shadow-sm">
                     <table className="w-full text-left border-collapse min-w-[300px]">
                       <thead>
-                        <tr className="bg-[#FAF9F8] border-b border-[#EAEAEA] text-[10px] sm:text-xs uppercase tracking-wider text-[#767676]">
+                        <tr className="bg-[#FAF9F8] border-b border-[#EAEAEA] text-xs uppercase tracking-wider text-[#767676]">
                           <th className="p-2 sm:p-3 font-bold">{t('mobileContainer.tablePhase')}</th>
                           <th className="p-2 sm:p-3 font-bold">{t('mobileContainer.tableAge')}</th>
                           <th className="p-2 sm:p-3 font-bold">{t('mobileContainer.tableYears')}</th>
@@ -645,26 +645,26 @@ export default function MobileContainer({
                   {/* Visual Comparison */}
                   <div className="space-y-6 pt-4 pb-2">
                     <div>
-                      <div className="flex justify-between text-xs font-bold text-[#2D2D2D] mb-2">
+                      <div className="flex justify-between text-sm font-bold text-[#2D2D2D] mb-2">
                         <span className="uppercase tracking-wider">{t('mobileContainer.normalLife')}</span>
-                        <span className="text-[#767676] font-mono">(61,25% {t('mobileContainer.working')})</span>
+                        <span className="text-[#5c5c5c] font-mono">(61,25% {t('mobileContainer.working')})</span>
                       </div>
-                      <div className="h-8 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#EAEAEA]">
-                        <div className="bg-[#EAE8E4] w-[25%] flex items-center justify-center text-[9px] font-bold text-[#767676]">25%</div>
-                        <div className="bg-[#2D2D2D]/80 w-[61.25%] flex items-center justify-center text-[9px] font-bold text-white">61%</div>
-                        <div className="bg-[#86A789] w-[13.75%] flex items-center justify-center text-[9px] font-bold text-white">13%</div>
+                      <div className="h-10 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#EAEAEA]">
+                        <div className="bg-[#EAE8E4] w-[25%] flex items-center justify-center text-[10px] font-bold text-[#5c5c5c]">25%</div>
+                        <div className="bg-[#2D2D2D]/80 w-[61.25%] flex items-center justify-center text-[10px] font-bold text-white">61%</div>
+                        <div className="bg-[#86A789] w-[13.75%] flex items-center justify-center text-[10px] font-bold text-white">13%</div>
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex justify-between text-xs font-bold text-[#D56B45] mb-2">
+                      <div className="flex justify-between text-sm font-bold text-[#D56B45] mb-2">
                         <span className="uppercase tracking-wider">{t('mobileContainer.optimalModel')}</span>
                         <span className="font-mono">(50% {t('mobileContainer.working')})</span>
                       </div>
-                      <div className="h-8 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#D56B45]/20 ring-2 ring-[#D56B45]/20">
-                        <div className="bg-[#FAF3F0] w-[25%] flex items-center justify-center text-[9px] font-bold text-[#D56B45]">25%</div>
-                        <div className="bg-[#D56B45] w-[50%] flex items-center justify-center text-[9px] font-bold text-white">50%</div>
-                        <div className="bg-[#86A789] w-[25%] flex items-center justify-center text-[9px] font-bold text-white">25%</div>
+                      <div className="h-10 w-full rounded-xl flex overflow-hidden shadow-inner border border-[#D56B45]/20 ring-2 ring-[#D56B45]/20">
+                        <div className="bg-[#FAF3F0] w-[25%] flex items-center justify-center text-[10px] font-bold text-[#D56B45]">25%</div>
+                        <div className="bg-[#D56B45] w-[50%] flex items-center justify-center text-[10px] font-bold text-white">50%</div>
+                        <div className="bg-[#86A789] w-[25%] flex items-center justify-center text-[10px] font-bold text-white">25%</div>
                       </div>
                     </div>
                   </div>
@@ -725,40 +725,40 @@ export default function MobileContainer({
                   </div>
 
                   <div className="space-y-4">
-                    <div className="bg-white border border-[#EAEAEA] p-4 rounded-xl shadow-sm flex items-start space-x-4">
-                      <div className="w-12 h-12 rounded-full bg-[#EAE8E4] flex items-center justify-center shrink-0">
-                        <span className="font-bold text-[#767676]">25%</span>
+                    <div className="bg-white border border-[#EAEAEA] p-5 rounded-xl shadow-sm flex items-start space-x-4">
+                      <div className="w-14 h-14 rounded-full bg-[#EAE8E4] flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#5c5c5c] text-lg">25%</span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#2D2D2D] text-sm uppercase tracking-wider">{t('mobileContainer.youthPhase')}</h4>
-                        <p className="text-xs text-[#767676] mt-1 font-mono">0 {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {Math.round(projectedLifeExpectancy * 0.25)} {t('onboardingPanel.years')}</p>
-                        <p className="text-sm text-[#767676] mt-2 leading-relaxed">
+                        <h4 className="font-bold text-[#2D2D2D] text-base uppercase tracking-wider">{t('mobileContainer.youthPhase')}</h4>
+                        <p className="text-sm text-[#767676] mt-1 font-mono">0 {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {Math.round(projectedLifeExpectancy * 0.25)} {t('onboardingPanel.years')}</p>
+                        <p className="text-sm text-[#5c5c5c] mt-2 leading-relaxed">
                           {t('mobileContainer.youthDesc')}
                         </p>
                       </div>
                     </div>
 
-                    <div className="bg-white border border-[#EAEAEA] p-4 rounded-xl shadow-sm flex items-start space-x-4 border-l-4 border-l-[#D56B45]">
-                      <div className="w-12 h-12 rounded-full bg-[#D56B45]/10 flex items-center justify-center shrink-0">
-                        <span className="font-bold text-[#D56B45]">50%</span>
+                    <div className="bg-white border border-[#EAEAEA] p-5 rounded-xl shadow-sm flex items-start space-x-4 border-l-4 border-l-[#D56B45]">
+                      <div className="w-14 h-14 rounded-full bg-[#D56B45]/10 flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#D56B45] text-lg">50%</span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#D56B45] text-sm uppercase tracking-wider">{t('mobileContainer.workTitle')}</h4>
-                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.25)} {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {Math.round(projectedLifeExpectancy * 0.75)} {t('onboardingPanel.years')}</p>
-                        <p className="text-sm text-[#767676] mt-2 leading-relaxed">
+                        <h4 className="font-bold text-[#D56B45] text-base uppercase tracking-wider">{t('mobileContainer.workTitle')}</h4>
+                        <p className="text-sm text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.25)} {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {Math.round(projectedLifeExpectancy * 0.75)} {t('onboardingPanel.years')}</p>
+                        <p className="text-sm text-[#5c5c5c] mt-2 leading-relaxed">
                           {t('mobileContainer.workDesc')}
                         </p>
                       </div>
                     </div>
 
-                    <div className="bg-[#86A789]/5 border border-[#86A789]/20 p-4 rounded-xl shadow-sm flex items-start space-x-4 border-l-4 border-l-[#86A789]">
-                      <div className="w-12 h-12 rounded-full bg-[#86A789]/10 flex items-center justify-center shrink-0">
-                        <span className="font-bold text-[#86A789]">25%</span>
+                    <div className="bg-[#86A789]/5 border border-[#86A789]/20 p-5 rounded-xl shadow-sm flex items-start space-x-4 border-l-4 border-l-[#86A789]">
+                      <div className="w-14 h-14 rounded-full bg-[#86A789]/10 flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#86A789] text-lg">25%</span>
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#86A789] text-sm uppercase tracking-wider">{t('mobileContainer.freeTitle')}</h4>
-                        <p className="text-xs text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.75)} {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {projectedLifeExpectancy} {t('onboardingPanel.years')}</p>
-                        <p className="text-sm text-[#767676] mt-2 leading-relaxed">
+                        <h4 className="font-bold text-[#86A789] text-base uppercase tracking-wider">{t('mobileContainer.freeTitle')}</h4>
+                        <p className="text-sm text-[#767676] mt-1 font-mono">{Math.round(projectedLifeExpectancy * 0.75)} {t('mobileContainer.working').toLowerCase().replace('werkend', 'tot')} {projectedLifeExpectancy} {t('onboardingPanel.years')}</p>
+                        <p className="text-sm text-[#5c5c5c] mt-2 leading-relaxed">
                           {t('mobileContainer.freeDesc')}
                         </p>
                       </div>
