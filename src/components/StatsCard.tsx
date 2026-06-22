@@ -63,13 +63,15 @@ export default function StatsCard({
         >
           <motion.div 
             initial={{ height: "0%" }}
-            animate={{ height: "100%" }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
-            className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
+            className="absolute bottom-0 left-0 right-0 bg-[#2D2D2D]"
           />
           <motion.div 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.9 }}
             className="relative z-10 flex flex-col h-full"
           >
@@ -85,9 +87,9 @@ export default function StatsCard({
               </span>
               <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
             </div>
-            <div className="mt-2.5 pt-2 border-t border-white/20 flex flex-wrap items-center justify-between gap-1 text-[10px] text-white/80">
+            <div className="mt-2.5 pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-1 text-[10px] text-white/80">
               <span className="font-medium">{t('statsCard.calibratedWith')}</span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[8.5px] font-extrabold uppercase tracking-widest bg-white text-[#D56B45] border border-white/30 whitespace-nowrap">
+              <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[8.5px] font-extrabold uppercase tracking-widest bg-white/10 text-white border border-white/20 whitespace-nowrap">
                 {apiSource}
               </span>
             </div>
@@ -101,13 +103,15 @@ export default function StatsCard({
         >
           <motion.div 
             initial={{ height: "0%" }}
-            animate={{ height: "100%" }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.5 }}
             className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
           />
           <motion.div 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 1.1 }}
             className="relative z-10 flex flex-col h-full"
           >
@@ -136,13 +140,15 @@ export default function StatsCard({
         >
           <motion.div 
             initial={{ height: "0%" }}
-            animate={{ height: "100%" }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.5 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.7 }}
             className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
           />
           <motion.div 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 1.3 }}
             className="relative z-10 flex flex-col h-full"
           >
@@ -173,13 +179,15 @@ export default function StatsCard({
         >
           <motion.div 
             initial={{ height: "0%" }}
-            animate={{ height: "100%" }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.7 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.9 }}
             className="absolute bottom-0 left-0 right-0 bg-[#D56B45]"
           />
           <motion.div 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 1.5 }}
             className="relative z-10 flex flex-col h-full"
           >
