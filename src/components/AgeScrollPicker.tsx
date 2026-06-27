@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Check } from 'lucide-react';
 
 interface AgeScrollPickerProps {
   value: number;
@@ -74,11 +74,15 @@ export default function AgeScrollPicker({ value, min, max, onChange }: AgeScroll
         <button
           type="button"
           onClick={() => setIsExpanded(true)}
-          className="w-full flex items-center justify-center py-3 bg-white rounded-xl border border-[#EAEAEA] shadow-3xs cursor-pointer hover:bg-gray-50 transition-colors"
+          className="w-full flex items-center justify-between px-4 py-3 bg-white rounded-xl border border-[#D56B45]/40 bg-[#FAF3F0] shadow-3xs cursor-pointer hover:bg-[#F5E8E2] transition-colors"
         >
-          <div className="flex items-center space-x-2">
+          <div className="w-6" /> {/* Spacer to keep center aligned */}
+          <div className="flex items-center space-x-1.5">
             <span className="font-mono font-black text-[#D56B45] text-xl">{value}</span>
-            <ChevronDown className="w-5 h-5 text-[#767676]" />
+            <ChevronDown className="w-4 h-4 text-[#D56B45]/60" />
+          </div>
+          <div className="w-6 h-6 flex items-center justify-center bg-[#D56B45] text-white rounded-full shadow-sm">
+            <Check className="w-3.5 h-3.5" strokeWidth={3} />
           </div>
         </button>
       ) : (
