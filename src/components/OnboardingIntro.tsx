@@ -161,12 +161,8 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
   }, [canProceed]);
 
   const mainScrollRef = useRef<HTMLElement>(null);
-  
-  useEffect(() => {
-    if (mainScrollRef.current) {
-      mainScrollRef.current.scrollTop = 0;
-    }
-  }, [step]);
+  const activitySectionRef = useRef<HTMLDivElement>(null);
+  const stressSectionRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
     if (step < 7 && !canProceed) {
@@ -270,7 +266,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
 
       {/* Main Interactive Slides container */}
       <main ref={mainScrollRef} className={`flex-grow flex items-center justify-center pt-2 pb-24 sm:pt-8 sm:pb-32 z-10 w-full max-w-xl mx-auto px-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
-        <AnimatePresence mode="wait">
+        <AnimatePresence 
+          mode="wait" 
+          onExitComplete={() => {
+            if (mainScrollRef.current) {
+              mainScrollRef.current.scrollTop = 0;
+            }
+          }}
+        >
           {isTransitioning ? (
             <motion.div
               key="transition"
@@ -743,7 +746,13 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-sleep-${item.key}`}
-                      onClick={() => { setLocalSleep(item.key as SleepLevel); updateBioAnswer("sleep", item.key as SleepLevel); }}
+                      onClick={() => { 
+                        setLocalSleep(item.key as SleepLevel); 
+                        updateBioAnswer("sleep", item.key as SleepLevel);
+                        if (activitySectionRef.current) {
+                          activitySectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                      }}
                       className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localSleep === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
@@ -761,7 +770,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </div>
 
               {/* 2. Beweging */}
-              <div className="space-y-1.5 sm:space-y-2">
+              <div className="space-y-1.5 sm:space-y-2" ref={activitySectionRef}>
                 <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
                   <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>{t('onboarding.lifestyle.activity.title')}</span>
@@ -777,7 +786,13 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-activity-${item.key}`}
-                      onClick={() => { setLocalActivity(item.key as ActivityLevel); updateBioAnswer("activity", item.key as ActivityLevel); }}
+                      onClick={() => { 
+                        setLocalActivity(item.key as ActivityLevel); 
+                        updateBioAnswer("activity", item.key as ActivityLevel);
+                        if (stressSectionRef.current) {
+                          stressSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                      }}
                       className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localActivity === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
@@ -795,7 +810,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </div>
 
               {/* 3. Stress */}
-              <div className="space-y-1.5 sm:space-y-2">
+              <div className="space-y-1.5 sm:space-y-2" ref={stressSectionRef}>
                 <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
                   <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
                   <span>{t('onboarding.lifestyle.stress.title')}</span>
