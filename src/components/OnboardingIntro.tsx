@@ -280,7 +280,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
       </AnimatePresence>
 
       {/* Main Interactive Slides container */}
-      <main ref={mainScrollRef} className={`flex-grow flex items-start justify-center pt-6 pb-24 sm:pt-10 sm:pb-32 z-10 w-full max-w-xl mx-auto px-1 min-h-0 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+      <main ref={mainScrollRef} className={`flex-grow flex items-start justify-center pt-6 sm:pt-10 z-10 w-full max-w-xl mx-auto px-1 min-h-0 ${step === 2 ? 'pb-6 sm:pb-10' : 'pb-24 sm:pb-32'} ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
         <AnimatePresence 
           mode="wait" 
           onExitComplete={() => {
@@ -534,7 +534,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-2"
+              className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-2 self-center"
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0.5, y: 20 }}
