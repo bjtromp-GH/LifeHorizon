@@ -622,14 +622,15 @@ export default function MobileContainer({
                     </table>
                   </div>
 
-                  <div className="space-y-3 bg-[#FAF3F0] p-4 rounded-xl border border-[#D56B45]/20">
-                    <p className="text-sm font-bold text-[#D56B45]">
+                  <div className="space-y-4 bg-gradient-to-br from-[#FFF5F0] to-[#FAF3F0] p-5 sm:p-6 rounded-2xl border-2 border-[#D56B45]/30 shadow-sm relative overflow-hidden">
+                    <div className="absolute top-[-10px] right-[-10px] text-[#D56B45]/10 text-7xl rotate-12 pointer-events-none">✨</div>
+                    <p className="text-base sm:text-lg font-black text-[#D56B45] leading-snug">
                       {t('mobileContainer.modelInspiration')}
                     </p>
-                    <ul className="text-sm text-[#D56B45]/90 space-y-1.5 list-disc list-inside font-medium ml-2">
-                      <li><strong>25%</strong> {t('mobileContainer.modelYouth')}</li>
-                      <li><strong>50%</strong> {t('mobileContainer.modelWork')}</li>
-                      <li><strong>25%</strong> {t('mobileContainer.modelFree')}</li>
+                    <ul className="text-base sm:text-lg text-[#D56B45]/90 space-y-2.5 list-disc list-inside font-semibold ml-1 relative z-10">
+                      <li><strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelYouth')}</li>
+                      <li><strong className="text-[#D56B45]">50%</strong> {t('mobileContainer.modelWork')}</li>
+                      <li><strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelFree')}</li>
                     </ul>
                   </div>
 
