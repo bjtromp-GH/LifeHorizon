@@ -934,11 +934,6 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                           setGeneticsInteracted(true);
                           onInputChange({ fatherPassedAge: val });
                         }}
-                        onSelect={() => {
-                          if (motherSectionRef.current) {
-                            motherSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                          }
-                        }}
                       />
                     </div>
                   </div>
@@ -1040,11 +1035,6 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                     onChange={(val) => {
                       setLocalStartWorkAge(val.toString());
                       onInputChange({ startWorkAge: val });
-                    }}
-                    onSelect={() => {
-                      if (fireAgeSectionRef.current) {
-                        fireAgeSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      }
                     }}
                   />
                 </div>
