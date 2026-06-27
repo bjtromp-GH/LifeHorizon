@@ -173,10 +173,16 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
       setShowValidation(false);
       if (step === 0 || step === 1 || step === 2) {
         if (step === 0) playChimeSound();
+        if (mainScrollRef.current) {
+          mainScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         setStep((s) => s + 1);
       } else {
         setIsTransitioning(true);
         playChimeSound();
+        if (mainScrollRef.current) {
+          mainScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         setTimeout(() => {
           setStep((s) => s + 1);
           setIsTransitioning(false);
@@ -190,6 +196,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
   const handleBack = () => {
     if (step > 0) {
       setStep(step - 1);
+      // Smooth scroll back to top of container when navigating backwards
+      setTimeout(() => {
+        if (mainScrollRef.current) {
+          mainScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 10);
     }
   };
 
