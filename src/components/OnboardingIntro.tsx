@@ -176,6 +176,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
         if (mainScrollRef.current) {
           mainScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setStep((s) => s + 1);
       } else {
         setIsTransitioning(true);
@@ -183,6 +184,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
         if (mainScrollRef.current) {
           mainScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => {
           setStep((s) => s + 1);
           setIsTransitioning(false);
@@ -201,6 +203,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
         if (mainScrollRef.current) {
           mainScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 10);
     }
   };
@@ -284,6 +287,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
             if (mainScrollRef.current) {
               mainScrollRef.current.scrollTop = 0;
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
           {isTransitioning ? (
