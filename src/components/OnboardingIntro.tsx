@@ -280,7 +280,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
       </AnimatePresence>
 
       {/* Main Interactive Slides container */}
-      <main ref={mainScrollRef} className={`flex-grow flex items-center justify-center pt-2 pb-24 sm:pt-8 sm:pb-32 z-10 w-full max-w-xl mx-auto px-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+      <main ref={mainScrollRef} className={`flex-grow flex items-start justify-center pt-6 pb-24 sm:pt-10 sm:pb-32 z-10 w-full max-w-xl mx-auto px-1 min-h-0 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
         <AnimatePresence 
           mode="wait" 
           onExitComplete={() => {
