@@ -40,11 +40,15 @@ export default function ScrollRevealText({ onComplete }: ScrollRevealTextProps) 
               ? { opacity: 0, height: 0, marginBottom: 0, scale: 0.5 }
               : { opacity: 1, scale: 1, y: [-20, -10, -20], height: 'auto', marginBottom: isMobile ? 24 : 32 }
           }
-          transition={{ 
-            duration: isMobile && showButton ? 0.8 : 4, 
-            repeat: isMobile && showButton ? 0 : Infinity, 
-            ease: "easeInOut" 
-          }}
+          transition={
+            isMobile && showButton 
+              ? { duration: 0.8, ease: "easeInOut" }
+              : { 
+                  y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
+                  opacity: { duration: 1 },
+                  scale: { duration: 1 }
+                }
+          }
           className="z-10 overflow-hidden shrink-0 mt-8"
         >
           <img src="/img/olifant-bril.png" alt="Olifant Mascotte" className="w-20 h-20 sm:w-28 sm:h-28 object-contain" />

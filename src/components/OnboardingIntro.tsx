@@ -36,11 +36,12 @@ import Confetti from "./Confetti";
 interface OnboardingIntroProps {
   initialStep?: number;
   inputs: UserInputs;
+  hasStoredData?: boolean;
   onInputChange: (updates: Partial<UserInputs>) => void;
   onComplete: () => void;
 }
 
-export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange, onComplete }: OnboardingIntroProps) {
+export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData, onInputChange, onComplete }: OnboardingIntroProps) {
   const { t, language, setLanguage } = useLanguage();
   const [step, setStep] = useState<number>(initialStep);
   const [imgError, setImgError] = useState(false);
@@ -296,13 +297,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white/95 backdrop-blur-md"
             >
               <motion.img 
                 src="/img/LR_Olifant_v2.png" 
+                decoding="async"
                 initial={{ scale: 0.8, rotate: -5, opacity: 0, y: 20 }}
                 animate={{ scale: 1.1, rotate: 0, opacity: 1, y: 0 }}
-                exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ type: "spring", bounce: 0.4, duration: 0.6 }}
                 className="w-48 h-48 sm:w-56 sm:h-56 object-contain drop-shadow-2xl mb-6"
               />
@@ -362,6 +364,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   <img
                     src="/img/Olifant.png"
                     alt="Olifant"
+                    decoding="async"
                     onError={() => setImgError(true)}
                     className={`w-full h-full object-contain object-bottom origin-bottom transition-all duration-500 hover:scale-105 ${imgError ? 'hidden' : 'block'}`}
                   />
@@ -415,20 +418,31 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </div>
 
               {/* Footer with Continuing button */}
-              <div className="w-full max-w-md mx-auto pb-4 sm:pb-12 flex flex-col items-center z-10 space-y-2 sm:space-y-4">
-                <motion.button
-                  id="btn-orange-splash-continue"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
-                  whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={handleNext}
-                  className="w-full py-3 px-5 sm:py-4 sm:px-6 bg-white hover:bg-[#FFF8F5] text-[#D56B45] font-extrabold text-xs sm:text-sm tracking-wider uppercase rounded-xl flex items-center justify-center space-x-3 shadow-xl border border-white/10 cursor-pointer transition-all duration-200"
-                >
-                  <span>{t('common.next')}</span>
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5px]" />
-                </motion.button>
+              <div className="w-full max-w-md mx-auto pb-4 sm:pb-12 flex flex-col items-center z-10 space-y-4">
+                  <button
+                    onClick={() => {
+                      playChimeSound();
+                      setStep(0.5);
+                    }}
+                    className="w-full flex items-center justify-center space-x-3 bg-white text-[#D56B45] py-4 rounded-2xl font-black shadow-xl hover:shadow-2xl transition-all active:scale-95 group relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                    <span className="text-lg relative z-10">{t('onboarding.splash.startBtn')}</span>
+                    <Play className="w-5 h-5 fill-current relative z-10" />
+                  </button>
+                  
+                  {hasStoredData && (
+                    <button
+                      onClick={() => {
+                        playChimeSound();
+                        onComplete();
+                      }}
+                      className="w-full flex items-center justify-center space-x-3 bg-[#E25C26] text-white py-4 rounded-2xl font-black border border-white/30 hover:bg-[#D56B45] transition-all active:scale-95 group relative overflow-hidden"
+                    >
+                      <span className="text-lg relative z-10">Ga naar Dashboard</span>
+                      <Target className="w-5 h-5 relative z-10" />
+                    </button>
+                  )}
                 
                 <motion.span 
                   initial={{ opacity: 0 }}
@@ -438,6 +452,69 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 >
                   {t('onboarding.splash.footer')}
                 </motion.span>
+              </div>
+            </motion.div>
+          ) : step === 0.5 ? (
+            <motion.div
+              key="privacy-screen"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-[#2D2D2D] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
+            >
+              {/* Decorative elements */}
+              <div className="absolute top-[-20%] left-[-10%] w-96 h-96 rounded-full bg-[#86A789] blur-[120px] opacity-20 pointer-events-none" />
+              
+              <div className="w-full flex flex-col items-center pt-8 sm:pt-12 z-10 space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+                  className="flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full"
+                >
+                  <span className="text-lg">🔒</span>
+                  <span className="font-sans font-bold text-xs sm:text-sm tracking-widest uppercase text-white/90">
+                    {t('onboarding.privacy.badge')}
+                  </span>
+                </motion.div>
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug">
+                  {t('onboarding.privacy.title')}
+                </h2>
+              </div>
+
+              <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4">
+                <div className="space-y-3 sm:space-y-4 w-full px-2">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
+                    className="p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
+                  >
+                    <p className="text-sm font-medium text-white/90 leading-relaxed">{t('onboarding.privacy.desc1')}</p>
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
+                    className="p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm relative"
+                  >
+                    <p className="text-sm font-medium text-white/90 leading-relaxed">{t('onboarding.privacy.desc2')}</p>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Footer with Continuing button */}
+              <div className="w-full max-w-md mx-auto pb-4 sm:pb-12 flex flex-col items-center z-10">
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.6, type: "spring" }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => {
+                    playChimeSound();
+                    setStep(1);
+                  }}
+                  className="w-full py-4 px-6 bg-[#D56B45] hover:bg-[#C0562F] text-white font-extrabold text-sm sm:text-base tracking-wider rounded-xl flex items-center justify-center space-x-3 shadow-xl cursor-pointer transition-all duration-200"
+                >
+                  <span>{t('onboarding.privacy.button')}</span>
+                  <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
+                </motion.button>
               </div>
             </motion.div>
           ) : step === 1 ? (
@@ -871,9 +948,10 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   {t('onboarding.genetics.title1')} <br className="block sm:hidden" />{t('onboarding.genetics.title2')}
                 </h2>
-                <p className="text-sm text-[#767676]">
-                  {t('onboarding.genetics.desc')}
-                </p>
+                <p 
+                  className="text-sm text-[#767676]"
+                  dangerouslySetInnerHTML={{ __html: t('onboarding.genetics.desc') }}
+                />
                 <div className="pt-2">
                   <button
                     onClick={() => setShowHeredityInfo(true)}
@@ -896,7 +974,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       type="button"
                       id="onboarding-father-alive"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: null }); }}
-                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
+                      className={`px-1 py-2.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer text-center leading-tight ${
                         inputs.fatherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -908,7 +986,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       type="button"
                       id="onboarding-father-passed"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: 75 }); }}
-                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer text-center ${
+                      className={`px-1 py-2.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer text-center leading-tight ${
                         inputs.fatherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -953,7 +1031,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       type="button"
                       id="onboarding-mother-alive"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: null }); }}
-                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer whitespace-nowrap text-center ${
+                      className={`px-1 py-2.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer text-center leading-tight ${
                         inputs.motherPassedAge === null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -965,7 +1043,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       type="button"
                       id="onboarding-mother-passed"
                       onClick={() => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: 82 }); }}
-                      className={`px-3 py-2.5 sm:px-4 sm:py-2 rounded-xl text-sm font-bold border transition-all cursor-pointer text-center ${
+                      className={`px-1 py-2.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer text-center leading-tight ${
                         inputs.motherPassedAge !== null
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#767676]"
@@ -1200,6 +1278,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               <motion.img 
                 src="/img/olifant-bril.png" 
                 alt="Olifant" 
+                decoding="async"
                 className="w-32 sm:w-40 h-auto mb-6 drop-shadow-2xl"
                 initial={{ y: 20, opacity: 0, scale: 0.8 }}
                 animate={{ y: 0, opacity: 1, scale: 1 }}

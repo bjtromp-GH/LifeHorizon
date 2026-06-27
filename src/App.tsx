@@ -6,6 +6,7 @@ import DesktopDashboard from "./components/DesktopDashboard";
 import MobileContainer from "./components/MobileContainer";
 import OnboardingIntro from "./components/OnboardingIntro";
 import { setupGlobalClickListener } from "./utils/audio";
+import { Preferences } from '@capacitor/preferences';
 
 export default function App() {
   // 1. Core State
@@ -32,6 +33,36 @@ export default function App() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
   const [initialOnboardingStep, setInitialOnboardingStep] = useState<number>(0);
+  const [isPreferencesLoaded, setIsPreferencesLoaded] = useState<boolean>(false);
+  const [hasStoredData, setHasStoredData] = useState<boolean>(false);
+
+  // 1b. Load preferences on mount
+  useEffect(() => {
+    const loadPreferences = async () => {
+      try {
+        const { value: storedInputs } = await Preferences.get({ key: 'userInputs' });
+        if (storedInputs) {
+          setInputs(JSON.parse(storedInputs));
+        }
+        const { value: onboardingCompleted } = await Preferences.get({ key: 'onboardingCompleted' });
+        if (onboardingCompleted === 'true') {
+          setHasStoredData(true);
+        }
+      } catch (err) {
+        console.error("Failed to load preferences", err);
+      } finally {
+        setIsPreferencesLoaded(true);
+      }
+    };
+    loadPreferences();
+  }, []);
+
+  // 1c. Save preferences when inputs change
+  useEffect(() => {
+    if (isPreferencesLoaded) {
+      Preferences.set({ key: 'userInputs', value: JSON.stringify(inputs) }).catch(console.error);
+    }
+  }, [inputs, isPreferencesLoaded]);
 
   // 2. Responsive viewport check and Global Audio
   useEffect(() => {
@@ -141,10 +172,51 @@ export default function App() {
     syncCBSLifeExpectancy(inputs.birthYear, inputs.gender, inputs.currentAge);
   }, [inputs.birthYear, inputs.gender, inputs.currentAge, syncCBSLifeExpectancy]);
 
-  const handleOnboardingComplete = useCallback(() => {
-    localStorage.setItem("onboarding_completed", "true");
+  const handleOnboardingComplete = useCallback(async () => {
+    try {
+      await Preferences.set({ key: 'onboardingCompleted', value: 'true' });
+      setHasStoredData(true);
+    } catch (err) {
+      console.error("Failed to save onboarding state", err);
+    }
     setShowOnboarding(false);
   }, []);
+
+  const handleResetApp = useCallback(async () => {
+    try {
+      await Preferences.remove({ key: 'onboardingCompleted' });
+      await Preferences.remove({ key: 'userInputs' });
+      setHasStoredData(false);
+      setInputs({
+        birthYear: 1980,
+        gender: "man",
+        currentAge: 46,
+        startWorkAge: 22,
+        fireAge: 62,
+        fatherPassedAge: null,
+        motherPassedAge: null,
+        bioAnswers: {
+          activity: "licht",
+          sleep: "goed",
+          stress: "gemiddeld",
+        },
+        customLifeExpectancy: null,
+      });
+      setInitialOnboardingStep(0);
+      setShowOnboarding(true);
+    } catch (err) {
+      console.error("Failed to clear preferences", err);
+    }
+  }, []);
+
+  // Prevent rendering until preferences are loaded
+  if (!isPreferencesLoaded) {
+    return (
+      <div className="h-[100dvh] w-full bg-[#FDFDFD] flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-[#D56B45]/20 border-t-[#D56B45] rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   // 7. Render Onboarding Screen if active
   if (showOnboarding) {
@@ -152,6 +224,7 @@ export default function App() {
       <OnboardingIntro
         initialStep={initialOnboardingStep}
         inputs={inputs}
+        hasStoredData={hasStoredData}
         onInputChange={handleInputChange}
         onComplete={handleOnboardingComplete}
       />
@@ -173,6 +246,7 @@ export default function App() {
           setInitialOnboardingStep(step);
           setShowOnboarding(true);
         }}
+        onResetApp={handleResetApp}
       />
     );
   }
@@ -188,6 +262,7 @@ export default function App() {
       onInputChange={handleInputChange}
       onRefreshCBS={handleRefreshCBSManual}
       onRestartOnboarding={() => setShowOnboarding(true)}
+      onResetApp={handleResetApp}
     />
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Settings, Edit3, ChevronDown, ChevronUp } from "lucide-react";
+import { Settings, Edit3, ChevronDown, ChevronUp, Maximize2 } from "lucide-react";
 import { LifePhases, UserInputs } from "../types";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -10,6 +10,7 @@ interface LifePhasesBarProps {
   projectedLifeExpectancy: number;
   phases: LifePhases;
   onInputChange?: (updates: Partial<UserInputs>) => void;
+  onFullscreen?: () => void;
 }
 
 export default React.memo(function LifePhasesBar({
@@ -17,6 +18,7 @@ export default React.memo(function LifePhasesBar({
   projectedLifeExpectancy,
   phases,
   onInputChange,
+  onFullscreen,
 }: LifePhasesBarProps) {
   const { t } = useLanguage();
   const { currentAge } = inputs;
@@ -136,6 +138,18 @@ export default React.memo(function LifePhasesBar({
             <span className="min-[375px]:hidden">{t('lifePhasesBar.currentAgeShort')}</span>
             <span className="font-mono text-sm font-black">{currentAge} <span className="hidden sm:inline">{t('lifePhasesBar.years')}</span></span>
           </span>
+          {onFullscreen && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onFullscreen();
+              }}
+              className="p-1.5 rounded bg-[#D56B45] hover:bg-[#B84E29] text-white transition-colors shadow-sm border border-[#D56B45]"
+              title="Fullscreen"
+            >
+              <Maximize2 className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
 
@@ -310,7 +324,7 @@ export default React.memo(function LifePhasesBar({
             {/* Legend & Details */}
             <div id="life-phases-legend" className="grid grid-cols-3 gap-2 pt-2 border-t border-[#EAEAEA]">
               <div className="flex flex-col">
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#767676]">
+                <span className="text-[9px] min-[380px]:text-[10px] sm:text-[11px] uppercase tracking-wide sm:tracking-wider text-[#767676] whitespace-nowrap">
                   1. {t('lifePhasesBar.development')}
                 </span>
                 <span className="text-sm font-semibold text-[#2D2D2D] font-mono">
@@ -323,7 +337,7 @@ export default React.memo(function LifePhasesBar({
               </div>
 
               <div className="flex flex-col border-l border-[#EAEAEA] pl-3">
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#767676]">
+                <span className="text-[9px] min-[380px]:text-[10px] sm:text-[11px] uppercase tracking-wide sm:tracking-wider text-[#767676] whitespace-nowrap">
                   2. {t('lifePhasesBar.work')}
                 </span>
                 <span className="text-sm font-semibold text-[#D56B45] font-mono">
@@ -338,7 +352,7 @@ export default React.memo(function LifePhasesBar({
               </div>
 
               <div className="flex flex-col border-l border-[#EAEAEA] pl-3">
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#767676]">
+                <span className="text-[9px] min-[380px]:text-[10px] sm:text-[11px] uppercase tracking-wide sm:tracking-wider text-[#767676] whitespace-nowrap">
                   3. {t('lifePhasesBar.freedom')}
                 </span>
                 <span className="text-sm font-semibold text-[#84A98C] font-mono">

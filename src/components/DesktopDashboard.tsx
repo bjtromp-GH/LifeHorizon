@@ -18,6 +18,7 @@ interface DesktopDashboardProps {
   onInputChange: (updates: Partial<UserInputs>) => void;
   onRefreshCBS: () => void;
   onRestartOnboarding: () => void;
+  onResetApp?: () => void;
 }
 
 export default function DesktopDashboard({
@@ -30,6 +31,7 @@ export default function DesktopDashboard({
   onInputChange,
   onRefreshCBS,
   onRestartOnboarding,
+  onResetApp,
 }: DesktopDashboardProps) {
   const { t } = useLanguage();
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);

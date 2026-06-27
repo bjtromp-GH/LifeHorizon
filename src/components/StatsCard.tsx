@@ -75,11 +75,11 @@ export default function StatsCard({
             transition={{ duration: 0.5, delay: 0.9 }}
             className="relative z-10 flex flex-col h-full"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
+            <div className="flex items-start justify-between min-h-[32px]">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold leading-tight">
                 {t('statsCard.popups.prognosisTitle')}
               </span>
-              <ShieldCheck className="w-4 h-4 text-white" />
+              <ShieldCheck className="w-4 h-4 text-white shrink-0 mt-0.5" />
             </div>
             <div className="mt-2.5 flex-1">
               <span id="stat-life-expectancy" className="text-3xl font-bold text-white font-mono tracking-tight">
@@ -87,7 +87,7 @@ export default function StatsCard({
               </span>
               <span className="text-xs text-white/80 ml-1 font-sans">{t('statsCard.years')}</span>
             </div>
-            <div className="mt-2.5 pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-1 text-[11px] text-white/80">
+            <div className="mt-2.5 pt-2 border-t border-white/10 flex flex-col items-center justify-center text-center gap-1.5 text-[11px] text-white/80">
               <span className="font-medium">{t('statsCard.calibratedWith')}</span>
               <span className="inline-flex items-center px-2 py-0.5 rounded font-sans text-[10px] font-extrabold uppercase tracking-widest bg-white/10 text-white border border-white/20 whitespace-nowrap">
                 {apiSource}
@@ -115,11 +115,11 @@ export default function StatsCard({
             transition={{ duration: 0.5, delay: 1.1 }}
             className="relative z-10 flex flex-col h-full"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
+            <div className="flex items-start justify-between min-h-[32px]">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold leading-tight">
                 {t('statsCard.popups.remainingTitle')}
               </span>
-              <Hourglass className="w-4 h-4 text-white" />
+              <Hourglass className="w-4 h-4 text-white shrink-0 mt-0.5" />
             </div>
             <div className="mt-2.5 flex-1">
               <span id="stat-remaining-years" className="text-3xl font-bold text-white font-mono tracking-tight">
@@ -152,11 +152,11 @@ export default function StatsCard({
             transition={{ duration: 0.5, delay: 1.3 }}
             className="relative z-10 flex flex-col h-full"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
+            <div className="flex items-start justify-between min-h-[32px]">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold leading-tight">
                 {t('statsCard.popups.workingTitle')}
               </span>
-              <Workflow className="w-4 h-4 text-white" />
+              <Workflow className="w-4 h-4 text-white shrink-0 mt-0.5" />
             </div>
             <div className="mt-2.5 flex-1">
               <span id="stat-working-years" className="text-3xl font-bold text-white font-mono tracking-tight">
@@ -191,11 +191,11 @@ export default function StatsCard({
             transition={{ duration: 0.5, delay: 1.5 }}
             className="relative z-10 flex flex-col h-full"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold">
+            <div className="flex items-start justify-between min-h-[32px]">
+              <span className="text-[11px] uppercase tracking-wider text-white/90 font-bold leading-tight">
                 {t('statsCard.popups.freedomTitle')}
               </span>
-              <Sun className="w-4 h-4 text-white" />
+              <Sun className="w-4 h-4 text-white shrink-0 mt-0.5" />
             </div>
             <div className="mt-2.5 flex-1">
               <span id="stat-freedom-years" className="text-3xl font-bold text-white font-mono tracking-tight">

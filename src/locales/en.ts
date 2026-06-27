@@ -10,6 +10,7 @@ export const en: Translations = {
     woman: "Woman",
     prevStep: "Previous",
     nextStep: "Next",
+    close: "Close",
     understood: "Understood",
     work: "Work",
     profile: "Profile",
@@ -30,7 +31,15 @@ export const en: Translations = {
     splash: {
       badge: "CHART YOUR COURSE",
       quote: "\"Discover your healthy years, freedom date and life course.\"",
-      footer: "Calculate your remaining time • CBS Cohort Model 2026"
+      footer: "Calculate your remaining time • CBS Model 2026",
+      startBtn: "Discover Your Life Course"
+    },
+    privacy: {
+      badge: "100% Private",
+      title: "Your data is yours",
+      desc1: "All your data is stored locally on this device only. You don't need an account and nothing is sent to a server.",
+      desc2: "This app is completely free of ads and tracking. Your time is precious and personal.",
+      button: "Start the introduction"
     },
     testimonials: {
       badge: "Experiences",
@@ -107,7 +116,7 @@ export const en: Translations = {
       badge: "Step 3: Heredity",
       title1: "How old did your biological",
       title2: "parents get?",
-      desc: "Hereditary factors influence your health timeline (-1.5 to +1.5 years per parent).",
+      desc: "Hereditary factors influence your health timeline <span class=\"whitespace-nowrap\">-1.5 to +1.5 years per parent.</span>",
       readFirst: "Read this first",
       father: "Father",
       mother: "Mother",
@@ -134,7 +143,7 @@ export const en: Translations = {
       desc: "All factors are compiled. We will route your demographic data live into the CBS model to determine your exact survival curve.",
       button: "View Life Matrix",
       generating: "Just one more thing...",
-      openDashboard: "Open Interactive Dashboard"
+      openDashboard: "Open Dashboard"
     },
     revealText: "We are living longer than ever before. Our life expectancy continues to rise. But there is a hidden reality. Our 'healthy' life expectancy is not increasing at the same pace. This means that at the end of our lives, we suffer from chronic diseases, fatigue, or disabilities for a longer average time. Your goal is not simply to live as long as possible. Your true goal is to live a real, vital, and independent life for as long as possible. This is what the Bio-Score is all about. Take control of your healthy years."
   },
@@ -195,10 +204,10 @@ export const en: Translations = {
   },
   cards: {
     consumedVsRemaining: {
-      title: "Consumed vs. Remaining",
-      badge: "Weakest Link: Time",
-      realised: "Realized",
-      remaining: "Remaining (Prognosis)",
+      title: "Consumed / Remaining",
+      badge: "Focus: Time",
+      realised: "Realised",
+      remaining: "Remaining (Prog.)",
       yr: "yr.",
       weeks: "weeks",
       days: "days",
@@ -218,15 +227,15 @@ export const en: Translations = {
       totalExpected: "Total Expected Age:"
     },
     career: {
-      title: "Career Runway (Retirement)",
-      badge: "Active Work",
+      title: "Career Runway",
+      badge: "Active",
       start: "Start:",
       completed: "completed",
       goal: "Goal:",
       worked: "Worked",
       years: "years",
-      remaining: "Remaining work years",
-      description: "<span class=\"font-semibold text-[#2D2D2D]\">{{remaining}} years</span> of mandatory time allocation left until your retirement age of {{fireAge}} years."
+      remaining: "Remaining",
+      description: "<span class=\"font-semibold text-[#2D2D2D]\">{{remaining}} years</span> left working until your chosen retirement age of {{fireAge}} years."
     },
     horizon: {
       title: "The Untamed Horizon (Freedom Harvest)",
@@ -310,7 +319,7 @@ export const en: Translations = {
       remainingDesc: "This is the time you statistically have left on earth, calculated from your current age to your prognosis age. Think of this as your remaining 'budget' of time to do the things you find important.",
       workingTitle: "Working Years",
       workingDesc: "This is the time you will still spend on the building and working phase of your life. This ends at your chosen retirement age.",
-      freedomTitle: "Wings (Freedom)",
+      freedomTitle: "Freedom",
       freedomDesc: "This is your free time (the 'harvest phase') without financial obligations, calculated from your retirement age to your prognosis age. In this phase you can spend your time completely at your own discretion.",
       progressTitle: "Life Progress",
       progressDesc: "This shows what percentage of your expected life has already been completed. It helps to put your time into perspective and be conscious of the time you have left."
@@ -340,7 +349,7 @@ export const en: Translations = {
       viewMatrix: "View Life Matrix",
       viewMatrixDesc: "View your personal life course in detail",
       currentAge: "Current Age:",
-      activeCareer: "Active Career (until {{age}} yr):",
+      activeCareer: "Active Career<br/>until {{age}} yr:",
       yearsLeft: "{{years}} years left",
       freeHorizon: "Free Horizon (Freedom Harvest):",
       slides: {
@@ -355,12 +364,12 @@ export const en: Translations = {
     tablePhase: "Life Phase",
     tableAge: "Age",
     tableYears: "Years",
-    tableTotal: "% Total",
+    tableTotal: "Total",
     youthPhase: "Youth & Development",
     workPhase: "Working life",
     freePhase: "Free time / Retirement",
     totalLabel: "Total",
-    modelInspiration: "As inspiration, we propose an optimal model: The 25 / 50 / 25 model.",
+    modelInspiration: "As inspiration, we propose an optimal model: <span class=\"whitespace-nowrap\">The 25 / 50 / 25 model.</span>",
     modelYouth: "of your life youth & development",
     modelWork: "of your life working",
     modelFree: "life in freedom",
@@ -376,7 +385,9 @@ export const en: Translations = {
     freeTitle: "Freedom & Enjoyment",
     freeDesc: "Complete financial independence. Time for yourself, family, travel and passions, without the obligation to work for money anymore.",
     financialRunwayTitle: "Your Financial Horizon",
-    financialRunwayQuestion: "Do you want to know how you can achieve the 25 / 50 / 25 model or better?",
+    financialRunwayQuote: "\"It is not that we have a short time to live, but that we waste a lot of it.\"",
+    financialRunwayAuthor: "- Seneca",
+    financialRunwayQuestion: "Want to know how to achieve the 25 / 50 / 25 model or better?",
     financialRunwayDesc: "We have built another app that helps you map out your financial horizon and achieve your goals: the Financial Horizon app.",
     financialRunwayPromo: "Discover how you build the necessary years to be able to retire earlier and experience more freedom in your life.",
     visitWebsite: "Visit the website",

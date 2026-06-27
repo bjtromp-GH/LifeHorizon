@@ -8,6 +8,7 @@ export const nl = {
     woman: "Vrouw",
     prevStep: "Vorige",
     nextStep: "Volgende",
+    close: "Sluiten",
     understood: "Begrepen",
     work: "Werk",
     profile: "Profiel",
@@ -28,7 +29,15 @@ export const nl = {
     splash: {
       badge: "BEPAAL JE KOERS",
       quote: "\"Ontdek je gezonde jaren, vrijheidsdatum en levensloop.\"",
-      footer: "Bereken je overgebleven tijd • CBS Cohort Model 2026"
+      footer: "Bereken je resterende tijd • CBS Model 2026",
+      startBtn: "Ontdek je Levensloop"
+    },
+    privacy: {
+      badge: "100% Privé",
+      title: "Jouw data is van jou",
+      desc1: "Al jouw gegevens worden uitsluitend lokaal opgeslagen op dit apparaat. Je hebt geen account nodig en er gaat niets naar een server.",
+      desc2: "Deze app is volledig vrij van advertenties en tracking. Jouw tijd is kostbaar en persoonlijk.",
+      button: "Start de introductie"
     },
     testimonials: {
       badge: "Ervaringen",
@@ -105,7 +114,7 @@ export const nl = {
       badge: "Stap 3: Erfelijkheid",
       title1: "Hoe oud zijn uw biologische",
       title2: "ouders geworden?",
-      desc: "Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn (-1.5 tot +1.5 jaar per ouder).",
+      desc: "Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn <span class=\"whitespace-nowrap\">-1.5 tot +1.5 jaar per ouder.</span>",
       readFirst: "Lees dit eerst",
       father: "Vader",
       mother: "Moeder",
@@ -132,7 +141,7 @@ export const nl = {
       desc: "Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.",
       button: "Bekijk Levensmatrix",
       generating: "Eerst nog even dit...",
-      openDashboard: "Open Interactief Dashboard"
+      openDashboard: "Open Dashboard"
     },
     revealText: "We worden gemiddeld ouder dan ooit tevoren. Onze levensverwachting blijft stijgen. Maar er is een verborgen realiteit. Onze 'gezonde' levensverwachting stijgt niet in hetzelfde tempo mee. Dit betekent dat we aan het einde van ons leven gemiddeld langer kampen met chronische ziekten, vermoeidheid of beperkingen. Je doel is niet simpelweg zo oud mogelijk worden. Je ware doel is zo lang mogelijk reëel, vitaal en onafhankelijk leven. Hier draait de Bio-Score om. Neem de regie over je gezonde jaren."
   },
@@ -193,10 +202,10 @@ export const nl = {
   },
   cards: {
     consumedVsRemaining: {
-      title: "Verbruikt vs. Resterend",
-      badge: "Zwakste Schakel: Tijd",
+      title: "Verbruikt / Resterend",
+      badge: "Focus: Tijd",
       realised: "Gerealiseerd",
-      remaining: "Resterend (Prognose)",
+      remaining: "Resterend (Prog.)",
       yr: "j.",
       weeks: "weken",
       days: "dagen",
@@ -216,15 +225,15 @@ export const nl = {
       totalExpected: "Totale Verwachte Leeftijd:"
     },
     career: {
-      title: "Carrière Runway (Pensioen)",
-      badge: "Actief Werk",
+      title: "Carrière Runway",
+      badge: "Actief",
       start: "Start:",
       completed: "voltooid",
       goal: "Doel:",
       worked: "Gewerkt",
       years: "jaar",
-      remaining: "Resterende werkjaren",
-      description: "Nog <span class=\"font-semibold text-[#2D2D2D]\">{{remaining}} jaar</span> verplichte tijdsallocatie tot uw pensioenleeftijd van {{fireAge}} jaar."
+      remaining: "Nog te gaan",
+      description: "Nog <span class=\"font-semibold text-[#2D2D2D]\">{{remaining}} jaar</span> werken tot je gekozen pensioenleeftijd van {{fireAge}} jaar."
     },
     horizon: {
       title: "De Ongetemde Horizon (Vrijheidsoogst)",
@@ -308,7 +317,7 @@ export const nl = {
       remainingDesc: "Dit is de tijd die je statistisch gezien nog over hebt op aarde, berekend vanaf je huidige leeftijd tot aan je prognose leeftijd. Zie dit als je resterende 'budget' aan tijd om de dingen te doen die je belangrijk vindt.",
       workingTitle: "Werkende Jaren",
       workingDesc: "Dit is de tijd die je nog zult besteden aan de opbouw- en werkfase van je leven. Dit eindigt bij de door jou gekozen pensioenleeftijd.",
-      freedomTitle: "Vleugels (Vrijheid)",
+      freedomTitle: "Vrijheid",
       freedomDesc: "Dit is jouw vrije tijd (de 'oogstfase') zonder financiële verplichtingen, berekend vanaf je pensioenleeftijd tot aan je prognose leeftijd. In deze fase kun je je tijd volledig naar eigen inzicht besteden.",
       progressTitle: "Levensvoortgang",
       progressDesc: "Dit toont welk percentage van je verwachte leven al voltooid is. Het helpt om je tijd in perspectief te plaatsen en bewust om te gaan met de tijd die je nog rest."
@@ -337,10 +346,10 @@ export const nl = {
       freedom: "Vrijheid",
       viewMatrix: "Bekijk Levensmatrix",
       viewMatrixDesc: "Bekijk je persoonlijke levensloop in detail",
-      currentAge: "Huidige Leeftijd:",
-      activeCareer: "Actieve Carrière (tot {{age}} jr):",
-      yearsLeft: "Nog {{years}} jaar",
-      freeHorizon: "Vrije Horizon (Vrijheidsoogst):",
+      currentAge: "Huidige Leeftijd",
+      activeCareer: "Actieve Carrière<br/>tot {{age}} jaar:",
+      yearsLeft: "{{years}} jaar over",
+      freeHorizon: "Vrije Horizon Harvest Fase",
       slides: {
         summers: "nog {{count}} zomers",
         coffees: "nog {{count}} ochtendkoffies",
@@ -353,12 +362,12 @@ export const nl = {
     tablePhase: "Levensfase",
     tableAge: "Leeftijd",
     tableYears: "Jaren",
-    tableTotal: "% Totaal",
+    tableTotal: "Totaal",
     youthPhase: "Jeugd & Ontwikkeling",
     workPhase: "Werkend leven",
     freePhase: "Vrije tijd / Pensioen",
     totalLabel: "Totaal",
-    modelInspiration: "Als inspiratie stellen wij een optimaal model voor: Het 25 / 50 / 25 model.",
+    modelInspiration: "Als inspiratie stellen wij een optimaal model voor: <span class=\"whitespace-nowrap\">Het 25 / 50 / 25 model.</span>",
     modelYouth: "van je leven jeugd & ontwikkeling",
     modelWork: "van je leven werken",
     modelFree: "leven in vrijheid",
@@ -374,6 +383,8 @@ export const nl = {
     freeTitle: "Vrijheid & Genieten",
     freeDesc: "Volledige financiële onafhankelijkheid. Tijd voor jezelf, familie, reizen en passies, zonder de verplichting om nog te moeten werken voor geld.",
     financialRunwayTitle: "Jouw Financiële Horizon",
+    financialRunwayQuote: "\"Het is niet dat we een kort leven hebben, maar dat we veel ervan verspillen.\"",
+    financialRunwayAuthor: "- Seneca",
     financialRunwayQuestion: "Wil je weten hoe je het 25 / 50 / 25 model of beter kunt bereiken?",
     financialRunwayDesc: "We hebben nog een app gebouwd die je helpt je financiële horizon uit te stippelen en je doelstellingen te bereiken: de Financiële Horizon app.",
     financialRunwayPromo: "Ontdek hoe je de benodigde jaren opbouwt om eerder met pensioen te kunnen en meer vrijheid te ervaren in je leven.",

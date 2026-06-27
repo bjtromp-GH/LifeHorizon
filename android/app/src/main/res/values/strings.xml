@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">LifeHorizon</string>
+    <string name="title_activity_main">LifeHorizon</string>
+    <string name="package_name">com.lifehorizon.app</string>
+    <string name="custom_url_scheme">com.lifehorizon.app</string>
+</resources>
