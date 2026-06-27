@@ -93,6 +93,17 @@ export default function RemainingTimeCard({ totalRemaining }: RemainingTimeCardP
           )}
         </AnimatePresence>
       </div>
+
+      <div className="flex space-x-1.5 mt-2">
+        {slides.map((_, i) => (
+          <div
+            key={i}
+            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+              i === slideIndex ? "bg-amber-100 scale-125" : "bg-white/20"
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
