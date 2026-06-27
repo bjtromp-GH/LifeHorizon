@@ -627,7 +627,7 @@ export default function MobileContainer({
                     <p className="text-base sm:text-lg font-black text-[#D56B45] leading-snug">
                       {t('mobileContainer.modelInspiration')}
                     </p>
-                    <ul className="text-base sm:text-lg text-[#D56B45]/90 space-y-2.5 list-disc list-inside font-semibold ml-1 relative z-10">
+                    <ul className="text-base sm:text-lg text-[#D56B45]/90 space-y-2.5 list-disc list-outside font-semibold ml-5 relative z-10">
                       <li><strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelYouth')}</li>
                       <li><strong className="text-[#D56B45]">50%</strong> {t('mobileContainer.modelWork')}</li>
                       <li><strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelFree')}</li>
