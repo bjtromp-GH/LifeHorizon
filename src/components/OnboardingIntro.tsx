@@ -681,27 +681,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                         {t('onboarding.demographics.ageYears', { age: inputs.customLifeExpectancy.toString() })}
                       </span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="range"
-                        id="slider-onboarding-custom-expectancy"
+                    <div className="pt-2">
+                      <AgeScrollPicker
                         min={Math.max(45, inputs.currentAge + 1)}
-                        max="115"
+                        max={115}
                         value={inputs.customLifeExpectancy ?? 85}
-                        onChange={(e) => onInputChange({ customLifeExpectancy: parseInt(e.target.value) })}
-                        className="hidden sm:block w-full h-1 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                      />
-                      <input
-                        type="number"
-                        min={Math.max(45, inputs.currentAge + 1)}
-                        max="115"
-                        value={inputs.customLifeExpectancy ?? 85}
-                        onChange={(e) => {
-                          const val = parseInt(e.target.value) || 85;
-                          const customLifeExpectancy = Math.min(115, Math.max(Math.max(45, inputs.currentAge + 1), val));
-                          onInputChange({ customLifeExpectancy });
-                        }}
-                        className="w-full sm:w-20 text-center border border-[#EAEAEA] rounded-md text-xs sm:text-sm py-1 font-mono text-[#2D2D2D] bg-white shadow-3xs"
+                        onChange={(val) => onInputChange({ customLifeExpectancy: val })}
                       />
                     </div>
                     <p className="text-[9px] sm:text-[10px] text-[#767676] italic">
