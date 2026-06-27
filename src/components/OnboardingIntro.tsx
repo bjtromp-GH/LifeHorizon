@@ -60,6 +60,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
   const [showHeredityInfo, setShowHeredityInfo] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const motherSectionRef = useRef<HTMLDivElement>(null);
+  const fireAgeSectionRef = useRef<HTMLDivElement>(null);
   const [focusedYear, setFocusedYear] = useState<number>(inputs.birthYear);
   const yearsList = Array.from({ length: 2024 - 1940 + 1 }, (_, i) => 1940 + i);
   const ITEM_HEIGHT = 64;
@@ -998,39 +999,20 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                   <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.startWork')}</span>
                   <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.startWorkAge.toString() })}</span>
                 </div>
-                <div className={`flex items-center space-x-3 bg-white p-2.5 rounded-xl border shadow-3xs transition-all duration-300 ${
-                  showValidation && localStartWorkAge === "" ? "border-red-400 bg-red-50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
-                }`}>
-                  <input
-                    type="range"
-                    id="slider-onboarding-startwork"
-                    min="15"
-                    max="40"
+                <div className="pt-2">
+                  <AgeScrollPicker
+                    min={15}
+                    max={40}
                     value={inputs.startWorkAge}
-                    onChange={(e) => { setLocalStartWorkAge(e.target.value); onInputChange({ startWorkAge: parseInt(e.target.value) }); }}
-                    className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                  />
-                  <input
-                    type="number"
-                    min="15"
-                    max="40"
-                    value={localStartWorkAge}
-                    onChange={(e) => {
-                      setLocalStartWorkAge(e.target.value);
-                      const val = parseInt(e.target.value);
-                      if (!isNaN(val)) {
-                        onInputChange({ startWorkAge: Math.min(40, Math.max(15, val)) });
+                    onChange={(val) => {
+                      setLocalStartWorkAge(val.toString());
+                      onInputChange({ startWorkAge: val });
+                    }}
+                    onSelect={() => {
+                      if (fireAgeSectionRef.current) {
+                        fireAgeSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
                       }
                     }}
-                    onBlur={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (isNaN(val)) {
-                        setLocalStartWorkAge(inputs.startWorkAge.toString());
-                      } else {
-                        setLocalStartWorkAge(Math.min(40, Math.max(15, val)).toString());
-                      }
-                    }}
-                    className="w-20 sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-1.5 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors shrink-0"
                   />
                 </div>
                 {showValidation && localStartWorkAge === "" && (
@@ -1039,46 +1021,20 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </div>
 
               {/* Pensioen Target Age */}
-              <div className="space-y-2.5">
+              <div className="space-y-2.5" ref={fireAgeSectionRef}>
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.fireAge')}</span>
                   <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.fireAge.toString() })}</span>
                 </div>
-                <div className={`flex items-center space-x-3 bg-white p-2.5 rounded-xl border shadow-3xs transition-all duration-300 ${
-                  showValidation && localFireAge === "" ? "border-red-400 bg-red-50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
-                }`}>
-                  <input
-                    type="range"
-                    id="slider-onboarding-fireage"
+                <div className="pt-2">
+                  <AgeScrollPicker
                     min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
-                    max="90"
+                    max={90}
                     value={inputs.fireAge}
-                    onChange={(e) => { setLocalFireAge(e.target.value); onInputChange({ fireAge: parseInt(e.target.value) }); }}
-                    className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                  />
-                  <input
-                    type="number"
-                    min={Math.max(inputs.startWorkAge + 2, inputs.currentAge)}
-                    max="90"
-                    value={localFireAge}
-                    onChange={(e) => {
-                      setLocalFireAge(e.target.value);
-                      const val = parseInt(e.target.value);
-                      if (!isNaN(val)) {
-                        const minVal = Math.max(inputs.startWorkAge + 2, inputs.currentAge);
-                        onInputChange({ fireAge: Math.min(90, Math.max(minVal, val)) });
-                      }
+                    onChange={(val) => {
+                      setLocalFireAge(val.toString());
+                      onInputChange({ fireAge: val });
                     }}
-                    onBlur={(e) => {
-                      const val = parseInt(e.target.value);
-                      if (isNaN(val)) {
-                        setLocalFireAge(inputs.fireAge.toString());
-                      } else {
-                        const minVal = Math.max(inputs.startWorkAge + 2, inputs.currentAge);
-                        setLocalFireAge(Math.min(90, Math.max(minVal, val)).toString());
-                      }
-                    }}
-                    className="w-20 sm:w-28 text-center border-2 border-[#D56B45]/40 focus:border-[#D56B45] focus:outline-none rounded-lg text-lg sm:text-2xl py-1.5 sm:py-2.5 font-mono font-bold text-[#2D2D2D] bg-white shadow-sm transition-colors shrink-0"
                   />
                 </div>
                 {showValidation && localFireAge === "" && (
