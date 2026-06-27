@@ -340,7 +340,13 @@ export const nl = {
       currentAge: "Huidige Leeftijd:",
       activeCareer: "Actieve Carrière (tot {{age}} jr):",
       yearsLeft: "Nog {{years}} jaar",
-      freeHorizon: "Vrije Horizon (Vrijheidsoogst):"
+      freeHorizon: "Vrije Horizon (Vrijheidsoogst):",
+      slides: {
+        summers: "nog {{count}} zomers",
+        coffees: "nog {{count}} ochtendkoffies",
+        sunsets: "nog {{count}} zonsondergangen",
+        weekends: "nog {{count}} weekenden"
+      }
     },
     modelsTitle: "Het Normale Leven vs. Het Optimaal Model",
     modelsDesc: "Laten we nog eens even kijken naar de levensvoortgangsbalk van een normaal leven. Je begint met werken op je 20ste, je werkt tot 69 en overlijdt op 80 jaar. Dit is dan je leven:",

@@ -8,6 +8,7 @@ import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
 import StatsCard from "./StatsCard";
+import RemainingTimeCard from "./RemainingTimeCard";
 import { useLanguage } from "../context/LanguageContext";
 
 interface MobileContainerProps {
@@ -457,17 +458,7 @@ export default function MobileContainer({
                       </span>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
-                      <span className="text-[11px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
-                        {t('mobileContainer.conclusion.remainingTime')}
-                      </span>
-                      <span className="text-3xl font-extrabold font-mono tracking-tight text-white mb-0.5">
-                        {totalRemaining.toFixed(1)} {t('decadeGrid.yr')}
-                      </span>
-                      <span className="text-[10px] font-sans text-white/80">
-                        {t('mobileContainer.conclusion.weeksLeft').replace('{{weeks}}', Math.round(totalRemaining * 52.17).toLocaleString(t('dashboard.lang')))}
-                      </span>
-                    </div>
+                    <RemainingTimeCard totalRemaining={totalRemaining} />
                   </div>
 
                   {/* Phase blocks */}

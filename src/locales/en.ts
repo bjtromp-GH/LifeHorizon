@@ -342,7 +342,13 @@ export const en: Translations = {
       currentAge: "Current Age:",
       activeCareer: "Active Career (until {{age}} yr):",
       yearsLeft: "{{years}} years left",
-      freeHorizon: "Free Horizon (Freedom Harvest):"
+      freeHorizon: "Free Horizon (Freedom Harvest):",
+      slides: {
+        summers: "{{count}} summers left",
+        coffees: "{{count}} morning coffees left",
+        sunsets: "{{count}} sunsets left",
+        weekends: "{{count}} weekends left"
+      }
     },
     modelsTitle: "Normal Life vs. The Optimal Model",
     modelsDesc: "Let's take a look at the life progress bar of a normal life. You start working at 20, you work until 69 and die at 80 years. This is your life:",
