@@ -6,9 +6,10 @@ interface AgeScrollPickerProps {
   min: number;
   max: number;
   onChange: (val: number) => void;
+  onSelect?: () => void;
 }
 
-export default function AgeScrollPicker({ value, min, max, onChange }: AgeScrollPickerProps) {
+export default function AgeScrollPicker({ value, min, max, onChange, onSelect }: AgeScrollPickerProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
@@ -66,6 +67,7 @@ export default function AgeScrollPicker({ value, min, max, onChange }: AgeScroll
   const handleOptionClick = (opt: number) => {
     onChange(opt);
     setIsExpanded(false);
+    if (onSelect) onSelect();
   };
 
   return (

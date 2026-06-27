@@ -59,6 +59,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
   const [showYearPicker, setShowYearPicker] = useState(false);
   const [showHeredityInfo, setShowHeredityInfo] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const motherSectionRef = useRef<HTMLDivElement>(null);
   const [focusedYear, setFocusedYear] = useState<number>(inputs.birthYear);
   const yearsList = Array.from({ length: 2024 - 1940 + 1 }, (_, i) => 1940 + i);
   const ITEM_HEIGHT = 64;
@@ -914,6 +915,11 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                           setGeneticsInteracted(true);
                           onInputChange({ fatherPassedAge: val });
                         }}
+                        onSelect={() => {
+                          if (motherSectionRef.current) {
+                            motherSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                          }
+                        }}
                       />
                     </div>
                   </div>
@@ -921,7 +927,9 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               </div>
 
               {/* Mother */}
-              <div className={`p-4 sm:p-5 bg-gray-50 border rounded-2xl space-y-3.5 shadow-3xs transition-all duration-300 ${
+              <div 
+                ref={motherSectionRef}
+                className={`p-4 sm:p-5 bg-gray-50 border rounded-2xl space-y-3.5 shadow-3xs transition-all duration-300 ${
                 showValidation && !geneticsInteracted ? "border-red-400 bg-red-50/50 ring-2 ring-red-400 animate-pulse" : "border-[#EAEAEA]"
               }`}>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2.5">
