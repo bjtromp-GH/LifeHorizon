@@ -249,7 +249,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10"
+            className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10 shrink-0"
           >
             <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
               <span className="text-xl">🔥</span>
@@ -1169,7 +1169,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
 
       {/* Navigation Footer */}
       {step >= 2 && step < 7 && !showYearPicker && (
-        <footer className={`w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 ${step > 2 ? 'border-t border-[#F3F2F0]' : ''} relative z-10`}>
+        <footer className={`w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 ${step > 2 ? 'border-t border-[#F3F2F0]' : ''} relative z-10 shrink-0`}>
           <div>
             {step > 2 && (
               <button
