@@ -3,6 +3,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
 import { playChimeSound } from "../utils/audio";
+import AgeScrollPicker from "./AgeScrollPicker";
 import { 
   Sparkles, 
   ChevronRight, 
@@ -904,28 +905,15 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       <span className="text-[#767676]">{t('onboarding.genetics.passedAge', { parent: t('onboarding.genetics.father').toLowerCase() })}</span>
                       <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.fatherPassedAge.toString() })}</span>
                     </div>
-                    <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
-                      <input
-                        type="range"
-                        id="slider-onboarding-fatherpassed"
-                        min="40"
-                        max="100"
+                    <div className="pt-2">
+                      <AgeScrollPicker
+                        min={40}
+                        max={100}
                         value={inputs.fatherPassedAge}
-                        onChange={(e) => { setGeneticsInteracted(true); onInputChange({ fatherPassedAge: parseInt(e.target.value) }); }}
-                        className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                      />
-                      <input
-                        type="number"
-                        min="40"
-                        max="100"
-                        value={inputs.fatherPassedAge}
-                        onChange={(e) => {
+                        onChange={(val) => {
                           setGeneticsInteracted(true);
-                          const val = parseInt(e.target.value) || 75;
-                          const fatherPassedAge = Math.min(100, Math.max(40, val));
-                          onInputChange({ fatherPassedAge });
+                          onInputChange({ fatherPassedAge: val });
                         }}
-                        className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
                       />
                     </div>
                   </div>
@@ -972,28 +960,15 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       <span className="text-[#767676]">{t('onboarding.genetics.passedAge', { parent: t('onboarding.genetics.mother').toLowerCase() })}</span>
                       <span className="font-mono font-black text-sm text-[#D56B45] bg-[#FAF3F0] px-2 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.motherPassedAge.toString() })}</span>
                     </div>
-                    <div className="flex items-center space-x-3 bg-white p-2.5 rounded-xl border border-[#EAEAEA] shadow-3xs">
-                      <input
-                        type="range"
-                        id="slider-onboarding-motherpassed"
-                        min="40"
-                        max="100"
+                    <div className="pt-2">
+                      <AgeScrollPicker
+                        min={40}
+                        max={100}
                         value={inputs.motherPassedAge}
-                        onChange={(e) => { setGeneticsInteracted(true); onInputChange({ motherPassedAge: parseInt(e.target.value) }); }}
-                        className="flex-grow h-2 bg-[#EAE8E4] rounded-lg appearance-none cursor-pointer accent-[#D56B45]"
-                      />
-                      <input
-                        type="number"
-                        min="40"
-                        max="100"
-                        value={inputs.motherPassedAge}
-                        onChange={(e) => {
+                        onChange={(val) => {
                           setGeneticsInteracted(true);
-                          const val = parseInt(e.target.value) || 78;
-                          const motherPassedAge = Math.min(100, Math.max(40, val));
-                          onInputChange({ motherPassedAge });
+                          onInputChange({ motherPassedAge: val });
                         }}
-                        className="w-20 text-center border border-[#EAEAEA] rounded-lg text-sm py-1.5 font-mono font-bold text-[#2D2D2D] bg-white shrink-0"
                       />
                     </div>
                   </div>
