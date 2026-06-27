@@ -765,9 +765,6 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       onClick={() => { 
                         setLocalSleep(item.key as SleepLevel); 
                         updateBioAnswer("sleep", item.key as SleepLevel);
-                        if (activitySectionRef.current) {
-                          activitySectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
                       }}
                       className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localSleep === item.key
@@ -805,9 +802,6 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
                       onClick={() => { 
                         setLocalActivity(item.key as ActivityLevel); 
                         updateBioAnswer("activity", item.key as ActivityLevel);
-                        if (stressSectionRef.current) {
-                          stressSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
                       }}
                       className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localActivity === item.key
