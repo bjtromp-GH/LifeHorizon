@@ -280,7 +280,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
       </AnimatePresence>
 
       {/* Main Interactive Slides container */}
-      <main ref={mainScrollRef} className={`flex-grow flex flex-col items-center pt-6 sm:pt-10 z-10 w-full max-w-xl mx-auto px-1 min-h-0 ${step === 2 || step === 3 ? 'pb-6 sm:pb-10' : 'pb-24 sm:pb-32'} ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+      <main ref={mainScrollRef} className={`flex-grow flex flex-col items-center pt-6 sm:pt-10 z-10 w-full max-w-xl mx-auto px-1 min-h-0 ${step === 2 || step === 3 || step === 7 ? 'pb-6 sm:pb-10' : 'pb-24 sm:pb-32'} ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
         <AnimatePresence 
           mode="wait" 
           onExitComplete={() => {
@@ -1092,7 +1092,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
-              className="text-center space-y-4 sm:space-y-6 max-w-md w-full px-1 relative"
+              className="text-center space-y-4 sm:space-y-6 max-w-md w-full px-1 relative my-auto py-4"
             >
               <Confetti />
               
