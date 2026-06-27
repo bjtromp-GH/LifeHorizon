@@ -160,6 +160,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
     if (canProceed) setShowValidation(false);
   }, [canProceed]);
 
+  const mainScrollRef = useRef<HTMLElement>(null);
+  
+  useEffect(() => {
+    if (mainScrollRef.current) {
+      mainScrollRef.current.scrollTop = 0;
+    }
+  }, [step]);
+
   const handleNext = () => {
     if (step < 7 && !canProceed) {
       setShowValidation(true);
@@ -261,7 +269,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, onInputChange
       </AnimatePresence>
 
       {/* Main Interactive Slides container */}
-      <main className={`flex-grow flex items-center justify-center py-2 sm:py-8 z-10 w-full max-w-xl mx-auto pr-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+      <main ref={mainScrollRef} className={`flex-grow flex items-center justify-center pt-2 pb-24 sm:pt-8 sm:pb-32 z-10 w-full max-w-xl mx-auto px-1 ${step <= 1 ? 'overflow-hidden' : 'overflow-y-auto'}`}>
         <AnimatePresence mode="wait">
           {isTransitioning ? (
             <motion.div
