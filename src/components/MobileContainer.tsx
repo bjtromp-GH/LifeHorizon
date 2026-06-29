@@ -727,17 +727,30 @@ export default function MobileContainer({
             {activeSlide === 5 && (
               <div className="space-y-6 flex flex-col justify-between h-full text-[#2D2D2D] pb-4">
                 <div className="space-y-6">
-                  <div className="mt-4">
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10, filter: 'blur(5px)' }}
+                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="mt-4"
+                  >
                     <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#86A789]">
                       {t('mobileContainer.optimalModel')} Uitgelegd
                     </h3>
                     <p className="text-sm mt-4 text-[#767676] leading-relaxed">
                       {t('mobileContainer.modelExplainedDesc').replace('{{age}}', projectedLifeExpectancy.toString())}
                     </p>
-                  </div>
+                  </motion.div>
 
                   <div className="space-y-4">
-                    <motion.div whileHover={{ scale: 1.02 }} className="bg-[#2D2D2D]/[0.03] border border-[#2D2D2D]/10 p-5 rounded-2xl shadow-sm flex items-start justify-between gap-4 border-l-4 border-l-[#2D2D2D] relative overflow-hidden">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -30 }} 
+                      whileInView={{ opacity: 1, x: 0 }} 
+                      viewport={{ once: true }} 
+                      transition={{ duration: 0.5, delay: 0.15, type: "spring", stiffness: 100 }} 
+                      whileHover={{ scale: 1.02 }} 
+                      className="bg-[#2D2D2D]/[0.03] border border-[#2D2D2D]/10 p-5 rounded-2xl shadow-sm flex items-start justify-between gap-4 border-l-4 border-l-[#2D2D2D] relative overflow-hidden"
+                    >
                       <div className="z-10 flex-1">
                         <h4 className="font-black text-[#2D2D2D] text-base uppercase tracking-wider">{t('mobileContainer.youthPhase')}</h4>
                         <p className="text-[15px] text-[#5c5c5c] mt-1 font-mono font-bold tracking-wide">0 <span className="lowercase font-sans text-sm font-medium opacity-70">tot</span> {Math.round(projectedLifeExpectancy * 0.25)} {t('onboardingPanel.years')}</p>
@@ -750,7 +763,14 @@ export default function MobileContainer({
                       </div>
                     </motion.div>
 
-                    <motion.div whileHover={{ scale: 1.02 }} className="bg-[#D56B45]/[0.04] border border-[#D56B45]/20 p-5 rounded-2xl shadow-sm flex items-start justify-between gap-4 border-l-4 border-l-[#D56B45] relative overflow-hidden">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -30 }} 
+                      whileInView={{ opacity: 1, x: 0 }} 
+                      viewport={{ once: true }} 
+                      transition={{ duration: 0.5, delay: 0.3, type: "spring", stiffness: 100 }} 
+                      whileHover={{ scale: 1.02 }} 
+                      className="bg-[#D56B45]/[0.04] border border-[#D56B45]/20 p-5 rounded-2xl shadow-sm flex items-start justify-between gap-4 border-l-4 border-l-[#D56B45] relative overflow-hidden"
+                    >
                       <div className="z-10 flex-1">
                         <h4 className="font-black text-[#D56B45] text-base uppercase tracking-wider">{t('mobileContainer.workTitle')}</h4>
                         <p className="text-[15px] text-[#D56B45] mt-1 font-mono font-bold tracking-wide">{Math.round(projectedLifeExpectancy * 0.25)} <span className="lowercase font-sans text-sm font-medium opacity-70">tot</span> {Math.round(projectedLifeExpectancy * 0.75)} {t('onboardingPanel.years')}</p>
@@ -763,7 +783,14 @@ export default function MobileContainer({
                       </div>
                     </motion.div>
 
-                    <motion.div whileHover={{ scale: 1.02 }} className="bg-[#86A789]/[0.06] border border-[#86A789]/30 p-5 rounded-2xl shadow-sm flex items-start justify-between gap-4 border-l-4 border-l-[#86A789] relative overflow-hidden">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -30 }} 
+                      whileInView={{ opacity: 1, x: 0 }} 
+                      viewport={{ once: true }} 
+                      transition={{ duration: 0.5, delay: 0.45, type: "spring", stiffness: 100 }} 
+                      whileHover={{ scale: 1.02 }} 
+                      className="bg-[#86A789]/[0.06] border border-[#86A789]/30 p-5 rounded-2xl shadow-sm flex items-start justify-between gap-4 border-l-4 border-l-[#86A789] relative overflow-hidden"
+                    >
                       <div className="z-10 flex-1">
                         <h4 className="font-black text-[#86A789] text-base uppercase tracking-wider">{t('mobileContainer.freeTitle')}</h4>
                         <p className="text-[15px] text-[#86A789] mt-1 font-mono font-bold tracking-wide">{Math.round(projectedLifeExpectancy * 0.75)} <span className="lowercase font-sans text-sm font-medium opacity-70">tot</span> {Number.isInteger(projectedLifeExpectancy) ? projectedLifeExpectancy : projectedLifeExpectancy.toFixed(1)} {t('onboardingPanel.years')}</p>
