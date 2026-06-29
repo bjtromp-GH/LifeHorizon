@@ -70,6 +70,10 @@ export default function MobileContainer({
       // Instant scroll to top feels much better during page transitions than smooth scrolling
       mainEl.scrollTop = 0;
     }
+    // Force fullscreen on the hero image slide
+    if (activeSlide === 6) {
+      setIsSwipedFullscreen(true);
+    }
   }, [activeSlide]);
 
   const goToSlide = (newIndex: number) => {
@@ -817,19 +821,25 @@ export default function MobileContainer({
 
             {/* Screen 7: Hero Image */}
             {activeSlide === 6 && (
-              <div className="flex flex-col items-center justify-center h-full w-full bg-black relative">
+              <div 
+                className="flex flex-col justify-end bg-black relative -mx-4 -mb-4"
+                style={{ 
+                  marginTop: isSwipedFullscreen ? '-56px' : '-16px', 
+                  minHeight: isSwipedFullscreen ? '100dvh' : 'calc(100dvh - 140px)' 
+                }}
+              >
                 <img 
                   src="/img/elephant-hero.jpg" 
                   alt="Hero Elephant" 
-                  className="w-full h-full object-cover absolute inset-0" 
+                  className="absolute inset-0 w-full h-full object-cover" 
                 />
                 
                 {/* Navigation Controls overlay */}
-                <div className="absolute bottom-4 w-full px-4">
-                  <div className="flex items-center justify-between bg-black/50 backdrop-blur-md p-2.5 rounded-lg text-white">
+                <div className="relative z-10 w-full px-4 pb-8 pt-32 bg-gradient-to-t from-black via-black/60 to-transparent">
+                  <div className="flex items-center justify-between bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/20 text-white shadow-2xl max-w-sm mx-auto">
                     <button
                       onClick={() => goToSlide(activeSlide - 1)}
-                      className="px-4 py-2 border border-white/30 hover:bg-white/10 text-xs font-bold rounded-lg transition-all cursor-pointer"
+                      className="px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm"
                     >
                       ◀ {t('dashboard.nav.prev')}
                     </button>
@@ -848,7 +858,7 @@ export default function MobileContainer({
 
                     <button
                       onClick={() => goToSlide(activeSlide + 1)}
-                      className="px-4 py-2 bg-[#D56B45] hover:bg-[#B84E29] text-xs font-black rounded-lg transition-all cursor-pointer"
+                      className="px-4 py-3 bg-[#D56B45] hover:bg-[#B84E29] text-white shadow-lg text-xs font-black rounded-xl transition-all cursor-pointer"
                     >
                       {t('dashboard.nav.next')} ▶
                     </button>
