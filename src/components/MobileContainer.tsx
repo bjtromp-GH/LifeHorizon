@@ -864,21 +864,50 @@ export default function MobileContainer({
                   className="absolute inset-0 w-full h-full object-cover object-[65%_center]" 
                 />
                 
-                {/* Navigation Controls overlay */}
-                <div className="relative z-10 w-full px-4 pb-8 pt-32 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end">
+                {/* Top Text overlay with typewriter effect */}
+                <div className="absolute top-0 left-0 right-0 z-10 w-full px-6 pt-20 pb-24 bg-gradient-to-b from-black/70 to-transparent flex flex-col items-center pointer-events-none">
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="max-w-sm mx-auto w-full text-center mb-8 px-2"
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: {
+                        opacity: 1,
+                        transition: { staggerChildren: 0.2, delayChildren: 0.8 }
+                      }
+                    }}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="max-w-sm text-center"
                   >
-                    <h2 className="text-3xl font-black text-white font-sans uppercase tracking-tight drop-shadow-lg mb-2">
-                      Jouw Levensloop
-                    </h2>
-                    <p className="text-white/90 text-[13px] sm:text-sm leading-relaxed drop-shadow-lg font-medium">
-                      Elke fase opent een nieuw perspectief. Met de juiste doelen en focus creëer je de ruimte om in volle vrijheid van jouw horizon te genieten.
+                    <motion.h2 
+                      variants={{
+                        hidden: { opacity: 0, y: -10 },
+                        visible: { opacity: 1, y: 0 }
+                      }}
+                      className="text-4xl font-black text-white font-sans uppercase tracking-widest drop-shadow-lg mb-6"
+                    >
+                      Vrijheid
+                    </motion.h2>
+                    <p className="text-white/95 text-[17px] sm:text-lg leading-relaxed drop-shadow-xl font-medium font-serif italic">
+                      {"Vrijheid is niet het stoppen met werken, maar het starten met kiezen.".split(" ").map((word, i) => (
+                        <motion.span 
+                          key={i} 
+                          variants={{
+                            hidden: { opacity: 0, y: 5 },
+                            visible: { opacity: 1, y: 0 }
+                          }} 
+                          transition={{ duration: 0.5 }}
+                          className="inline-block mr-1"
+                        >
+                          {word}
+                        </motion.span>
+                      ))}
                     </p>
                   </motion.div>
+                </div>
+                
+                {/* Navigation Controls overlay */}
+                <div className="relative z-10 w-full px-4 pb-8 pt-32 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end">
 
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
