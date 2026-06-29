@@ -889,9 +889,23 @@ export default function MobileContainer({
                       Vrijheid
                     </motion.h2>
                     <p className="text-white/95 text-[17px] sm:text-lg leading-relaxed drop-shadow-xl font-medium font-serif italic">
-                      {"Vrijheid is niet het stoppen met werken, maar het starten met kiezen.".split(" ").map((word, i) => (
+                      {"Vrijheid is niet het stoppen met werken,".split(" ").map((word, i) => (
                         <motion.span 
-                          key={i} 
+                          key={`l1-${i}`} 
+                          variants={{
+                            hidden: { opacity: 0, y: 5 },
+                            visible: { opacity: 1, y: 0 }
+                          }} 
+                          transition={{ duration: 0.5 }}
+                          className="inline-block mr-1"
+                        >
+                          {word}
+                        </motion.span>
+                      ))}
+                      <br />
+                      {"maar het starten met kiezen.".split(" ").map((word, i) => (
+                        <motion.span 
+                          key={`l2-${i}`} 
                           variants={{
                             hidden: { opacity: 0, y: 5 },
                             visible: { opacity: 1, y: 0 }
