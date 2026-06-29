@@ -965,34 +965,34 @@ export default function MobileContainer({
                 <div className="space-y-6">
                   <div className="mt-4">
                     <div className="mb-8 p-5 bg-[#D56B45]/5 border-l-4 border-[#D56B45] rounded-r-xl">
-                      <p className="text-sm font-serif italic text-[#2D2D2D] leading-relaxed">
+                      <p className="text-base sm:text-lg font-serif italic text-[#2D2D2D] leading-relaxed">
                         {t('mobileContainer.financialRunwayQuote')}
                       </p>
-                      <p className="text-xs font-bold text-[#D56B45] mt-2">
+                      <p className="text-sm font-bold text-[#D56B45] mt-2">
                         {t('mobileContainer.financialRunwayAuthor')}
                       </p>
                     </div>
 
-                    <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
+                    <h3 className="text-2xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
                       {t('mobileContainer.financialRunwayTitle')}
                     </h3>
-                    <p className="text-sm mt-4 text-[#2D2D2D] font-bold leading-relaxed">
+                    <p className="text-base mt-4 text-[#2D2D2D] font-bold leading-relaxed">
                       {t('mobileContainer.financialRunwayQuestion')}
                     </p>
-                    <p className="text-sm mt-3 text-[#767676] leading-relaxed">
+                    <p className="text-[15px] mt-3 text-[#767676] leading-relaxed">
                       {t('mobileContainer.financialRunwayDesc')}
                     </p>
                   </div>
 
                   <div className="bg-[#FAF9F8] border border-[#EAEAEA] p-6 rounded-xl shadow-sm text-center">
-                    <p className="text-sm text-[#767676] mb-4">
+                    <p className="text-base text-[#767676] mb-4">
                       {t('mobileContainer.financialRunwayPromo')}
                     </p>
                     <a
                       href="https://financiele-horizon-promo.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
+                      className="inline-flex w-full items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 text-[15px] rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                     >
                       {t('mobileContainer.visitWebsite')}
                     </a>
