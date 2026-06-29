@@ -855,15 +855,37 @@ export default function MobileContainer({
                   minHeight: isSwipedFullscreen ? '100dvh' : 'calc(100dvh - 140px)' 
                 }}
               >
-                <img 
+                <motion.img 
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
                   src="/img/elephant-hero.jpg" 
                   alt="Hero Elephant" 
                   className="absolute inset-0 w-full h-full object-cover object-[65%_center]" 
                 />
                 
                 {/* Navigation Controls overlay */}
-                <div className="relative z-10 w-full px-4 pb-8 pt-32 bg-gradient-to-t from-black via-black/60 to-transparent">
-                  <div className="flex items-center justify-between bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/20 text-white shadow-2xl max-w-sm mx-auto">
+                <div className="relative z-10 w-full px-4 pb-8 pt-32 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="max-w-sm mx-auto w-full text-center mb-8 px-2"
+                  >
+                    <h2 className="text-3xl font-black text-white font-sans uppercase tracking-tight drop-shadow-lg mb-2">
+                      Jouw Levensloop
+                    </h2>
+                    <p className="text-white/90 text-[13px] sm:text-sm leading-relaxed drop-shadow-lg font-medium">
+                      Elke fase opent een nieuw perspectief. Met de juiste doelen en focus creëer je de ruimte om in volle vrijheid van jouw horizon te genieten.
+                    </p>
+                  </motion.div>
+
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                    className="flex items-center justify-between bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/20 text-white shadow-2xl max-w-sm mx-auto w-full"
+                  >
                     <button
                       onClick={() => goToSlide(activeSlide - 1)}
                       className="px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm"
