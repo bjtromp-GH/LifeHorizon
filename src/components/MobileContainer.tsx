@@ -911,7 +911,7 @@ export default function MobileContainer({
                     >
                       {t('dashboard.nav.next')} ▶
                     </button>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             )}
