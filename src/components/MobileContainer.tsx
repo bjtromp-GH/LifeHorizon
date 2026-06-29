@@ -884,7 +884,7 @@ export default function MobileContainer({
                         hidden: { opacity: 0, y: -10 },
                         visible: { opacity: 1, y: 0 }
                       }}
-                      className="text-4xl font-black text-white font-sans uppercase tracking-widest drop-shadow-lg mb-6"
+                      className="text-2xl font-black text-white font-sans uppercase tracking-widest drop-shadow-lg mb-3"
                     >
                       Vrijheid
                     </motion.h2>
