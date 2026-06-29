@@ -1,59 +1,63 @@
-# Life Runway - Design Systeem
+# Life Horizon - Design System
 
-Dit document beschrijft de visuele identiteit, kleuren, typografie en UI-componenten die gebruikt zijn in de **Life Runway** applicatie. Het doel van dit design systeem is om een consistente, rustige en tegelijkertijd overtuigende gebruikerservaring (UX) te bieden.
+Dit document beschrijft de visuele identiteit, kleuren, typografie en UI-elementen van de **Life Horizon** applicatie.
 
-## 🎨 Kleurenpalet
+## 1. Typografie
 
-De applicatie maakt gebruik van aardse, warme kleuren die rust uitstralen maar toch activerend werken. Er wordt gewerkt met hard-coded HEX-waarden in Tailwind-klassen.
+De applicatie maakt gebruik van twee primaire lettertypen, ingeladen via Google Fonts:
+
+- **Primaire Font (Tekst & Koppen):** `Sora` (sans-serif)
+  - Gekozen vanwege de moderne, strakke en licht geometrische uitstraling.
+  - Gebruikte gewichten: 300 (Light), 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold), 800 (ExtraBold).
+- **Secundaire Font (Getallen & Code):** `JetBrains Mono` (monospace)
+  - Wordt gebruikt voor datums, leeftijden, en statistieken (zoals de aftel-timers en percentages).
+  - Gebruikte gewichten: 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold).
+
+## 2. Kleurenpalet
+
+De app maakt gebruik van een warm, aards en contrasterend kleurenpalet om een serieuze, maar uitnodigende sfeer te creëren.
 
 ### Primaire Kleuren
-- **Oranje (Actie & Energie):** `#D56B45`
-  - *Hover status:* `#C0562F`
-  - *Wordt gebruikt voor:* Hoofdknoppen (Ga verder), voortgangsbalken, accentkleuren, "Werk" of "Actie" labels.
-- **Groen (Vrijheid & Gezondheid):** `#86A789`
-  - *Hover status:* `#729275`
-  - *Wordt gebruikt voor:* Knoppen ("Ontwerp mijn plan", "Bezoek de website"), "Vrijheid / Pensioen" aanduidingen, vitale onderdelen.
+- **Hoofdkleur (Accent):** `#D56B45` (Roest-oranje) 
+  - Gebruikt voor primaire knoppen, actieve states, iconen en belangrijke highlights.
+- **Donker Tekst & Elementen:** `#2D2D2D` (Zacht zwart/Donkergrijs)
+  - Gebruikt voor de belangrijkste koppen en standaard tekst.
 
 ### Achtergronden
-- **Sand / Off-White (Basis Achtergrond):** `#F9F8F6`
-  - *Wordt gebruikt voor:* De primaire achtergrond van de mobiele weergave en kaarten. Het voorkomt de hardheid van spierwit en geeft een zachte 'papieren' uitstraling.
-- **Card Achtergrond (Zeer Licht):** `#FAF9F8` of `bg-white`
-- **Border Kleur:** `#EAEAEA` of `#EAE8E4`
+- **Standaard Achtergrond:** `#FDFDFD` (Sneeuwwit)
+  - Gebruikt voor kaarten en modale vensters.
+- **Secundaire Achtergrond:** `#F9F8F6` (Zeer licht crème/grijs)
+  - Gebruikt als basis achtergrondkleur voor de mobiele weergave (mobile viewport root).
+- **Accent Achtergrond:** `#FAF3F0` (Heel licht oranje-getint)
+  - Gebruikt voor geselecteerde knoppen, actieve tabbladen of subtiele badges.
 
-### Tekstkleuren
-- **Zwart / Donkergrijs (Primaire Tekst):** `#2D2D2D`
-  - *Wordt gebruikt voor:* Koppen (H1, H2, H3) en belangrijke platte tekst.
-- **Middengrijs (Secundaire Tekst):** `#767676`
-  - *Wordt gebruikt voor:* Ondertitels, uitleg, kleine labels en data.
+### Grijstinten (Tekst & Randen)
+- **Secundaire Tekst:** `#767676` (Middengrijs)
+  - Gebruikt voor omschrijvingen, labels en subtiele informatie.
+- **Randen (Borders):** `#EAEAEA` of `#E9E4E2` (Lichtgrijs)
+  - Gebruikt voor scheidingslijnen en randen van ongeselecterde knoppen.
 
-### Gradients
-- **Introductie Animatie Gradient:** `from-[#E25C26] to-[#B84E29]`
-  - *Wordt gebruikt voor:* Het allereerste opstartscherm met de typmachine-tekst, om onmiddellijk impact te maken.
+### Matrix & Status Kleuren
+In de Matrix en voortgangsbalken worden specifieke kleuren gebruikt voor de levensfasen:
+- **Verleden (Geleefde tijd):** Groen-tinten (`#10B981` / Tailwind `emerald-500`)
+- **Toekomst (Resterende tijd):** Grijstinten (`#E5E7EB` of leeg met een lichte border)
+- **Specifieke Fasen:**
+  - *Kinderjaren:* Pastelgroen / Blauw
+  - *Werken:* Blauw (`#3B82F6` / Tailwind `blue-500`) of het Primaire oranje
+  - *Pensioen:* Goud / Geel (`#F59E0B` / Tailwind `amber-500`)
 
-## 🔤 Typografie
+## 3. Vormgeving & UI Componenten
 
-De typografie leunt op twee specifieke, geïmporteerde Google Fonts. We gebruiken deze via de standaard Tailwind font-families die we in `index.css` hebben overschreven:
+- **Hoeken:** Er wordt veel gebruik gemaakt van afgeronde hoeken (`rounded-lg`, `rounded-xl`, `rounded-2xl` in Tailwind) voor een vriendelijke uitstraling.
+- **Schaduwen:** Subtiele slagschaduwen (`shadow-sm`, `shadow-md`) zorgen voor diepte en hiërarchie, waardoor elementen (zoals de Bento-grid kaarten) zwevend aanvoelen.
+- **Animaties:** De app maakt zwaar gebruik van `framer-motion` voor micro-animaties:
+  - Spring-animaties (vering) voor het inladen van schermen.
+  - Stagger-effecten voor lijsten.
+  - Scale-effecten op knoppen bij hover (`scale: 1.02`) en tap (`scale: 0.98`).
+- **Gevoel (Haptics):** Op mobiele apparaten vibreert de app kort (Haptic Feedback) bij het scrollen door de leeftijdkiezer of het indrukken van knoppen.
+- **Geluid:** Een zachte 'chime' wordt afgespeeld bij het afronden van belangrijke stappen (zoals de onboarding) voor positieve bekrachtiging.
 
-- **Primaire Font (Sora):** `font-sans` is gekoppeld aan de **Sora** font-family. Dit is een uiterst moderne, vriendelijke en goed leesbare schreefloze letter die overal in de app wordt gebruikt voor een heldere uitstraling.
-- **Cijfers & Percentages (JetBrains Mono):** `font-mono` is gekoppeld aan **JetBrains Mono**. We gebruiken dit lettertype voor datagedreven getallen, percentages en de "levensvoortgangsbalk" voor een strakke, technische en betrouwbare look.
-- **Koppen:** Vaak in **Sora** met `font-black` of `font-extrabold` in combinatie met `tracking-tight` of `tracking-tighter`.
-- **Knoppen (Buttons):** Vaak in **Sora** met `font-black uppercase tracking-widest` voor maximale leesbaarheid en een premium "app" gevoel.
+## 4. Mobile First vs. Desktop
 
-## 📐 Vormgeving & Spacing
-
-- **Rondingen (Border Radius):** Grote, zachte rondingen. We gebruiken veelal `rounded-xl` (kaarten, invoervelden) en `rounded-2xl` of `rounded-3xl` voor grotere containers en knoppen.
-- **Schaduwen:** Subtiel (`shadow-sm`, `shadow-md`) om diepte te creëren tussen de lichtgrijze/zandkleurige achtergrond en de witte cards. Geen harde, donkere schaduwen.
-- **Spacing:** Ruime paddings (`p-6`, `p-8`) om de elementen "lucht" te geven en de content niet te benauwend over te laten komen.
-
-## ✨ Animaties & Interacties
-
-**Framer Motion** vormt de basis van alle animaties in de app:
-- **Pagina Transities:** Schermen glijden soepel in en uit met een `AnimatePresence` `x`-as slide animatie en een vleugje opaciteit.
-- **Scroll Reveal:** Op het startscherm lichten woorden één voor één op om de aandacht vast te houden (typemachine / fade-in effect).
-- **Micro-interacties:** Knoppen schalen licht mee bij een hover (`scale: 1.05`) of klik (`whileTap={{ scale: 0.95 }}`) voor directe feedback.
-
-## 📱 Responsiviteit
-
-Het design is in de kern **Mobile First**.
-- Op telefoons toont het design zich als een full-screen app-ervaring met fixed bottom-bars en dots-navigatie.
-- Op grotere schermen (Desktop) centreert de weergave zich rond flexibele kolommen en worden lettergroottes responsief geschaald (`sm:text-lg`, `md:text-2xl`), zonder de leesbaarheid te verliezen in oneindig brede tekstblokken (`max-w-4xl`).
+- **Mobile:** Bestaat uit één naadloze "swipe" interface of een verticaal scrollende feed. Componenten nemen 100% breedte in beslag.
+- **Desktop:** Maakt gebruik van een "Bento Box" grid layout. De componenten zijn verdeeld over verschillende kaarten die in een strak, asymmetrisch raster passen.

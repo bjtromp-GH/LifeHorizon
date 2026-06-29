@@ -73,7 +73,7 @@ export default function MobileContainer({
   }, [activeSlide]);
 
   const goToSlide = (newIndex: number) => {
-    if (newIndex < 0 || newIndex > 6) return;
+    if (newIndex < 0 || newIndex > 7) return;
     setSlideDirection(newIndex > activeSlide ? 1 : -1);
     setActiveSlide(newIndex);
   };
@@ -100,7 +100,7 @@ export default function MobileContainer({
         }
       } else {
         // Swipe Left -> next slide
-        if (activeSlide < 3) {
+        if (activeSlide < 7) {
           goToSlide(activeSlide + 1);
           setIsSwipedFullscreen(true);
         }
@@ -309,7 +309,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -367,7 +367,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -414,7 +414,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -562,7 +562,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4, 5].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -697,7 +697,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -793,7 +793,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
@@ -815,8 +815,50 @@ export default function MobileContainer({
               </div>
             )}
 
-            {/* Screen 7: Financiële Runway Promo */}
+            {/* Screen 7: Hero Image */}
             {activeSlide === 6 && (
+              <div className="flex flex-col items-center justify-center h-full w-full bg-black relative">
+                <img 
+                  src="/img/elephant-hero.jpg" 
+                  alt="Hero Elephant" 
+                  className="w-full h-full object-cover absolute inset-0" 
+                />
+                
+                {/* Navigation Controls overlay */}
+                <div className="absolute bottom-4 w-full px-4">
+                  <div className="flex items-center justify-between bg-black/50 backdrop-blur-md p-2.5 rounded-lg text-white">
+                    <button
+                      onClick={() => goToSlide(activeSlide - 1)}
+                      className="px-4 py-2 border border-white/30 hover:bg-white/10 text-xs font-bold rounded-lg transition-all cursor-pointer"
+                    >
+                      ◀ {t('dashboard.nav.prev')}
+                    </button>
+                    
+                    <div className="flex space-x-1.5">
+                      {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => goToSlide(idx)}
+                          className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                            activeSlide === idx ? "w-4 bg-white" : "bg-white/30"
+                          }`}
+                        />
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => goToSlide(activeSlide + 1)}
+                      className="px-4 py-2 bg-[#D56B45] hover:bg-[#B84E29] text-xs font-black rounded-lg transition-all cursor-pointer"
+                    >
+                      {t('dashboard.nav.next')} ▶
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Screen 8: Financiële Runway Promo */}
+            {activeSlide === 7 && (
               <div className="space-y-6 flex flex-col justify-between h-full text-[#2D2D2D] pb-4">
                 <div className="space-y-6">
                   <div className="mt-4">
@@ -865,7 +907,7 @@ export default function MobileContainer({
                   </button>
                   
                   <div className="flex space-x-1.5">
-                    {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
+                    {[0, 1, 2, 3, 4, 5, 6, 7].map((idx) => (
                       <button
                         key={idx}
                         onClick={() => goToSlide(idx)}
