@@ -858,7 +858,7 @@ export default function MobileContainer({
                 <img 
                   src="/img/elephant-hero.jpg" 
                   alt="Hero Elephant" 
-                  className="absolute inset-0 w-full h-full object-cover" 
+                  className="absolute inset-0 w-full h-full object-cover object-[65%_center]" 
                 />
                 
                 {/* Navigation Controls overlay */}
