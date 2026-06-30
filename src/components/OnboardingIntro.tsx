@@ -699,7 +699,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                       type="button"
                       id={`btn-onboarding-gender-${g}`}
                       onClick={() => { setLocalGender(g as Gender); onInputChange({ gender: g as Gender }); }}
-                      className={`py-3 rounded-lg border font-bold text-sm sm:text-base transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
+                      className={`py-3 rounded-lg border font-bold text-lg sm:text-base transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
                         localGender === g
                            ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                            : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"

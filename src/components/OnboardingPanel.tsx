@@ -76,7 +76,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
             type="button"
             id="btn-gender-man"
             onClick={() => onChange({ gender: "man" })}
-            className={`py-3 rounded text-[15px] sm:text-sm font-bold sm:font-medium border transition-all duration-200 cursor-pointer ${
+            className={`py-3 rounded text-lg sm:text-base font-bold sm:font-medium border transition-all duration-200 cursor-pointer ${
               inputs.gender === "man"
                 ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                 : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50 hover:border-gray-300"
@@ -88,7 +88,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
             type="button"
             id="btn-gender-vrouw"
             onClick={() => onChange({ gender: "vrouw" })}
-            className={`py-3 rounded text-[15px] sm:text-sm font-bold sm:font-medium border transition-all duration-200 cursor-pointer ${
+            className={`py-3 rounded text-lg sm:text-base font-bold sm:font-medium border transition-all duration-200 cursor-pointer ${
               inputs.gender === "vrouw"
                 ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                 : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50 hover:border-gray-300"
