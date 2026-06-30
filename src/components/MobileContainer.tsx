@@ -910,7 +910,7 @@ export default function MobileContainer({
                             hidden: { opacity: 0, y: 5 },
                             visible: { opacity: 1, y: 0 }
                           }} 
-                          transition={{ duration: 0.5, delay: 0.1 }}
+                          transition={{ duration: 0.5 }}
                           className="inline-block mr-1"
                         >
                           {word}
