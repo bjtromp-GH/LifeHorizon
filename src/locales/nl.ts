@@ -399,7 +399,10 @@ export const nl = {
     showMatrix: "Toon Levensmatrix",
     mascotTitle: "Mascotte",
     mascotDesc: "Wist je dat een olifant normaal gesproken een levensverwachting van 50-70 heeft maar in ideale omstandigheden zoals in een dierentuin wel 80 jaar kan worden? Vandaar de mascotte voor onze app!",
-    matrixTitle: "Jouw Levensmatrix"
+    matrixTitle: "Jouw Levensmatrix",
+    freedomHeroTitle: "Vrijheid",
+    freedomHeroQuote1: "Vrijheid is niet het stoppen met werken,",
+    freedomHeroQuote2: "maar het starten met kiezen."
   },
   onboardingPanel: {
     personalYardstick: "Persoonlijke Meetlat",

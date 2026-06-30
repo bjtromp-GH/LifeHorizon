@@ -401,7 +401,10 @@ export const en: Translations = {
     showMatrix: "Show Life Matrix",
     mascotTitle: "Mascot",
     mascotDesc: "Did you know that an elephant normally has a life expectancy of 50-70 but in ideal conditions such as in a zoo can live up to 80 years? Hence the mascot for our app!",
-    matrixTitle: "Your Life Matrix"
+    matrixTitle: "Your Life Matrix",
+    freedomHeroTitle: "Freedom",
+    freedomHeroQuote1: "Freedom is not stopping work,",
+    freedomHeroQuote2: "but starting to choose."
   },
   onboardingPanel: {
     personalYardstick: "Personal Yardstick",
