@@ -617,6 +617,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               <div className="absolute inset-x-0 top-0 h-96 bg-radial-gradient from-white/10 to-transparent blur-2xl pointer-events-none" />
 
               <div className="flex-grow flex flex-col items-center justify-center text-center max-w-xl mx-auto px-4 z-10 space-y-6">
+                <motion.img 
+                  src="/img/olifant-bril.png" 
+                  alt="Olifant met bril" 
+                  initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.6, type: "spring", bounce: 0.5 }}
+                  className="w-32 sm:w-40 h-auto mx-auto drop-shadow-2xl"
+                />
                 <motion.div 
                   variants={{
                     hidden: { opacity: 0 },
