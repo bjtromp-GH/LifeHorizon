@@ -28,7 +28,8 @@ import {
   Cpu,
   Edit3,
   UserRound,
-  HeartPulse
+  HeartPulse,
+  Calculator
 } from "lucide-react";
 import ScrollRevealText from "./ScrollRevealText";
 import Confetti from "./Confetti";
@@ -1157,6 +1158,26 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                       onInputChange({ fireAge: val });
                     }}
                   />
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const bYear = parseInt(inputs.birthYear.toString()) || 1980;
+                        let aow = 67;
+                        if (bYear <= 1954) aow = 67;
+                        else if (bYear <= 1960) aow = 67;
+                        else if (bYear <= 1970) aow = 68;
+                        else if (bYear <= 1980) aow = 69;
+                        else aow = 70;
+                        setLocalFireAge(aow.toString());
+                        onInputChange({ fireAge: aow });
+                      }}
+                      className="px-4 py-2.5 bg-white text-[#D56B45] text-xs font-bold rounded-xl border border-[#EAEAEA] hover:border-[#D56B45]/50 hover:bg-[#FAF3F0] transition-all flex items-center space-x-2 shadow-sm"
+                    >
+                      <Calculator className="w-4 h-4" />
+                      <span>{t('onboarding.career.calcAow')}</span>
+                    </button>
+                  </div>
                 </div>
                 {showValidation && localFireAge === "" && (
                   <p className="text-red-500 text-xs font-bold px-1 mt-1">Vul dit a.u.b. in</p>

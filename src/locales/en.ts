@@ -135,7 +135,8 @@ export const en: Translations = {
       fireAge: "Target Retirement Age",
       ageYears: "{{val}} years",
       yearsDiff: "{{val}} years",
-      workDesc: "This is the number of mandatory work years you have planned for your financial independence or retirement."
+      workDesc: "This is the number of mandatory work years you have planned for your financial independence or retirement.",
+      calcAow: "Calculate State Pension age"
     },
     ready: {
       badge: "Ready to explore!",

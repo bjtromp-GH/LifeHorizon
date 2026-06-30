@@ -133,7 +133,8 @@ export const nl = {
       fireAge: "Doelleeftijd Pensioen",
       ageYears: "{{val}} jaar",
       yearsDiff: "{{val}} jaar",
-      workDesc: "Dit is het aantal jaren verplicht werk dat u heeft ingepland voor uw financiële onafhankelijkheid of pensioen."
+      workDesc: "Dit is het aantal jaren verplicht werk dat u heeft ingepland voor uw financiële onafhankelijkheid of pensioen.",
+      calcAow: "Bereken AOW-leeftijd"
     },
     ready: {
       badge: "Klaar om te ontdekken!",
