@@ -735,7 +735,7 @@ export default function MobileContainer({
                     className="mt-4"
                   >
                     <h3 className="text-xl font-black font-sans uppercase tracking-tight text-[#86A789]">
-                      {t('mobileContainer.optimalModel')} Uitgelegd
+                      {t('mobileContainer.modelExplainedTitle')}
                     </h3>
                     <p className="text-sm mt-4 text-[#767676] leading-relaxed">
                       {t('mobileContainer.modelExplainedDesc').replace('{{age}}', projectedLifeExpectancy.toString())}
@@ -753,7 +753,7 @@ export default function MobileContainer({
                     >
                       <div className="z-10 flex-1">
                         <h4 className="font-black text-[#2D2D2D] text-base uppercase tracking-wider">{t('mobileContainer.youthPhase')}</h4>
-                        <p className="text-[15px] text-[#5c5c5c] mt-1 font-mono font-bold tracking-wide">0 <span className="lowercase font-sans text-sm font-medium opacity-70">tot</span> {Math.round(projectedLifeExpectancy * 0.25)} {t('onboardingPanel.years')}</p>
+                        <p className="text-[15px] text-[#5c5c5c] mt-1 font-mono font-bold tracking-wide">0 <span className="lowercase font-sans text-sm font-medium opacity-70">{t('common.to')}</span> {Math.round(projectedLifeExpectancy * 0.25)} {t('onboardingPanel.years')}</p>
                         <p className="text-sm text-[#5c5c5c] mt-2.5 leading-relaxed">
                           {t('mobileContainer.youthDesc')}
                         </p>
@@ -773,7 +773,7 @@ export default function MobileContainer({
                     >
                       <div className="z-10 flex-1">
                         <h4 className="font-black text-[#D56B45] text-base uppercase tracking-wider">{t('mobileContainer.workTitle')}</h4>
-                        <p className="text-[15px] text-[#D56B45] mt-1 font-mono font-bold tracking-wide">{Math.round(projectedLifeExpectancy * 0.25)} <span className="lowercase font-sans text-sm font-medium opacity-70">tot</span> {Math.round(projectedLifeExpectancy * 0.75)} {t('onboardingPanel.years')}</p>
+                        <p className="text-[15px] text-[#D56B45] mt-1 font-mono font-bold tracking-wide">{Math.round(projectedLifeExpectancy * 0.25)} <span className="lowercase font-sans text-sm font-medium opacity-70">{t('common.to')}</span> {Math.round(projectedLifeExpectancy * 0.75)} {t('onboardingPanel.years')}</p>
                         <p className="text-sm text-[#5c5c5c] mt-2.5 leading-relaxed">
                           {t('mobileContainer.workDesc')}
                         </p>
@@ -793,7 +793,7 @@ export default function MobileContainer({
                     >
                       <div className="z-10 flex-1">
                         <h4 className="font-black text-[#86A789] text-base uppercase tracking-wider">{t('mobileContainer.freeTitle')}</h4>
-                        <p className="text-[15px] text-[#86A789] mt-1 font-mono font-bold tracking-wide">{Math.round(projectedLifeExpectancy * 0.75)} <span className="lowercase font-sans text-sm font-medium opacity-70">tot</span> {Number.isInteger(projectedLifeExpectancy) ? projectedLifeExpectancy : projectedLifeExpectancy.toFixed(1)} {t('onboardingPanel.years')}</p>
+                        <p className="text-[15px] text-[#86A789] mt-1 font-mono font-bold tracking-wide">{Math.round(projectedLifeExpectancy * 0.75)} <span className="lowercase font-sans text-sm font-medium opacity-70">{t('common.to')}</span> {Number.isInteger(projectedLifeExpectancy) ? projectedLifeExpectancy : projectedLifeExpectancy.toFixed(1)} {t('onboardingPanel.years')}</p>
                         <p className="text-sm text-[#5c5c5c] mt-2.5 leading-relaxed">
                           {t('mobileContainer.freeDesc')}
                         </p>
@@ -886,10 +886,10 @@ export default function MobileContainer({
                       }}
                       className="text-2xl font-black text-white font-sans uppercase tracking-widest drop-shadow-lg mb-3"
                     >
-                      Vrijheid
+                      {t('mobileContainer.freedomHeroTitle')}
                     </motion.h2>
                     <p className="text-white/95 text-[17px] sm:text-lg leading-relaxed drop-shadow-xl font-medium font-serif italic">
-                      {"Vrijheid is niet het stoppen met werken,".split(" ").map((word, i) => (
+                      {t('mobileContainer.freedomHeroQuote1').split(" ").map((word, i) => (
                         <motion.span 
                           key={`l1-${i}`} 
                           variants={{
@@ -903,14 +903,14 @@ export default function MobileContainer({
                         </motion.span>
                       ))}
                       <br />
-                      {"maar het starten met kiezen.".split(" ").map((word, i) => (
+                      {t('mobileContainer.freedomHeroQuote2').split(" ").map((word, i) => (
                         <motion.span 
                           key={`l2-${i}`} 
                           variants={{
                             hidden: { opacity: 0, y: 5 },
                             visible: { opacity: 1, y: 0 }
                           }} 
-                          transition={{ duration: 0.5 }}
+                          transition={{ duration: 0.5, delay: 0.1 }}
                           className="inline-block mr-1"
                         >
                           {word}

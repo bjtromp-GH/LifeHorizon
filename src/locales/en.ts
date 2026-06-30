@@ -15,7 +15,8 @@ export const en: Translations = {
     work: "Work",
     profile: "Profile",
     retirementGoal: "Retirement Goal",
-    welcome: "Welcome"
+    welcome: "Welcome",
+    to: "to"
   },
   lifeProgress: {
     completed: "Completed",

@@ -13,7 +13,8 @@ export const nl = {
     work: "Werk",
     profile: "Profiel",
     retirementGoal: "Pensioendoel",
-    welcome: "Welkom"
+    welcome: "Welkom",
+    to: "tot"
   },
   lifeProgress: {
     completed: "Voltooid",
