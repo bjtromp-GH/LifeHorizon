@@ -88,9 +88,9 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
                 }`}
               >
                 <div className="flex justify-between items-center w-full">
-                  <span className="font-semibold text-[#2D2D2D]">{opt.label}</span>
+                  <span className="font-semibold text-sm text-[#2D2D2D]">{opt.label}</span>
                   <span
-                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                    className={`font-mono text-[11px] px-1.5 py-0.5 rounded font-bold ${
                       opt.offset > 0
                         ? "text-[#D56B45] bg-[#D56B45]/10"
                         : opt.offset < 0
@@ -101,7 +101,7 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
                     {opt.offset >= 0 ? `+${opt.offset}` : opt.offset} jr
                   </span>
                 </div>
-                <span className="text-[10px] text-[#767676] mt-0.5 leading-tight">{opt.desc}</span>
+                <span className="text-[11px] text-[#767676] mt-0.5 leading-tight">{opt.desc}</span>
               </button>
             );
           })}
@@ -129,9 +129,9 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
                 }`}
               >
                 <div className="flex justify-between items-center w-full">
-                  <span className="font-semibold text-[#2D2D2D]">{opt.label}</span>
+                  <span className="font-semibold text-sm text-[#2D2D2D]">{opt.label}</span>
                   <span
-                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                    className={`font-mono text-[11px] px-1.5 py-0.5 rounded font-bold ${
                       opt.offset > 0
                         ? "text-[#D56B45] bg-[#D56B45]/10"
                         : opt.offset < 0
@@ -142,7 +142,7 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
                     {opt.offset >= 0 ? `+${opt.offset}` : opt.offset} jr
                   </span>
                 </div>
-                <span className="text-[10px] text-[#767676] mt-0.5 leading-tight">{opt.desc}</span>
+                <span className="text-[11px] text-[#767676] mt-0.5 leading-tight">{opt.desc}</span>
               </button>
             );
           })}
@@ -170,9 +170,9 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
                 }`}
               >
                 <div className="flex justify-between items-center w-full">
-                  <span className="font-semibold text-[#2D2D2D]">{opt.label}</span>
+                  <span className="font-semibold text-sm text-[#2D2D2D]">{opt.label}</span>
                   <span
-                    className={`font-mono text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                    className={`font-mono text-[11px] px-1.5 py-0.5 rounded font-bold ${
                       opt.offset > 0
                         ? "text-[#D56B45] bg-[#D56B45]/10"
                         : opt.offset < 0
@@ -183,7 +183,7 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
                     {opt.offset >= 0 ? `+${opt.offset}` : opt.offset} jr
                   </span>
                 </div>
-                <span className="text-[10px] text-[#767676] mt-0.5 leading-tight">{opt.desc}</span>
+                <span className="text-[11px] text-[#767676] mt-0.5 leading-tight">{opt.desc}</span>
               </button>
             );
           })}

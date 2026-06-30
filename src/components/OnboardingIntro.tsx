@@ -843,14 +843,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                         setLocalSleep(item.key as SleepLevel); 
                         updateBioAnswer("sleep", item.key as SleepLevel);
                       }}
-                      className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localSleep === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
-                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
+                      <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
+                      <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
                     </button>
                   ))}
                 </div>
@@ -880,14 +880,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                         setLocalActivity(item.key as ActivityLevel); 
                         updateBioAnswer("activity", item.key as ActivityLevel);
                       }}
-                      className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localActivity === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
-                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "licht" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
+                      <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
+                      <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "licht" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
                     </button>
                   ))}
                 </div>
@@ -914,14 +914,14 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                       type="button"
                       id={`btn-onboarding-stress-${item.key}`}
                       onClick={() => { setLocalStress(item.key as StressLevel); updateBioAnswer("stress", item.key as StressLevel); }}
-                      className={`p-2 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localStress === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
-                      <span className="font-extrabold text-[11px] sm:text-[14px] leading-tight">{item.label}</span>
-                      <span className="text-[9px] sm:text-xs font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "gemiddeld" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
+                      <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
+                      <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "gemiddeld" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
                     </button>
                   ))}
                 </div>
