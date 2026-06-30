@@ -859,7 +859,7 @@ export default function MobileContainer({
                   initial={{ opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  src="/img/elephant-hero.jpg" 
+                  src="/img/olifant-vrijheid.webp" 
                   alt="Hero Elephant" 
                   className="absolute inset-0 w-full h-full object-cover object-[65%_center]" 
                 />
