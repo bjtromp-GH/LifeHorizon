@@ -54,10 +54,9 @@ export const en: Translations = {
       button: "Start introduction"
     },
     welcome: {
-      title: "Welcome to your Life Course",
-      desc: "How much sovereign time do you really have left? Discover your statistical life expectancy based on the official CBS cohort model and compare it against your retirement ambitions.",
-      info: "This model dynamically calculates your prognosis based on survival statistics, lifestyle factors, and hereditary adjustments.",
-      button: "Start the Measurement"
+      quote: "It is not that we have a short time to live, but that we waste a lot of it.",
+      author: "- Seneca",
+      button: "Continue"
     },
     demographics: {
       steps: {

@@ -52,10 +52,9 @@ export const nl = {
       button: "Start de introductie"
     },
     welcome: {
-      title: "Welkom bij uw Levensloop",
-      desc: "Hoeveel soevereine tijd heeft u echt te besteden? Ontdek uw statistische levensverwachting gebaseerd op het officiële CBS cohortmodel en zet dit af tegen uw pensioenambities.",
-      info: "Dit model berekent uw prognose dynamisch overlevingsstatistieken, leefstijlfactoren en genetische hereditaire aanpassingen.",
-      button: "Start de Levensmeting"
+      quote: "Het is niet dat we een kort leven hebben, maar dat we veel ervan verspillen.",
+      author: "- Seneca",
+      button: "Ga verder"
     },
     demographics: {
       steps: {

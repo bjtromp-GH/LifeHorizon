@@ -606,65 +606,77 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
             </motion.div>
           ) : step === 2 ? (
             <motion.div
-              key="welcome"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-center space-y-3.5 sm:space-y-6 max-w-md w-full px-2 my-auto"
+              key="welcome-quote"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-gradient-to-br from-[#E25C26] via-[#D56B45] to-[#B84E29] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
             >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.8, type: "spring", bounce: 0.5, delay: 0.2 }}
-                className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-[#FAF3F0]/80 border border-[#E9E4E2] flex items-end justify-center shadow-sm relative overflow-hidden group pt-4 px-4 pb-0 sm:pt-5 sm:px-5 sm:pb-0 mb-4 sm:mb-6"
-              >
-                <img
-                  src="/img/Olifant.png"
-                  alt="De Olifant"
-                  onError={() => setImgError(true)}
-                  className={`w-full h-full object-contain object-bottom origin-bottom transition-all duration-500 hover:scale-105 ${imgError ? 'hidden' : 'block'}`}
+              {/* Subtle animated light orb background */}
+              <div className="absolute inset-x-0 top-0 h-96 bg-radial-gradient from-white/10 to-transparent blur-2xl pointer-events-none" />
+
+              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-xl mx-auto px-4 z-10 space-y-6">
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+                    }
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                  className="space-y-4"
+                >
+                  <p className="text-xl sm:text-3xl font-serif italic text-white/95 max-w-lg leading-relaxed font-bold drop-shadow-lg">
+                    {t('onboarding.welcome.quote').split(' ').map((word, i) => (
+                      <motion.span
+                        key={i}
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                        }}
+                        className="inline-block mr-2"
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </p>
+                  <motion.p 
+                    variants={{
+                      hidden: { opacity: 0, y: 15 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                    }}
+                    className="text-sm sm:text-lg font-bold text-white/70"
+                  >
+                    {t('onboarding.welcome.author')}
+                  </motion.p>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.5, type: "spring", bounce: 0.5 }}
+                  className="w-12 h-[3px] bg-white/40 mx-auto rounded" 
                 />
-                {imgError && (
-                  <div className="flex flex-col items-center justify-center text-[#D56B45]">
-                    <svg
-                      viewBox="0 0 100 100"
-                      className="w-10 h-10 sm:w-14 sm:h-14 stroke-current fill-none stroke-[1.5]"
-                    >
-                      <path d="M75,50 C75,35 60,25 45,25 C32,25 25,35 25,48 M25,48 C20,49 15,52 15,58 C15,65 22,66 25,66 M25,48 C26,56 28,62 30,75 M45,25 C50,25 55,30 55,38 C55,42 50,44 48,46 M48,46 C48,55 52,65 52,75 M38,48 C38,58 40,68 40,75 M75,40 C82,41 85,45 85,55 C85,68 72,75 72,75 M63,45 C63,55 64,65 64,75" />
-                      <circle cx="34" cy="38" r="1.5" className="fill-current" />
-                      <path d="M55,32 C58,31 62,32 64,35 C66,38 65,42 63,45" />
-                    </svg>
-                  </div>
-                )}
-              </motion.div>
-
-              <div className="space-y-1.5 sm:space-y-3">
-                <h2 className="text-xl sm:text-3xl font-extrabold font-sans tracking-tight text-[#2D2D2D]">
-                  {t('onboarding.welcome.title')}
-                </h2>
-                <p className="text-xs sm:text-sm text-[#767676] leading-relaxed">
-                  {t('onboarding.welcome.desc')}
-                </p>
               </div>
 
-              <div className="p-2.5 sm:p-3.5 bg-gray-50 rounded-lg border border-[#EAEAEA] text-[11px] sm:text-xs text-left flex items-start space-x-2">
-                <Info className="w-4 h-4 text-[#D56B45] shrink-0 mt-0.5" />
-                <p className="text-[#767676] leading-snug">
-                  {t('onboarding.welcome.info')}
-                </p>
+              {/* Footer with Continuing button */}
+              <div className="w-full max-w-md mx-auto pb-4 sm:pb-12 flex flex-col items-center z-10">
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.0, duration: 0.6, type: "spring" }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={handleNext}
+                  className="w-full flex items-center justify-center space-x-3 bg-white text-[#D56B45] py-4 rounded-2xl font-black shadow-xl hover:shadow-2xl transition-all active:scale-95 group relative overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                  <span className="text-lg relative z-10">{t('onboarding.welcome.button')}</span>
+                  <ChevronRight className="w-5 h-5 stroke-[3px] relative z-10" />
+                </motion.button>
               </div>
-
-              <motion.button
-                id="btn-intro-start"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleNext}
-                className="w-full py-2.5 sm:py-3.5 font-semibold text-xs sm:text-sm rounded-lg flex items-center justify-center space-x-2 shadow-md transition-colors duration-200 bg-[#201F1D] hover:bg-[#1A1A1A] text-white cursor-pointer"
-              >
-                <span>{t('onboarding.welcome.button')}</span>
-                <Play className="w-3.5 h-3.5 fill-current" />
-              </motion.button>
             </motion.div>
           ) : step === 3 ? (
             <motion.div
