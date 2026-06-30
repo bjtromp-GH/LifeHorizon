@@ -1172,7 +1172,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                         setLocalFireAge(aow.toString());
                         onInputChange({ fireAge: aow });
                       }}
-                      className="px-4 py-2.5 bg-white text-[#D56B45] text-xs font-bold rounded-xl border border-[#EAEAEA] hover:border-[#D56B45]/50 hover:bg-[#FAF3F0] transition-all flex items-center space-x-2 shadow-sm"
+                      className="w-full max-w-[280px] justify-center px-5 py-3.5 bg-[#D56B45] text-white text-sm font-extrabold rounded-xl hover:bg-[#C15833] transition-all flex items-center space-x-2 shadow-sm"
                     >
                       <Calculator className="w-4 h-4" />
                       <span>{t('onboarding.career.calcAow')}</span>
