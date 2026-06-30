@@ -42,7 +42,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
 
       {/* 1. Geboortejaar */}
       <div className="space-y-1.5">
-        <div className="flex justify-between items-center text-xs">
+        <div className="flex justify-between items-center text-sm">
           <label className="font-medium text-[#2D2D2D]">{t('onboardingPanel.birthYear')}</label>
           <span className="font-mono text-[#D56B45] font-semibold">{inputs.birthYear}</span>
         </div>
@@ -63,20 +63,20 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
             max={currentYear - 1}
             value={inputs.birthYear}
             onChange={(e) => handleBirthYearChange(parseInt(e.target.value) || 1980)}
-            className="w-full sm:w-16 text-center border border-[#EAEAEA] rounded text-sm sm:text-xs py-1.5 sm:py-0.5 font-mono text-[#2D2D2D]"
+            className="w-full sm:w-16 text-center border border-[#EAEAEA] rounded text-base sm:text-sm py-1.5 sm:py-0.5 font-mono text-[#2D2D2D]"
           />
         </div>
       </div>
 
       {/* 2. Geslacht (Gender Selector) */}
-      <div className="space-y-1.5">
-        <label className="text-xs font-medium text-[#2D2D2D]">{t('onboardingPanel.gender')}</label>
-        <div id="gender-button-group" className="grid grid-cols-2 gap-2">
+      <div className="space-y-1.5 mt-2">
+        <label className="text-sm font-medium text-[#2D2D2D]">{t('onboardingPanel.gender')}</label>
+        <div id="gender-button-group" className="grid grid-cols-2 gap-3">
           <button
             type="button"
             id="btn-gender-man"
             onClick={() => onChange({ gender: "man" })}
-            className={`py-2 rounded text-xs font-medium border transition-all duration-200 cursor-pointer ${
+            className={`py-3 rounded text-[15px] sm:text-sm font-bold sm:font-medium border transition-all duration-200 cursor-pointer ${
               inputs.gender === "man"
                 ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                 : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50 hover:border-gray-300"
@@ -88,7 +88,7 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
             type="button"
             id="btn-gender-vrouw"
             onClick={() => onChange({ gender: "vrouw" })}
-            className={`py-2 rounded text-xs font-medium border transition-all duration-200 cursor-pointer ${
+            className={`py-3 rounded text-[15px] sm:text-sm font-bold sm:font-medium border transition-all duration-200 cursor-pointer ${
               inputs.gender === "vrouw"
                 ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                 : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50 hover:border-gray-300"
@@ -100,8 +100,8 @@ export default function OnboardingPanel({ inputs, onChange }: OnboardingPanelPro
       </div>
 
       {/* 3. Huidige Leeftijd (autocalculated but slider manual override) */}
-      <div className="space-y-1.5">
-        <div className="flex justify-between items-center text-xs">
+      <div className="space-y-1.5 mt-2">
+        <div className="flex justify-between items-center text-sm">
           <label className="font-medium text-[#2D2D2D]">{t('onboardingPanel.currentAge')}</label>
           <span className="font-mono text-[#D56B45] font-semibold">{inputs.currentAge} {t('onboardingPanel.years')}</span>
         </div>

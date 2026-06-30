@@ -689,7 +689,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
 
               {/* Gender selection */}
               <div className="space-y-1 sm:space-y-2">
-                <label className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#767676]">
+                <label className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#767676]">
                   {t('onboarding.demographics.gender')}
                 </label>
                 <div className={`grid grid-cols-2 gap-2 sm:gap-3 p-1 rounded-xl transition-all duration-300 ${showValidation && localGender === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
@@ -699,7 +699,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                       type="button"
                       id={`btn-onboarding-gender-${g}`}
                       onClick={() => { setLocalGender(g as Gender); onInputChange({ gender: g as Gender }); }}
-                      className={`py-2 sm:py-3 rounded-lg border font-semibold text-xs sm:text-sm transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
+                      className={`py-3 rounded-lg border font-bold text-sm sm:text-base transition-all duration-200 flex items-center justify-center space-x-2 cursor-pointer ${
                         localGender === g
                            ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                            : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
@@ -716,9 +716,9 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
 
               {/* Birth Year selection */}
               <div className="space-y-1 sm:space-y-3">
-                <div className="flex justify-between items-center text-[10px] sm:text-xs">
-                  <span className="font-semibold text-[#767676] uppercase tracking-wider">{t('onboarding.demographics.birthYear')}</span>
-                  <span className="font-mono text-sm font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
+                <div className="flex justify-between items-center text-xs sm:text-sm">
+                  <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.demographics.birthYear')}</span>
+                  <span className="font-mono text-[15px] sm:text-base font-extrabold text-[#D56B45]">{inputs.birthYear}</span>
                 </div>
                 <div 
                   onClick={() => setShowYearPicker(true)}
@@ -738,15 +738,15 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
 
               {/* Current Age display and tweak */}
               <div className="space-y-1 sm:space-y-3 pt-0.5 sm:pt-2 pb-1">
-                <div className="flex justify-between items-center text-[10px] sm:text-xs bg-[#FAF3F0] p-2.5 rounded-lg border border-[#D56B45]/15">
-                  <span className="font-semibold text-[#D56B45] uppercase tracking-wider">{t('onboarding.demographics.currentAge')}</span>
-                  <span className="font-mono text-sm sm:text-base font-black text-[#D56B45]">{t('onboarding.demographics.ageYears', { age: inputs.currentAge.toString() })}</span>
+                <div className="flex justify-between items-center text-xs sm:text-sm bg-[#FAF3F0] p-3 rounded-lg border border-[#D56B45]/15">
+                  <span className="font-bold text-[#D56B45] uppercase tracking-wider">{t('onboarding.demographics.currentAge')}</span>
+                  <span className="font-mono text-[15px] sm:text-base font-black text-[#D56B45]">{t('onboarding.demographics.ageYears', { age: inputs.currentAge.toString() })}</span>
                 </div>
               </div>
 
               {/* Own Expected Age Option */}
               <div className="space-y-1.5 sm:space-y-3 pt-1.5 sm:pt-2 border-t border-[#EAEAEA]/60 mt-1 sm:mt-2">
-                <label className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#767676] block">
+                <label className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#767676] block">
                   {t('onboarding.demographics.lifeExpectancyTitle')}
                 </label>
                 <div className="grid grid-cols-2 gap-2 sm:gap-3">
@@ -754,7 +754,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                     type="button"
                     id="btn-onboarding-life-calc"
                     onClick={() => onInputChange({ customLifeExpectancy: null })}
-                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
+                    className={`py-2.5 sm:py-3 rounded-md border text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                       inputs.customLifeExpectancy === null
                         ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                         : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
@@ -767,7 +767,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                     type="button"
                     id="btn-onboarding-life-custom"
                     onClick={() => onInputChange({ customLifeExpectancy: 85 })}
-                    className={`py-1.5 sm:py-2 rounded-md border text-[11px] sm:text-xs font-semibold transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
+                    className={`py-2.5 sm:py-3 rounded-md border text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center space-x-1.5 ${
                       inputs.customLifeExpectancy !== null
                         ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45]"
                         : "border-[#EAEAEA] bg-white text-[#767676] hover:bg-gray-50"
