@@ -1242,7 +1242,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
       </main>
 
       {/* Navigation Footer */}
-      {step >= 2 && step < 7 && !showYearPicker && (
+      {step > 2 && step < 7 && !showYearPicker && (
         <footer className={`w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 ${step > 2 ? 'border-t border-[#F3F2F0]' : ''} relative z-10 shrink-0`}>
           <div>
             {step > 2 && (
@@ -1259,7 +1259,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-3">
-            {step >= 2 && step < stepsMeta.length - 1 && (
+            {step > 2 && step < stepsMeta.length - 1 && (
               <motion.button
                 type="button"
                 id="btn-onboarding-next"
