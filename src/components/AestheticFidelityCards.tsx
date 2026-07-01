@@ -11,6 +11,7 @@ interface AestheticFidelityCardsProps {
   cbsBaseLife: number;
   apiSource: "CBS API" | "CBS Cohort Model";
   showOnly?: ("verbruikt" | "vitaliteit" | "carriere" | "horizon")[];
+  layout?: "horizontal" | "vertical";
 }
 
 export default React.memo(function AestheticFidelityCards({
@@ -19,6 +20,7 @@ export default React.memo(function AestheticFidelityCards({
   cbsBaseLife,
   apiSource,
   showOnly,
+  layout = "horizontal",
 }: AestheticFidelityCardsProps) {
   const { t } = useLanguage();
   const { currentAge, startWorkAge, fireAge, fatherPassedAge, motherPassedAge, bioAnswers } = inputs;
@@ -90,7 +92,9 @@ export default React.memo(function AestheticFidelityCards({
   const showHorizon = !showOnly || showOnly.includes("horizon");
 
   const activeCountInRow1 = [showVerbruikt, showVitaliteit, showCarriere].filter(Boolean).length;
-  const gridColsClass = activeCountInRow1 === 3 ? "md:grid-cols-3" : activeCountInRow1 === 2 ? "md:grid-cols-2" : "md:grid-cols-1";
+  const gridColsClass = layout === "vertical" 
+    ? "md:grid-cols-1" 
+    : activeCountInRow1 === 3 ? "md:grid-cols-3" : activeCountInRow1 === 2 ? "md:grid-cols-2" : "md:grid-cols-1";
 
   return (
     <div id="fidelity-panels-container" className="space-y-5 w-full">
