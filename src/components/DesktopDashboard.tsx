@@ -138,14 +138,22 @@ export default function DesktopDashboard({
 
           {/* Right Column: Visualisations and decade grids */}
           <section className={`${showConfig ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col space-y-5 transition-all duration-300`}>
-            {/* Custom Levensfasen Stacked Bar */}
-            <div className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
-              <LifePhasesBar
-                inputs={inputs}
-                projectedLifeExpectancy={projectedLifeExpectancy}
-                phases={phases}
-                onInputChange={onInputChange}
-              />
+            {/* Top row: Mascot & Levensfasen */}
+            <div className="flex flex-col md:flex-row gap-5">
+              {/* Mascot Box */}
+              <div className="w-full md:w-48 shrink-0 p-5 bg-white border border-[#EAEAEA] rounded-md flex items-center justify-center transition-all duration-300">
+                <img src="/img/olifant-bril.png" alt="Olifant Mascotte" className="w-24 h-24 object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+              </div>
+
+              {/* Custom Levensfasen Stacked Bar */}
+              <div className="flex-1 p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300 overflow-hidden">
+                <LifePhasesBar
+                  inputs={inputs}
+                  projectedLifeExpectancy={projectedLifeExpectancy}
+                  phases={phases}
+                  onInputChange={onInputChange}
+                />
+              </div>
             </div>
 
             {/* Matrix and Fidelity Cards Side-by-Side */}
