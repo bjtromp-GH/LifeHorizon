@@ -148,28 +148,24 @@ export default function DesktopDashboard({
               />
             </div>
 
-            {/* Matrix and Fidelity Cards Side-by-Side */}
-            <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-5">
-              {/* Decade Square Grid */}
-              <div className="xl:col-span-8 flex flex-col justify-between">
-                <DecadeGrid
-                  inputs={inputs}
-                  projectedLifeExpectancy={projectedLifeExpectancy}
-                />
-              </div>
-
-              {/* Detail Cards Vertical */}
-              <div className="xl:col-span-4 flex flex-col">
-                <AestheticFidelityCards
-                  inputs={inputs}
-                  projectedLifeExpectancy={projectedLifeExpectancy}
-                  cbsBaseLife={cbsBaseLife}
-                  apiSource={apiSource}
-                  layout="vertical"
-                />
-              </div>
+            {/* Decade Square Grid */}
+            <div className="flex-1 flex flex-col justify-between">
+              <DecadeGrid
+                inputs={inputs}
+                projectedLifeExpectancy={projectedLifeExpectancy}
+              />
             </div>
           </section>
+        </div>
+
+        {/* AestheticFidelityCards at the bottom */}
+        <div id="desktop-bottom-stats" className="w-full pt-2">
+          <AestheticFidelityCards
+            inputs={inputs}
+            projectedLifeExpectancy={projectedLifeExpectancy}
+            cbsBaseLife={cbsBaseLife}
+            apiSource={apiSource}
+          />
         </div>
       </div>
 
