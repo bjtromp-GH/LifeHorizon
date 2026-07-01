@@ -141,8 +141,8 @@ export default function DesktopDashboard({
             {/* Top row: Mascot & Levensfasen */}
             <div className="flex flex-col md:flex-row gap-5">
               {/* Mascot Box */}
-              <div className="w-full md:w-48 shrink-0 p-5 bg-white border border-[#EAEAEA] rounded-md flex items-center justify-center transition-all duration-300">
-                <img src="/img/olifant-bril.png" alt="Olifant Mascotte" className="w-24 h-24 object-contain drop-shadow-sm hover:scale-105 transition-transform" />
+              <div className="w-full md:w-64 shrink-0 p-5 bg-white border border-[#EAEAEA] rounded-md flex items-center justify-center transition-all duration-300">
+                <img src="/img/olifant-bril.png" alt="Olifant Mascotte" className="w-40 h-40 object-contain drop-shadow-sm hover:scale-105 transition-transform" />
               </div>
 
               {/* Custom Levensfasen Stacked Bar */}
