@@ -55,7 +55,7 @@ export default function StatsCard({
 
   return (
     <>
-      <div id="stats-dashboard-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div id="stats-dashboard-grid" className="grid grid-cols-2 lg:grid-cols-5 gap-3">
         {/* 1. Geprognosticeerde Levensverwachting */}
         <motion.div 
           onClick={() => setActivePopup("prognose")}

@@ -1,4 +1,5 @@
-import { Compass, RefreshCw, HelpCircle } from "lucide-react";
+import { useState } from "react";
+import { Compass, RefreshCw, HelpCircle, Settings } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -34,6 +35,7 @@ export default function DesktopDashboard({
   onResetApp,
 }: DesktopDashboardProps) {
   const { t } = useLanguage();
+  const [showConfig, setShowConfig] = useState(false);
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const roundedRemaining = Math.round(totalRemaining * 10) / 10;
 
@@ -86,6 +88,15 @@ export default function DesktopDashboard({
               <span>{t('desktopDashboard.sync')}</span>
             </button>
 
+            {/* Config Button */}
+            <button
+              onClick={() => setShowConfig(!showConfig)}
+              className={`flex items-center space-x-1.5 px-3 py-1.5 border border-[#EAEAEA] text-xs rounded transition-all duration-200 cursor-pointer ${showConfig ? 'bg-[#D56B45] text-white border-[#D56B45]' : 'bg-white text-[#767676] hover:bg-gray-100'}`}
+            >
+              <Settings className="w-3.5 h-3.5" />
+              <span>Configuratie</span>
+            </button>
+
             {/* General countdown pill */}
             <div className="bg-[#D56B45]/10 text-[#D56B45] font-mono text-xs font-semibold px-3.5 py-1.5 rounded border border-[#D56B45]/10 shadow-xs select-none">
               {roundedRemaining} {t('desktopDashboard.yearsRemaining')}
@@ -105,10 +116,10 @@ export default function DesktopDashboard({
         {/* Bento Grid */}
         <div id="bento-grid-root" className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           
-          {/* Left Column: Inputs & Modifiers (Hidden on Request) */}
-          <section className="hidden lg:col-span-5 flex-col space-y-5">
+          {/* Left Column: Inputs & Modifiers */}
+          <section className={`${showConfig ? "lg:col-span-5 flex" : "hidden"} flex-col space-y-5`}>
             {/* Onboarding Sliders */}
-            <div className="hidden p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
+            <div className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
               <OnboardingPanel inputs={inputs} onChange={onInputChange} />
             </div>
 
@@ -125,8 +136,8 @@ export default function DesktopDashboard({
             </div>
           </section>
 
-          {/* Right Column: Visualisations and decade grids (Width 12 on Large) */}
-          <section className="lg:col-span-12 flex flex-col space-y-5">
+          {/* Right Column: Visualisations and decade grids */}
+          <section className={`${showConfig ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col space-y-5 transition-all duration-300`}>
             {/* Custom Levensfasen Stacked Bar */}
             <div className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
               <LifePhasesBar
