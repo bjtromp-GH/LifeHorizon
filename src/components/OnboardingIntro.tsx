@@ -128,7 +128,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
     { title: t('onboarding.demographics.steps.ready'), icon: CheckCircle2 }
   ];
 
-  const titleLetters = Array.from("Life Horizon");
+  const titleLetters = Array.from("Life Horizon App");
   const containerVars = {
     hidden: {},
     visible: {
