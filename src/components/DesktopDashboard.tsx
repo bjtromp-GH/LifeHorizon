@@ -166,10 +166,23 @@ export default function DesktopDashboard({
                   cbsBaseLife={cbsBaseLife}
                   apiSource={apiSource}
                   layout="vertical"
+                  showOnly={["verbruikt", "vitaliteit", "carriere"]}
                 />
               </div>
             </div>
           </section>
+        </div>
+
+        {/* Horizon Card Full Width */}
+        <div id="desktop-bottom-horizon" className="w-full pt-2">
+          <AestheticFidelityCards
+            inputs={inputs}
+            projectedLifeExpectancy={projectedLifeExpectancy}
+            cbsBaseLife={cbsBaseLife}
+            apiSource={apiSource}
+            layout="horizontal"
+            showOnly={["horizon"]}
+          />
         </div>
       </div>
 
