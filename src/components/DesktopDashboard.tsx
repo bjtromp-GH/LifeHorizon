@@ -171,6 +171,7 @@ export default function DesktopDashboard({
             </div>
           </section>
         </div>
+      </div>
 
       {/* Modern, minimalist workspace footer */}
       <footer className="mt-8 pt-4 border-t border-[#EAEAEA]/85 max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-center text-[11px] text-[#767676] font-sans">
