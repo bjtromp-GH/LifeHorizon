@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Compass, RefreshCw, HelpCircle, Settings } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Compass, RefreshCw, HelpCircle, Settings, X } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -116,28 +117,8 @@ export default function DesktopDashboard({
         {/* Bento Grid */}
         <div id="bento-grid-root" className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           
-          {/* Left Column: Inputs & Modifiers */}
-          <section className={`${showConfig ? "lg:col-span-5 flex" : "hidden"} flex-col space-y-5`}>
-            {/* Onboarding Sliders */}
-            <div className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
-              <OnboardingPanel inputs={inputs} onChange={onInputChange} />
-            </div>
-
-            {/* Bio-Score Modifiers */}
-            <div className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
-              <BioScoreSection
-                answers={inputs.bioAnswers}
-                onChange={(updates) =>
-                  onInputChange({
-                    bioAnswers: { ...inputs.bioAnswers, ...updates },
-                  })
-                }
-              />
-            </div>
-          </section>
-
-          {/* Right Column: Visualisations and decade grids */}
-          <section className={`${showConfig ? "lg:col-span-7" : "lg:col-span-12"} flex flex-col space-y-5 transition-all duration-300`}>
+          {/* Main Column */}
+          <section className="lg:col-span-12 flex flex-col space-y-5 transition-all duration-300">
             {/* Top row: Mascot & Levensfasen */}
             <div className="flex flex-col md:flex-row gap-5">
               {/* Mascot Box */}
@@ -192,7 +173,63 @@ export default function DesktopDashboard({
             showOnly={["horizon"]}
           />
         </div>
-      </div>
+
+      {/* Configuration Modal */}
+      <AnimatePresence>
+        {showConfig && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+            onClick={() => setShowConfig(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="bg-[#FAFAFA] rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-white border-b border-[#EAEAEA] rounded-t-xl">
+                <h2 className="text-lg font-bold text-[#2D2D2D] font-sans flex items-center gap-2">
+                  <Settings className="w-5 h-5 text-[#D56B45]" />
+                  Configuratie
+                </h2>
+                <button
+                  onClick={() => setShowConfig(false)}
+                  className="p-1.5 text-[#767676] hover:bg-[#F3F2F0] rounded-md transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              {/* Modal Content */}
+              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Onboarding Sliders */}
+                <div className="p-5 bg-white border border-[#EAEAEA] rounded-md shadow-sm">
+                  <OnboardingPanel inputs={inputs} onChange={onInputChange} />
+                </div>
+
+                {/* Bio-Score Modifiers */}
+                <div className="p-5 bg-white border border-[#EAEAEA] rounded-md shadow-sm">
+                  <BioScoreSection
+                    answers={inputs.bioAnswers}
+                    onChange={(updates) =>
+                      onInputChange({
+                        bioAnswers: { ...inputs.bioAnswers, ...updates },
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
 
       {/* Modern, minimalist workspace footer */}
       <footer className="mt-8 pt-4 border-t border-[#EAEAEA]/85 max-w-7xl mx-auto w-full flex flex-col sm:flex-row justify-between items-center text-[11px] text-[#767676] font-sans">
