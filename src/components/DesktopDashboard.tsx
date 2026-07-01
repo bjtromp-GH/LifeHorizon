@@ -105,10 +105,10 @@ export default function DesktopDashboard({
         {/* Bento Grid */}
         <div id="bento-grid-root" className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           
-          {/* Left Column: Inputs & Modifiers (Width 5 on Large) */}
-          <section className="lg:col-span-5 flex flex-col space-y-5">
+          {/* Left Column: Inputs & Modifiers (Hidden on Request) */}
+          <section className="hidden lg:col-span-5 flex-col space-y-5">
             {/* Onboarding Sliders */}
-            <div className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
+            <div className="hidden p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
               <OnboardingPanel inputs={inputs} onChange={onInputChange} />
             </div>
 
@@ -125,8 +125,8 @@ export default function DesktopDashboard({
             </div>
           </section>
 
-          {/* Right Column: Visualisations and decade grids (Width 7 on Large) */}
-          <section className="lg:col-span-7 flex flex-col space-y-5">
+          {/* Right Column: Visualisations and decade grids (Width 12 on Large) */}
+          <section className="lg:col-span-12 flex flex-col space-y-5">
             {/* Custom Levensfasen Stacked Bar */}
             <div className="p-5 bg-white border border-[#EAEAEA] rounded-md transition-all duration-300">
               <LifePhasesBar
