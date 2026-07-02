@@ -42,7 +42,7 @@ export const nl = {
     },
     why: {
       badge: "Waarom",
-      title: "Waarom we dit hebben gebouwd?",
+      title: "Waarom hebben we dit gebouwd?",
       desc1: "Mensen leven vaak alsof ze oneindig de tijd hebben.",
       desc2: "We stellen onze dromen uit tot 'later', tot dat magische moment van pensioen.",
       desc3: "Maar wanneer begint dat eigenlijk, en hoe vitaal ben je dan nog?",
