@@ -480,9 +480,17 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug">
                   {t('onboarding.privacy.title')}
                 </h2>
+                <motion.img 
+                  src="/img/olifant-bril.png" 
+                  alt="Olifant met bril" 
+                  initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.6, type: "spring", bounce: 0.5 }}
+                  className="w-28 sm:w-36 h-auto drop-shadow-2xl pt-2"
+                />
               </div>
 
-              <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4">
+              <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-6 sm:mt-8">
                 <div className="space-y-3 sm:space-y-4 w-full px-2">
                   <motion.div 
                     initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
