@@ -38,9 +38,17 @@ export const en: Translations = {
     privacy: {
       badge: "100% Private",
       title: "Your data is yours",
-      desc1: "All your data is stored locally on this device only. You don't need an account and nothing is sent to a server.",
+      desc1: "All your data is stored locally on this device only. You don't need an account and nothing goes to a server.",
       desc2: "This app is completely free of ads and tracking. Your time is precious and personal.",
-      button: "Start the introduction"
+      button: "Start introduction"
+    },
+    why: {
+      badge: "Why",
+      title: "Why we built this?",
+      desc1: "People often live as if they have infinite time.",
+      desc2: "We postpone our dreams until 'later', until that magical moment of retirement.",
+      desc3: "But when does that actually begin, and how vital will you still be?",
+      button: "Continue"
     },
     testimonials: {
       badge: "Experiences",

@@ -40,6 +40,14 @@ export const nl = {
       desc2: "Deze app is volledig vrij van advertenties en tracking. Jouw tijd is kostbaar en persoonlijk.",
       button: "Start de introductie"
     },
+    why: {
+      badge: "Waarom",
+      title: "Waarom we dit hebben gebouwd?",
+      desc1: "Mensen leven vaak alsof ze oneindig de tijd hebben.",
+      desc2: "We stellen onze dromen uit tot 'later', tot dat magische moment van pensioen.",
+      desc3: "Maar wanneer begint dat eigenlijk, en hoe vitaal ben je dan nog?",
+      button: "Ga verder"
+    },
     testimonials: {
       badge: "Ervaringen",
       title1: "Wat gebruikers zeggen ",

@@ -509,11 +509,86 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   whileTap={{ scale: 0.97 }}
                   onClick={() => {
                     playChimeSound();
-                    setStep(1);
+                    setStep(0.75);
                   }}
                   className="w-full py-4 px-6 bg-[#D56B45] hover:bg-[#C0562F] text-white font-extrabold text-sm sm:text-base tracking-wider rounded-xl flex items-center justify-center space-x-3 shadow-xl cursor-pointer transition-all duration-200"
                 >
                   <span>{t('onboarding.privacy.button')}</span>
+                  <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
+                </motion.button>
+              </div>
+            </motion.div>
+          ) : step === 0.75 ? (
+            <motion.div
+              key="why-screen"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-[#2D2D2D] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
+            >
+              <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50">
+                <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-[#D56B45]/20 rounded-full blur-[140px]" />
+              </div>
+  
+              <div className="w-full flex flex-col items-center pt-8 sm:pt-12 z-10 space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+                  className="flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full"
+                >
+                  <Brain size={18} className="text-white" />
+                  <span className="font-sans font-bold text-xs sm:text-sm tracking-widest uppercase text-white/90">
+                    {t('onboarding.why.badge')}
+                  </span>
+                </motion.div>
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug">
+                  {t('onboarding.why.title')}
+                </h2>
+              </div>
+  
+              <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4 text-center">
+                <motion.p 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-lg sm:text-xl font-bold text-white/90 leading-relaxed text-balance"
+                >
+                  {t('onboarding.why.desc1')}
+                </motion.p>
+                <motion.p 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-base sm:text-lg text-white/70 leading-relaxed text-balance font-semibold"
+                >
+                  {t('onboarding.why.desc2')}
+                </motion.p>
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="py-5 px-6 bg-[#D56B45]/10 rounded-xl border border-[#D56B45]/20 inline-block mt-4"
+                >
+                  <p className="text-base sm:text-lg text-[#D56B45] font-bold">
+                    {t('onboarding.why.desc3')}
+                  </p>
+                </motion.div>
+              </div>
+  
+              <div className="w-full max-w-md mx-auto pb-4 sm:pb-12 flex flex-col items-center z-10">
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.6, type: "spring" }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => {
+                    playChimeSound();
+                    setStep(1);
+                  }}
+                  className="w-full py-4 px-6 bg-[#D56B45] hover:bg-[#C0562F] text-white font-extrabold text-sm sm:text-base tracking-wider rounded-xl flex items-center justify-center space-x-3 shadow-xl cursor-pointer transition-all duration-200"
+                >
+                  <span>{t('onboarding.why.button')}</span>
                   <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
                 </motion.button>
               </div>
