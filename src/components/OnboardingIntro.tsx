@@ -1214,7 +1214,10 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               {/* Start of working life */}
               <div className="space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.startWork')}</span>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.startWork')}</span>
+                    <span className="text-[10px] text-[#767676] font-normal mt-0.5">{t('onboardingPanel.whenDidYouStart')}</span>
+                  </div>
                   <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.startWorkAge.toString() })}</span>
                 </div>
                 <div className="pt-2">
@@ -1236,7 +1239,10 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               {/* Pensioen Target Age */}
               <div className="space-y-2.5" ref={fireAgeSectionRef}>
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.fireAge')}</span>
+                  <div className="flex flex-col">
+                    <span className="font-bold text-[#767676] uppercase tracking-wider">{t('onboarding.career.fireAge')}</span>
+                    <span className="text-[10px] text-[#767676] font-normal mt-0.5">{t('onboardingPanel.whenStartsFreedom')}</span>
+                  </div>
                   <span className="font-mono text-sm font-black text-[#D56B45] bg-[#FAF3F0] px-2.5 py-0.5 rounded border border-[#D56B45]/15">{t('onboarding.career.ageYears', { val: inputs.fireAge.toString() })}</span>
                 </div>
                 <div className="pt-2">
@@ -1353,7 +1359,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-[300] bg-[#111111]"
+              className="fixed inset-0 z-[300] bg-[#111111]"
             >
               <ScrollRevealText onComplete={onComplete} />
             </motion.div>
