@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useEffect } from "react";
-import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid } from "lucide-react";
+import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -41,6 +41,7 @@ export default function MobileContainer({
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   const [showElephantFact, setShowElephantFact] = useState(false);
   const [showMatrixModal, setShowMatrixModal] = useState(false);
+  const [showSurvivalModal, setShowSurvivalModal] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -503,7 +504,7 @@ export default function MobileContainer({
                   </div>
 
                   {/* Button to show Matrix again */}
-                  <div className="flex flex-col items-center justify-center max-w-sm mx-auto w-full pt-1 pb-1">
+                  <div className="flex flex-col items-center justify-center max-w-sm mx-auto w-full pt-1 pb-1 gap-3">
                     <button
                       onClick={() => setShowMatrixModal(true)}
                       className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm cursor-pointer"
@@ -511,7 +512,16 @@ export default function MobileContainer({
                       <Grid className="w-5 h-5" />
                       <span>{t('mobileContainer.conclusion.viewMatrix')}</span>
                     </button>
-                    <span className="text-[11px] font-sans text-white/80 mt-2 text-center">
+                    
+                    <button
+                      onClick={() => setShowSurvivalModal(true)}
+                      className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm cursor-pointer"
+                    >
+                      <Activity className="w-5 h-5" />
+                      <span>{t('dashboard.survivalCurveTitle') || "Bekijk overlevingskans curve"}</span>
+                    </button>
+
+                    <span className="text-[11px] font-sans text-white/80 mt-1 text-center">
                       {t('mobileContainer.conclusion.viewMatrixDesc')}
                     </span>
                   </div>
@@ -1220,6 +1230,47 @@ export default function MobileContainer({
                 <DecadeGrid inputs={inputs} projectedLifeExpectancy={projectedLifeExpectancy} />
                 <div className="mt-8 flex justify-center pb-8">
                   <button onClick={() => setShowMatrixModal(false)} className="w-full max-w-xs py-3.5 bg-white border border-[#EAEAEA] text-[#767676] font-bold rounded-xl shadow-sm hover:bg-gray-50 uppercase tracking-wider text-sm transition-all cursor-pointer">
+                    {t('common.close') || "Sluiten"}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Survival Curve Popup Modal */}
+      <AnimatePresence>
+        {showSurvivalModal && (
+          <div className="fixed inset-0 z-50 flex flex-col pointer-events-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-[#F9F8F6]"
+            />
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative w-full h-full flex flex-col bg-[#F9F8F6]"
+            >
+              <div className="flex justify-between items-center px-5 py-4 bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
+                <h3 className="text-lg font-black font-sans tracking-tight text-[#2D2D2D] uppercase">
+                  {t('dashboard.survivalCurveTitle') || "Overlevingskans"}
+                </h3>
+                <button
+                  onClick={() => setShowSurvivalModal(false)}
+                  className="p-1 -mr-2 -mt-2 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto overflow-x-hidden relative px-4 pt-8 pb-8 flex flex-col">
+                <SurvivalCurveCard inputs={inputs} projectedLifeExpectancy={projectedLifeExpectancy} />
+                <div className="mt-8 flex justify-center pb-8">
+                  <button onClick={() => setShowSurvivalModal(false)} className="w-full max-w-xs py-3.5 bg-white border border-[#EAEAEA] text-[#767676] font-bold rounded-xl shadow-sm hover:bg-gray-50 uppercase tracking-wider text-sm transition-all cursor-pointer">
                     {t('common.close') || "Sluiten"}
                   </button>
                 </div>
