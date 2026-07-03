@@ -62,14 +62,14 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
       <div className="flex justify-between items-end px-1 pt-2">
         {highlightAges.map((age, i) => {
           const prob = getProb(age);
-          const colors = ['text-[#0B4A6F]', 'text-[#F46B6B]', 'text-[#7D1B50]']; // Match colors from image roughly
-          const dots = ['bg-[#0B4A6F]', 'bg-[#F46B6B]', 'bg-[#7D1B50]'];
+          const colors = ['text-[#D56B45]', 'text-[#86A789]', 'text-[#2D2D2D]'];
+          const dots = ['bg-[#D56B45]', 'bg-[#86A789]', 'bg-[#2D2D2D]'];
           const color = colors[i % colors.length];
           const dot = dots[i % dots.length];
           return (
             <div key={age} className="flex flex-col items-center">
               <div className="flex items-center space-x-1.5 mb-1">
-                <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#0B4A6F] bg-white' : dot} box-content`} />
+                <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#D56B45] bg-white' : dot} box-content`} />
                 <span className={`text-xl sm:text-2xl font-black font-sans ${color}`}>{age}</span>
                 <span className={`text-xs font-bold ${color}`}>jaar</span>
               </div>
@@ -97,7 +97,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               y1="0" 
               x2={((projectedLifeExpectancy - currentAge) / (endAge - currentAge)) * 100} 
               y2="100" 
-              stroke="#0B4A6F" 
+              stroke="#D56B45" 
               strokeWidth="0.5" 
             />
           )}
@@ -126,27 +126,23 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
             strokeLinejoin="round"
             className="drop-shadow-sm"
           />
-
-          {/* Highlight Points on Curve */}
-          {highlightAges.map((age, i) => {
-            const prob = getProb(age);
-            const x = ((age - currentAge) / (endAge - currentAge)) * 100;
-            const y = 100 - prob;
-            const dots = ['#0B4A6F', '#F46B6B', '#7D1B50'];
-            const color = dots[i % dots.length];
-            return (
-              <circle 
-                key={`pt-${age}`} 
-                cx={x} 
-                cy={y} 
-                r="2.5" 
-                fill={i === 0 ? "white" : color} 
-                stroke={color} 
-                strokeWidth={i === 0 ? "1" : "0"} 
-              />
-            );
-          })}
         </svg>
+
+        {/* Highlight Points as Perfectly Round HTML Divs */}
+        {highlightAges.map((age, i) => {
+          const prob = getProb(age);
+          const x = ((age - currentAge) / (endAge - currentAge)) * 100;
+          const y = 100 - prob;
+          const dots = ['bg-white border-[#D56B45]', 'bg-[#86A789] border-[#86A789]', 'bg-[#2D2D2D] border-[#2D2D2D]'];
+          const styleClasses = dots[i % dots.length];
+          return (
+            <div 
+              key={`pt-${age}`}
+              className={`absolute w-3 h-3 rounded-full border-[2.5px] -translate-x-1/2 -translate-y-1/2 shadow-sm ${styleClasses}`}
+              style={{ left: `${x}%`, top: `${y}%` }}
+            />
+          );
+        })}
 
         {/* X-axis labels */}
         <div className="absolute -bottom-5 left-0 w-full flex justify-between text-[10px] text-[#767676]">
@@ -166,18 +162,18 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               left: `calc(${((projectedLifeExpectancy - currentAge) / (endAge - currentAge)) * 100}% + 4px)` 
             }}
           >
-            <span className="font-bold text-[#0B4A6F]">{Math.round(projectedLifeExpectancy)} jaar</span>
-            <span className="text-[#0B4A6F] opacity-80">Verwachte<br/>levensduur</span>
+            <span className="font-bold text-[#D56B45]">{Math.round(projectedLifeExpectancy)} jaar</span>
+            <span className="text-[#D56B45] opacity-80">Verwachte<br/>levensduur</span>
           </div>
         )}
         
         {/* Pension age label (if 68 is first highlight) */}
         {highlightAges[0] === 68 && (
           <div 
-            className="absolute text-[10px] leading-tight flex flex-col items-center pointer-events-none -translate-x-1/2 text-[#0B4A6F]"
+            className="absolute text-[10px] leading-tight flex flex-col items-center pointer-events-none -translate-x-1/2 text-[#D56B45]"
             style={{ 
               left: `${((68 - currentAge) / (endAge - currentAge)) * 100}%`,
-              top: `calc(${100 - getProb(68)}% + 8px)`
+              top: `calc(${100 - getProb(68)}% + 10px)`
             }}
           >
             <span className="font-bold">68 jaar</span>

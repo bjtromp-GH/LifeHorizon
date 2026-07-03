@@ -180,7 +180,8 @@ export const nl = {
     matrixTitle: "Levensmatrix",
     matrixSubtitle: "Hoe verhouden levensverwachting en gezondheid zich tot elkaar?",
     matrixDetailsBtn: "Matrix details",
-    healthVsLife: "Gezondheidsduur (Healthspan) vs Levensduur (Lifespan)"
+    healthVsLife: "Gezondheidsduur (Healthspan) vs Levensduur (Lifespan)",
+    survivalCurveTitle: "Overlevingskans Curve"
   },
   bioScore: {
     title: "Lifestyle Bio-Score",

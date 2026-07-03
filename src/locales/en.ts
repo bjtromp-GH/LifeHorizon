@@ -182,7 +182,8 @@ export const en: Translations = {
     matrixTitle: "Life Matrix",
     matrixSubtitle: "How do life expectancy and health relate?",
     matrixDetailsBtn: "Matrix details",
-    healthVsLife: "Healthspan vs Lifespan"
+    healthVsLife: "Healthspan vs Lifespan",
+    survivalCurveTitle: "Survival Probability Curve"
   },
   bioScore: {
     title: "Lifestyle Bio-Score",
