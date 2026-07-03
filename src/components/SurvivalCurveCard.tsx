@@ -80,15 +80,15 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
       </div>
 
       {/* Chart Area */}
-      <div className="relative w-full h-40 mt-6 pt-2 border-l border-b border-[#EAEAEA]">
+      <div className="relative w-[calc(100%-1.5rem)] h-40 mt-6 ml-6 pt-2 border-l border-b border-[#EAEAEA]">
         {/* Y-axis labels */}
-        <div className="absolute -left-6 bottom-0 text-[10px] text-[#767676] -translate-y-1/2">0</div>
-        <div className="absolute -left-6 top-1/2 text-[10px] text-[#767676] -translate-y-1/2">50</div>
-        <div className="absolute -left-6 top-0 text-[10px] text-[#767676] -translate-y-1/2">100</div>
+        <div className="absolute right-full pr-1.5 top-[100%] text-[10px] text-[#767676] -translate-y-1/2">0</div>
+        <div className="absolute right-full pr-1.5 top-[50%] text-[10px] text-[#767676] -translate-y-1/2">50</div>
+        <div className="absolute right-full pr-1.5 top-[0%] text-[10px] text-[#767676] -translate-y-1/2">100</div>
 
         <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible" preserveAspectRatio="none">
           {/* 50% line */}
-          <line x1="0" y1="50" x2="100" y2="50" stroke="#EAEAEA" strokeWidth="0.5" strokeDasharray="2" />
+          <line x1="0" y1="50" x2="100" y2="50" stroke="#EAEAEA" strokeWidth="0.5" strokeDasharray="2" vectorEffect="non-scaling-stroke" />
           
           {/* Average Life Expectancy Line (Vertical) */}
           {projectedLifeExpectancy > currentAge && projectedLifeExpectancy <= endAge && (
@@ -99,6 +99,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               y2="100" 
               stroke="#D56B45" 
               strokeWidth="0.5" 
+              vectorEffect="non-scaling-stroke"
             />
           )}
 
@@ -125,6 +126,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
             strokeLinecap="round"
             strokeLinejoin="round"
             className="drop-shadow-sm"
+            vectorEffect="non-scaling-stroke"
           />
         </svg>
 
