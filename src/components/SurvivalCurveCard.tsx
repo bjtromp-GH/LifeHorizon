@@ -80,7 +80,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
       </div>
 
       {/* Chart Area */}
-      <div className="relative w-[calc(100%-1.5rem)] h-40 mt-6 ml-6 pt-2 border-l border-b border-[#EAEAEA]">
+      <div className="relative w-[calc(100%-1.5rem)] h-40 mt-8 ml-6 border-l border-b border-[#EAEAEA]">
         {/* Y-axis labels */}
         <div className="absolute right-full pr-1.5 top-[100%] text-[10px] text-[#767676] -translate-y-1/2">0</div>
         <div className="absolute right-full pr-1.5 top-[50%] text-[10px] text-[#767676] -translate-y-1/2">50</div>
@@ -122,7 +122,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
             d={pathD}
             fill="none"
             stroke="#111"
-            strokeWidth="1.5"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
             className="drop-shadow-sm"
