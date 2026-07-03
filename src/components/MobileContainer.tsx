@@ -292,16 +292,15 @@ export default function MobileContainer({
                       isFullscreen={isSwipedFullscreen}
                     />
                   </div>
-                  
+                  <SurvivalCurveCard 
+                    inputs={inputs}
+                    projectedLifeExpectancy={projectedLifeExpectancy}
+                  />
+
                   <StatsCard
                     inputs={inputs}
                     projectedLifeExpectancy={projectedLifeExpectancy}
                     apiSource={apiSource}
-                  />
-
-                  <SurvivalCurveCard 
-                    inputs={inputs}
-                    projectedLifeExpectancy={projectedLifeExpectancy}
                   />
                 </div>
 
