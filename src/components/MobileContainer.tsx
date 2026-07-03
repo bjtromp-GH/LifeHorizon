@@ -9,6 +9,7 @@ import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
 import StatsCard from "./StatsCard";
 import RemainingTimeCard from "./RemainingTimeCard";
+import SurvivalCurveCard from "./SurvivalCurveCard";
 import { useLanguage } from "../context/LanguageContext";
 
 interface MobileContainerProps {
@@ -296,6 +297,11 @@ export default function MobileContainer({
                     inputs={inputs}
                     projectedLifeExpectancy={projectedLifeExpectancy}
                     apiSource={apiSource}
+                  />
+
+                  <SurvivalCurveCard 
+                    inputs={inputs}
+                    projectedLifeExpectancy={projectedLifeExpectancy}
                   />
                 </div>
 
