@@ -8,6 +8,7 @@ import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
 import StatsCard from "./StatsCard";
+import SurvivalCurveCard from "./SurvivalCurveCard";
 import { useLanguage } from "../context/LanguageContext";
 
 interface DesktopDashboardProps {
@@ -135,6 +136,14 @@ export default function DesktopDashboard({
                   onInputChange={onInputChange}
                 />
               </div>
+            </div>
+
+            {/* Survival Curve */}
+            <div className="w-full">
+              <SurvivalCurveCard 
+                inputs={inputs}
+                projectedLifeExpectancy={projectedLifeExpectancy}
+              />
             </div>
 
             {/* Matrix and Fidelity Cards Side-by-Side */}
