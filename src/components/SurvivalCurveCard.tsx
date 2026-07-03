@@ -59,21 +59,27 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
       </div>
       
       {/* Highlight Stats */}
-      <div className="flex justify-between items-end px-1 pt-2">
+      {/* Highlight Stats aligned with X-axis */}
+      <div className="relative w-[calc(100%-1.5rem)] ml-6 h-16 mt-2">
         {highlightAges.map((age, i) => {
           const prob = getProb(age);
+          const x = ((age - currentAge) / (endAge - currentAge)) * 100;
           const colors = ['text-[#D56B45]', 'text-[#86A789]', 'text-[#2D2D2D]'];
           const dots = ['bg-[#D56B45]', 'bg-[#86A789]', 'bg-[#2D2D2D]'];
           const color = colors[i % colors.length];
           const dot = dots[i % dots.length];
           return (
-            <div key={age} className="flex flex-col items-center">
+            <div 
+              key={age} 
+              className="absolute flex flex-col items-center -translate-x-1/2 bottom-0 w-24"
+              style={{ left: `${x}%` }}
+            >
               <div className="flex items-center space-x-1.5 mb-1">
-                <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#D56B45] bg-white' : dot} box-content`} />
+                <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#D56B45] bg-white' : dot} box-content shrink-0`} />
                 <span className={`text-xl sm:text-2xl font-black font-sans ${color}`}>{age}</span>
                 <span className={`text-xs font-bold ${color}`}>jaar</span>
               </div>
-              <span className={`text-sm ${color} opacity-80 font-medium`}>{formatProb(prob)}% kans</span>
+              <span className={`text-sm ${color} opacity-80 font-medium whitespace-nowrap`}>{formatProb(prob)}% kans</span>
             </div>
           );
         })}
