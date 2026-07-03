@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Settings, Edit3, ChevronDown, ChevronUp, Maximize2 } from "lucide-react";
+import { Settings, Edit3, ChevronDown, ChevronUp, Maximize2, Minimize2 } from "lucide-react";
 import { LifePhases, UserInputs } from "../types";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -11,6 +11,7 @@ interface LifePhasesBarProps {
   phases: LifePhases;
   onInputChange?: (updates: Partial<UserInputs>) => void;
   onFullscreen?: () => void;
+  isFullscreen?: boolean;
 }
 
 export default React.memo(function LifePhasesBar({
@@ -19,6 +20,7 @@ export default React.memo(function LifePhasesBar({
   phases,
   onInputChange,
   onFullscreen,
+  isFullscreen,
 }: LifePhasesBarProps) {
   const { t } = useLanguage();
   const { currentAge } = inputs;
@@ -145,9 +147,9 @@ export default React.memo(function LifePhasesBar({
                 onFullscreen();
               }}
               className="p-1.5 rounded bg-[#D56B45] hover:bg-[#B84E29] text-white transition-colors shadow-sm border border-[#D56B45]"
-              title="Fullscreen"
+              title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
             >
-              <Maximize2 className="w-4 h-4" />
+              {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
             </button>
           )}
         </div>

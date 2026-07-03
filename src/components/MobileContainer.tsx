@@ -287,7 +287,8 @@ export default function MobileContainer({
                       projectedLifeExpectancy={projectedLifeExpectancy}
                       phases={phases}
                       onInputChange={onInputChange}
-                      onFullscreen={() => setIsSwipedFullscreen(true)}
+                      onFullscreen={() => setIsSwipedFullscreen(!isSwipedFullscreen)}
+                      isFullscreen={isSwipedFullscreen}
                     />
                   </div>
                   
