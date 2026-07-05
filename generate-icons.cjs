@@ -64,6 +64,27 @@ async function createIcon() {
     .toFile(path.join(assetsDir, 'splash.png'));
     
   console.log('Generated assets/splash.png');
+
+  // 5. Create Play Store Feature Graphic (1024x500)
+  const featureSvgText = `
+    <svg width="1024" height="500">
+      <rect x="0" y="0" width="1024" height="500" fill="#FAF3F0" />
+      <text x="560" y="280" font-family="sans-serif" font-weight="900" font-size="72" fill="#2d3748" text-anchor="start">Life Horizon</text>
+    </svg>
+  `;
+  const featureElephant = await sharp('public/img/olifant-bril.png')
+    .extract({ left: 5, top: 5, width: 790, height: 715 })
+    .resize(360, 360, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .toBuffer();
+
+  await sharp(Buffer.from(featureSvgText))
+    .composite([
+      { input: featureElephant, top: 70, left: 160 }
+    ])
+    .png()
+    .toFile(path.join(assetsDir, 'feature-graphic.png'));
+    
+  console.log('Generated assets/feature-graphic.png');
 }
 
 createIcon().catch(console.error);
