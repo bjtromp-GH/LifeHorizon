@@ -388,7 +388,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   variants={containerVars}
                   initial="hidden"
                   animate="visible"
-                  className="flex justify-center items-center flex-wrap gap-x-2 sm:gap-x-4 w-full"
+                  className="flex justify-center items-center flex-nowrap w-full"
                 >
                   {"Life Horizon App".split(" ").map((word, wordIndex) => (
                     <span key={wordIndex} className="flex whitespace-nowrap">
@@ -396,7 +396,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                         <motion.span
                           key={charIndex}
                           variants={letterVars}
-                          className="text-[32px] min-[375px]:text-[38px] min-[415px]:text-[42px] sm:text-7xl font-sans font-black tracking-tight select-none inline-block text-white"
+                          className={`text-[26px] min-[375px]:text-[32px] min-[415px]:text-[36px] sm:text-6xl font-sans font-black tracking-tight select-none inline-block text-white ${wordIndex > 0 && charIndex === 0 ? "ml-1.5 sm:ml-3" : ""}`}
                           style={{
                             textShadow: "0 4px 12px rgba(0,0,0,0.15)"
                           }}
