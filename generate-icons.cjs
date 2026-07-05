@@ -10,7 +10,8 @@ async function createIcon() {
 
   // 1. Create the App Icon (1024x1024)
   const elephantIcon = await sharp('public/img/olifant-bril.png')
-    .resize(700, 700, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .extract({ left: 5, top: 5, width: 790, height: 715 })
+    .resize(900, 900, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .toBuffer();
   
   const iconSvgText = `
@@ -21,7 +22,7 @@ async function createIcon() {
 
   await sharp(Buffer.from(iconSvgText))
     .composite([
-      { input: elephantIcon, top: 162, left: 162 }
+      { input: elephantIcon, top: 62, left: 62 }
     ])
     .png()
     .toFile(path.join(assetsDir, 'icon.png'));
@@ -36,12 +37,13 @@ async function createIcon() {
     </svg>
   `;
   const elephantSplash = await sharp('public/img/olifant-bril.png')
-    .resize(1200, 1200, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .extract({ left: 5, top: 5, width: 790, height: 715 })
+    .resize(1300, 1300, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .toBuffer();
     
   await sharp(Buffer.from(splashSvgText))
     .composite([
-      { input: elephantSplash, top: 600, left: 766 }
+      { input: elephantSplash, top: 550, left: 716 }
     ])
     .png()
     .toFile(path.join(assetsDir, 'splash.png'));
