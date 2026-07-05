@@ -11,7 +11,7 @@ async function createIcon() {
   // Create the extracted elephant image
   const elephantIcon = await sharp('public/img/olifant-bril.png')
     .extract({ left: 5, top: 5, width: 790, height: 715 })
-    .resize(860, 860, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize(800, 800, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .toBuffer();
   
   // 1. Create standard icon.png (1024x1024)
@@ -23,7 +23,7 @@ async function createIcon() {
 
   await sharp(Buffer.from(iconSvgText))
     .composite([
-      { input: elephantIcon, top: 115, left: 82 }
+      { input: elephantIcon, top: 112, left: 112 }
     ])
     .png()
     .toFile(path.join(assetsDir, 'icon.png'));
@@ -38,7 +38,7 @@ async function createIcon() {
   // 3. Create Adaptive Icon Foreground (1024x1024)
   await sharp({ create: { width: 1024, height: 1024, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
     .composite([
-      { input: elephantIcon, top: 115, left: 82 }
+      { input: elephantIcon, top: 112, left: 112 }
     ])
     .png()
     .toFile(path.join(assetsDir, 'icon-foreground.png'));
