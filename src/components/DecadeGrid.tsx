@@ -264,21 +264,31 @@ export default React.memo(function DecadeGrid({
       )}
       <AnimatePresence>
         {showToast && (
-          <motion.div
-            initial={{ opacity: 0, y: -30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4]"
-          >
-            <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain" />
-            <div className="flex flex-col">
-              <span className="text-sm font-bold text-[#2D2D2D]">Jouw extra vrije jaren!</span>
-              <span className="text-2xl font-black text-[#84A98C]">+{extraFreeYears} jaar</span>
-            </div>
-            <button onClick={() => setShowToast(false)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
-              <X className="w-4 h-4" />
-            </button>
-          </motion.div>
+          <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+            <motion.div
+              initial={{ opacity: 0, y: -30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.7}
+              onDragEnd={(e, { offset, velocity }) => {
+                if (Math.abs(offset.x) > 100 || Math.abs(velocity.x) > 500) {
+                  setShowToast(false);
+                }
+              }}
+              className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4] touch-none cursor-grab active:cursor-grabbing"
+            >
+              <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain pointer-events-none" />
+              <div className="flex flex-col pointer-events-none">
+                <span className="text-sm font-bold text-[#2D2D2D]">Jouw extra vrije jaren!</span>
+                <span className="text-2xl font-black text-[#84A98C]">+{extraFreeYears} jaar</span>
+              </div>
+              <button onClick={() => setShowToast(false)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
+                <X className="w-4 h-4" />
+              </button>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
