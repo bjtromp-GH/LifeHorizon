@@ -25,3 +25,14 @@ html, body {
 #root {
   overscroll-behavior: none;
 }
+
+/* Safe area utilities for Capacitor Android edge-to-edge */
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top), 1.5rem);
+}
+.pt-safe-sm {
+  padding-top: max(env(safe-area-inset-top), 0.875rem); /* 3.5 tailwind */
+}
+.pt-safe-header {
+  padding-top: max(env(safe-area-inset-top), 0.375rem); /* 1.5 tailwind */
+}

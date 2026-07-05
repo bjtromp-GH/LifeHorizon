@@ -183,7 +183,7 @@ export default function MobileContainer({
       {/* 1. Mobile Custom Header Bar */}
       {!isSwipedFullscreen && (
         <>
-          <header className="px-4 py-3 bg-white border-b border-[#EAEAEA] flex items-center justify-between shrink-0">
+          <header className="px-4 py-3 pt-safe-sm bg-white border-b border-[#EAEAEA] flex items-center justify-between shrink-0">
             <div 
               className="flex items-center space-x-2 cursor-pointer group"
               onClick={() => window.location.reload()}

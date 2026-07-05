@@ -254,7 +254,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
   };
 
   return (
-    <div className="h-[100dvh] md:h-auto md:min-h-screen overflow-hidden bg-[#FDFDFD] flex flex-col justify-between p-3.5 sm:p-8 font-sans text-[#2D2D2D] select-none relative">
+    <div className="h-[100dvh] md:h-auto md:min-h-screen overflow-hidden bg-[#FDFDFD] flex flex-col justify-between p-3.5 pt-safe-sm sm:p-8 sm:pt-safe font-sans text-[#2D2D2D] select-none relative">
       {/* Abstract elegant background elements */}
       <motion.div 
         animate={{ 
@@ -284,7 +284,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="w-full max-w-xl mx-auto flex flex-col items-center pt-1.5 sm:pt-6 z-10 shrink-0"
+            className="w-full max-w-xl mx-auto flex flex-col items-center pt-safe-header sm:pt-safe z-10 shrink-0"
           >
             <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
               <span className="text-xl">🔥</span>
@@ -359,7 +359,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="fixed inset-0 bg-gradient-to-br from-[#E25C26] via-[#D56B45] to-[#B84E29] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
+              className="fixed inset-0 bg-gradient-to-br from-[#E25C26] via-[#D56B45] to-[#B84E29] flex flex-col justify-between p-6 pt-safe select-none overflow-hidden z-50 text-white"
             >
               {/* Subtle animated light orb background */}
               <div className="absolute inset-x-0 top-0 h-96 bg-radial-gradient from-white/10 to-transparent blur-2xl pointer-events-none" />
@@ -499,7 +499,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="fixed inset-0 bg-[#2D2D2D] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
+              className="fixed inset-0 bg-[#2D2D2D] flex flex-col justify-between p-6 pt-safe select-none overflow-hidden z-50 text-white"
             >
               {/* Decorative elements */}
               <div className="absolute top-[-20%] left-[-10%] w-96 h-96 rounded-full bg-[#86A789] blur-[120px] opacity-20 pointer-events-none" />
@@ -570,8 +570,9 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="fixed inset-0 bg-[#2D2D2D] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
+              className="fixed inset-0 bg-[#2D2D2D] flex flex-col justify-between p-6 pt-safe select-none overflow-hidden z-50 text-white"
             >
+              {/* Decorative elements */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50">
                 <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-[#D56B45]/20 rounded-full blur-[140px]" />
               </div>
@@ -653,7 +654,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="fixed inset-0 bg-[#201F1D] flex flex-col justify-between p-6 select-none overflow-hidden z-50 text-white"
+              className="fixed inset-0 bg-[#201F1D] flex flex-col justify-between p-6 pt-safe select-none overflow-hidden z-50 text-white"
             >
               {/* Decorative elements */}
               <div className="absolute top-[-20%] right-[-10%] w-96 h-96 rounded-full bg-[#D56B45] blur-[120px] opacity-20 pointer-events-none" />
