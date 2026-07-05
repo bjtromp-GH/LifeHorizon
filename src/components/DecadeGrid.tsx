@@ -22,6 +22,7 @@ export default React.memo(function DecadeGrid({
   const [isCurrentAgeModalOpen, setIsCurrentAgeModalOpen] = useState(false);
   const [isAnalyseModalOpen, setIsAnalyseModalOpen] = useState(false);
   const [isHealthyModalOpen, setIsHealthyModalOpen] = useState(false);
+  const [isModelInfoModalOpen, setIsModelInfoModalOpen] = useState(false);
   const [activeSlice, setActiveSlice] = useState<"dev" | "work" | "free" | null>(null);
   const [use255025Model, setUse255025Model] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -247,9 +248,9 @@ export default React.memo(function DecadeGrid({
               {use255025Model ? "✓ 25/50/25 Model" : "Toon 25/50/25 Model"}
             </button>
             <button
-              onClick={() => alert("Info over het 25/50/25 model")}
-              className="p-2 text-gray-400 hover:text-[#D56B45] transition-colors"
-              title="Later meer over het 25/50/25 model"
+              onClick={() => setIsModelInfoModalOpen(true)}
+              className="p-2 text-gray-400 hover:text-[#D56B45] transition-colors hidden sm:block"
+              title="Informatie over het 25/50/25 model"
             >
               <Info className="w-5 h-5" />
             </button>
@@ -531,6 +532,55 @@ export default React.memo(function DecadeGrid({
                   {t('decadeGrid.close')}
                 </button>
               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isModelInfoModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModelInfoModalOpen(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              className="relative bg-white rounded-xl shadow-xl w-full max-w-sm p-6 overflow-hidden"
+            >
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-lg font-bold text-[#2D2D2D] tracking-tight">
+                  Het 25/50/25 Model
+                </h3>
+                <button
+                  onClick={() => setIsModelInfoModalOpen(false)}
+                  className="p-1 -mr-2 -mt-2 bg-[#D56B45] text-white hover:bg-[#B84E29] rounded-md transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <p className="text-sm text-[#767676] leading-relaxed mb-3">
+                Dit model biedt een alternatief perspectief op je levensloop door het in te delen in drie duidelijke fasen, afgestemd op de levensverwachting:
+              </p>
+              <ul className="text-sm text-[#767676] leading-relaxed list-none space-y-3">
+                <li className="flex items-start gap-2">
+                  <span className="w-2.5 h-2.5 rounded-[2px] bg-[#2D2D2D] mt-1 shrink-0" />
+                  <span><strong className="text-[#2D2D2D]">25% Ontwikkeling:</strong> De eerste jaren van je leven, gericht op leren, ontdekken en opgroeien.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D56B45] mt-1 shrink-0" />
+                  <span><strong className="text-[#D56B45]">50% Werk:</strong> De kern van je loopbaan waarin je waarde creëert en vermogen opbouwt voor later.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2.5 h-2.5 rounded-[2px] bg-[#84A98C] mt-1 shrink-0" />
+                  <span><strong className="text-[#84A98C]">25% Vrijheid:</strong> Het laatste deel van je leven, bedoeld om in volledige vrijheid te genieten van wat je hebt opgebouwd.</span>
+                </li>
+              </ul>
             </motion.div>
           </div>
         )}
