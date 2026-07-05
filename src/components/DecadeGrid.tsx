@@ -24,6 +24,7 @@ export default React.memo(function DecadeGrid({
   const [isHealthyModalOpen, setIsHealthyModalOpen] = useState(false);
   const [activeSlice, setActiveSlice] = useState<"dev" | "work" | "free" | null>(null);
   const [use255025Model, setUse255025Model] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   
   // Total years in the runway (e.g. 82 years = 82 boxes)
   const totalYears = Math.max(1, Math.ceil(projectedLifeExpectancy));
@@ -31,6 +32,21 @@ export default React.memo(function DecadeGrid({
   // Effective phases (25/50/25 is based on projected life expectancy)
   const effectiveStartWorkAge = use255025Model ? Math.round(totalYears * 0.25) : startWorkAge;
   const effectiveFireAge = use255025Model ? Math.round(totalYears * 0.75) : fireAge;
+
+  const extraFreeYears = fireAge - Math.round(totalYears * 0.75);
+
+  const handleToggleModel = () => {
+    const newValue = !use255025Model;
+    setUse255025Model(newValue);
+    if (newValue && extraFreeYears > 0) {
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 4000);
+    } else {
+      setShowToast(false);
+    }
+  };
 
   // Determine which phase a given year falls into
   const getYearPhase = (year: number): "basis" | "accumulation" | "freedom" | "beyond" => {
@@ -45,14 +61,14 @@ export default React.memo(function DecadeGrid({
   const decadesArray = useMemo(() => Array.from({ length: decadesCount }, (_, i) => i), [decadesCount]);
 
   return (
-    <div id="decade-grid-container" className="flex flex-col space-y-4">
+    <div id="decade-grid-container" className="flex flex-col space-y-4 relative">
       <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center space-x-3">
           <h4 className="text-xs font-semibold uppercase tracking-wider text-[#767676]">
             {t('decadeGrid.title')}
           </h4>
           <button 
-            onClick={() => setUse255025Model(!use255025Model)}
+            onClick={handleToggleModel}
             className={`text-[10px] px-3 py-1 rounded-md border transition-all font-bold flex items-center shadow-sm ${
               use255025Model 
                 ? 'bg-[#D56B45] text-white border-[#D56B45]' 
@@ -110,7 +126,7 @@ export default React.memo(function DecadeGrid({
                       borderStyle = isPast ? "border-[#D56B45]" : "border-transparent";
                     } else {
                       // Freedom / Retirement phase
-                      bgStyle = isPast ? "bg-[#84A98C]" : "bg-[#84A98C]/40";
+                      bgStyle = "bg-[#84A98C]";
                       borderStyle = isPast ? "border-[#84A98C]" : "border-transparent";
                     }
 
@@ -144,7 +160,7 @@ export default React.memo(function DecadeGrid({
                             className={`w-full h-full rounded-[3px] transition-all duration-300 border ${borderStyle} ${bgStyle} hover:border-white/50 flex items-center justify-center cursor-default group/box`}
                           >
                             {/* Age label always visible but subtle, gets slightly larger and high contrast on hover */}
-                            <span className={`text-[9px] md:text-[10px] font-mono transition-all duration-150 select-none font-medium ${isPast ? 'text-white/40 group-hover/box:text-white' : 'text-[#2D2D2D]/40 group-hover/box:text-[#2D2D2D]'} group-hover/box:font-extrabold group-hover/box:scale-110`}>
+                            <span className={`text-[9px] md:text-[10px] font-mono transition-all duration-150 select-none font-medium ${isPast || phase === 'freedom' ? 'text-white/40 group-hover/box:text-white' : 'text-[#2D2D2D]/40 group-hover/box:text-[#2D2D2D]'} group-hover/box:font-extrabold group-hover/box:scale-110`}>
                               {year}
                             </span>
                           </div>
@@ -211,6 +227,26 @@ export default React.memo(function DecadeGrid({
         </div>
         </div>
       )}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-white p-4 rounded-2xl shadow-2xl border border-[#EAE8E4]"
+          >
+            <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain" />
+            <div className="flex flex-col">
+              <span className="text-sm font-bold text-[#2D2D2D]">Jouw extra vrije jaren!</span>
+              <span className="text-2xl font-black text-[#84A98C]">+{extraFreeYears} jaar</span>
+            </div>
+            <button onClick={() => setShowToast(false)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
+              <X className="w-4 h-4" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isCurrentAgeModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
