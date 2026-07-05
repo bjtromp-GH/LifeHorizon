@@ -78,17 +78,7 @@ export default function DesktopDashboard({
               <span>{t('desktopDashboard.intro')}</span>
             </button>
 
-            {/* CBS Sync Indicator */}
-            <button
-              type="button"
-              id="btn-sync-cbs"
-              onClick={onRefreshCBS}
-              title={t('desktopDashboard.syncTitle')}
-              className="flex items-center space-x-1.5 px-3 py-1.5 border border-[#EAEAEA] bg-white text-xs text-[#767676] rounded hover:bg-gray-100 transition-all duration-200 cursor-pointer"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 ${isLoadingCBS ? "animate-spin" : ""}`} />
-              <span>{t('desktopDashboard.sync')}</span>
-            </button>
+
 
             {/* Config Button */}
             <button
