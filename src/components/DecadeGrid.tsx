@@ -67,16 +67,6 @@ export default React.memo(function DecadeGrid({
           <h4 className="text-xs font-semibold uppercase tracking-wider text-[#767676]">
             {t('decadeGrid.title')}
           </h4>
-          <button 
-            onClick={handleToggleModel}
-            className={`text-[10px] px-3 py-1 rounded-md border transition-all font-bold flex items-center shadow-sm ${
-              use255025Model 
-                ? 'bg-[#D56B45] text-white border-[#D56B45]' 
-                : 'bg-white text-[#2D2D2D] border-[#EAE8E4] hover:bg-gray-50'
-            }`}
-          >
-            {use255025Model ? "✓ 25/50/25 Model" : "Toon 25/50/25 Model"}
-          </button>
         </div>
         <div className="flex items-center space-x-3 text-[10px] text-[#767676] font-mono">
           <span className="flex items-center gap-1">
@@ -206,12 +196,24 @@ export default React.memo(function DecadeGrid({
       {!compact && (
         <div className="flex flex-col items-center justify-center pt-2 gap-3">
         <div className="flex flex-col items-center">
-          <button
-            onClick={() => setIsAnalyseModalOpen(true)}
-            className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#C05D3A] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
-          >
-            {t('decadeGrid.analysisBtn')}
-          </button>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => setIsAnalyseModalOpen(true)}
+              className="px-4 py-2 bg-[#D56B45] text-white text-xs font-bold rounded-md hover:bg-[#C05D3A] transition-colors uppercase tracking-widest cursor-pointer shadow-sm"
+            >
+              {t('decadeGrid.analysisBtn')}
+            </button>
+            <button 
+              onClick={handleToggleModel}
+              className={`px-4 py-2 text-xs rounded-md border transition-all font-bold flex items-center shadow-sm tracking-widest uppercase ${
+                use255025Model 
+                  ? 'bg-[#D56B45] text-white border-[#D56B45]' 
+                  : 'bg-white text-[#2D2D2D] border-[#EAE8E4] hover:bg-gray-50'
+              }`}
+            >
+              {use255025Model ? "✓ 25/50/25 Model" : "Toon 25/50/25 Model"}
+            </button>
+          </div>
           <span className="text-[10px] text-gray-500 mt-2 text-center max-w-xs">
             {t('decadeGrid.analysisSubtitle')}
           </span>
@@ -233,7 +235,7 @@ export default React.memo(function DecadeGrid({
             initial={{ opacity: 0, y: -30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            className="absolute top-16 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4]"
+            className="absolute top-28 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4]"
           >
             <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain" />
             <div className="flex flex-col">
