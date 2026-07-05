@@ -281,17 +281,17 @@ export default React.memo(function DecadeGrid({
               dragMomentum={false}
               className="flex flex-col gap-2 cursor-grab active:cursor-grabbing"
             >
-              <div className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4]">
-                <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain pointer-events-none" />
+              <div className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4] w-max max-w-[90vw]">
+                <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain pointer-events-none shrink-0" />
                 <div className="flex flex-col pointer-events-none">
-                  <span className="text-sm font-bold text-[#2D2D2D]">Jouw extra vrije jaren!</span>
-                  <span className="text-2xl font-black text-[#84A98C]">+{extraFreeYears} jaar</span>
+                  <span className="text-sm font-bold text-[#2D2D2D] whitespace-nowrap">Jouw extra vrije jaren!</span>
+                  <span className="text-2xl font-black text-[#84A98C] whitespace-nowrap">+{extraFreeYears} jaar</span>
                 </div>
                 <button onClick={() => setShowToast(false)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
                   <X className="w-4 h-4" />
                 </button>
               </div>
-              <div className="bg-[#2D2D2D] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg self-center border border-[#1A1A1A] sm:hidden">
+              <div className="bg-[#2D2D2D] text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl shadow-lg self-center border border-[#1A1A1A] sm:hidden text-center max-w-[85vw]">
                 Later meer over het 25/50/25 model
               </div>
             </motion.div>
