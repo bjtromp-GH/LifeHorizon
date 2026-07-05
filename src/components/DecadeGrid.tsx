@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X } from "lucide-react";
+import { X, Info } from "lucide-react";
 import { UserInputs } from "../types";
 import LifeProgressBar from "./LifeProgressBar";
 import HealthyMatrixModal from "./HealthyMatrixModal";
@@ -246,6 +246,13 @@ export default React.memo(function DecadeGrid({
             >
               {use255025Model ? "✓ 25/50/25 Model" : "Toon 25/50/25 Model"}
             </button>
+            <button
+              onClick={() => alert("Info over het 25/50/25 model")}
+              className="p-2 text-gray-400 hover:text-[#D56B45] transition-colors"
+              title="Later meer over het 25/50/25 model"
+            >
+              <Info className="w-5 h-5" />
+            </button>
           </div>
           <span className="text-[10px] text-gray-500 mt-2 text-center max-w-xs">
             {t('decadeGrid.analysisSubtitle')}
@@ -283,7 +290,7 @@ export default React.memo(function DecadeGrid({
                   <X className="w-4 h-4" />
                 </button>
               </div>
-              <div className="bg-[#2D2D2D] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg self-center border border-[#1A1A1A]">
+              <div className="bg-[#2D2D2D] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 rounded-2xl shadow-lg self-center border border-[#1A1A1A] sm:hidden">
                 Later meer over het 25/50/25 model
               </div>
             </motion.div>
