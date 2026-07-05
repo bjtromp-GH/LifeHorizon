@@ -16,7 +16,12 @@ export const en: Translations = {
     profile: "Profile",
     retirementGoal: "Retirement Goal",
     welcome: "Welcome",
-    to: "to"
+    to: "to",
+    about: "Info",
+    aboutApp: "About Life Horizon",
+    aboutDesc: "Discover your healthy years, freedom date, and life course. Gain in-depth insight into your personal development, work phase, and total freedom.",
+    privacyPolicy: "Privacy Policy",
+    version: "Version"
   },
   lifeProgress: {
     completed: "Completed",

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
+import InfoModal from "./InfoModal";
 import BioScoreSection from "./BioScoreSection";
 import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
@@ -35,6 +36,7 @@ export default function MobileContainer({
 }: MobileContainerProps) {
   const [showConfig, setShowConfig] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [slideDirection, setSlideDirection] = useState(0);
   const [isSwipedFullscreen, setIsSwipedFullscreen] = useState(false);
   const [showSwipeHint, setShowSwipeHint] = useState(true);
@@ -176,6 +178,14 @@ export default function MobileContainer({
               </span>
             </div>
             <div className="flex items-center space-x-2">
+              <button
+                type="button"
+                onClick={() => setIsInfoOpen(true)}
+                className="p-1.5 bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-500 rounded-md transition-all cursor-pointer"
+                title={t('common.about')}
+              >
+                <Info className="w-4 h-4" />
+              </button>
               <button
                 type="button"
                 id="btn-mobile-config"
@@ -1279,6 +1289,9 @@ export default function MobileContainer({
           </div>
         )}
       </AnimatePresence>
+      
+      {/* Info Modal */}
+      <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
     </div>
   );
 }

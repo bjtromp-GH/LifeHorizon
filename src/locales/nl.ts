@@ -14,7 +14,12 @@ export const nl = {
     profile: "Profiel",
     retirementGoal: "Pensioendoel",
     welcome: "Welkom",
-    to: "tot"
+    to: "tot",
+    about: "Info",
+    aboutApp: "Over Life Horizon",
+    aboutDesc: "Ontdek je gezonde jaren, vrijheidsdatum en levensloop. Krijg diepgaand inzicht in je persoonlijke ontwikkeling, werkfase en totale vrijheid.",
+    privacyPolicy: "Privacybeleid",
+    version: "Versie"
   },
   lifeProgress: {
     completed: "Voltooid",
