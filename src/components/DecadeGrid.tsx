@@ -271,16 +271,21 @@ export default React.memo(function DecadeGrid({
               exit={{ opacity: 0, scale: 0.9 }}
               drag
               dragMomentum={false}
-              className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4] cursor-grab active:cursor-grabbing"
+              className="flex flex-col gap-2 cursor-grab active:cursor-grabbing"
             >
-              <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain pointer-events-none" />
-              <div className="flex flex-col pointer-events-none">
-                <span className="text-sm font-bold text-[#2D2D2D]">Jouw extra vrije jaren!</span>
-                <span className="text-2xl font-black text-[#84A98C]">+{extraFreeYears} jaar</span>
+              <div className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4]">
+                <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain pointer-events-none" />
+                <div className="flex flex-col pointer-events-none">
+                  <span className="text-sm font-bold text-[#2D2D2D]">Jouw extra vrije jaren!</span>
+                  <span className="text-2xl font-black text-[#84A98C]">+{extraFreeYears} jaar</span>
+                </div>
+                <button onClick={() => setShowToast(false)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
+                  <X className="w-4 h-4" />
+                </button>
               </div>
-              <button onClick={() => setShowToast(false)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
-                <X className="w-4 h-4" />
-              </button>
+              <div className="bg-[#84A98C] text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md self-center">
+                Later meer over 25/50/25
+              </div>
             </motion.div>
           </div>
         )}
