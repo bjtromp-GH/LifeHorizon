@@ -23,14 +23,19 @@ export default React.memo(function DecadeGrid({
   const [isAnalyseModalOpen, setIsAnalyseModalOpen] = useState(false);
   const [isHealthyModalOpen, setIsHealthyModalOpen] = useState(false);
   const [activeSlice, setActiveSlice] = useState<"dev" | "work" | "free" | null>(null);
+  const [use255025Model, setUse255025Model] = useState(false);
+  
+  // Effective phases
+  const effectiveStartWorkAge = use255025Model ? 25 : startWorkAge;
+  const effectiveFireAge = use255025Model ? 75 : fireAge;
   
   // Total years in the runway (e.g. 82 years = 82 boxes)
-  const totalYears = Math.max(1, Math.ceil(projectedLifeExpectancy));
+  const totalYears = use255025Model ? 100 : Math.max(1, Math.ceil(projectedLifeExpectancy));
 
   // Determine which phase a given year falls into
   const getYearPhase = (year: number): "basis" | "accumulation" | "freedom" | "beyond" => {
-    if (year < startWorkAge) return "basis";
-    if (year < fireAge) return "accumulation";
+    if (year < effectiveStartWorkAge) return "basis";
+    if (year < effectiveFireAge) return "accumulation";
     if (year < totalYears) return "freedom";
     return "beyond";
   };
@@ -41,10 +46,22 @@ export default React.memo(function DecadeGrid({
 
   return (
     <div id="decade-grid-container" className="flex flex-col space-y-4">
-      <div className="flex items-center justify-between">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-[#767676]">
-          {t('decadeGrid.title')}
-        </h4>
+      <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center space-x-3">
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-[#767676]">
+            {t('decadeGrid.title')}
+          </h4>
+          <button 
+            onClick={() => setUse255025Model(!use255025Model)}
+            className={`text-[9px] px-2 py-0.5 rounded-full border transition-all flex items-center gap-1 ${
+              use255025Model 
+                ? 'bg-[#2D2D2D] text-white border-[#2D2D2D]' 
+                : 'bg-white text-[#767676] border-[#EAE8E4] hover:bg-gray-50'
+            }`}
+          >
+            25/50/25 Model
+          </button>
+        </div>
         <div className="flex items-center space-x-3 text-[10px] text-[#767676] font-mono">
           <span className="flex items-center gap-1">
             <span className="w-2.5 h-2.5 rounded-[2px] bg-[#2D2D2D]" /> {t('decadeGrid.development')}
@@ -259,9 +276,9 @@ export default React.memo(function DecadeGrid({
 
               {/* Pie Chart & Animated Bars */}
               {(() => {
-                const devPct = (startWorkAge / totalYears) * 100;
-                const workPct = ((fireAge - startWorkAge) / totalYears) * 100;
-                const freePct = ((totalYears - fireAge) / totalYears) * 100;
+                const devPct = (effectiveStartWorkAge / totalYears) * 100;
+                const workPct = ((effectiveFireAge - effectiveStartWorkAge) / totalYears) * 100;
+                const freePct = ((totalYears - effectiveFireAge) / totalYears) * 100;
                 
                 const r = 15.91549431; // Circumference = 100
                 const workOffset = 100 - devPct;
@@ -341,12 +358,12 @@ export default React.memo(function DecadeGrid({
                       >
                         <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
                           <span>{t('decadeGrid.development')}</span>
-                          <span>{startWorkAge} {t('decadeGrid.yr')} ({(startWorkAge / totalYears * 100).toFixed(0)}%)</span>
+                          <span>{effectiveStartWorkAge} {t('decadeGrid.yr')} ({(effectiveStartWorkAge / totalYears * 100).toFixed(0)}%)</span>
                         </div>
                         <div className="h-3 bg-[#2D2D2D]/20 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
-                            animate={{ width: `${(startWorkAge / totalYears) * 100}%` }}
+                            animate={{ width: `${(effectiveStartWorkAge / totalYears) * 100}%` }}
                             transition={{ duration: 1, ease: "easeOut" }}
                             className="h-full bg-[#2D2D2D]"
                           />
@@ -360,12 +377,12 @@ export default React.memo(function DecadeGrid({
                       >
                         <div className="flex justify-between text-xs font-semibold text-[#767676] mb-1 uppercase tracking-wider">
                           <span>{t('decadeGrid.work')}</span>
-                          <span>{fireAge - startWorkAge} {t('decadeGrid.yr')} ({((fireAge - startWorkAge) / totalYears * 100).toFixed(0)}%)</span>
+                          <span>{effectiveFireAge - effectiveStartWorkAge} {t('decadeGrid.yr')} ({((effectiveFireAge - effectiveStartWorkAge) / totalYears * 100).toFixed(0)}%)</span>
                         </div>
                         <div className="h-3 bg-[#D56B45]/20 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
-                            animate={{ width: `${((fireAge - startWorkAge) / totalYears) * 100}%` }}
+                            animate={{ width: `${((effectiveFireAge - effectiveStartWorkAge) / totalYears) * 100}%` }}
                             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                             className="h-full bg-[#D56B45]"
                           />
@@ -379,12 +396,12 @@ export default React.memo(function DecadeGrid({
                       >
                         <div className="flex justify-between text-xs font-semibold text-[#84A98C] mb-1 uppercase tracking-wider">
                           <span>{t('decadeGrid.freedom')}</span>
-                          <span>{totalYears - fireAge} {t('decadeGrid.yr')} ({((totalYears - fireAge) / totalYears * 100).toFixed(0)}%)</span>
+                          <span>{totalYears - effectiveFireAge} {t('decadeGrid.yr')} ({((totalYears - effectiveFireAge) / totalYears * 100).toFixed(0)}%)</span>
                         </div>
                         <div className="h-3 bg-[#84A98C]/20 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
-                            animate={{ width: `${((totalYears - fireAge) / totalYears) * 100}%` }}
+                            animate={{ width: `${((totalYears - effectiveFireAge) / totalYears) * 100}%` }}
                             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
                             className="h-full bg-[#84A98C]"
                           />
@@ -399,23 +416,23 @@ export default React.memo(function DecadeGrid({
                 <div className="text-center mb-6">
                   <h2 
                     className="text-[14px] sm:text-lg font-black text-[#2D2D2D] tracking-tight uppercase whitespace-nowrap overflow-hidden text-ellipsis"
-                    dangerouslySetInnerHTML={{ __html: t('decadeGrid.livedPercentage').replace('{{pct}}', Math.min(100, Math.round((currentAge / Math.max(projectedLifeExpectancy, currentAge, 1)) * 100)).toString()) }}
+                    dangerouslySetInnerHTML={{ __html: t('decadeGrid.livedPercentage').replace('{{pct}}', Math.min(100, Math.round((currentAge / Math.max(totalYears, currentAge, 1)) * 100)).toString()) }}
                   />
                 </div>
                 <LifeProgressBar 
                   currentAge={currentAge} 
-                  projectedLifeExpectancy={projectedLifeExpectancy} 
+                  projectedLifeExpectancy={totalYears} 
                   className="w-full"
                   hideLabels={true}
                 />
               </div>
 
-              <div 
-                className="bg-[#FAF9F8] p-4 rounded-lg text-sm text-[#767676] leading-relaxed border border-[#EAE8E4]"
-                dangerouslySetInnerHTML={{ 
+              <p 
+                className="text-xs text-[#767676] leading-relaxed mt-4 bg-gray-50 p-4 rounded-lg border border-gray-100"
+                dangerouslySetInnerHTML={{
                   __html: t('decadeGrid.analysisDesc')
-                    .replace('{{freePct}}', ((totalYears - fireAge) / totalYears * 100).toFixed(0))
-                    .replace('{{fireAge}}', fireAge.toString())
+                    .replace('{{freePct}}', (((totalYears - effectiveFireAge) / totalYears) * 100).toFixed(0))
+                    .replace('{{fireAge}}', String(effectiveFireAge))
                 }}
               />
 
