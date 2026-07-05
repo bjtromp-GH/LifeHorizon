@@ -269,15 +269,9 @@ export default React.memo(function DecadeGrid({
               initial={{ opacity: 0, y: -30, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.7}
-              onDragEnd={(e, { offset, velocity }) => {
-                if (Math.abs(offset.x) > 100 || Math.abs(velocity.x) > 500) {
-                  setShowToast(false);
-                }
-              }}
-              className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4] touch-none cursor-grab active:cursor-grabbing"
+              drag
+              dragMomentum={false}
+              className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4] cursor-grab active:cursor-grabbing"
             >
               <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain pointer-events-none" />
               <div className="flex flex-col pointer-events-none">
