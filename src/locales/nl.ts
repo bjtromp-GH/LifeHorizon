@@ -171,8 +171,8 @@ export const nl = {
       overview: "4. Overzicht"
     },
     nav: {
-      prev: "◀ Vorige",
-      next: "Volgende ▶"
+      prev: "Vorige",
+      next: "Volgende"
     },
     explorePhases: "Verken je fases",
     deepInsight: "Diepgaand inzicht in uw levensfases",

@@ -173,8 +173,8 @@ export const en: Translations = {
       overview: "4. Overview"
     },
     nav: {
-      prev: "◀ Previous",
-      next: "Next ▶"
+      prev: "Previous",
+      next: "Next"
     },
     explorePhases: "Explore phases",
     deepInsight: "In-depth insight into your life phases",

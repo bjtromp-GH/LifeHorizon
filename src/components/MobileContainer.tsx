@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useEffect } from "react";
-import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity } from "lucide-react";
+import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
@@ -374,7 +374,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 rounded-lg text-xs font-bold transition-all cursor-pointer"
                   >
-                    ◀ {t('dashboard.nav.prev')}
+                    <div className="flex items-center space-x-1"><ChevronLeft className="w-4 h-4" /><span>{t('dashboard.nav.prev')}</span></div>
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -421,7 +421,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-zinc-200 text-[#2D2D2D] hover:bg-zinc-50 rounded-lg text-xs font-bold transition-all cursor-pointer"
                   >
-                    ◀ {t('dashboard.nav.prev')}
+                    <div className="flex items-center space-x-1"><ChevronLeft className="w-4 h-4" /><span>{t('dashboard.nav.prev')}</span></div>
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -578,7 +578,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-white/30 text-white hover:bg-white/10 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ {t('dashboard.nav.prev')}
+                    <div className="flex items-center space-x-1"><ChevronLeft className="w-4 h-4" /><span>{t('dashboard.nav.prev')}</span></div>
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -713,7 +713,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ {t('dashboard.nav.prev')}
+                    <div className="flex items-center space-x-1"><ChevronLeft className="w-4 h-4" /><span>{t('dashboard.nav.prev')}</span></div>
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -836,7 +836,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ {t('dashboard.nav.prev')}
+                    <div className="flex items-center space-x-1"><ChevronLeft className="w-4 h-4" /><span>{t('dashboard.nav.prev')}</span></div>
                   </button>
                   
                   <div className="flex space-x-1.5">
@@ -949,7 +949,7 @@ export default function MobileContainer({
                       onClick={() => goToSlide(activeSlide - 1)}
                       className="px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/10 text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm"
                     >
-                      ◀ {t('dashboard.nav.prev')}
+                      <div className="flex items-center space-x-1"><ChevronLeft className="w-4 h-4" /><span>{t('dashboard.nav.prev')}</span></div>
                     </button>
                     
                     <div className="flex space-x-1.5">
@@ -968,7 +968,7 @@ export default function MobileContainer({
                       onClick={() => goToSlide(activeSlide + 1)}
                       className="px-4 py-3 bg-[#D56B45] hover:bg-[#B84E29] text-white shadow-lg text-xs font-black rounded-xl transition-all cursor-pointer"
                     >
-                      {t('dashboard.nav.next')} ▶
+                      <div className="flex items-center space-x-1"><span>{t('dashboard.nav.next')}</span><ChevronRight className="w-4 h-4" /></div>
                     </button>
                   </motion.div>
                 </div>
@@ -1021,7 +1021,7 @@ export default function MobileContainer({
                     onClick={() => goToSlide(activeSlide - 1)}
                     className="px-4 py-2 border border-[#EAEAEA] text-[#767676] hover:bg-zinc-50 text-xs font-bold rounded-lg transition-all cursor-pointer"
                   >
-                    ◀ {t('dashboard.nav.prev')}
+                    <div className="flex items-center space-x-1"><ChevronLeft className="w-4 h-4" /><span>{t('dashboard.nav.prev')}</span></div>
                   </button>
                   
                   <div className="flex space-x-1.5">
