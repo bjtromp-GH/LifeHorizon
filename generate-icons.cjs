@@ -15,14 +15,13 @@ async function createIcon() {
   
   const iconSvgText = `
     <svg width="1024" height="1024">
-      <rect x="0" y="0" width="1024" height="1024" fill="#D56B45" />
-      <text x="512" y="940" font-family="sans-serif" font-weight="900" font-size="160" fill="#FFFFFF" text-anchor="middle">LH</text>
+      <rect x="0" y="0" width="1024" height="1024" fill="#FAF3F0" />
     </svg>
   `;
 
   await sharp(Buffer.from(iconSvgText))
     .composite([
-      { input: elephantIcon, top: 80, left: 162 }
+      { input: elephantIcon, top: 162, left: 162 }
     ])
     .png()
     .toFile(path.join(assetsDir, 'icon.png'));
