@@ -283,7 +283,7 @@ export default React.memo(function DecadeGrid({
                   <X className="w-4 h-4" />
                 </button>
               </div>
-              <div className="bg-[#84A98C] text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md self-center">
+              <div className="bg-[#2D2D2D] text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 rounded-full shadow-lg self-center border border-[#1A1A1A]">
                 Later meer over 25/50/25
               </div>
             </motion.div>
