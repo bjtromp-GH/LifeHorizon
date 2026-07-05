@@ -10,6 +10,7 @@ import DecadeGrid from "./DecadeGrid";
 import StatsCard from "./StatsCard";
 import SurvivalCurveCard from "./SurvivalCurveCard";
 import { useLanguage } from "../context/LanguageContext";
+import { StatusBar, Style } from "@capacitor/status-bar";
 
 interface DesktopDashboardProps {
   inputs: UserInputs;
@@ -37,6 +38,20 @@ export default function DesktopDashboard({
   onResetApp,
 }: DesktopDashboardProps) {
   const { t } = useLanguage();
+
+  // Update Status Bar for native Android experience
+  useEffect(() => {
+    const updateStatusBar = async () => {
+      try {
+        await StatusBar.setStyle({ style: Style.Light });
+        await StatusBar.setBackgroundColor({ color: '#FFFFFF' });
+      } catch (e) {
+        // Ignore on web
+      }
+    };
+    updateStatusBar();
+  }, []);
+
   const [showConfig, setShowConfig] = useState(false);
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const roundedRemaining = Math.round(totalRemaining * 10) / 10;

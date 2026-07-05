@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { StatusBar, Style } from '@capacitor/status-bar';
 import { useLanguage } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, Gender, ActivityLevel, SleepLevel, StressLevel } from "../types";
@@ -146,6 +147,38 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
       transition: { type: "spring", damping: 12, stiffness: 250, mass: 0.8 } 
     }
   };
+
+  // Validation mapping
+  const currentStepIsValid = useMemo(() => {
+    if (step === 3) {
+      return localGender !== null && localBirthYear !== "" && localAge !== "";
+    }
+    return true;
+  }, [step, localGender, localBirthYear, localAge]);
+
+  // Update Status Bar for native Android experience
+  useEffect(() => {
+    const updateStatusBar = async () => {
+      try {
+        if (step === 0) {
+          await StatusBar.setStyle({ style: Style.Dark });
+          await StatusBar.setBackgroundColor({ color: '#E25C26' });
+        } else if (step === 0.5 || step === 0.75) {
+          await StatusBar.setStyle({ style: Style.Dark });
+          await StatusBar.setBackgroundColor({ color: '#2D2D2D' });
+        } else if (step === 1) {
+          await StatusBar.setStyle({ style: Style.Dark });
+          await StatusBar.setBackgroundColor({ color: '#201F1D' });
+        } else {
+          await StatusBar.setStyle({ style: Style.Light });
+          await StatusBar.setBackgroundColor({ color: '#FDFDFD' });
+        }
+      } catch (e) {
+        // Ignore on web where StatusBar is not available
+      }
+    };
+    updateStatusBar();
+  }, [step]);
 
   let canProceed = true;
   if (step === 3) {

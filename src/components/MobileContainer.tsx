@@ -4,6 +4,7 @@ import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Gr
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import InfoModal from "./InfoModal";
+import { StatusBar, Style } from "@capacitor/status-bar";
 import BioScoreSection from "./BioScoreSection";
 import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
@@ -44,7 +45,24 @@ export default function MobileContainer({
   const [showElephantFact, setShowElephantFact] = useState(false);
   const [showMatrixModal, setShowMatrixModal] = useState(false);
   const [showSurvivalModal, setShowSurvivalModal] = useState(false);
+  const [isManualScroll, setIsManualScroll] = useState(false);
   const { t } = useLanguage();
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Update Status Bar for native Android experience
+  useEffect(() => {
+    const updateStatusBar = async () => {
+      try {
+        await StatusBar.setStyle({ style: Style.Light });
+        await StatusBar.setBackgroundColor({ color: '#FFFFFF' });
+      } catch (e) {
+        // Ignore on web
+      }
+    };
+    updateStatusBar();
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
