@@ -388,19 +388,23 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   variants={containerVars}
                   initial="hidden"
                   animate="visible"
-                  className="flex justify-center items-center"
+                  className="flex justify-center items-center flex-wrap gap-x-2 sm:gap-x-4 w-full"
                 >
-                  {titleLetters.map((char, index) => (
-                    <motion.span
-                      key={index}
-                      variants={letterVars}
-                      className={`text-[32px] min-[375px]:text-[38px] min-[415px]:text-[42px] sm:text-7xl font-sans font-black tracking-tight select-none inline-block ${char === " " ? "w-2 sm:w-4" : "text-white"} ${index === 8 ? "ml-0.5 sm:ml-1" : ""}`}
-                      style={{
-                        textShadow: char === " " ? "none" : "0 4px 12px rgba(0,0,0,0.15)"
-                      }}
-                    >
-                      {char === " " ? "\u00A0" : char}
-                    </motion.span>
+                  {"Life Horizon App".split(" ").map((word, wordIndex) => (
+                    <span key={wordIndex} className="flex whitespace-nowrap">
+                      {Array.from(word).map((char, charIndex) => (
+                        <motion.span
+                          key={charIndex}
+                          variants={letterVars}
+                          className="text-[32px] min-[375px]:text-[38px] min-[415px]:text-[42px] sm:text-7xl font-sans font-black tracking-tight select-none inline-block text-white"
+                          style={{
+                            textShadow: "0 4px 12px rgba(0,0,0,0.15)"
+                          }}
+                        >
+                          {char}
+                        </motion.span>
+                      ))}
+                    </span>
                   ))}
                 </motion.div>
 
