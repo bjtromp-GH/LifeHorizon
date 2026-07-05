@@ -81,6 +81,39 @@ export default React.memo(function DecadeGrid({
         </div>
       </div>
 
+      <AnimatePresence>
+        {use255025Model && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="flex flex-col w-full pb-2">
+              <div className="flex justify-between items-end mb-1 px-1">
+                <span className="text-[9px] sm:text-[10px] text-[#2D2D2D] font-bold uppercase tracking-widest">{t('decadeGrid.development')} (25%)</span>
+                <span className="text-[9px] sm:text-[10px] text-[#D56B45] font-bold uppercase tracking-widest">{t('decadeGrid.work')} (50%)</span>
+                <span className="text-[9px] sm:text-[10px] text-[#84A98C] font-bold uppercase tracking-widest">{t('decadeGrid.freedom')} (25%)</span>
+              </div>
+              <div className="h-3 sm:h-4 bg-[#F3F2F0] rounded-full overflow-hidden w-full flex shadow-inner">
+                <motion.div 
+                  initial={{ width: 0 }} animate={{ width: "25%" }} transition={{ duration: 1, ease: "easeOut" }}
+                  className="h-full bg-[#2D2D2D]"
+                />
+                <motion.div 
+                  initial={{ width: 0 }} animate={{ width: "50%" }} transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                  className="h-full bg-[#D56B45]"
+                />
+                <motion.div 
+                  initial={{ width: 0 }} animate={{ width: "25%" }} transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+                  className="h-full bg-[#84A98C]"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Main Grid Card wrapper - borderless and transparent on mobile to support clean layout, with hidden scrollbar */}
       <div className="p-0 sm:p-5 bg-transparent sm:bg-white border-none sm:border sm:border-[#EAEAEA] sm:rounded-md shadow-none sm:shadow-3xs">
         <div className="flex flex-col space-y-2.5 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden">
