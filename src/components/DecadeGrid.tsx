@@ -25,12 +25,12 @@ export default React.memo(function DecadeGrid({
   const [activeSlice, setActiveSlice] = useState<"dev" | "work" | "free" | null>(null);
   const [use255025Model, setUse255025Model] = useState(false);
   
-  // Effective phases
-  const effectiveStartWorkAge = use255025Model ? 25 : startWorkAge;
-  const effectiveFireAge = use255025Model ? 75 : fireAge;
-  
   // Total years in the runway (e.g. 82 years = 82 boxes)
-  const totalYears = use255025Model ? 100 : Math.max(1, Math.ceil(projectedLifeExpectancy));
+  const totalYears = Math.max(1, Math.ceil(projectedLifeExpectancy));
+
+  // Effective phases (25/50/25 is based on projected life expectancy)
+  const effectiveStartWorkAge = use255025Model ? Math.round(totalYears * 0.25) : startWorkAge;
+  const effectiveFireAge = use255025Model ? Math.round(totalYears * 0.75) : fireAge;
 
   // Determine which phase a given year falls into
   const getYearPhase = (year: number): "basis" | "accumulation" | "freedom" | "beyond" => {
@@ -53,13 +53,13 @@ export default React.memo(function DecadeGrid({
           </h4>
           <button 
             onClick={() => setUse255025Model(!use255025Model)}
-            className={`text-[9px] px-2 py-0.5 rounded-full border transition-all flex items-center gap-1 ${
+            className={`text-[10px] px-3 py-1 rounded-md border transition-all font-bold flex items-center shadow-sm ${
               use255025Model 
-                ? 'bg-[#2D2D2D] text-white border-[#2D2D2D]' 
-                : 'bg-white text-[#767676] border-[#EAE8E4] hover:bg-gray-50'
+                ? 'bg-[#D56B45] text-white border-[#D56B45]' 
+                : 'bg-white text-[#2D2D2D] border-[#EAE8E4] hover:bg-gray-50'
             }`}
           >
-            25/50/25 Model
+            {use255025Model ? "✓ 25/50/25 Model" : "Toon 25/50/25 Model"}
           </button>
         </div>
         <div className="flex items-center space-x-3 text-[10px] text-[#767676] font-mono">
