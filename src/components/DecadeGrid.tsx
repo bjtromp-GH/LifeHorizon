@@ -209,13 +209,13 @@ export default React.memo(function DecadeGrid({
                         <motion.div
                           key={`pad-${i}`}
                           initial={{ opacity: 0, scale: 0.5, y: 10 }}
-                          animate={{ opacity: 0.3, scale: 1, y: 0 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
                           transition={{ 
                             duration: 0.4, 
                             delay: padYear * 0.015,
                             ease: "easeOut"
                           }}
-                          className="flex-1 border border-dashed border-gray-200 bg-transparent"
+                          className="flex-1 border border-dashed border-[#B0BEC5] rounded-[3px] bg-transparent"
                           style={{ aspectRatio: "1/1" }}
                         />
                       );
