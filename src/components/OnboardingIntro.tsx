@@ -294,7 +294,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
             </div>
 
             {step > 2 && (
-              <div className="w-full bg-[#EAE8E4] h-1 rounded-full relative overflow-hidden flex mb-1.5 sm:mb-2">
+              <div className="w-full bg-[#EAE8E4] h-2.5 rounded-full relative overflow-hidden flex mb-2 shadow-inner">
                 <motion.div 
                   className="h-full bg-[#D56B45]"
                   initial={{ width: 0 }}
@@ -305,9 +305,12 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
             )}
 
             {step > 2 && (
-              <div className="flex justify-between w-full px-1 text-[9px] sm:text-[10px] text-[#767676] font-medium uppercase tracking-wider">
-                <span>{t('common.step')} {step - 2} {t('common.of')} {stepsMeta.length - 3}</span>
-                <span className="text-[#D56B45] font-semibold">{stepsMeta[step].title}</span>
+              <div className="flex justify-between w-full px-1 text-[10px] sm:text-[11px] text-[#767676] font-medium uppercase tracking-wider items-center">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-[#2D2D2D] bg-[#F2F0E9] px-2 py-0.5 rounded-md">{Math.round(((step - 2) / (stepsMeta.length - 3)) * 100)}%</span>
+                  <span>{t('common.step')} {step - 2} / {stepsMeta.length - 3}</span>
+                </div>
+                <span className="text-[#D56B45] font-bold">{stepsMeta[step].title}</span>
               </div>
             )}
           </motion.header>
