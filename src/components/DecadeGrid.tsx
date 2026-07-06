@@ -58,7 +58,7 @@ export default React.memo(function DecadeGrid({
   };
 
   // Organize years into decades (rows of 10 items)
-  const decadesCount = useMemo(() => Math.ceil(totalYears / 10), [totalYears]);
+  const decadesCount = useMemo(() => Math.max(10, Math.ceil(totalYears / 10)), [totalYears]);
   const decadesArray = useMemo(() => Array.from({ length: decadesCount }, (_, i) => i), [decadesCount]);
 
   return (
@@ -204,7 +204,7 @@ export default React.memo(function DecadeGrid({
                   {/* Pad row if it has fewer than 10 blocks (the very last decade) */}
                   {yearsInThisDecade.length < 10 &&
                     Array.from({ length: 10 - yearsInThisDecade.length }).map((_, i) => {
-                      const padYear = (yearsInThisDecade[yearsInThisDecade.length - 1] || startYearOfDecade) + i + 1;
+                      const padYear = startYearOfDecade + yearsInThisDecade.length + i;
                       return (
                         <motion.div
                           key={`pad-${i}`}
