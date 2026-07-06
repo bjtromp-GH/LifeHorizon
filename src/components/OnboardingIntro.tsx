@@ -286,12 +286,6 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
             transition={{ duration: 0.5, delay: 0.3 }}
             className="w-full max-w-xl mx-auto flex flex-col items-center pt-safe-header sm:pt-safe z-10 shrink-0"
           >
-            <div className="flex items-center space-x-1.5 mb-1.5 sm:mb-3">
-              <span className="text-xl">🔥</span>
-              <h1 className="font-sans font-extrabold text-xs sm:text-base uppercase tracking-wider text-[#2D2D2D]">
-                {t('onboarding.header')}
-              </h1>
-            </div>
 
             {step > 2 && (
               <div className="w-full bg-[#EAE8E4] h-2.5 rounded-full relative overflow-hidden flex mb-2 shadow-inner">
