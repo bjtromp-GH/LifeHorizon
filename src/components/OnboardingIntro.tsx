@@ -360,7 +360,9 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 transition={{ delay: 0.2, duration: 0.4 }}
                 className="text-center"
               >
-                <h2 className="text-xl sm:text-3xl font-black text-[#D56B45] uppercase tracking-wider mb-2 drop-shadow-sm">{t('onboarding.transition.goodJob')}</h2>
+                <h2 className="text-xl sm:text-3xl font-black text-[#D56B45] uppercase tracking-wider mb-2 drop-shadow-sm">
+                  {inputs.name ? t('onboarding.transition.goodJobName', { name: inputs.name }) : t('onboarding.transition.goodJob')}
+                </h2>
                 <p className="text-sm sm:text-lg font-bold text-[#767676]">{t('onboarding.transition.nextStep', { step: (step - 1).toString() })}</p>
               </motion.div>
             </motion.div>

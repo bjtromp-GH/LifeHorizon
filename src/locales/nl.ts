@@ -31,6 +31,7 @@ export const nl = {
     header: "Levensloop & Pensioen",
     transition: {
       goodJob: "Goed bezig!",
+      goodJobName: "Goed bezig {{name}}!",
       nextStep: "Door naar stap {{step}}"
     },
     splash: {

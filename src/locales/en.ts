@@ -32,8 +32,9 @@ export const en: Translations = {
   onboarding: {
     header: "Life Course & Retirement",
     transition: {
-      goodJob: "Great job!",
-      nextStep: "On to step {{step}}"
+      goodJob: "Good job!",
+      goodJobName: "Good job {{name}}!",
+      nextStep: "Moving to step {{step}}"
     },
     splash: {
       badge: "CHART YOUR COURSE",
