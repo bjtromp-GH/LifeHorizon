@@ -43,7 +43,9 @@ export const nl = {
       title: "Hallo, ik ben de Life Horizon Olifant!",
       desc: "Wat is jouw voornaam?",
       placeholder: "Vul je naam in...",
-      button: "Aangenaam"
+      button: "Aangenaam",
+      greeting: "Hallo {{name}}!",
+      greetingSub: "Aangenaam! Laten we jouw levensloop verkennen..."
     },
     privacy: {
       badge: "100% Privé",

@@ -164,7 +164,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
         if (step === 0) {
           await StatusBar.setStyle({ style: Style.Dark });
           await StatusBar.setBackgroundColor({ color: '#E25C26' });
-        } else if (step === 0.25 || step === 0.5 || step === 0.75) {
+        } else if (step === 0.25 || step === 0.35 || step === 0.5 || step === 0.75) {
           await StatusBar.setStyle({ style: Style.Dark });
           await StatusBar.setBackgroundColor({ color: '#2D2D2D' });
         } else if (step === 1) {
@@ -195,6 +195,15 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
   useEffect(() => {
     if (canProceed) setShowValidation(false);
   }, [canProceed]);
+
+  useEffect(() => {
+    if (step === 0.35) {
+      const timer = setTimeout(() => {
+        setStep(0.5);
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
 
   const mainScrollRef = useRef<HTMLElement>(null);
   const activitySectionRef = useRef<HTMLDivElement>(null);
@@ -517,8 +526,17 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                     {t('onboarding.name.badge')}
                   </span>
                 </motion.div>
-                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug">
-                  {t('onboarding.name.title')}
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug block">
+                  {t('onboarding.name.title').split('').map((char, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.04 + 0.3, duration: 0.05 }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
                 </h2>
                 <motion.img 
                   src="/img/olifant-bril.png" 
@@ -563,7 +581,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   disabled={!localName.trim()}
                   onClick={() => {
                     playChimeSound();
-                    setStep(0.5);
+                    setStep(0.35);
                   }}
                   className={`w-full py-4 px-6 font-extrabold text-sm sm:text-base tracking-wider rounded-xl flex items-center justify-center space-x-3 shadow-xl transition-all duration-200 ${
                     localName.trim() ? "bg-[#D56B45] hover:bg-[#C0562F] text-white cursor-pointer" : "bg-white/10 text-white/30 cursor-not-allowed"
@@ -573,6 +591,38 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
                 </motion.button>
               </div>
+            </motion.div>
+          ) : step === 0.35 ? (
+            <motion.div
+              key="greeting-screen"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-[#2D2D2D] flex flex-col items-center justify-center p-6 pt-safe select-none overflow-hidden z-50 text-white"
+            >
+              <div className="absolute top-[-20%] right-[-10%] w-96 h-96 rounded-full bg-[#E25C26] blur-[120px] opacity-20 pointer-events-none" />
+              <motion.img 
+                src="/img/LR_Olifant_v2.png" 
+                decoding="async"
+                initial={{ scale: 0.8, rotate: -5, opacity: 0, y: 20 }}
+                animate={{ scale: 1.1, rotate: 0, opacity: 1, y: 0 }}
+                transition={{ type: "spring", bounce: 0.4, duration: 0.6 }}
+                className="w-48 h-48 sm:w-56 sm:h-56 object-contain drop-shadow-2xl mb-8"
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+                className="text-center"
+              >
+                <h2 className="text-2xl sm:text-4xl font-black text-[#D56B45] uppercase tracking-wider mb-3 drop-shadow-sm">
+                  {t('onboarding.name.greeting', { name: localName })}
+                </h2>
+                <p className="text-base sm:text-xl font-bold text-white/80">
+                  {t('onboarding.name.greetingSub')}
+                </p>
+              </motion.div>
             </motion.div>
           ) : step === 0.5 ? (
             <motion.div

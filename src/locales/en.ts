@@ -45,7 +45,9 @@ export const en: Translations = {
       title: "Hi, I'm the Life Horizon Elephant!",
       desc: "What is your first name?",
       placeholder: "Enter your name...",
-      button: "Nice to meet you"
+      button: "Nice to meet you",
+      greeting: "Hi {{name}}!",
+      greetingSub: "Nice to meet you! Let's explore your life course..."
     },
     privacy: {
       badge: "100% Private",
