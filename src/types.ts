@@ -11,6 +11,7 @@ export interface BioScoreAnswers {
 }
 
 export interface UserInputs {
+  name: string;
   birthYear: number;
   gender: Gender;
   currentAge: number;

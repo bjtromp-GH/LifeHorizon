@@ -40,6 +40,13 @@ export const en: Translations = {
       footer: "Calculate your remaining time • CBS Model 2026",
       startBtn: "Discover Your Life Course"
     },
+    name: {
+      badge: "Your Name",
+      title: "Hi, I'm the Life Horizon Elephant!",
+      desc: "What is your first name?",
+      placeholder: "Enter your name...",
+      button: "Nice to meet you"
+    },
     privacy: {
       badge: "100% Private",
       title: "Your data is yours",

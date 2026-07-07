@@ -38,6 +38,13 @@ export const nl = {
       footer: "Bereken je resterende tijd • CBS Model 2026",
       startBtn: "Ontdek je Levensloop"
     },
+    name: {
+      badge: "Jouw Naam",
+      title: "Hallo, ik ben de Life Horizon Olifant!",
+      desc: "Wat is jouw voornaam?",
+      placeholder: "Vul je naam in...",
+      button: "Aangenaam"
+    },
     privacy: {
       badge: "100% Privé",
       title: "Jouw data is van jou",

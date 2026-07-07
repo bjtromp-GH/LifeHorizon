@@ -49,6 +49,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
   const [imgError, setImgError] = useState(false);
   
   const [localGender, setLocalGender] = useState<Gender | null>(null);
+  const [localName, setLocalName] = useState<string>(inputs.name || "");
   const [localBirthYear, setLocalBirthYear] = useState<string>(inputs.birthYear.toString());
   const [localAge, setLocalAge] = useState<string>(inputs.currentAge.toString());
   const [ageInteracted, setAgeInteracted] = useState(false);
@@ -163,7 +164,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
         if (step === 0) {
           await StatusBar.setStyle({ style: Style.Dark });
           await StatusBar.setBackgroundColor({ color: '#E25C26' });
-        } else if (step === 0.5 || step === 0.75) {
+        } else if (step === 0.25 || step === 0.5 || step === 0.75) {
           await StatusBar.setStyle({ style: Style.Dark });
           await StatusBar.setBackgroundColor({ color: '#2D2D2D' });
         } else if (step === 1) {
@@ -462,7 +463,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   <button
                     onClick={() => {
                       playChimeSound();
-                      setStep(0.5);
+                      setStep(0.25);
                     }}
                     className="w-full flex items-center justify-center space-x-3 bg-white text-[#D56B45] py-4 rounded-2xl font-black shadow-xl hover:shadow-2xl transition-all active:scale-95 group relative overflow-hidden"
                   >
@@ -492,6 +493,85 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 >
                   {t('onboarding.splash.footer')}
                 </motion.span>
+              </div>
+            </motion.div>
+          ) : step === 0.25 ? (
+            <motion.div
+              key="name-screen"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-[#2D2D2D] flex flex-col justify-between p-6 pt-safe select-none overflow-hidden z-50 text-white"
+            >
+              {/* Decorative elements */}
+              <div className="absolute top-[-20%] left-[-10%] w-96 h-96 rounded-full bg-[#E25C26] blur-[120px] opacity-20 pointer-events-none" />
+              
+              <div className="w-full flex flex-col items-center pt-8 sm:pt-12 z-10 space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+                  className="flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full"
+                >
+                  <Smile size={18} className="text-white" />
+                  <span className="font-sans font-bold text-xs sm:text-sm tracking-widest uppercase text-white/90">
+                    {t('onboarding.name.badge')}
+                  </span>
+                </motion.div>
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug">
+                  {t('onboarding.name.title')}
+                </h2>
+                <motion.img 
+                  src="/img/olifant-bril.png" 
+                  alt="Olifant met bril" 
+                  initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.6, type: "spring", bounce: 0.5 }}
+                  className="w-28 sm:w-36 h-auto drop-shadow-2xl pt-2"
+                />
+              </div>
+
+              <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-6 sm:mt-8">
+                <div className="space-y-3 sm:space-y-4 w-full px-2">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                    className="p-6 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-sm relative w-full flex flex-col items-center"
+                  >
+                    <p className="text-lg font-bold text-white/90 mb-4">{t('onboarding.name.desc')}</p>
+                    <input
+                      type="text"
+                      value={localName}
+                      onChange={(e) => {
+                        setLocalName(e.target.value);
+                        onInputChange({ name: e.target.value });
+                      }}
+                      placeholder={t('onboarding.name.placeholder')}
+                      className="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white text-xl font-semibold text-center placeholder:text-white/40 focus:outline-none focus:border-[#D56B45] focus:ring-2 focus:ring-[#D56B45]/50 transition-all"
+                      autoFocus
+                    />
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Footer with Continuing button */}
+              <div className="w-full max-w-md mx-auto pb-4 sm:pb-12 flex flex-col items-center z-10">
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.6, type: "spring" }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
+                  whileTap={{ scale: 0.97 }}
+                  disabled={!localName.trim()}
+                  onClick={() => {
+                    playChimeSound();
+                    setStep(0.5);
+                  }}
+                  className={`w-full py-4 px-6 font-extrabold text-sm sm:text-base tracking-wider rounded-xl flex items-center justify-center space-x-3 shadow-xl transition-all duration-200 ${
+                    localName.trim() ? "bg-[#D56B45] hover:bg-[#C0562F] text-white cursor-pointer" : "bg-white/10 text-white/30 cursor-not-allowed"
+                  }`}
+                >
+                  <span>{t('onboarding.name.button')}</span>
+                  <ChevronRight className="w-5 h-5 stroke-[2.5px]" />
+                </motion.button>
               </div>
             </motion.div>
           ) : step === 0.5 ? (

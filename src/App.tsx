@@ -12,6 +12,7 @@ export default function App() {
   // 1. Core State
   // Default values coordinate to Born in 1980 -> Age 46 (as of local current time 2026)
   const [inputs, setInputs] = useState<UserInputs>({
+    name: "",
     birthYear: 1980,
     gender: "man",
     currentAge: 46,
@@ -188,6 +189,7 @@ export default function App() {
       await Preferences.remove({ key: 'userInputs' });
       setHasStoredData(false);
       setInputs({
+        name: "",
         birthYear: 1980,
         gender: "man",
         currentAge: 46,

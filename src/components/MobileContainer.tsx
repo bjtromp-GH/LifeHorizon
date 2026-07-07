@@ -166,8 +166,8 @@ export default function MobileContainer({
       </AnimatePresence>
 
       {/* Floating Restore Navigation button when in immersive swiped view */}
-      {isSwipedFullscreen && (
-        <div className="absolute top-3 right-3 z-50 flex items-center space-x-1.5 pointer-events-auto">
+      {isSwipedFullscreen && activeSlide < 4 && (
+        <div className="absolute right-3 z-50 flex items-center space-x-1.5 pointer-events-auto top-[calc(env(safe-area-inset-top)+12px)]">
           <button
             type="button"
             onClick={() => setIsSwipedFullscreen(false)}
@@ -293,7 +293,11 @@ export default function MobileContainer({
           setIsSwipedFullscreen(true);
         }}
         className={`flex-1 relative overflow-y-auto px-4 pb-4 transition-colors duration-300 cursor-pointer ${
-          isSwipedFullscreen ? "pt-14" : "pt-4"
+          isSwipedFullscreen 
+            ? activeSlide < 4 
+              ? "pt-[calc(env(safe-area-inset-top)+64px)]" 
+              : "pt-[calc(env(safe-area-inset-top)+16px)]"
+            : "pt-4"
         } ${
           activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-[#F9F8F6] text-[#2D2D2D]"
         }`}
@@ -895,7 +899,7 @@ export default function MobileContainer({
               <div 
                 className="flex flex-col justify-end bg-black relative -mx-4 -mb-4"
                 style={{ 
-                  marginTop: isSwipedFullscreen ? '-56px' : '-16px', 
+                  marginTop: isSwipedFullscreen ? 'calc((env(safe-area-inset-top) + 16px) * -1)' : '-16px', 
                   minHeight: isSwipedFullscreen ? '100dvh' : 'calc(100dvh - 140px)' 
                 }}
               >
