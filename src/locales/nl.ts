@@ -162,6 +162,7 @@ export const nl = {
     },
     ready: {
       badge: "Klaar om te ontdekken!",
+      interesting: "Jouw levensloop is interessant {{name}}",
       title: "Klaar om te ontdekken!",
       desc: "Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.",
       button: "Bekijk Levensmatrix",

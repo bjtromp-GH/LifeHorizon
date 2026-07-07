@@ -164,6 +164,7 @@ export const en: Translations = {
     },
     ready: {
       badge: "Ready to explore!",
+      interesting: "Your life course is interesting {{name}}",
       title: "Ready to explore!",
       desc: "All factors are compiled. We will route your demographic data live into the CBS model to determine your exact survival curve.",
       button: "View Life Matrix",

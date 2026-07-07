@@ -1478,6 +1478,11 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               </div>
 
               <div className="space-y-2">
+                {inputs.name && (
+                  <p className="text-sm font-bold text-[#D56B45] mb-1">
+                    {t('onboarding.ready.interesting', { name: inputs.name })}
+                  </p>
+                )}
                 <h2 className="text-[21px] sm:text-2xl font-black tracking-tight text-[#2D2D2D]">
                   {t('onboarding.ready.title')}
                 </h2>
