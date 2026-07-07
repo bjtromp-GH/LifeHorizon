@@ -551,7 +551,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               <div className="flex-grow flex flex-col items-center justify-center max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-6 sm:mt-8">
                 <div className="space-y-3 sm:space-y-4 w-full px-2">
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.2, duration: 0.8 }}
                     className="p-6 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-sm relative w-full flex flex-col items-center"
                   >
                     <p className="text-lg font-bold text-white/90 mb-4">{t('onboarding.name.desc')}</p>
@@ -564,7 +564,6 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                       }}
                       placeholder={t('onboarding.name.placeholder')}
                       className="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white text-xl font-semibold text-center placeholder:text-white/40 focus:outline-none focus:border-[#D56B45] focus:ring-2 focus:ring-[#D56B45]/50 transition-all"
-                      autoFocus
                     />
                   </motion.div>
                 </div>
@@ -575,7 +574,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.6, type: "spring" }}
+                  transition={{ delay: 2.5, duration: 0.6, type: "spring" }}
                   whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)" }}
                   whileTap={{ scale: 0.97 }}
                   disabled={!localName.trim()}

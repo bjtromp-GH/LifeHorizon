@@ -66,7 +66,7 @@ export default React.memo(function DecadeGrid({
       <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center space-x-3">
           <h4 className="text-xs font-semibold uppercase tracking-wider text-[#767676]">
-            {t('decadeGrid.title')}
+            {inputs.name ? t('decadeGrid.title', { name: inputs.name }) : t('dashboard.matrixTitle')}
           </h4>
         </div>
         <div className="flex items-center space-x-3 text-[10px] text-[#767676] font-mono">

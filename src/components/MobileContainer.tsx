@@ -233,7 +233,7 @@ export default function MobileContainer({
           {/* Quick Info bar triggering configuration */}
           <div className="bg-white border-b border-[#EAEAEA]/80 px-4 py-2 flex items-center justify-between text-xs text-[#5c5c5c] shrink-0">
             <div className="flex items-center space-x-1">
-              <span className="font-bold text-[#2D2D2D]">{t('common.profile')}:</span>
+              <span className="font-bold text-[#2D2D2D]">{inputs.name ? t('common.profileOf', { name: inputs.name }) : t('common.profile')}:</span>
               <span>{inputs.gender === "man" ? t('common.man') : t('common.woman')} &bull; {t('dashboard.born')} {inputs.birthYear} &bull; {t('common.work')}: {inputs.startWorkAge} - {inputs.fireAge}</span>
             </div>
             <button
@@ -580,7 +580,7 @@ export default function MobileContainer({
                   <div className="bg-[#5c2411]/20 p-4 rounded-xl border border-white/10 text-[13px] text-stone-50 max-w-sm mx-auto w-full leading-relaxed space-y-2">
                     <p
                       dangerouslySetInnerHTML={{
-                        __html: t('mobileContainer.overviewTitle')
+                        __html: t('mobileContainer.overviewTitle', { name: inputs.name ? `${inputs.name}, ` : '' })
                           .replace('{{years}}', Math.round(projectedLifeExpectancy).toString())
                           .replace('{{weeks}}', Math.round(projectedLifeExpectancy * 52.17).toLocaleString(t('dashboard.lang')))
                       }}
@@ -1249,7 +1249,7 @@ export default function MobileContainer({
             >
               <div className="flex justify-between items-center px-5 py-4 bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
                 <h3 className="text-lg font-black font-sans tracking-tight text-[#2D2D2D] uppercase">
-                  {t('mobileContainer.matrixTitle')}
+                  {inputs.name ? t('decadeGrid.title', { name: inputs.name }) : t('dashboard.matrixTitle')}
                 </h3>
                 <button
                   onClick={() => setShowMatrixModal(false)}

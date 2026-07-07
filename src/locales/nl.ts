@@ -12,6 +12,7 @@ export const nl = {
     understood: "Begrepen",
     work: "Werk",
     profile: "Profiel",
+    profileOf: "Profiel van {{name}}",
     retirementGoal: "Pensioendoel",
     welcome: "Welkom",
     to: "tot",
@@ -297,7 +298,7 @@ export const nl = {
     phase3Desc: "De oogstfase. Werk is optioneel geworden dankzij opgebouwd vermogen (pensioen). De nadruk verschuift naar zingeving, genieten, tijd doorbrengen met dierbaren en het najagen van persoonlijke passies in goede gezondheid."
   },
   decadeGrid: {
-    title: "Levensmatrix",
+    title: "De Levensmatrix van {{name}}",
     development: "Ontwikkeling",
     work: "Werk",
     freedom: "Vrijheid",
@@ -354,7 +355,7 @@ export const nl = {
     harvestPhase: "De ultieme oogstfase van je leven."
   },
   mobileContainer: {
-    overviewTitle: "Jouw verwachte leefduur van <span class=\"font-bold text-white\">{{years}} jaar</span> telt ca. <span class=\"font-bold text-white\">{{weeks}} weken</span>. Elk hokje in de matrix vertegenwoordigt een unieke week.",
+    overviewTitle: "{{name}}Jouw verwachte leefduur van <span class=\"font-bold text-white\">{{years}} jaar</span> telt ca. <span class=\"font-bold text-white\">{{weeks}} weken</span>. Elk hokje in de matrix vertegenwoordigt een unieke week.",
     overviewDesc: "De kleurverdeling (Ontwikkeling, Werk, Vrijheid) verschuift mee met jouw persoonlijke Bio-Score!",
     continueBtn: "Laten we verder gaan",
     adjustBtn: "Pas aan",

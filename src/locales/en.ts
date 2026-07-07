@@ -14,6 +14,7 @@ export const en: Translations = {
     understood: "Understood",
     work: "Work",
     profile: "Profile",
+    profileOf: "{{name}}'s Profile",
     retirementGoal: "Retirement Goal",
     welcome: "Welcome",
     to: "to",
@@ -299,7 +300,7 @@ export const en: Translations = {
     phase3Desc: "The harvest phase. Work has become optional thanks to accumulated wealth (pension). The emphasis shifts to meaning, enjoyment, spending time with loved ones, and pursuing personal passions in good health."
   },
   decadeGrid: {
-    title: "Life Matrix",
+    title: "{{name}}'s Life Matrix",
     development: "Development",
     work: "Work",
     freedom: "Freedom",
@@ -356,7 +357,7 @@ export const en: Translations = {
     harvestPhase: "The ultimate harvest phase of your life."
   },
   mobileContainer: {
-    overviewTitle: "Your expected life span of <span class=\"font-bold text-white\">{{years}} years</span> counts approx. <span class=\"font-bold text-white\">{{weeks}} weeks</span>. Each box in the matrix represents a unique week.",
+    overviewTitle: "{{name}}Your expected lifespan of <span class=\"font-bold text-white\">{{years}} years</span> contains approx. <span class=\"font-bold text-white\">{{weeks}} weeks</span>. Each block in the matrix represents a unique week.",
     overviewDesc: "The color distribution (Development, Work, Freedom) shifts along with your personal Bio-Score!",
     continueBtn: "Let's continue",
     adjustBtn: "Adjust",

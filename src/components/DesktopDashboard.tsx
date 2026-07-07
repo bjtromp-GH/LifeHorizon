@@ -75,7 +75,7 @@ export default function DesktopDashboard({
                 Life Horizon
               </h1>
               <p className="text-xs text-[#767676]">
-                {t('desktopDashboard.subtitle')}
+                {t('desktopDashboard.subtitle', { name: inputs.name || 'Reiziger' })}
               </p>
             </div>
           </div>
