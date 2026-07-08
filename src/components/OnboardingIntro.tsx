@@ -1682,6 +1682,9 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 <p>
                   {t('onboarding.genetics.modalDesc1')}
                 </p>
+                <div className="w-full flex justify-center py-4">
+                  <img src="/img/olifant-bril.png" alt="Olifant met bril" className="w-40 sm:w-48 h-auto object-contain opacity-90" />
+                </div>
                 <p>
                   {t('onboarding.genetics.modalDesc2')}
                 </p>

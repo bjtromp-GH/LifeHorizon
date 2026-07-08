@@ -147,8 +147,8 @@ export const nl = {
       passed: "Overleden",
       passedAge: "Geleefde leeftijd van {{parent}}:",
       modalTitle: "Genetica vs. Leefstijl",
-      modalDesc1: "Het feit dat beide ouders aan een ziekte zijn overleden heeft invloed op je statistische levensverwachting, maar je eigen levensloop staat niet vast.",
-      modalDesc2: "Onderzoek toont aan dat levensduur voor slechts 10% tot 25% genetisch bepaald is. De overige 75% tot 90% stuur je grotendeels zelf aan met leefstijl en omgeving. Conclusie: Je DNA is de blauwdruk, maar jij bent de regisseur."
+      modalDesc1: "Hoewel genetica een zekere invloed heeft – een soort basislijn voor je levensverwachting – is het absoluut niet zo dat je lot vastligt. Je DNA is slechts het eerste hoofdstuk van je boek; jij schrijft zelf de rest.",
+      modalDesc2: "Wetenschappelijk onderzoek toont aan dat levensduur voor slechts 10% tot 25% genetisch bepaald is. Dat betekent dat jij voor de overige 75% tot 90% zélf aan het roer staat. Met de juiste keuzes rondom leefstijl, slaap en stressmanagement kun je een gigantische impact maken. Conclusie: Je DNA is de blauwdruk, maar jij bent en blijft de regisseur!"
     },
     career: {
       badge: "Stap 4: Carrière & Pensioen",

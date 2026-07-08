@@ -149,8 +149,8 @@ export const en: Translations = {
       passed: "Passed away",
       passedAge: "Lived age of {{parent}}:",
       modalTitle: "Genetics vs. Lifestyle",
-      modalDesc1: "The fact that both parents died of an illness impacts your statistical life expectancy, but your own timeline is not fixed.",
-      modalDesc2: "Research shows that lifespan is only 10% to 25% genetically determined. The other 75% to 90% is largely controlled by your own lifestyle and environment. Conclusion: Your DNA is the blueprint, but you are the director."
+      modalDesc1: "Although genetics plays a role—acting as a baseline for your life expectancy—your destiny is absolutely not set in stone. Your DNA is merely the first chapter of your book; you write the rest yourself.",
+      modalDesc2: "Scientific research shows that lifespan is only 10% to 25% genetically determined. This means that you are in control of the remaining 75% to 90%. With the right choices regarding lifestyle, sleep, and stress management, you can make a massive impact. Conclusion: Your DNA is the blueprint, but you are and remain the director!"
     },
     career: {
       badge: "Step 4: Career & Retirement",
