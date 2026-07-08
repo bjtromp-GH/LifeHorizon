@@ -1248,7 +1248,7 @@ export default function MobileContainer({
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="relative w-full h-full flex flex-col bg-[#FAFCEE]"
             >
-              <div className="flex justify-between items-center px-5 py-4 bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
+              <div className="flex justify-between items-center px-5 pb-4 pt-[calc(env(safe-area-inset-top)+16px)] bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
                 <h3 className="text-lg font-black font-sans tracking-tight text-[#2D2D2D] uppercase">
                   {inputs.name ? t('decadeGrid.title', { name: inputs.name }) : t('dashboard.matrixTitle')}
                 </h3>
@@ -1289,7 +1289,7 @@ export default function MobileContainer({
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="relative w-full h-full flex flex-col bg-[#F9F8F6]"
             >
-              <div className="flex justify-between items-center px-5 py-4 bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
+              <div className="flex justify-between items-center px-5 pb-4 pt-[calc(env(safe-area-inset-top)+16px)] bg-white border-b border-[#EAE8E4] shrink-0 shadow-sm z-20">
                 <h3 className="text-lg font-black font-sans tracking-tight text-[#2D2D2D] uppercase">
                   {t('dashboard.survivalCurveTitle') || "Overlevingskans"}
                 </h3>
