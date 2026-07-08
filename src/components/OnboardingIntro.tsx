@@ -200,7 +200,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
     if (step === 0.35) {
       const timer = setTimeout(() => {
         setStep(0.5);
-      }, 3500);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [step]);
