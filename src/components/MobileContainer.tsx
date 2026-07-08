@@ -328,6 +328,7 @@ export default function MobileContainer({
                   <SurvivalCurveCard 
                     inputs={inputs}
                     projectedLifeExpectancy={projectedLifeExpectancy}
+                    delayAppearance={1.8}
                   />
 
                   <StatsCard

@@ -7,9 +7,10 @@ import { useLanguage } from '../context/LanguageContext';
 interface Props {
   inputs: UserInputs;
   projectedLifeExpectancy: number;
+  delayAppearance?: number;
 }
 
-export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: Props) {
+export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy, delayAppearance = 0 }: Props) {
   const { t } = useLanguage();
   
   const currentAge = inputs.currentAge;
@@ -50,7 +51,12 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
   const title = t('dashboard.survivalCurveTitle') || `Kans voor een ${genderStr} van ${currentAge} jaar om te leven tot...`;
 
   return (
-    <div className="bg-white p-4 rounded-xl border border-[#EAEAEA] shadow-3xs space-y-4">
+    <motion.div 
+      initial={{ opacity: delayAppearance > 0 ? 0 : 1, y: delayAppearance > 0 ? 20 : 0 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: delayAppearance, duration: 0.5 }}
+      className="bg-white p-4 rounded-xl border border-[#EAEAEA] shadow-3xs space-y-4"
+    >
       <div className="flex items-center space-x-2">
         <Activity className="w-4 h-4 text-[#D56B45]" />
         <h3 className="font-bold text-[#2D2D2D] text-sm leading-tight tracking-tight">
@@ -73,7 +79,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               className="flex flex-col items-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.3 }}
+              transition={{ duration: 0.4, delay: delayAppearance + 0.2 + i * 0.3 }}
             >
               <div className="flex items-center space-x-1.5 mb-1">
                 <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#D56B45] bg-white' : dot} box-content shrink-0`} />
@@ -100,7 +106,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               key={`desk-${age}`} 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.3 }}
+              transition={{ duration: 0.4, delay: delayAppearance + 0.2 + i * 0.3 }}
               className="absolute flex flex-col items-center -translate-x-1/2 bottom-0 w-24"
               style={{ left: `${x}%` }}
             >
@@ -178,7 +184,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               key={`pt-${age}`}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.4 + i * 0.3, type: "spring" }}
+              transition={{ duration: 0.4, delay: delayAppearance + 0.4 + i * 0.3, type: "spring" }}
               className={`absolute w-3 h-3 rounded-full border-[2.5px] -translate-x-1/2 -translate-y-1/2 shadow-sm ${styleClasses}`}
               style={{ left: `${x}%`, top: `${y}%` }}
             />
@@ -200,7 +206,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
           <motion.div 
             initial={{ opacity: 0, x: -5 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 1.5 }}
+            transition={{ duration: 0.4, delay: delayAppearance + 1.5 }}
             className="absolute top-1 text-[10px] leading-tight flex flex-col pointer-events-none"
             style={{ 
               left: `calc(${((projectedLifeExpectancy - currentAge) / (endAge - currentAge)) * 100}% + 4px)` 
@@ -216,7 +222,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
           <motion.div 
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.6 }}
+            transition={{ duration: 0.4, delay: delayAppearance + 0.6 }}
             className="absolute text-[10px] leading-tight flex flex-col items-center pointer-events-none -translate-x-1/2 text-[#D56B45]"
             style={{ 
               left: `${((68 - currentAge) / (endAge - currentAge)) * 100}%`,
@@ -230,6 +236,6 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
 
       </div>
       <div className="text-right text-[10px] text-[#767676] pt-5 -mb-2">Leeftijd</div>
-    </div>
+    </motion.div>
   );
 }

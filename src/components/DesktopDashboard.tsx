@@ -148,6 +148,7 @@ export default function DesktopDashboard({
               <SurvivalCurveCard 
                 inputs={inputs}
                 projectedLifeExpectancy={projectedLifeExpectancy}
+                delayAppearance={1.8}
               />
             </div>
 
