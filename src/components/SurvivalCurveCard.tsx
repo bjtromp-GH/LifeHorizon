@@ -73,7 +73,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               className="flex flex-col items-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 1 + i * 0.2 }}
+              transition={{ duration: 0.4, delay: 0.2 + i * 0.3 }}
             >
               <div className="flex items-center space-x-1.5 mb-1">
                 <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#D56B45] bg-white' : dot} box-content shrink-0`} />
@@ -100,7 +100,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               key={`desk-${age}`} 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 1 + i * 0.2 }}
+              transition={{ duration: 0.4, delay: 0.2 + i * 0.3 }}
               className="absolute flex flex-col items-center -translate-x-1/2 bottom-0 w-24"
               style={{ left: `${x}%` }}
             >
@@ -128,7 +128,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
           
           {/* Average Life Expectancy Line (Vertical) */}
           {projectedLifeExpectancy > currentAge && projectedLifeExpectancy <= endAge && (
-            <motion.line 
+            <line 
               x1={((projectedLifeExpectancy - currentAge) / (endAge - currentAge)) * 100} 
               y1="0" 
               x2={((projectedLifeExpectancy - currentAge) / (endAge - currentAge)) * 100} 
@@ -136,20 +136,15 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               stroke="#D56B45" 
               strokeWidth="0.5" 
               vectorEffect="non-scaling-stroke"
-              initial={{ opacity: 0, y2: 0 }}
-              animate={{ opacity: 1, y2: 100 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
             />
           )}
 
           {/* Fill Area up to Average Life Expectancy */}
           {projectedLifeExpectancy > currentAge && projectedLifeExpectancy <= endAge && (
-            <motion.path
+            <path
               d={`${pathD} L 100 100 L 0 100 Z`} // Full area under curve
               fill="#EAEAEA"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              transition={{ duration: 1, delay: 1 }}
+              opacity="0.5"
               // Clip path to only fill up to projectedLifeExpectancy
               clipPath="url(#fillClip)"
             />
@@ -159,7 +154,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
           </clipPath>
 
           {/* The Curve */}
-          <motion.path
+          <path
             d={pathD}
             fill="none"
             stroke="#111"
@@ -168,9 +163,6 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
             strokeLinejoin="round"
             className="drop-shadow-sm"
             vectorEffect="non-scaling-stroke"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
           />
         </svg>
 
@@ -186,7 +178,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
               key={`pt-${age}`}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 1.2 + i * 0.2, type: "spring" }}
+              transition={{ duration: 0.4, delay: 0.4 + i * 0.3, type: "spring" }}
               className={`absolute w-3 h-3 rounded-full border-[2.5px] -translate-x-1/2 -translate-y-1/2 shadow-sm ${styleClasses}`}
               style={{ left: `${x}%`, top: `${y}%` }}
             />
@@ -208,7 +200,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
           <motion.div 
             initial={{ opacity: 0, x: -5 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 1.6 }}
+            transition={{ duration: 0.4, delay: 1.5 }}
             className="absolute top-1 text-[10px] leading-tight flex flex-col pointer-events-none"
             style={{ 
               left: `calc(${((projectedLifeExpectancy - currentAge) / (endAge - currentAge)) * 100}% + 4px)` 
@@ -224,7 +216,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy }: P
           <motion.div 
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 1.4 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
             className="absolute text-[10px] leading-tight flex flex-col items-center pointer-events-none -translate-x-1/2 text-[#D56B45]"
             style={{ 
               left: `${((68 - currentAge) / (endAge - currentAge)) * 100}%`,
