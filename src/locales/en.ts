@@ -44,7 +44,7 @@ export const en: Translations = {
     },
     name: {
       badge: "Your Name",
-      title: "Hello,\nI am the Life Horizon Elephant!",
+      title: "Hello, I am the\nLife Horizon Elephant!",
       desc: "What is your first name?",
       placeholder: "Enter your name...",
       button: "Nice to meet you",
