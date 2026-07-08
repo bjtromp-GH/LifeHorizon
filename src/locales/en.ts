@@ -49,7 +49,8 @@ export const en: Translations = {
       placeholder: "Enter your name...",
       button: "Nice to meet you",
       greeting: "Hi {{name}}!",
-      greetingSub: "Nice to meet you! Let's explore your life course..."
+      greetingSub1: "Nice to meet you!",
+      greetingSub2: "Let's explore your life course..."
     },
     privacy: {
       badge: "100% Private",

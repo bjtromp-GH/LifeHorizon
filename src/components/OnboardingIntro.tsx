@@ -621,7 +621,8 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   {t('onboarding.name.greeting', { name: localName })}
                 </h2>
                 <p className="text-base sm:text-xl font-bold text-white/80">
-                  {t('onboarding.name.greetingSub')}
+                  <span className="block">{t('onboarding.name.greetingSub1')}</span>
+                  <span className="block">{t('onboarding.name.greetingSub2')}</span>
                 </p>
               </motion.div>
             </motion.div>

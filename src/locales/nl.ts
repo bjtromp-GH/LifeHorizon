@@ -47,7 +47,8 @@ export const nl = {
       placeholder: "Vul je naam in...",
       button: "Aangenaam",
       greeting: "Hallo {{name}}!",
-      greetingSub: "Aangenaam! Laten we jouw levensloop verkennen..."
+      greetingSub1: "Aangenaam!",
+      greetingSub2: "Laten we jouw levensloop verkennen..."
     },
     privacy: {
       badge: "100% Privé",
