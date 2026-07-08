@@ -712,13 +712,13 @@ export default function MobileContainer({
                       </motion.span>
                     </p>
                     <ul className="text-base sm:text-lg text-white/90 space-y-2.5 list-disc list-outside font-semibold ml-5 relative z-10">
-                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.0, duration: 0.4, repeat: 2, repeatType: "reverse" }}>
+                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.0, duration: 0.4, repeat: 2, repeatType: "reverse", repeatDelay: 2.5 }}>
                         <strong className="text-white">25%</strong> {t('mobileContainer.modelYouth')}
                       </motion.li>
-                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.5, duration: 0.4, repeat: 2, repeatType: "reverse" }}>
+                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.5, duration: 0.4, repeat: 2, repeatType: "reverse", repeatDelay: 2.5 }}>
                         <strong className="text-white">50%</strong> {t('mobileContainer.modelWork')}
                       </motion.li>
-                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 3.0, duration: 0.4, repeat: 2, repeatType: "reverse" }}>
+                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 3.0, duration: 0.4, repeat: 2, repeatType: "reverse", repeatDelay: 2.5 }}>
                         <strong className="text-white">25%</strong> {t('mobileContainer.modelFree')}
                       </motion.li>
                     </ul>
