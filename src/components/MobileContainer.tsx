@@ -690,9 +690,9 @@ export default function MobileContainer({
                     </table>
                   </div>
 
-                  <div className="space-y-4 bg-gradient-to-br from-[#FFF5F0] to-[#FAF3F0] p-5 sm:p-6 rounded-2xl border-2 border-[#D56B45]/30 shadow-sm relative overflow-hidden">
-                    <div className="absolute top-[-10px] right-[-10px] text-[#D56B45]/10 text-7xl rotate-12 pointer-events-none">✨</div>
-                    <p className="text-base sm:text-lg font-black text-[#D56B45] leading-snug">
+                  <div className="space-y-4 bg-[#D56B45] p-5 sm:p-6 rounded-2xl shadow-md relative overflow-hidden">
+                    <div className="absolute top-[-10px] right-[-10px] text-white/10 text-7xl rotate-12 pointer-events-none">✨</div>
+                    <p className="text-base sm:text-lg font-black text-white leading-snug">
                       {t('mobileContainer.modelInspiration1').split('').map((char, index) => (
                         <motion.span
                           key={index}
@@ -712,15 +712,15 @@ export default function MobileContainer({
                         {t('mobileContainer.modelInspiration2')}
                       </motion.span>
                     </p>
-                    <ul className="text-base sm:text-lg text-[#D56B45]/90 space-y-2.5 list-disc list-outside font-semibold ml-5 relative z-10">
+                    <ul className="text-base sm:text-lg text-white/90 space-y-2.5 list-disc list-outside font-semibold ml-5 relative z-10">
                       <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.0, duration: 0.4 }}>
-                        <strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelYouth')}
+                        <strong className="text-white">25%</strong> {t('mobileContainer.modelYouth')}
                       </motion.li>
                       <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.5, duration: 0.4 }}>
-                        <strong className="text-[#D56B45]">50%</strong> {t('mobileContainer.modelWork')}
+                        <strong className="text-white">50%</strong> {t('mobileContainer.modelWork')}
                       </motion.li>
                       <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 3.0, duration: 0.4 }}>
-                        <strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelFree')}
+                        <strong className="text-white">25%</strong> {t('mobileContainer.modelFree')}
                       </motion.li>
                     </ul>
                   </div>
