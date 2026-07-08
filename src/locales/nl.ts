@@ -199,7 +199,8 @@ export const nl = {
     matrixSubtitle: "Hoe verhouden levensverwachting en gezondheid zich tot elkaar?",
     matrixDetailsBtn: "Matrix details",
     healthVsLife: "Gezondheidsduur (Healthspan) vs Levensduur (Lifespan)",
-    survivalCurveTitle: "Overlevingskans Curve"
+    survivalCurveTitle: "Overlevingskans Curve",
+    survivalCurveDesc: "Deze grafiek toont de statistische kans om bepaalde leeftijden te bereiken, gebaseerd op actuariële CBS data. Naarmate de tijd vordert, neemt de curve sneller af. Elke dag is uniek, maar dit geeft een mooie indicatie van de statistische verwachting."
   },
   bioScore: {
     title: "Lifestyle Bio-Score",

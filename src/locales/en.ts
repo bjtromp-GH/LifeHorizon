@@ -201,7 +201,8 @@ export const en: Translations = {
     matrixSubtitle: "How do life expectancy and health relate?",
     matrixDetailsBtn: "Matrix details",
     healthVsLife: "Healthspan vs Lifespan",
-    survivalCurveTitle: "Survival Probability Curve"
+    survivalCurveTitle: "Survival Probability Curve",
+    survivalCurveDesc: "This graph shows the statistical probability of reaching certain ages, based on actuarial data. As time progresses, the curve declines faster. Every day is unique, but this gives a nice indication of the statistical expectation."
   },
   bioScore: {
     title: "Lifestyle Bio-Score",

@@ -1324,6 +1324,9 @@ export default function MobileContainer({
               </div>
               <div className="flex-1 overflow-y-auto overflow-x-hidden relative px-4 pt-8 pb-8 flex flex-col">
                 <SurvivalCurveCard inputs={inputs} projectedLifeExpectancy={projectedLifeExpectancy} />
+                <div className="mt-6 px-2 text-center text-sm text-[#767676] leading-relaxed">
+                  {t('dashboard.survivalCurveDesc')}
+                </div>
                 <div className="mt-8 flex justify-center pb-8">
                   <button onClick={() => setShowSurvivalModal(false)} className="w-full max-w-xs py-3.5 bg-white border border-[#EAEAEA] text-[#767676] font-bold rounded-xl shadow-sm hover:bg-gray-50 uppercase tracking-wider text-sm transition-all cursor-pointer">
                     {t('common.close') || "Sluiten"}
