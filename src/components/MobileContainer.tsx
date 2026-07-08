@@ -691,7 +691,6 @@ export default function MobileContainer({
                   </div>
 
                   <div className="space-y-4 bg-[#86A789] p-5 sm:p-6 rounded-2xl shadow-md relative overflow-hidden">
-                    <div className="absolute top-[-10px] right-[-10px] text-white/10 text-7xl rotate-12 pointer-events-none">✨</div>
                     <p className="text-base sm:text-lg font-black text-white leading-snug">
                       {t('mobileContainer.modelInspiration1').split('').map((char, index) => (
                         <motion.span
