@@ -692,14 +692,36 @@ export default function MobileContainer({
 
                   <div className="space-y-4 bg-gradient-to-br from-[#FFF5F0] to-[#FAF3F0] p-5 sm:p-6 rounded-2xl border-2 border-[#D56B45]/30 shadow-sm relative overflow-hidden">
                     <div className="absolute top-[-10px] right-[-10px] text-[#D56B45]/10 text-7xl rotate-12 pointer-events-none">✨</div>
-                    <p 
-                      className="text-base sm:text-lg font-black text-[#D56B45] leading-snug"
-                      dangerouslySetInnerHTML={{ __html: t('mobileContainer.modelInspiration') }}
-                    />
+                    <p className="text-base sm:text-lg font-black text-[#D56B45] leading-snug">
+                      {t('mobileContainer.modelInspiration1').split('').map((char, index) => (
+                        <motion.span
+                          key={index}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: index * 0.02, duration: 0.05 }}
+                        >
+                          {char}
+                        </motion.span>
+                      ))}
+                      <motion.span 
+                        className="whitespace-nowrap"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: (t('mobileContainer.modelInspiration1').length * 0.02) + 0.3, duration: 0.5, type: "spring" }}
+                      >
+                        {t('mobileContainer.modelInspiration2')}
+                      </motion.span>
+                    </p>
                     <ul className="text-base sm:text-lg text-[#D56B45]/90 space-y-2.5 list-disc list-outside font-semibold ml-5 relative z-10">
-                      <li><strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelYouth')}</li>
-                      <li><strong className="text-[#D56B45]">50%</strong> {t('mobileContainer.modelWork')}</li>
-                      <li><strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelFree')}</li>
+                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.0, duration: 0.4 }}>
+                        <strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelYouth')}
+                      </motion.li>
+                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.5, duration: 0.4 }}>
+                        <strong className="text-[#D56B45]">50%</strong> {t('mobileContainer.modelWork')}
+                      </motion.li>
+                      <motion.li initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 3.0, duration: 0.4 }}>
+                        <strong className="text-[#D56B45]">25%</strong> {t('mobileContainer.modelFree')}
+                      </motion.li>
                     </ul>
                   </div>
 
