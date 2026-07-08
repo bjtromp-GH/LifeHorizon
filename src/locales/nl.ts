@@ -42,7 +42,7 @@ export const nl = {
     },
     name: {
       badge: "Jouw Naam",
-      title: "Hallo, ik ben de Life Horizon Olifant!",
+      title: "Hallo,\nik ben de Life Horizon Olifant!",
       desc: "Wat is jouw voornaam?",
       placeholder: "Vul je naam in...",
       button: "Aangenaam",

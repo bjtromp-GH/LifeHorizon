@@ -530,14 +530,16 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 </motion.div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center px-2 leading-snug block">
                   {t('onboarding.name.title').split('').map((char, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: index * 0.04 + 0.3, duration: 0.05 }}
-                    >
-                      {char}
-                    </motion.span>
+                    char === '\n' ? <br key={index} /> : (
+                      <motion.span
+                        key={index}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: index * 0.04 + 0.3, duration: 0.05 }}
+                      >
+                        {char}
+                      </motion.span>
+                    )
                   ))}
                 </h2>
                 <motion.img 
