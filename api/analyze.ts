@@ -40,7 +40,7 @@ De gebruiker heeft de volgende gegevens ingevuld in hun gezondheidsprofiel:
   - Slaap: ${inputs.sleep}
   - Fysieke Activiteit: ${inputs.activity}
   - Stressniveau: ${inputs.stress}
-  - Roker: ${inputs.smoker === 'yes' ? 'Ja' : 'Nee'}
+  - Roker: ${inputs.smoker === 'ja' ? 'Ja' : 'Nee'}
   - Alcohol: ${inputs.alcohol}
   - Dieet: ${inputs.diet}
 - Genetica (leeftijd ouders):
