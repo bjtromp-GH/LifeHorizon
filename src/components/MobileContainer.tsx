@@ -446,7 +446,15 @@ export default function MobileContainer({
               <div className="space-y-4 flex flex-col justify-between h-full">
                 <div className="space-y-4">
                   <div id="mobile-analytics-wrapper" className="space-y-4">
-                    {/* AI Button - Mobile (Moved to Screen 3) */}
+                    <AestheticFidelityCards
+                      inputs={inputs}
+                      projectedLifeExpectancy={projectedLifeExpectancy}
+                      cbsBaseLife={cbsBaseLife}
+                      apiSource={apiSource}
+                      showOnly={["vitaliteit"]}
+                    />
+                    
+                    {/* AI Button - Mobile (Moved below Vitaliteit) */}
                     <div className="w-full">
                       <motion.button
                         whileHover={{ scale: 1.01 }}
@@ -468,12 +476,13 @@ export default function MobileContainer({
                         </div>
                       </motion.button>
                     </div>
+
                     <AestheticFidelityCards
                       inputs={inputs}
                       projectedLifeExpectancy={projectedLifeExpectancy}
                       cbsBaseLife={cbsBaseLife}
                       apiSource={apiSource}
-                      showOnly={["vitaliteit", "carriere", "horizon"]}
+                      showOnly={["carriere", "horizon"]}
                     />
                   </div>
                 </div>
