@@ -139,7 +139,7 @@ export const en: Translations = {
       yearsOffset: "{{val}} yr"
     },
     lifestyle2: {
-      badge: "Step 2b: Bio-Score Continued",
+      badge: "Step 3: Bio-Score Continued",
       title: "What are your other habits?",
       desc: "Smoking, alcohol, and diet strongly influence life expectancy.",
       smoker: {
@@ -159,7 +159,7 @@ export const en: Translations = {
       }
     },
     genetics: {
-      badge: "Step 3: Heredity",
+      badge: "Step 4: Heredity",
       title1: "How old did your biological",
       title2: "parents get?",
       desc: "Hereditary factors influence your health timeline <span class=\"whitespace-nowrap\">-1.5 to +1.5 years per parent.</span>",
@@ -174,7 +174,7 @@ export const en: Translations = {
       modalDesc2: "Scientific research shows that lifespan is only 10% to 25% genetically determined. This means that you are in control of the remaining 75% to 90%. With the right choices regarding lifestyle, sleep, and stress management, you can make a massive impact. Conclusion: Your DNA is the blueprint, but you are and remain the director!"
     },
     career: {
-      badge: "Step 4: Career & Retirement",
+      badge: "Step 5: Career & Retirement",
       title: "When did you start working and what is your retirement goal?",
       desc: "The split between mandatory working time and absolute time sovereignty.",
       startWork: "Career Start Age",

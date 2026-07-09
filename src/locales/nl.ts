@@ -137,7 +137,7 @@ export const nl = {
       yearsOffset: "{{val}} jr"
     },
     lifestyle2: {
-      badge: "Stap 2b: Bio-Score Vervolg",
+      badge: "Stap 3: Bio-Score Vervolg",
       title: "Wat zijn uw overige gewoonten?",
       desc: "Roken, alcohol en dieet hebben een sterke invloed op de levensverwachting.",
       smoker: {
@@ -157,7 +157,7 @@ export const nl = {
       }
     },
     genetics: {
-      badge: "Stap 3: Erfelijkheid",
+      badge: "Stap 4: Erfelijkheid",
       title1: "Hoe oud zijn uw biologische",
       title2: "ouders geworden?",
       desc: "Hereditaire factoren hebben een invloed op uw gezondheidstijdlijn <span class=\"whitespace-nowrap\">-1.5 tot +1.5 jaar per ouder.</span>",
@@ -172,7 +172,7 @@ export const nl = {
       modalDesc2: "Wetenschappelijk onderzoek toont aan dat levensduur voor slechts 10% tot 25% genetisch bepaald is. Dat betekent dat jij voor de overige 75% tot 90% zélf aan het roer staat. Met de juiste keuzes rondom leefstijl, slaap en stressmanagement kun je een gigantische impact maken. Conclusie: Je DNA is de blauwdruk, maar jij bent en blijft de regisseur!"
     },
     career: {
-      badge: "Stap 4: Carrière & Pensioen",
+      badge: "Stap 5: Carrière & Pensioen",
       title: "Wanneer begon u met werken en wat is uw pensioendoel?",
       desc: "De splitsing tussen verplichte werktijd en absolute tijdssoevereiniteit.",
       startWork: "Startleeftijd Carrière",
