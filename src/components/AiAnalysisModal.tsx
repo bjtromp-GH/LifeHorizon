@@ -145,28 +145,63 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
 
               {result && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.2,
+                        delayChildren: 0.1,
+                      },
+                    },
+                  }}
                   className="w-full text-left"
                 >
                   <ReactMarkdown
                     components={{
-                      h1: ({node, ...props}) => <h1 className="text-2xl font-black text-[#D56B45] mb-4 mt-2" {...props} />,
-                      h2: ({node, ...props}) => <h2 className="text-xl font-bold text-[#D56B45] mt-6 mb-3" {...props} />,
-                      h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#2D2D2D] mt-5 mb-2" {...props} />,
-                      p: ({node, ...props}) => <p className="text-[#2D2D2D] leading-relaxed mb-4" {...props} />,
+                      h1: ({node, children, ...props}) => {
+                        const text = String(children);
+                        return (
+                          <motion.h1 
+                            variants={{
+                              hidden: { opacity: 0 },
+                              visible: { opacity: 1 }
+                            }}
+                            className="text-2xl font-black text-[#D56B45] mb-4 mt-2" 
+                            {...props}
+                          >
+                            {text.split('').map((char, i) => (
+                              <motion.span
+                                key={i}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.01, delay: i * 0.03 }}
+                              >
+                                {char}
+                              </motion.span>
+                            ))}
+                          </motion.h1>
+                        );
+                      },
+                      h2: ({node, ...props}) => <motion.h2 variants={{hidden: {opacity: 0, y: 10}, visible: {opacity: 1, y: 0, transition: {duration: 0.5}}}} className="text-xl font-bold text-[#D56B45] mt-6 mb-3" {...props} />,
+                      h3: ({node, ...props}) => <motion.h3 variants={{hidden: {opacity: 0, y: 10}, visible: {opacity: 1, y: 0, transition: {duration: 0.5}}}} className="text-lg font-bold text-[#2D2D2D] mt-5 mb-2" {...props} />,
+                      p: ({node, ...props}) => <motion.p variants={{hidden: {opacity: 0, y: 10}, visible: {opacity: 1, y: 0, transition: {duration: 0.5}}}} className="text-[#2D2D2D] leading-relaxed mb-4" {...props} />,
                       strong: ({node, ...props}) => <strong className="font-bold text-black" {...props} />,
-                      ul: ({node, ...props}) => <ul className="list-disc list-outside ml-5 mb-4 space-y-1 text-[#2D2D2D]" {...props} />,
-                      ol: ({node, ...props}) => <ol className="list-decimal list-outside ml-5 mb-4 space-y-1 text-[#2D2D2D]" {...props} />,
+                      ul: ({node, ...props}) => <motion.ul variants={{hidden: {opacity: 0, y: 10}, visible: {opacity: 1, y: 0, transition: {duration: 0.5}}}} className="list-disc list-outside ml-5 mb-4 space-y-1 text-[#2D2D2D]" {...props} />,
+                      ol: ({node, ...props}) => <motion.ol variants={{hidden: {opacity: 0, y: 10}, visible: {opacity: 1, y: 0, transition: {duration: 0.5}}}} className="list-decimal list-outside ml-5 mb-4 space-y-1 text-[#2D2D2D]" {...props} />,
                       li: ({node, ...props}) => <li className="text-[#2D2D2D] leading-relaxed" {...props} />,
                     }}
                   >
                     {result}
                   </ReactMarkdown>
                   
-                  <div className="flex justify-center mt-8 mb-2">
+                  <motion.div 
+                    variants={{hidden: {opacity: 0, scale: 0.8}, visible: {opacity: 1, scale: 1, transition: {duration: 0.6, type: "spring"}}}}
+                    className="flex justify-center mt-8 mb-2"
+                  >
                     <img src="/img/Olifant.png" alt="Olifant met duimpjes" className="w-40 h-40 object-contain drop-shadow-md" />
-                  </div>
+                  </motion.div>
                 </motion.div>
               )}
             </div>
