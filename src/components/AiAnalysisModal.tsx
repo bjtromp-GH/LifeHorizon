@@ -34,14 +34,15 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
       });
 
       if (!response.ok) {
-        throw new Error('Netwerkfout bij het ophalen van de analyse');
+        const errData = await response.json().catch(() => null);
+        throw new Error(errData?.error || 'Netwerkfout bij het ophalen van de analyse');
       }
 
       const data = await response.json();
       setResult(data.result);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError('Er ging iets mis bij het genereren van de analyse. Probeer het later opnieuw.');
+      setError(err.message || 'Er ging iets mis bij het genereren van de analyse. Probeer het later opnieuw.');
     } finally {
       setLoading(false);
     }
