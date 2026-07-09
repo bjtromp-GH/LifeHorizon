@@ -772,7 +772,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                         key={i}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8 + i * 0.03, duration: 0.05 }}
+                        transition={{ delay: 1.5 + i * 0.03, duration: 0.05 }}
                       >
                         {char}
                       </motion.span>
