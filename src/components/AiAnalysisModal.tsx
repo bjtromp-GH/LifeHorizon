@@ -69,8 +69,8 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
             {/* Header */}
             <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-5 bg-white border-b border-[#EAEAEA]">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#D56B45]/10 rounded-lg">
-                  <BrainCircuit className="w-6 h-6 text-[#D56B45]" />
+                <div className="w-10 h-10 bg-[#FAF3F0] rounded-full flex items-center justify-center overflow-hidden border border-[#D56B45]/20">
+                  <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-8 h-8 object-contain" />
                 </div>
                 <div>
                   <h2 className="text-xl font-black text-[#2D2D2D] tracking-tight">AI Levensmatrix Analyse</h2>
@@ -89,13 +89,13 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
             <div className="flex-1 overflow-y-auto p-6 sm:p-8">
               {!loading && !result && !error && (
                 <div className="flex flex-col items-center justify-center text-center space-y-6 py-12">
-                  <div className="w-24 h-24 bg-[#FAF3F0] rounded-full flex items-center justify-center relative">
+                  <div className="w-28 h-28 bg-[#FAF3F0] rounded-full flex items-center justify-center relative shadow-inner overflow-hidden border border-[#D56B45]/20">
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                       className="absolute inset-0 border-2 border-dashed border-[#D56B45]/30 rounded-full"
                     />
-                    <Sparkles className="w-10 h-10 text-[#D56B45]" />
+                    <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-20 h-20 object-contain relative z-10" />
                   </div>
                   <div className="max-w-md space-y-3">
                     <h3 className="text-2xl font-bold text-[#2D2D2D]">Klaar voor de waarheid?</h3>
@@ -118,11 +118,11 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
               {loading && (
                 <div className="flex flex-col items-center justify-center text-center space-y-6 py-20">
                   <motion.div
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-16 h-16 bg-[#D56B45]/20 rounded-full flex items-center justify-center"
+                    className="w-20 h-20 bg-[#FAF3F0] rounded-full flex items-center justify-center shadow-lg border border-[#D56B45]/20 overflow-hidden"
                   >
-                    <BrainCircuit className="w-8 h-8 text-[#D56B45]" />
+                    <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-14 h-14 object-contain" />
                   </motion.div>
                   <div className="space-y-2">
                     <h3 className="text-xl font-bold text-[#2D2D2D]">De AI is aan het schrijven...</h3>
@@ -147,9 +147,22 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="prose prose-sm sm:prose-base prose-[#2D2D2D] max-w-none prose-headings:font-black prose-h1:text-2xl prose-h1:text-[#D56B45] prose-h2:text-[#D56B45] prose-h2:mt-8 prose-h2:mb-4 prose-p:leading-relaxed prose-li:my-1"
+                  className="w-full text-left"
                 >
-                  <ReactMarkdown>{result}</ReactMarkdown>
+                  <ReactMarkdown
+                    components={{
+                      h1: ({node, ...props}) => <h1 className="text-2xl font-black text-[#D56B45] mb-4 mt-2" {...props} />,
+                      h2: ({node, ...props}) => <h2 className="text-xl font-bold text-[#D56B45] mt-6 mb-3" {...props} />,
+                      h3: ({node, ...props}) => <h3 className="text-lg font-bold text-[#2D2D2D] mt-5 mb-2" {...props} />,
+                      p: ({node, ...props}) => <p className="text-[#2D2D2D] leading-relaxed mb-4" {...props} />,
+                      strong: ({node, ...props}) => <strong className="font-bold text-black" {...props} />,
+                      ul: ({node, ...props}) => <ul className="list-disc list-outside ml-5 mb-4 space-y-1 text-[#2D2D2D]" {...props} />,
+                      ol: ({node, ...props}) => <ol className="list-decimal list-outside ml-5 mb-4 space-y-1 text-[#2D2D2D]" {...props} />,
+                      li: ({node, ...props}) => <li className="text-[#2D2D2D] leading-relaxed" {...props} />,
+                    }}
+                  >
+                    {result}
+                  </ReactMarkdown>
                 </motion.div>
               )}
             </div>
