@@ -339,29 +339,6 @@ export default function MobileContainer({
                     delayAppearance={1.8}
                   />
 
-                  {/* AI Button - Mobile (White variant for Screen 1) */}
-                  <div className="w-full">
-                    <motion.button
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                      onClick={() => setShowAiModal(true)}
-                      className="w-full bg-white hover:bg-zinc-50 border border-zinc-200 text-[#2D2D2D] rounded-xl p-4 flex items-center justify-between shadow-sm cursor-pointer mt-1"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#FAF3F0] rounded-full flex items-center justify-center overflow-hidden border border-[#D56B45]/20">
-                          <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-8 h-8 object-contain drop-shadow-sm" />
-                        </div>
-                        <div className="text-left">
-                          <h3 className="font-black text-sm text-[#D56B45]">AI Levensmatrix Analyse</h3>
-                          <p className="text-[#767676] text-[11px] font-medium leading-tight mt-0.5">Laat AI jouw profiel lezen</p>
-                        </div>
-                      </div>
-                      <div className="bg-[#FAF3F0] text-[#D56B45] px-3 py-1.5 rounded-md border border-[#D56B45]/20 shrink-0 ml-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider">Bekijk</span>
-                      </div>
-                    </motion.button>
-                  </div>
-
                   <StatsCard
                     inputs={inputs}
                     projectedLifeExpectancy={projectedLifeExpectancy}
