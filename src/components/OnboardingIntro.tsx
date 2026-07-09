@@ -767,7 +767,16 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   className="py-5 px-6 bg-[#D56B45]/10 rounded-xl border border-[#D56B45]/20 inline-block mt-4"
                 >
                   <p className="text-base sm:text-lg text-[#D56B45] font-bold">
-                    {t('onboarding.why.desc3')}
+                    {t('onboarding.why.desc3').split('').map((char, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.8 + i * 0.03, duration: 0.05 }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
                   </p>
                 </motion.div>
               </div>
