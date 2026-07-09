@@ -163,19 +163,19 @@ export default function DesktopDashboard({
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 onClick={() => setShowAiModal(true)}
-                className="w-full bg-gradient-to-r from-[#D56B45]/90 to-[#E25C26]/90 hover:from-[#D56B45] hover:to-[#E25C26] text-white rounded-xl p-5 flex items-center justify-between shadow-lg shadow-[#D56B45]/20 transition-all cursor-pointer"
+                className="w-full bg-white hover:bg-zinc-50 border border-zinc-200 text-[#2D2D2D] rounded-xl p-5 flex items-center justify-between shadow-sm transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
+                  <div className="w-12 h-12 bg-[#FAF3F0] rounded-full flex items-center justify-center overflow-hidden border border-[#D56B45]/20 shadow-inner">
                     <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-10 h-10 object-contain drop-shadow-sm" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-black text-lg">AI Levensmatrix Analyse</h3>
-                    <p className="text-white/80 text-sm font-medium">Krijg direct inzicht en ontdek jouw winstpakkers.</p>
+                    <h3 className="font-black text-lg text-[#D56B45]">AI Levensmatrix Analyse</h3>
+                    <p className="text-[#767676] text-sm font-medium">Krijg direct inzicht en ontdek jouw winstpakkers.</p>
                   </div>
                 </div>
-                <div className="bg-white/10 px-4 py-2 rounded-full border border-white/20">
-                  <span className="text-sm font-bold uppercase tracking-wider">Genereer</span>
+                <div className="bg-[#FAF3F0] text-[#D56B45] px-4 py-2 rounded-lg border border-[#D56B45]/20">
+                  <span className="text-sm font-bold uppercase tracking-wider">Bekijk</span>
                 </div>
               </motion.button>
             </div>
