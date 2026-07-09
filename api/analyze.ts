@@ -68,7 +68,7 @@ Gebruik emojis waar passend en hou het overzichtelijk. Gebruik Markdown voor bol
     `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-1.5-flash",
       contents: prompt,
     });
 
