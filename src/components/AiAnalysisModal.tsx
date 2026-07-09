@@ -21,7 +21,7 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
     setError(null);
     try {
       // Gebruik relatieve URL als proxy is ingesteld, of absolute URL voor lokale dev backend
-      const response = await fetch('http://localhost:3001/api/analyze', {
+      const response = await fetch('/api/analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
