@@ -12,6 +12,8 @@ import StatsCard from "./StatsCard";
 import SurvivalCurveCard from "./SurvivalCurveCard";
 import { useLanguage } from "../context/LanguageContext";
 import { StatusBar, Style } from "@capacitor/status-bar";
+import { AiAnalysisModal } from "./AiAnalysisModal";
+import { Sparkles } from "lucide-react";
 
 interface DesktopDashboardProps {
   inputs: UserInputs;
@@ -54,8 +56,10 @@ export default function DesktopDashboard({
   }, []);
 
   const [showConfig, setShowConfig] = useState(false);
+  const [showAiModal, setShowAiModal] = useState(false);
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const roundedRemaining = Math.round(totalRemaining * 10) / 10;
+  const netScore = Math.round((projectedLifeExpectancy - cbsBaseLife) * 10) / 10;
 
   return (
     <div id="desktop-dashboard-root" className="min-h-screen bg-[#F9F8F6] text-[#2D2D2D] py-8 px-6 md:px-12 xl:px-16 flex flex-col justify-between">
@@ -151,6 +155,29 @@ export default function DesktopDashboard({
                 projectedLifeExpectancy={projectedLifeExpectancy}
                 delayAppearance={1.8}
               />
+            </div>
+
+            {/* AI Button Placeholder - Below Phases */}
+            <div className="w-full pt-4">
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                onClick={() => setShowAiModal(true)}
+                className="w-full bg-gradient-to-r from-[#D56B45]/90 to-[#E25C26]/90 hover:from-[#D56B45] hover:to-[#E25C26] text-white rounded-xl p-5 flex items-center justify-between shadow-lg shadow-[#D56B45]/20 transition-all cursor-pointer"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="font-black text-lg">AI Levensmatrix Analyse</h3>
+                    <p className="text-white/80 text-sm font-medium">Krijg direct inzicht en ontdek jouw winstpakkers.</p>
+                  </div>
+                </div>
+                <div className="bg-white/10 px-4 py-2 rounded-full border border-white/20">
+                  <span className="text-sm font-bold uppercase tracking-wider">Genereer</span>
+                </div>
+              </motion.button>
             </div>
 
             {/* Matrix and Fidelity Cards Side-by-Side */}
@@ -257,6 +284,13 @@ export default function DesktopDashboard({
           </motion.div>
         )}
       </AnimatePresence>
+      
+      <AiAnalysisModal
+        isOpen={showAiModal}
+        onClose={() => setShowAiModal(false)}
+        inputs={inputs}
+        netScore={netScore}
+      />
     </div>
 
       {/* Modern, minimalist workspace footer */}

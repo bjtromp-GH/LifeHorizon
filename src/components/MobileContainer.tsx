@@ -14,6 +14,8 @@ import StatsCard from "./StatsCard";
 import RemainingTimeCard from "./RemainingTimeCard";
 import SurvivalCurveCard from "./SurvivalCurveCard";
 import { useLanguage } from "../context/LanguageContext";
+import { AiAnalysisModal } from "./AiAnalysisModal";
+import { Sparkles } from "lucide-react";
 
 interface MobileContainerProps {
   inputs: UserInputs;
@@ -46,6 +48,7 @@ export default function MobileContainer({
   const [showElephantFact, setShowElephantFact] = useState(false);
   const [showMatrixModal, setShowMatrixModal] = useState(false);
   const [showSurvivalModal, setShowSurvivalModal] = useState(false);
+  const [showAiModal, setShowAiModal] = useState(false);
   const [isManualScroll, setIsManualScroll] = useState(false);
   const { t } = useLanguage();
 
@@ -85,6 +88,7 @@ export default function MobileContainer({
 
   const totalRemaining = Math.max(0, projectedLifeExpectancy - inputs.currentAge);
   const totalRoundedRemaining = Math.round(totalRemaining * 10) / 10;
+  const netScore = Math.round((projectedLifeExpectancy - cbsBaseLife) * 10) / 10;
 
   // Ensure scroll is reset to top when switching slides
   useEffect(() => {
@@ -326,6 +330,30 @@ export default function MobileContainer({
                       isFullscreen={isSwipedFullscreen}
                     />
                   </div>
+                  
+                  {/* AI Button - Mobile */}
+                  <div className="w-full pt-1">
+                    <motion.button
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => setShowAiModal(true)}
+                      className="w-full bg-gradient-to-r from-[#D56B45]/90 to-[#E25C26]/90 active:from-[#D56B45] active:to-[#E25C26] text-white rounded-xl p-4 flex items-center justify-between shadow-md shadow-[#D56B45]/20 cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                          <Sparkles className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="text-left">
+                          <h3 className="font-black text-base">AI Levensmatrix Analyse</h3>
+                          <p className="text-white/80 text-xs font-medium">Ontdek direct jouw winstpakkers.</p>
+                        </div>
+                      </div>
+                      <div className="bg-white/10 px-3 py-1.5 rounded-full border border-white/20">
+                        <span className="text-xs font-bold uppercase tracking-wider">Start</span>
+                      </div>
+                    </motion.button>
+                  </div>
+
                   <SurvivalCurveCard 
                     inputs={inputs}
                     projectedLifeExpectancy={projectedLifeExpectancy}
@@ -1347,6 +1375,13 @@ export default function MobileContainer({
           </div>
         )}
       </AnimatePresence>
+      
+      <AiAnalysisModal
+        isOpen={showAiModal}
+        onClose={() => setShowAiModal(false)}
+        inputs={inputs}
+        netScore={netScore}
+      />
       
       {/* Info Modal */}
       <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
