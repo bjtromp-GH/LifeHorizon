@@ -37,12 +37,12 @@ De gebruiker heeft de volgende gegevens ingevuld in hun gezondheidsprofiel:
 - Verwachte startleeftijd met werken: ${inputs.startWorkAge}
 - Geplande pensioenleeftijd (FIRE): ${inputs.fireAge}
 - Leefstijl Bio-Score Netto Effect: ${netScore > 0 ? '+' : ''}${netScore} jaar
-  - Slaap: ${inputs.sleep}
-  - Fysieke Activiteit: ${inputs.activity}
-  - Stressniveau: ${inputs.stress}
-  - Roker: ${inputs.smoker === 'ja' ? 'Ja' : 'Nee'}
-  - Alcohol: ${inputs.alcohol}
-  - Dieet: ${inputs.diet}
+  - Slaap: ${inputs.bioAnswers.sleep}
+  - Fysieke Activiteit: ${inputs.bioAnswers.activity}
+  - Stressniveau: ${inputs.bioAnswers.stress}
+  - Roker: ${inputs.bioAnswers.smoker === 'ja' ? 'Ja' : 'Nee'}
+  - Alcohol: ${inputs.bioAnswers.alcohol}
+  - Dieet: ${inputs.bioAnswers.diet}
 - Genetica (leeftijd ouders):
   - Vader overleden op: ${inputs.fatherPassedAge || 'Niet ingevuld / in leven'}
   - Moeder overleden op: ${inputs.motherPassedAge || 'Niet ingevuld / in leven'}
