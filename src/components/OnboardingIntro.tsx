@@ -295,7 +295,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
 
       {/* Top Header & Step Progress Bar */}
       <AnimatePresence>
-        {step >= 2 && step < 8 && (
+        {step >= 2 && step < 9 && (
           <motion.header 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1686,7 +1686,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
       </main>
 
       {/* Navigation Footer */}
-      {step > 2 && step < 8 && !showYearPicker && (
+      {step > 2 && step < 9 && !showYearPicker && (
         <footer className={`w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 ${step > 2 ? 'border-t border-[#F3F2F0]' : ''} relative z-10 shrink-0`}>
           <div>
             {step > 2 && (
