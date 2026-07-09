@@ -331,28 +331,7 @@ export default function MobileContainer({
                     />
                   </div>
                   
-                  {/* AI Button - Mobile */}
-                  <div className="w-full pt-1">
-                    <motion.button
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                      onClick={() => setShowAiModal(true)}
-                      className="w-full bg-gradient-to-r from-[#D56B45]/90 to-[#E25C26]/90 active:from-[#D56B45] active:to-[#E25C26] text-white rounded-xl p-4 flex items-center justify-between shadow-md shadow-[#D56B45]/20 cursor-pointer"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                          <Sparkles className="w-5 h-5 text-white" />
-                        </div>
-                        <div className="text-left">
-                          <h3 className="font-black text-base">AI Levensmatrix Analyse</h3>
-                          <p className="text-white/80 text-xs font-medium">Ontdek direct jouw winstpakkers.</p>
-                        </div>
-                      </div>
-                      <div className="bg-white/10 px-3 py-1.5 rounded-full border border-white/20">
-                        <span className="text-xs font-bold uppercase tracking-wider">Start</span>
-                      </div>
-                    </motion.button>
-                  </div>
+                  {/* AI Button is verplaatst naar scherm 3 */}
 
                   <SurvivalCurveCard 
                     inputs={inputs}
@@ -467,6 +446,28 @@ export default function MobileContainer({
               <div className="space-y-4 flex flex-col justify-between h-full">
                 <div className="space-y-4">
                   <div id="mobile-analytics-wrapper" className="space-y-4">
+                    {/* AI Button - Mobile (Moved to Screen 3) */}
+                    <div className="w-full">
+                      <motion.button
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        onClick={() => setShowAiModal(true)}
+                        className="w-full bg-gradient-to-r from-[#D56B45]/90 to-[#E25C26]/90 active:from-[#D56B45] active:to-[#E25C26] text-white rounded-xl p-4 flex items-center justify-between shadow-md shadow-[#D56B45]/20 cursor-pointer"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shadow-inner overflow-hidden border border-white/10">
+                            <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-10 h-10 object-contain drop-shadow-sm" />
+                          </div>
+                          <div className="text-left">
+                            <h3 className="font-black text-base">AI Levensmatrix Analyse</h3>
+                            <p className="text-white/80 text-xs font-medium">Ontdek direct jouw winstpakkers.</p>
+                          </div>
+                        </div>
+                        <div className="bg-white/10 px-3 py-1.5 rounded-full border border-white/20 shrink-0 ml-2">
+                          <span className="text-xs font-bold uppercase tracking-wider">Start</span>
+                        </div>
+                      </motion.button>
+                    </div>
                     <AestheticFidelityCards
                       inputs={inputs}
                       projectedLifeExpectancy={projectedLifeExpectancy}

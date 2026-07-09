@@ -166,8 +166,8 @@ export default function DesktopDashboard({
                 className="w-full bg-gradient-to-r from-[#D56B45]/90 to-[#E25C26]/90 hover:from-[#D56B45] hover:to-[#E25C26] text-white rounded-xl p-5 flex items-center justify-between shadow-lg shadow-[#D56B45]/20 transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                    <Sparkles className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
+                    <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-10 h-10 object-contain drop-shadow-sm" />
                   </div>
                   <div className="text-left">
                     <h3 className="font-black text-lg">AI Levensmatrix Analyse</h3>
