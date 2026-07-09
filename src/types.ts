@@ -4,10 +4,17 @@ export type ActivityLevel = "zittend" | "licht" | "actief" | "optimaal";
 export type SleepLevel = "kort" | "matig" | "goed" | "optimaal";
 export type StressLevel = "hoog" | "gemiddeld" | "balans" | "laag";
 
+export type SmokerLevel = "ja" | "nee";
+export type AlcoholLevel = "geen_af_en_toe" | "regelmatig";
+export type DietLevel = "gezond" | "gemiddeld";
+
 export interface BioScoreAnswers {
   activity: ActivityLevel;
   sleep: SleepLevel;
   stress: StressLevel;
+  smoker: SmokerLevel;
+  alcohol: AlcoholLevel;
+  diet: DietLevel;
 }
 
 export interface UserInputs {

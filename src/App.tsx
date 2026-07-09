@@ -24,6 +24,9 @@ export default function App() {
       activity: "licht",
       sleep: "goed",
       stress: "gemiddeld",
+      smoker: "nee",
+      alcohol: "geen_af_en_toe",
+      diet: "gemiddeld",
     },
     customLifeExpectancy: null,
   });
@@ -201,6 +204,9 @@ export default function App() {
           activity: "licht",
           sleep: "goed",
           stress: "gemiddeld",
+          smoker: "nee",
+          alcohol: "geen_af_en_toe",
+          diet: "gemiddeld",
         },
         customLifeExpectancy: null,
       });

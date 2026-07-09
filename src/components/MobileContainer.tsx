@@ -6,6 +6,7 @@ import OnboardingPanel from "./OnboardingPanel";
 import InfoModal from "./InfoModal";
 import { StatusBar, Style } from "@capacitor/status-bar";
 import BioScoreSection from "./BioScoreSection";
+import BioScoreSection2 from "./BioScoreSection2";
 import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
@@ -1179,6 +1180,16 @@ export default function MobileContainer({
                       })
                     }
                   />
+                  <div className="pt-4 border-t border-[#EAEAEA]">
+                    <BioScoreSection2
+                      answers={inputs.bioAnswers}
+                      onChange={(u) =>
+                        onInputChange({
+                          bioAnswers: { ...inputs.bioAnswers, ...u },
+                        })
+                      }
+                    />
+                  </div>
                 </div>
 
                 {/* Custom genetic overview widget */}

@@ -1,53 +1,43 @@
-import { ActivityLevel, BioScoreAnswers, SleepLevel, StressLevel } from "../types";
+import { BioScoreAnswers, SmokerLevel, AlcoholLevel, DietLevel } from "../types";
 import NumberTicker from "./NumberTicker";
 import { useLanguage } from "../context/LanguageContext";
+import { getBioScoreOffset } from "./BioScoreSection";
 
-interface BioScoreSectionProps {
+interface BioScoreSection2Props {
   answers: BioScoreAnswers;
   onChange: (updates: Partial<BioScoreAnswers>) => void;
 }
 
-export default function BioScoreSection({ answers, onChange }: BioScoreSectionProps) {
+export default function BioScoreSection2({ answers, onChange }: BioScoreSection2Props) {
   const { t } = useLanguage();
 
-  // Option lists with labels, years, description
-  const activityOptions: { value: ActivityLevel; label: string; offset: number; desc: string }[] = [
-    { value: "zittend", label: t('bioScore.activity.sedentary.label'), offset: -2.0, desc: t('bioScore.activity.sedentary.desc') },
-    { value: "licht", label: t('bioScore.activity.light.label'), offset: 0.0, desc: t('bioScore.activity.light.desc') },
-    { value: "actief", label: t('bioScore.activity.active.label'), offset: 1.0, desc: t('bioScore.activity.active.desc') },
-    { value: "optimaal", label: t('bioScore.activity.optimal.label'), offset: 2.0, desc: t('bioScore.activity.optimal.desc') },
+  const smokerOptions: { value: SmokerLevel; label: string; offset: number; desc: string }[] = [
+    { value: "nee", label: t('bioScore.smoker.no.label'), offset: 0.0, desc: t('bioScore.smoker.no.desc') },
+    { value: "ja", label: t('bioScore.smoker.yes.label'), offset: -5.0, desc: t('bioScore.smoker.yes.desc') },
   ];
 
-  const sleepOptions: { value: SleepLevel; label: string; offset: number; desc: string }[] = [
-    { value: "kort", label: t('bioScore.sleep.short.label'), offset: -1.5, desc: t('bioScore.sleep.short.desc') },
-    { value: "matig", label: t('bioScore.sleep.moderate.label'), offset: -0.5, desc: t('bioScore.sleep.moderate.desc') },
-    { value: "goed", label: t('bioScore.sleep.good.label'), offset: 0.5, desc: t('bioScore.sleep.good.desc') },
-    { value: "optimaal", label: t('bioScore.sleep.optimal.label'), offset: 1.5, desc: t('bioScore.sleep.optimal.desc') },
+  const alcoholOptions: { value: AlcoholLevel; label: string; offset: number; desc: string }[] = [
+    { value: "geen_af_en_toe", label: t('bioScore.alcohol.none.label'), offset: 0.5, desc: t('bioScore.alcohol.none.desc') },
+    { value: "regelmatig", label: t('bioScore.alcohol.regular.label'), offset: -1.5, desc: t('bioScore.alcohol.regular.desc') },
   ];
 
-  const stressOptions: { value: StressLevel; label: string; offset: number; desc: string }[] = [
-    { value: "hoog", label: t('bioScore.stress.high.label'), offset: -1.5, desc: t('bioScore.stress.high.desc') },
-    { value: "gemiddeld", label: t('bioScore.stress.moderate.label'), offset: -0.5, desc: t('bioScore.stress.moderate.desc') },
-    { value: "balans", label: t('bioScore.stress.balanced.label'), offset: 0.5, desc: t('bioScore.stress.balanced.desc') },
-    { value: "laag", label: t('bioScore.stress.low.label'), offset: 1.5, desc: t('bioScore.stress.low.desc') },
+  const dietOptions: { value: DietLevel; label: string; offset: number; desc: string }[] = [
+    { value: "gezond", label: t('bioScore.diet.healthy.label'), offset: 1.5, desc: t('bioScore.diet.healthy.desc') },
+    { value: "gemiddeld", label: t('bioScore.diet.average.label'), offset: -0.5, desc: t('bioScore.diet.average.desc') },
   ];
 
-  // Calculate cumulative local score
-  const totalOffset =
-    (activityOptions.find((o) => o.value === answers.activity)?.offset || 0) +
-    (sleepOptions.find((o) => o.value === answers.sleep)?.offset || 0) +
-    (stressOptions.find((o) => o.value === answers.stress)?.offset || 0);
+  const totalOffset = getBioScoreOffset(answers);
 
   return (
-    <div id="bioscore-section" className="flex flex-col space-y-6">
+    <div id="bioscore-section-2" className="flex flex-col space-y-6">
       {/* Header with live feedback in Terracotta */}
       <div className="flex items-center justify-between border-b border-[#EAEAEA] pb-3">
         <div>
           <h3 className="font-sans font-medium text-sm text-[#2D2D2D] uppercase tracking-wide">
-            {t('bioScore.title')}
+            {t('onboarding.lifestyle2.title')}
           </h3>
           <p className="text-[11px] text-[#767676]">
-            {t('bioScore.subtitle')}
+            {t('onboarding.lifestyle2.desc')}
           </p>
         </div>
         <div className="flex flex-col items-end">
@@ -67,20 +57,19 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
         </div>
       </div>
 
-      {/* 1. Beweging (Movement) */}
+      {/* 4. Roker */}
       <div className="space-y-2.5">
         <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
-          {t('bioScore.activity.title')}
+          {t('bioScore.smoker.title')}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {activityOptions.map((opt) => {
-            const isSelected = answers.activity === opt.value;
+          {smokerOptions.map((opt) => {
+            const isSelected = answers.smoker === opt.value;
             return (
               <button
                 key={opt.value}
                 type="button"
-                id={`btn-activity-${opt.value}`}
-                onClick={() => onChange({ activity: opt.value })}
+                onClick={() => onChange({ smoker: opt.value })}
                 className={`flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? "border-[#D56B45] bg-[#FAF3F0]"
@@ -108,20 +97,19 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
         </div>
       </div>
 
-      {/* 2. Slaap (Sleep) */}
+      {/* 5. Alcohol */}
       <div className="space-y-2.5">
         <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
-          {t('bioScore.sleep.title')}
+          {t('bioScore.alcohol.title')}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {sleepOptions.map((opt) => {
-            const isSelected = answers.sleep === opt.value;
+          {alcoholOptions.map((opt) => {
+            const isSelected = answers.alcohol === opt.value;
             return (
               <button
                 key={opt.value}
                 type="button"
-                id={`btn-sleep-${opt.value}`}
-                onClick={() => onChange({ sleep: opt.value })}
+                onClick={() => onChange({ alcohol: opt.value })}
                 className={`flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? "border-[#D56B45] bg-[#FAF3F0]"
@@ -149,20 +137,19 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
         </div>
       </div>
 
-      {/* 3. Stress */}
+      {/* 6. Dieet */}
       <div className="space-y-2.5">
         <label className="text-sm sm:text-[11px] uppercase tracking-wider font-bold sm:font-semibold text-[#D56B45] sm:text-[#767676]">
-          {t('bioScore.stress.title')}
+          {t('bioScore.diet.title')}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {stressOptions.map((opt) => {
-            const isSelected = answers.stress === opt.value;
+          {dietOptions.map((opt) => {
+            const isSelected = answers.diet === opt.value;
             return (
               <button
                 key={opt.value}
                 type="button"
-                id={`btn-stress-${opt.value}`}
-                onClick={() => onChange({ stress: opt.value })}
+                onClick={() => onChange({ diet: opt.value })}
                 className={`flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? "border-[#D56B45] bg-[#FAF3F0]"
@@ -191,14 +178,4 @@ export default function BioScoreSection({ answers, onChange }: BioScoreSectionPr
       </div>
     </div>
   );
-}
-export function getBioScoreOffset(answers: BioScoreAnswers): number {
-  const movementMap = { zittend: -2.0, licht: 0.0, actief: 1.0, optimaal: 2.0 };
-  const sleepMap = { kort: -1.5, matig: -0.5, goed: 0.5, optimaal: 1.5 };
-  const stressMap = { hoog: -1.5, gemiddeld: -0.5, balans: 0.5, laag: 1.5 };
-  const smokerMap = { nee: 0.0, ja: -5.0 };
-  const alcoholMap = { geen_af_en_toe: 0.5, regelmatig: -1.5 };
-  const dietMap = { gezond: 1.5, gemiddeld: -0.5 };
-
-  return movementMap[answers.activity] + sleepMap[answers.sleep] + stressMap[answers.stress] + smokerMap[answers.smoker] + alcoholMap[answers.alcohol] + dietMap[answers.diet];
 }

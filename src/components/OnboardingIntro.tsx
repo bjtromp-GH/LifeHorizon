@@ -58,6 +58,9 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
   const [localSleep, setLocalSleep] = useState<SleepLevel | null>(null);
   const [localActivity, setLocalActivity] = useState<ActivityLevel | null>(null);
   const [localStress, setLocalStress] = useState<StressLevel | null>(null);
+  const [localSmoker, setLocalSmoker] = useState<string | null>(null);
+  const [localAlcohol, setLocalAlcohol] = useState<string | null>(null);
+  const [localDiet, setLocalDiet] = useState<string | null>(null);
   const [geneticsInteracted, setGeneticsInteracted] = useState(false);
   
   const [showYearPicker, setShowYearPicker] = useState(false);
@@ -116,6 +119,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
     { title: t('common.welcome'), icon: Sparkles },
     { title: t('common.profile'), icon: User },
     { title: t('onboarding.demographics.steps.lifestyle'), icon: Heart },
+    { title: t('onboarding.demographics.steps.lifestyle2'), icon: Flame },
     { title: t('onboarding.demographics.steps.genetics'), icon: Dna },
     { title: t('onboarding.demographics.steps.career'), icon: Briefcase },
     { title: t('onboarding.demographics.steps.ready'), icon: CheckCircle2 }
@@ -125,6 +129,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
     { title: t('onboarding.demographics.steps.intro'), icon: Play },
     { title: t('onboarding.demographics.steps.demographics'), icon: UserRound },
     { title: t('onboarding.demographics.steps.lifestyle'), icon: HeartPulse },
+    { title: t('onboarding.demographics.steps.lifestyle2'), icon: Flame },
     { title: t('onboarding.demographics.steps.genetics'), icon: Dna },
     { title: t('onboarding.demographics.steps.career'), icon: Briefcase },
     { title: t('onboarding.demographics.steps.ready'), icon: CheckCircle2 }
@@ -187,8 +192,10 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
   } else if (step === 4) {
     canProceed = localSleep !== null && localActivity !== null && localStress !== null;
   } else if (step === 5) {
-    canProceed = geneticsInteracted;
+    canProceed = localSmoker !== null && localAlcohol !== null && localDiet !== null;
   } else if (step === 6) {
+    canProceed = geneticsInteracted;
+  } else if (step === 7) {
     canProceed = localStartWorkAge !== "" && localFireAge !== "";
   }
 
@@ -210,11 +217,11 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
   const stressSectionRef = useRef<HTMLDivElement>(null);
 
   const handleNext = () => {
-    if (step < 7 && !canProceed) {
+    if (step < 8 && !canProceed) {
       setShowValidation(true);
       return;
     }
-    if (step < 8 && canProceed) {
+    if (step < 9 && canProceed) {
       setShowValidation(false);
       if (step === 0 || step === 1 || step === 2) {
         if (step === 0) playChimeSound();
@@ -235,7 +242,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
           setIsTransitioning(false);
         }, 1200);
       }
-    } else if (step >= 8) {
+    } else if (step >= 9) {
       onComplete();
     }
   };
@@ -254,7 +261,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
   };
 
   // Helper to handle bio score answer changes
-  const updateBioAnswer = (key: "activity" | "sleep" | "stress", value: any) => {
+  const updateBioAnswer = (key: "activity" | "sleep" | "stress" | "smoker" | "alcohol" | "diet", value: any) => {
     onInputChange({
       bioAnswers: {
         ...inputs.bioAnswers,
@@ -1218,6 +1225,129 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
             </motion.div>
           ) : step === 5 ? (
             <motion.div
+              key="lifestyle2"
+              initial={{ opacity: 0, x: 25 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -25 }}
+              transition={{ duration: 0.4 }}
+              className="w-full space-y-2 sm:space-y-6 px-1"
+            >
+              <div className="space-y-0.5 sm:space-y-2 text-center sm:text-left">
+                <span className="inline-block text-[11px] sm:text-xs bg-[#FAF3F0] border border-[#E9E4E2] text-[#D56B45] px-3 py-1 sm:py-1.5 rounded-md font-extrabold uppercase tracking-wider mb-1 sm:mb-2">
+                  {t('onboarding.lifestyle2.badge')}
+                </span>
+                <h2 className="text-lg sm:text-2xl font-black tracking-tight text-[#2D2D2D] leading-tight">
+                  {t('onboarding.lifestyle2.title')}
+                </h2>
+                <p className="text-[11px] sm:text-sm text-[#767676] leading-tight">
+                  {t('onboarding.lifestyle2.desc')}
+                </p>
+              </div>
+
+              {/* 4. Roker */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
+                  <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                  <span>{t('onboarding.lifestyle2.smoker.title')}</span>
+                </label>
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localSmoker === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
+                  {[
+                    { key: "nee", label: t('onboarding.lifestyle2.smoker.no'), detail: t('onboarding.lifestyle.neutral') },
+                    { key: "ja", label: t('onboarding.lifestyle2.smoker.yes'), detail: "-5.0" }
+                  ].map((item) => (
+                    <button
+                      key={item.key}
+                      type="button"
+                      onClick={() => { 
+                        setLocalSmoker(item.key); 
+                        updateBioAnswer("smoker", item.key);
+                      }}
+                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                        localSmoker === item.key
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
+                          : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
+                      <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key === "ja" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
+                    </button>
+                  ))}
+                </div>
+                {showValidation && localSmoker === null && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('common.required')}</p>
+                )}
+              </div>
+
+              {/* 5. Alcohol */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
+                  <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                  <span>{t('onboarding.lifestyle2.alcohol.title')}</span>
+                </label>
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localAlcohol === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
+                  {[
+                    { key: "geen_af_en_toe", label: t('onboarding.lifestyle2.alcohol.none'), detail: "+0.5" },
+                    { key: "regelmatig", label: t('onboarding.lifestyle2.alcohol.regular'), detail: "-1.5" }
+                  ].map((item) => (
+                    <button
+                      key={item.key}
+                      type="button"
+                      onClick={() => { 
+                        setLocalAlcohol(item.key); 
+                        updateBioAnswer("alcohol", item.key);
+                      }}
+                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                        localAlcohol === item.key
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
+                          : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
+                      <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
+                    </button>
+                  ))}
+                </div>
+                {showValidation && localAlcohol === null && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('common.required')}</p>
+                )}
+              </div>
+
+              {/* 6. Dieet */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-black uppercase tracking-wider text-[#D56B45] flex items-center space-x-1.5">
+                  <HeartPulse className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D56B45]" />
+                  <span>{t('onboarding.lifestyle2.diet.title')}</span>
+                </label>
+                <div className={`grid grid-cols-2 gap-1.5 sm:gap-3 text-xs sm:text-sm p-1 rounded-xl transition-all duration-300 ${showValidation && localDiet === null ? 'bg-red-50/80 ring-2 ring-red-400 animate-pulse' : ''}`}>
+                  {[
+                    { key: "gezond", label: t('onboarding.lifestyle2.diet.healthy'), detail: "+1.5" },
+                    { key: "gemiddeld", label: t('onboarding.lifestyle2.diet.average'), detail: "-0.5" }
+                  ].map((item) => (
+                    <button
+                      key={item.key}
+                      type="button"
+                      onClick={() => { 
+                        setLocalDiet(item.key); 
+                        updateBioAnswer("diet", item.key);
+                      }}
+                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                        localDiet === item.key
+                          ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
+                          : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
+                      <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
+                    </button>
+                  ))}
+                </div>
+                {showValidation && localDiet === null && (
+                  <p className="text-red-500 text-xs font-bold mt-1 px-1">{t('common.required')}</p>
+                )}
+              </div>
+            </motion.div>
+          ) : step === 6 ? (
+            <motion.div
               key="genetics"
               initial={{ opacity: 0, x: 25 }}
               animate={{ opacity: 1, x: 0 }}
@@ -1364,7 +1494,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 )}
               </div>
             </motion.div>
-          ) : step === 6 ? (
+          ) : step === 7 ? (
             <motion.div
               key="career_fire"
               initial={{ opacity: 0, x: 25 }}
@@ -1465,7 +1595,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 </p>
               </div>
             </motion.div>
-          ) : step === 7 ? (
+          ) : step === 8 ? (
             <motion.div
               key="complete"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -1523,7 +1653,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
-                    setStep(8);
+                    setStep(9);
                   }}
                   className="w-full py-3.5 sm:py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-black text-sm tracking-wide rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer transition-colors duration-200"
                 >
@@ -1532,7 +1662,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 </motion.button>
               </motion.div>
             </motion.div>
-          ) : step === 8 ? (
+          ) : step === 9 ? (
             <motion.div
               key="scroll-reveal"
               initial={{ opacity: 0 }}
@@ -1547,7 +1677,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
       </main>
 
       {/* Navigation Footer */}
-      {step > 2 && step < 7 && !showYearPicker && (
+      {step > 2 && step < 8 && !showYearPicker && (
         <footer className={`w-full max-w-xl mx-auto flex justify-between items-center pt-3 sm:pt-4 ${step > 2 ? 'border-t border-[#F3F2F0]' : ''} relative z-10 shrink-0`}>
           <div>
             {step > 2 && (

@@ -89,6 +89,7 @@ export const en: Translations = {
         intro: "Intro",
         demographics: "Demographics",
         lifestyle: "Bio-Score",
+        lifestyle2: "Habits",
         genetics: "Genetics",
         career: "Career",
         ready: "Ready"
@@ -136,6 +137,26 @@ export const en: Translations = {
       },
       neutral: "Neutral",
       yearsOffset: "{{val}} yr"
+    },
+    lifestyle2: {
+      badge: "Step 2b: Bio-Score Continued",
+      title: "What are your other habits?",
+      desc: "Smoking, alcohol, and diet strongly influence life expectancy.",
+      smoker: {
+        title: "Smoker",
+        no: "No",
+        yes: "Yes"
+      },
+      alcohol: {
+        title: "Alcohol",
+        none: "None / Occasionally",
+        regular: "Regularly"
+      },
+      diet: {
+        title: "Diet",
+        healthy: "Healthy and varied",
+        average: "Average / Less healthy"
+      }
     },
     genetics: {
       badge: "Step 3: Heredity",
@@ -229,6 +250,21 @@ export const en: Translations = {
       moderate: { label: "Average", desc: "Healthy stress with peaks, good recovery" },
       balanced: { label: "Good balance", desc: "Sense of control and relaxation" },
       low: { label: "Low / Zen", desc: "Deep rest, little external pressure" }
+    },
+    smoker: {
+      title: "4. Smoker",
+      no: { label: "No", desc: "Non-smoker or quit" },
+      yes: { label: "Yes", desc: "Regular smoker" }
+    },
+    alcohol: {
+      title: "5. Alcohol",
+      none: { label: "None / Occasional", desc: "Rarely up to max 1-2 per week" },
+      regular: { label: "Regularly", desc: "Regularly, multiple glasses per week" }
+    },
+    diet: {
+      title: "6. Diet",
+      healthy: { label: "Healthy", desc: "Fresh, unprocessed, lots of vegetables" },
+      average: { label: "Average", desc: "Often processed food or high sugar" }
     }
   },
   cards: {

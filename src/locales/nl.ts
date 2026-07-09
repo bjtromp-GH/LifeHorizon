@@ -87,6 +87,7 @@ export const nl = {
         intro: "Intro",
         demographics: "Demografie",
         lifestyle: "Bio-Score",
+        lifestyle2: "Gewoonten",
         genetics: "Genetica",
         career: "Carrière",
         ready: "Klaar"
@@ -134,6 +135,26 @@ export const nl = {
       },
       neutral: "Neutraal",
       yearsOffset: "{{val}} jr"
+    },
+    lifestyle2: {
+      badge: "Stap 2b: Bio-Score Vervolg",
+      title: "Wat zijn uw overige gewoonten?",
+      desc: "Roken, alcohol en dieet hebben een sterke invloed op de levensverwachting.",
+      smoker: {
+        title: "Roker",
+        no: "Nee",
+        yes: "Ja"
+      },
+      alcohol: {
+        title: "Alcohol",
+        none: "Geen / Af en toe",
+        regular: "Regelmatig"
+      },
+      diet: {
+        title: "Dieet",
+        healthy: "Gezond en gevarieerd",
+        average: "Gemiddeld / Minder gezond"
+      }
     },
     genetics: {
       badge: "Stap 3: Erfelijkheid",
@@ -227,6 +248,21 @@ export const nl = {
       moderate: { label: "Gemiddeld", desc: "Gezonde stress met pieken, prima herstel" },
       balanced: { label: "Goede balans", desc: "Gevoel van controle en ontspanning" },
       low: { label: "Laag / Zen", desc: "Diepe rust, weinig externe druk" }
+    },
+    smoker: {
+      title: "4. Roker",
+      no: { label: "Nee", desc: "Niet-roker of gestopt" },
+      yes: { label: "Ja", desc: "Regelmatige roker" }
+    },
+    alcohol: {
+      title: "5. Alcohol",
+      none: { label: "Geen / Af en toe", desc: "Zelden tot max 1-2 per week" },
+      regular: { label: "Regelmatig", desc: "Regelmatig, meerdere glazen per week" }
+    },
+    diet: {
+      title: "6. Dieet",
+      healthy: { label: "Gezond", desc: "Vers, onbewerkt, veel groente" },
+      average: { label: "Gemiddeld", desc: "Vaak bewerkt voedsel of veel suiker" }
     }
   },
   cards: {

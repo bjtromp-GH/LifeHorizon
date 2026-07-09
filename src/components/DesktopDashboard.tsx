@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import BioScoreSection from "./BioScoreSection";
+import BioScoreSection2 from "./BioScoreSection2";
 import AestheticFidelityCards from "./AestheticFidelityCards";
 import LifePhasesBar from "./LifePhasesBar";
 import DecadeGrid from "./DecadeGrid";
@@ -229,15 +230,27 @@ export default function DesktopDashboard({
                 </div>
 
                 {/* Bio-Score Modifiers */}
-                <div className="p-5 bg-white border border-[#EAEAEA] rounded-md shadow-sm">
-                  <BioScoreSection
-                    answers={inputs.bioAnswers}
-                    onChange={(updates) =>
-                      onInputChange({
-                        bioAnswers: { ...inputs.bioAnswers, ...updates },
-                      })
-                    }
-                  />
+                <div className="flex flex-col gap-6">
+                  <div className="p-5 bg-white border border-[#EAEAEA] rounded-md shadow-sm">
+                    <BioScoreSection
+                      answers={inputs.bioAnswers}
+                      onChange={(updates) =>
+                        onInputChange({
+                          bioAnswers: { ...inputs.bioAnswers, ...updates },
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="p-5 bg-white border border-[#EAEAEA] rounded-md shadow-sm">
+                    <BioScoreSection2
+                      answers={inputs.bioAnswers}
+                      onChange={(updates) =>
+                        onInputChange({
+                          bioAnswers: { ...inputs.bioAnswers, ...updates },
+                        })
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
