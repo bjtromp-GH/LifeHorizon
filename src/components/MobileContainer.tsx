@@ -592,6 +592,14 @@ export default function MobileContainer({
                       <Activity className="w-5 h-5" />
                       <span>{t('dashboard.survivalCurveTitle') || "Bekijk overlevingskans curve"}</span>
                     </button>
+                    
+                    <button
+                      onClick={() => { setIsSwipedFullscreen(false); setTimeout(() => setShowAiModal(true), 300); }}
+                      className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm cursor-pointer"
+                    >
+                      <img src="/img/olifant-bril.png" alt="AI" className="w-5 h-5 object-contain" />
+                      <span>AI Levensmatrix Analyse</span>
+                    </button>
 
                     <span className="text-[11px] font-sans text-white/80 mt-1 text-center">
                       {t('mobileContainer.conclusion.viewMatrixDesc')}
