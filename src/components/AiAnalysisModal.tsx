@@ -163,6 +163,10 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                   >
                     {result}
                   </ReactMarkdown>
+                  
+                  <div className="flex justify-center mt-8 mb-2">
+                    <img src="/img/Olifant.png" alt="Olifant met duimpjes" className="w-40 h-40 object-contain drop-shadow-md" />
+                  </div>
                 </motion.div>
               )}
             </div>
