@@ -559,7 +559,7 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
                 />
               </div>
 
-              <div className="flex-grow flex flex-col items-center justify-start max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-2 sm:mt-4">
+              <div className="flex-grow flex flex-col items-center justify-start max-w-lg mx-auto z-10 space-y-4 sm:space-y-6 w-full mt-4 sm:mt-6">
                 <div className="space-y-3 sm:space-y-4 w-full px-2">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.2, duration: 0.8 }}
