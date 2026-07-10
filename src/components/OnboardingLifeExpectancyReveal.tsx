@@ -165,9 +165,9 @@ export default function OnboardingLifeExpectancyReveal({
           >
             <button
               onClick={() => setShowGraph(true)}
-              className="flex items-center justify-center space-x-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white/95 hover:text-white mx-auto text-sm font-medium transition-all active:scale-95 shadow-sm"
+              className="flex items-center justify-center space-x-2 px-5 py-2.5 rounded-full bg-[#FCD34D]/10 hover:bg-[#FCD34D]/20 border border-[#FCD34D]/30 text-[#FCD34D] hover:text-[#FDE68A] mx-auto text-sm font-medium transition-all active:scale-95 shadow-sm"
             >
-              <BarChart2 className="w-4 h-4 opacity-80" />
+              <BarChart2 className="w-4 h-4 opacity-90" />
               <span>Bekijk grafiek overlevingsleeftijd</span>
             </button>
           </motion.div>
