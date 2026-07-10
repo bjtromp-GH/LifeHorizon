@@ -283,6 +283,21 @@ export default React.memo(function LifePhasesBar({
                 </div>
               </div>
 
+              {/* Top Ticks (if overlapping) */}
+              {isFireAgeOverlapping && (
+                <div className="absolute top-0 left-0 right-0 h-6 text-[10px] font-mono text-[#767676] select-none pointer-events-none">
+                  <div 
+                    className="absolute top-1 flex flex-col items-center -translate-x-1/2"
+                    style={{ left: `${phases.basisPercent + phases.accumulationPercent}%` }}
+                  >
+                    <span className="mb-0.5 font-extrabold text-[#84A98C] bg-[#FDFDFD] px-1 rounded border border-[#84A98C]/20 shadow-3xs whitespace-nowrap">
+                      {inputs.fireAge} {t('lifePhasesBar.yr')} <span className="font-semibold text-[#84A98C]/80 hidden sm:inline">({t('lifePhasesBar.retirement')})</span>
+                    </span>
+                    <div className="w-[1.5px] h-2.5 bg-[#84A98C]" />
+                  </div>
+                </div>
+              )}
+
               {/* Dynamic Ticks and Labels underneath the bar */}
               <div className="absolute bottom-1 left-0 right-0 h-5 text-[10px] font-mono text-[#767676] select-none pointer-events-none">
                 {/* Start tick (0) */}
@@ -302,16 +317,18 @@ export default React.memo(function LifePhasesBar({
                   </span>
                 </div>
 
-                {/* Pensioen Age tick */}
-                <div 
-                  className="absolute bottom-0 flex flex-col items-center -translate-x-1/2"
-                  style={{ left: `${phases.basisPercent + phases.accumulationPercent}%` }}
-                >
-                  <div className="w-[1.5px] h-2.5 bg-[#84A98C]" />
-                  <span className="mt-0.5 font-extrabold text-[#84A98C] bg-[#FDFDFD] px-1 rounded border border-[#84A98C]/20 shadow-3xs whitespace-nowrap">
-                    {inputs.fireAge} {t('lifePhasesBar.yr')} <span className="font-semibold text-[#84A98C]/80 hidden sm:inline">({t('lifePhasesBar.retirement')})</span>
-                  </span>
-                </div>
+                {/* Pensioen Age tick (only if not overlapping) */}
+                {!isFireAgeOverlapping && (
+                  <div 
+                    className="absolute bottom-0 flex flex-col items-center -translate-x-1/2"
+                    style={{ left: `${phases.basisPercent + phases.accumulationPercent}%` }}
+                  >
+                    <div className="w-[1.5px] h-2.5 bg-[#84A98C]" />
+                    <span className="mt-0.5 font-extrabold text-[#84A98C] bg-[#FDFDFD] px-1 rounded border border-[#84A98C]/20 shadow-3xs whitespace-nowrap">
+                      {inputs.fireAge} {t('lifePhasesBar.yr')} <span className="font-semibold text-[#84A98C]/80 hidden sm:inline">({t('lifePhasesBar.retirement')})</span>
+                    </span>
+                  </div>
+                )}
 
                 {/* End Age tick */}
                 <div className="absolute right-0 bottom-0 flex flex-col items-end">
