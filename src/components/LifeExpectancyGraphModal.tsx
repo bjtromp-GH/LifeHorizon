@@ -108,13 +108,13 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[500] bg-white sm:bg-gray-100 flex justify-center">
+        <div className="fixed inset-0 z-[500] bg-white sm:bg-black/40 flex justify-center sm:items-center sm:p-4">
           <motion.div
             initial={{ opacity: 0, y: "100%" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="flex-1 w-full max-w-md flex flex-col bg-white sm:shadow-2xl"
+            className="flex-1 sm:flex-none w-full max-w-md sm:h-auto sm:max-h-[90vh] flex flex-col bg-white sm:rounded-2xl sm:shadow-2xl overflow-hidden"
           >
           {/* Header */}
           <div className="flex justify-between items-center px-4 py-4 pt-[calc(env(safe-area-inset-top)+16px)]">
