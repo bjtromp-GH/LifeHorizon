@@ -271,7 +271,10 @@ export default function App() {
       isLoadingCBS={isLoadingCBS}
       onInputChange={handleInputChange}
       onRefreshCBS={handleRefreshCBSManual}
-      onRestartOnboarding={() => setShowOnboarding(true)}
+      onRestartOnboarding={(step = 0) => {
+        setInitialOnboardingStep(step);
+        setShowOnboarding(true);
+      }}
       onResetApp={handleResetApp}
     />
   );

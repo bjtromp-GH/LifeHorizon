@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Compass, RefreshCw, HelpCircle, Settings, X } from "lucide-react";
+import { Compass, RefreshCw, HelpCircle, Settings, X, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
@@ -24,7 +24,7 @@ interface DesktopDashboardProps {
   isLoadingCBS: boolean;
   onInputChange: (updates: Partial<UserInputs>) => void;
   onRefreshCBS: () => void;
-  onRestartOnboarding: () => void;
+  onRestartOnboarding: (step?: number) => void;
   onResetApp?: () => void;
 }
 
@@ -86,16 +86,26 @@ export default function DesktopDashboard({
           </div>
 
           <div className="flex items-center space-x-3">
-            {/* Rerun Onboarding Intro button */}
             <button
               type="button"
               id="btn-restart-onboarding"
-              onClick={onRestartOnboarding}
+              onClick={() => onRestartOnboarding(0)}
               title={t('desktopDashboard.restartIntroTitle')}
               className="flex items-center space-x-1.5 px-3 py-1.5 border border-[#EAEAEA] bg-white text-xs text-[#767676] rounded hover:bg-gray-100 transition-all duration-200 cursor-pointer"
             >
               <HelpCircle className="w-3.5 h-3.5 text-[#D56B45]" />
               <span>{t('desktopDashboard.intro')}</span>
+            </button>
+
+            {/* Reveal Screen Button */}
+            <button
+              type="button"
+              onClick={() => onRestartOnboarding(10)}
+              title={t('common.revealScreen') || 'Levensverwachting'}
+              className="flex items-center space-x-1.5 px-3 py-1.5 border border-[#84A98C]/20 bg-[#84A98C]/10 hover:bg-[#84A98C]/20 text-xs text-[#84A98C] font-semibold rounded transition-all duration-200 cursor-pointer"
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Levensverwachting</span>
             </button>
 
 

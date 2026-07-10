@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useEffect, useRef } from "react";
-import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity, ChevronLeft, ChevronRight } from "lucide-react";
+import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity, ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import InfoModal from "./InfoModal";
@@ -128,6 +128,8 @@ export default function MobileContainer({
         if (activeSlide > 0) {
           goToSlide(activeSlide - 1);
           setIsSwipedFullscreen(true);
+        } else if (activeSlide === 0) {
+          onRestartOnboarding(10);
         }
       } else {
         // Swipe Left -> next slide
@@ -208,6 +210,14 @@ export default function MobileContainer({
                 title={t('common.about')}
               >
                 <Info className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onRestartOnboarding(10)}
+                className="p-1.5 bg-[#84A98C]/10 hover:bg-[#84A98C]/20 border border-[#84A98C]/20 text-[#84A98C] rounded-md transition-all cursor-pointer"
+                title="Levensverwachting"
+              >
+                <Eye className="w-4 h-4" />
               </button>
               <button
                 type="button"
