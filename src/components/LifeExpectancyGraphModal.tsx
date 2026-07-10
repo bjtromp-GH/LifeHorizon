@@ -117,24 +117,24 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
             className="flex-1 sm:flex-none w-full max-w-md sm:h-auto sm:max-h-[90vh] flex flex-col bg-white sm:rounded-2xl sm:shadow-2xl overflow-hidden"
           >
           {/* Header */}
-          <div className="flex justify-between items-center px-4 py-4 pt-[calc(env(safe-area-inset-top)+16px)]">
-            <div className="flex items-center space-x-2 relative">
-              <h2 className="text-[20px] font-semibold text-[#1C1C1E] tracking-tight leading-snug">
-                Je levensverwachting <br /> groeit mee
-              </h2>
+          <div className="flex justify-between items-start px-4 py-4 pt-[calc(env(safe-area-inset-top)+16px)]">
+            <h2 className="text-[20px] font-semibold text-[#1C1C1E] tracking-tight leading-snug">
+              Je levensverwachting <br /> groeit mee
+            </h2>
+            <div className="flex items-center space-x-4 mt-1">
               <button 
                 onClick={() => setShowTooltip(!showTooltip)}
-                className="text-[#8E8E93] hover:text-[#1C1C1E] transition-colors"
+                className="text-[#8E8E93] hover:text-[#1C1C1E] transition-colors p-1"
               >
-                <Info className="w-4 h-4" />
+                <Info className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={onClose} 
+                className="text-[#6E9E7A] text-[17px] font-medium active:opacity-50 transition-opacity shrink-0"
+              >
+                Gereed
               </button>
             </div>
-            <button 
-              onClick={onClose} 
-              className="text-[#6E9E7A] text-[17px] font-medium active:opacity-50 transition-opacity ml-2 shrink-0"
-            >
-              Gereed
-            </button>
           </div>
           
           <div className="flex-1 overflow-y-auto pb-10">
