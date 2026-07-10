@@ -48,7 +48,7 @@ export default function OnboardingLifeExpectancyReveal({
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-y-auto bg-gradient-to-br from-[#E25C26] to-[#B84E29] text-white flex flex-col">
-      {showConfetti && <Confetti color="#FFFFFF" />}
+      {showConfetti && <Confetti />}
       
       <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 relative z-10 w-full max-w-lg mx-auto">
         <motion.div
