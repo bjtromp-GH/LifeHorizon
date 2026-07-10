@@ -305,6 +305,7 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
 
           </div>
         </motion.div>
+      </div>
       )}
     </AnimatePresence>
   );
