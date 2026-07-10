@@ -37,6 +37,8 @@ export default React.memo(function LifePhasesBar({
 
   // Calculate current age percentage position relative to the entire life runway.
   const currentAgePercent = (currentAge / projectedLifeExpectancy) * 100;
+  
+  const isFireAgeOverlapping = (100 - (phases.basisPercent + phases.accumulationPercent)) < 15;
 
   return (
     <motion.div
