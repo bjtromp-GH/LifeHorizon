@@ -22,12 +22,7 @@ export const nl = {
     privacyPolicy: "Privacybeleid",
     version: "Versie",
     legendFreedom: "Vrijheid",
-    legendDeath: "Einde",
-    showModel: "Toon 25/50/25 Model",
-    hideModel: "✓ 25/50/25 Model",
-    modelInfoTitle: "Informatie over het 25/50/25 model",
-    modelInfoMore: "Later meer over het 25/50/25 model",
-    modelTitle: "Het 25/50/25 Model"
+    legendDeath: "Einde"
   },
   lifeProgress: {
     completed: "Voltooid",
@@ -310,6 +305,7 @@ export const nl = {
     startBtn: "Start",
     generateSmallBtn: "Genereer"
   },
+
   cards: {
     consumedVsRemaining: {
       title: "Verbruikt / Resterend",
@@ -383,6 +379,11 @@ export const nl = {
     phase3Desc: "De oogstfase. Werk is optioneel geworden dankzij opgebouwd vermogen (pensioen). De nadruk verschuift naar zingeving, genieten, tijd doorbrengen met dierbaren en het najagen van persoonlijke passies in goede gezondheid."
   },
   decadeGrid: {
+    showModel: "Toon 25/50/25 Model",
+    hideModel: "✓ 25/50/25 Model",
+    modelInfoTitle: "Informatie over het 25/50/25 model",
+    modelInfoMore: "Later meer over het 25/50/25 model",
+    modelTitle: "Het 25/50/25 Model",
     title: "De Levensmatrix van {{name}}",
     development: "Ontwikkeling",
     work: "Werk",

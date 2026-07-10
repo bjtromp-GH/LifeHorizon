@@ -305,6 +305,7 @@ export const en: Translations = {
     startBtn: "Start",
     generateSmallBtn: "Generate"
   },
+
   cards: {
     consumedVsRemaining: {
       title: "Consumed / Remaining",
@@ -378,6 +379,11 @@ export const en: Translations = {
     phase3Desc: "The harvest phase. Work has become optional thanks to accumulated wealth (pension). The emphasis shifts to meaning, enjoyment, spending time with loved ones, and pursuing personal passions in good health."
   },
   decadeGrid: {
+    showModel: "Show 25/50/25 Model",
+    hideModel: "✓ 25/50/25 Model",
+    modelInfoTitle: "Information about the 25/50/25 model",
+    modelInfoMore: "More about the 25/50/25 model later",
+    modelTitle: "The 25/50/25 Model",
     title: "{{name}}'s Life Matrix",
     development: "Development",
     work: "Work",
@@ -514,13 +520,6 @@ export const en: Translations = {
     personalYardstick: "Personal Yardstick",
     calibrateLifeSpan: "Set your basic parameters to calibrate your lifespan",
     birthYear: "Birth Year",
-    legendFreedom: "Freedom",
-    legendDeath: "End",
-    showModel: "Show 25/50/25 Model",
-    hideModel: "✓ 25/50/25 Model",
-    modelInfoTitle: "Information about the 25/50/25 model",
-    modelInfoMore: "More about the 25/50/25 model later",
-    modelTitle: "The 25/50/25 Model",
     gender: "Gender",
     manStat: "Man (Statistically shorter)",
     womanStat: "Woman (Statistically longer)",
