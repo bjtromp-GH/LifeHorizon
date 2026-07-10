@@ -41,6 +41,8 @@ export default function OnboardingLifeExpectancyReveal({
   // Circle animation settings
   const circleRadius = 70;
   const circumference = 2 * Math.PI * circleRadius;
+  const progressPercentage = Math.min(1, inputs.currentAge / projectedLifeExpectancy);
+  const progressOffset = circumference - (progressPercentage * circumference);
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-y-auto bg-gradient-to-br from-[#E25C26] to-[#B84E29] text-white flex flex-col">
@@ -78,6 +80,18 @@ export default function OnboardingLifeExpectancyReveal({
                   initial={{ strokeDasharray: circumference, strokeDashoffset: circumference }}
                   animate={{ strokeDashoffset: 0 }}
                   transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+                />
+                <motion.circle
+                  cx="96"
+                  cy="96"
+                  r={circleRadius}
+                  fill="none"
+                  stroke="#4ade80"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  initial={{ strokeDasharray: circumference, strokeDashoffset: circumference }}
+                  animate={{ strokeDashoffset: progressOffset }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 1 }}
                 />
               </svg>
               <div className="relative z-10 flex flex-col items-center justify-center pt-2">
