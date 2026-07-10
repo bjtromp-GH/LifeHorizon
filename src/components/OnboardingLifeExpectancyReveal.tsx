@@ -141,7 +141,18 @@ export default function OnboardingLifeExpectancyReveal({
                 <span className="text-white/80">{t('onboarding.revealScreen.currentAge')}</span>
                 <span className="font-bold text-white relative z-10">{inputs.currentAge} {t('onboarding.revealScreen.years')}</span>
               </div>
-              <div className="w-full h-px bg-white/20 my-3 relative z-10" />
+              
+              <div className="w-full relative z-10 py-1">
+                <div className="h-3 w-full bg-white/20 rounded-full overflow-hidden shadow-inner">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progressPercentage * 100}%` }}
+                    transition={{ delay: 2.2, duration: 1.5, ease: "easeOut" }}
+                    className="h-full bg-[#FCD34D] rounded-full"
+                  />
+                </div>
+              </div>
+              
               <div className="flex justify-between items-center text-base sm:text-lg relative z-10">
                 <span className="text-white/80 pr-4">{t('onboarding.revealScreen.expectancyAtBirth')}</span>
                 <span className="font-bold text-amber-200 shrink-0">{Math.round(lifeAtBirth)} {t('onboarding.revealScreen.years')}</span>
