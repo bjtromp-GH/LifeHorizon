@@ -54,6 +54,19 @@ export default function OnboardingLifeExpectancyReveal({
           className="w-full text-center space-y-8"
         >
           <div className="space-y-3">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1, y: [-10, 0, -10] }}
+              transition={{ 
+                scale: { duration: 0.8, ease: "easeOut" },
+                opacity: { duration: 0.8 },
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
+              }}
+              className="flex justify-center mb-6"
+            >
+              <img src="/img/Olifant.png" alt="Olifant Mascotte" className="w-20 h-20 sm:w-28 sm:h-28 object-contain" />
+            </motion.div>
+            
             <h2 className="text-xl sm:text-2xl font-bold text-white/90">
               {t('onboarding.revealScreen.title')}
             </h2>
