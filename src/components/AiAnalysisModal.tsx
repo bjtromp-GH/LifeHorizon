@@ -198,9 +198,16 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                   
                   <motion.div 
                     variants={{hidden: {opacity: 0, scale: 0.8}, visible: {opacity: 1, scale: 1, transition: {duration: 0.6, type: "spring"}}}}
-                    className="flex justify-center mt-8 mb-2"
+                    className="flex flex-col items-center justify-center mt-8 mb-2"
                   >
-                    <img src="/img/Olifant.png" alt="Olifant met duimpjes" className="w-40 h-40 object-contain drop-shadow-md" />
+                    <img src="/img/Olifant.png" alt="Olifant met duimpjes" className="w-40 h-40 object-contain drop-shadow-md mb-8" />
+                    
+                    <button
+                      onClick={onClose}
+                      className="px-8 py-4 bg-[#EAEAEA] hover:bg-[#D4D4D4] text-[#2D2D2D] font-extrabold text-sm tracking-wide uppercase rounded-xl shadow-sm transition-all active:scale-95"
+                    >
+                      Sluiten
+                    </button>
                   </motion.div>
                 </motion.div>
               )}
