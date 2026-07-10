@@ -233,7 +233,15 @@ export const nl = {
     matrixDetailsBtn: "Matrix details",
     healthVsLife: "Gezondheidsduur (Healthspan) vs Levensduur (Lifespan)",
     survivalCurveTitle: "Overlevingskans Curve",
-    survivalCurveDesc: "Deze grafiek toont de statistische kans om bepaalde leeftijden te bereiken, gebaseerd op actuariële CBS data. Naarmate de tijd vordert, neemt de curve sneller af. Elke dag is uniek, maar dit geeft een mooie indicatie van de statistische verwachting."
+    survivalCurveDesc: "Deze grafiek toont de statistische kans om bepaalde leeftijden te bereiken, gebaseerd op actuariële CBS data. Naarmate de tijd vordert, neemt de curve sneller af. Elke dag is uniek, maar dit geeft een mooie indicatie van de statistische verwachting.",
+    survivalCurve: {
+      chanceFor: "Kans voor een {{gender}} van {{age}} jaar om te leven tot...",
+      years: "jaar",
+      chance: "% kans",
+      expectedLifeSpan: "Verwachte<br/>levensduur",
+      statePensionAge: "AOW<br/>leeftijd",
+      age: "Leeftijd"
+    }
   },
   bioScore: {
     title: "Lifestyle Bio-Score",

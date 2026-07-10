@@ -48,7 +48,7 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy, del
   const formatProb = (p: number) => (p < 1 ? p.toFixed(1) : Math.round(p * 10) / 10);
 
   const genderStr = inputs.gender === "man" ? t('common.man') || "man" : t('common.woman') || "vrouw";
-  const title = t('dashboard.survivalCurveTitle') || `Kans voor een ${genderStr} van ${currentAge} jaar om te leven tot...`;
+  const title = t('dashboard.survivalCurve.chanceFor', { gender: genderStr, age: currentAge.toString() }) || `Kans voor een ${genderStr} van ${currentAge} jaar om te leven tot...`;
 
   return (
     <motion.div 
@@ -84,9 +84,9 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy, del
               <div className="flex items-center space-x-1.5 mb-1">
                 <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#D56B45] bg-white' : dot} box-content shrink-0`} />
                 <span className={`text-xl sm:text-2xl font-black font-sans ${color}`}>{age}</span>
-                <span className={`text-xs font-bold ${color}`}>jaar</span>
+                <span className={`text-xs font-bold ${color}`}>{t('dashboard.survivalCurve.years')}</span>
               </div>
-              <span className={`text-sm ${color} opacity-80 font-medium whitespace-nowrap`}>{formatProb(prob)}% kans</span>
+              <span className={`text-sm ${color} opacity-80 font-medium whitespace-nowrap`}>{formatProb(prob)}{t('dashboard.survivalCurve.chance')}</span>
             </motion.div>
           );
         })}
@@ -113,9 +113,9 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy, del
               <div className="flex items-center space-x-1.5 mb-1">
                 <div className={`w-3 h-3 rounded-full border-2 ${i === 0 ? 'border-[#D56B45] bg-white' : dot} box-content shrink-0`} />
                 <span className={`text-xl sm:text-2xl font-black font-sans ${color}`}>{age}</span>
-                <span className={`text-xs font-bold ${color}`}>jaar</span>
+                <span className={`text-xs font-bold ${color}`}>{t('dashboard.survivalCurve.years')}</span>
               </div>
-              <span className={`text-sm ${color} opacity-80 font-medium whitespace-nowrap`}>{formatProb(prob)}% kans</span>
+              <span className={`text-sm ${color} opacity-80 font-medium whitespace-nowrap`}>{formatProb(prob)}{t('dashboard.survivalCurve.chance')}</span>
             </motion.div>
           );
         })}
@@ -212,8 +212,8 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy, del
               left: `calc(${((projectedLifeExpectancy - currentAge) / (endAge - currentAge)) * 100}% + 4px)` 
             }}
           >
-            <span className="font-bold text-[#D56B45]">{Math.round(projectedLifeExpectancy)} jaar</span>
-            <span className="text-[#D56B45] opacity-80">Verwachte<br/>levensduur</span>
+            <span className="font-bold text-[#D56B45]">{Math.round(projectedLifeExpectancy)} {t('dashboard.survivalCurve.years')}</span>
+            <span className="text-[#D56B45] opacity-80" dangerouslySetInnerHTML={{ __html: t('dashboard.survivalCurve.expectedLifeSpan') }} />
           </motion.div>
         )}
         
@@ -229,13 +229,13 @@ export default function SurvivalCurveCard({ inputs, projectedLifeExpectancy, del
               top: `calc(${100 - getProb(68)}% + 10px)`
             }}
           >
-            <span className="font-bold">68 jaar</span>
-            <span className="opacity-80 text-center">AOW<br/>leeftijd</span>
+            <span className="font-bold">68 {t('dashboard.survivalCurve.years')}</span>
+            <span className="opacity-80 text-center" dangerouslySetInnerHTML={{ __html: t('dashboard.survivalCurve.statePensionAge') }} />
           </motion.div>
         )}
 
       </div>
-      <div className="text-right text-[10px] text-[#767676] pt-5 -mb-2">Leeftijd</div>
+      <div className="text-right text-[10px] text-[#767676] pt-5 -mb-2">{t('dashboard.survivalCurve.age')}</div>
     </motion.div>
   );
 }
