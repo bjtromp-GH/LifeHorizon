@@ -119,8 +119,8 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
           {/* Header */}
           <div className="flex justify-between items-center px-4 py-4 pt-[calc(env(safe-area-inset-top)+16px)]">
             <div className="flex items-center space-x-2 relative">
-              <h2 className="text-[20px] font-semibold text-[#1C1C1E] tracking-tight">
-                Je levensverwachting groeit mee
+              <h2 className="text-[20px] font-semibold text-[#1C1C1E] tracking-tight leading-snug">
+                Je levensverwachting <br /> groeit mee
               </h2>
               <button 
                 onClick={() => setShowTooltip(!showTooltip)}
@@ -256,10 +256,11 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
 
                 {/* Current Age Highlight Label */}
                 <g transform={`translate(${getX(currentPoint.x)}, ${padding.top - 20})`}>
-                  <rect x="-35" y="-30" width="70" height="40" rx="6" fill="white" stroke={strokeColor} strokeWidth="1" />
-                  <text x="0" y="-14" fontSize="11" fill={textColor} textAnchor="middle">Jij nu</text>
-                  <text x="0" y="2" fontSize="13" fontWeight="600" fill={strokeColor} textAnchor="middle">{currentAge} jaar</text>
-                  <text x="0" y="22" fontSize="12" fontWeight="600" fill={strokeColor} textAnchor="middle">{yNow.toFixed(1).replace('.', ',')}</text>
+                  <rect x="-38" y="-35" width="76" height="62" rx="8" fill="white" stroke={strokeColor} strokeWidth="1.5" />
+                  <text x="0" y="-18" fontSize="11" fill={textColor} textAnchor="middle">Jij nu</text>
+                  <text x="0" y="0" fontSize="14" fontWeight="700" fill={strokeColor} textAnchor="middle">{currentAge} jaar</text>
+                  <line x1="-25" y1="8" x2="25" y2="8" stroke={gridColor} strokeWidth="1" />
+                  <text x="0" y="21" fontSize="12" fontWeight="600" fill={strokeColor} textAnchor="middle">{yNow.toFixed(1).replace('.', ',')}</text>
                 </g>
 
                 {/* Highlight Point (Birth) */}
@@ -287,10 +288,10 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
                   <polyline points="-3,3 0,0 3,3" fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   <polyline points={`-3,${getY(yBirth) - getY(yNow) - 3} 0,${getY(yBirth) - getY(yNow)} 3,${getY(yBirth) - getY(yNow) - 3}`} fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   
-                  <rect x="6" y={(getY(yBirth) - getY(yNow)) / 2 - 25} width="68" height="42" rx="6" fill="white" stroke={strokeColor} strokeWidth="1" />
-                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 - 5} fontSize="13" fontWeight="600" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
-                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 8} fontSize="9" fill={textColor} textAnchor="middle">sinds je</text>
-                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="9" fill={textColor} textAnchor="middle">geboorte</text>
+                  <rect x="8" y={(getY(yBirth) - getY(yNow)) / 2 - 28} width="76" height="56" rx="8" fill="white" stroke={strokeColor} strokeWidth="1.5" />
+                  <text x="46" y={(getY(yBirth) - getY(yNow)) / 2 - 10} fontSize="13" fontWeight="700" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
+                  <text x="46" y={(getY(yBirth) - getY(yNow)) / 2 + 6} fontSize="10" fill={textColor} textAnchor="middle">sinds je</text>
+                  <text x="46" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="10" fill={textColor} textAnchor="middle">geboorte</text>
                 </g>
 
               </svg>
