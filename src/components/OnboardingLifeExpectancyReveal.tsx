@@ -3,8 +3,9 @@ import { motion } from "motion/react";
 import { UserInputs } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import Confetti from './Confetti';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, BarChart2 } from 'lucide-react';
 import { getHistoricalLifeExpectancyAtBirth } from '../api/cbs';
+import LifeExpectancyGraphModal from './LifeExpectancyGraphModal';
 
 interface OnboardingLifeExpectancyRevealProps {
   inputs: UserInputs;
@@ -28,6 +29,7 @@ export default function OnboardingLifeExpectancyReveal({
   const lifeAtBirth = getHistoricalLifeExpectancyAtBirth(inputs.birthYear, inputs.gender);
 
   const [showConfetti, setShowConfetti] = useState(false);
+  const [showGraph, setShowGraph] = useState(false);
 
   useEffect(() => {
     if (isIncreased) {
@@ -158,8 +160,23 @@ export default function OnboardingLifeExpectancyReveal({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 2.2 }}
+            className="pt-6"
+          >
+            <button
+              onClick={() => setShowGraph(true)}
+              className="flex items-center justify-center space-x-2 text-white/90 hover:text-white mx-auto text-sm sm:text-base underline decoration-white/30 underline-offset-4 transition-all"
+            >
+              <BarChart2 className="w-4 h-4" />
+              <span>Bekijk grafiek overlevingsleeftijd</span>
+            </button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 2.5 }}
-            className="pt-10"
+            className="pt-6"
           >
 
             <button
@@ -172,6 +189,14 @@ export default function OnboardingLifeExpectancyReveal({
           </motion.div>
         </motion.div>
       </div>
+      
+      <LifeExpectancyGraphModal 
+        isOpen={showGraph} 
+        onClose={() => setShowGraph(false)} 
+        inputs={inputs} 
+        cbsBaseLife={cbsBaseLife} 
+        projectedLifeExpectancy={projectedLifeExpectancy} 
+      />
     </div>
   );
 }
