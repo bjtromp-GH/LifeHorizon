@@ -8,10 +8,11 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   inputs: UserInputs;
-  cbsBaseLife: number; // This is the CBS expectancy at CURRENT AGE
+  cbsBaseLife: number; // CBS expectancy at CURRENT AGE
+  projectedLifeExpectancy: number; // The final calculated life expectancy
 }
 
-export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsBaseLife }: Props) {
+export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsBaseLife, projectedLifeExpectancy }: Props) {
   if (!isOpen) return null;
 
   const currentAge = inputs.currentAge;
@@ -19,7 +20,7 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
   
   // 1. Calculate values
   const yBirth = getHistoricalLifeExpectancyAtBirth(birthYear, inputs.gender);
-  const yNow = cbsBaseLife;
+  const yNow = projectedLifeExpectancy;
   const difference = yNow - yBirth;
 
   // Generate points
@@ -58,7 +59,8 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
   // 2. SVG Setup
   const width = 360;
   const height = 280;
-  const padding = { top: 60, right: 80, bottom: 40, left: 30 };
+  // Increase right padding so the label fits *inside* the viewBox
+  const padding = { top: 60, right: 90, bottom: 40, left: 30 };
   
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = height - padding.top - padding.bottom;
@@ -226,17 +228,17 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
                 </g>
 
                 {/* Right Arrow Label for Difference */}
-                <g transform={`translate(${width - padding.right + 15}, ${getY(yNow)})`}>
+                <g transform={`translate(${width - padding.right + 10}, ${getY(yNow)})`}>
                   {/* Vertical dashed arrow showing increase */}
                   <line x1="0" y1="0" x2="0" y2={getY(yBirth) - getY(yNow)} stroke={strokeColor} strokeWidth="1" strokeDasharray="3 3" />
                   {/* Arrow heads */}
                   <polyline points="-3,3 0,0 3,3" fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   <polyline points={`-3,${getY(yBirth) - getY(yNow) - 3} 0,${getY(yBirth) - getY(yNow)} 3,${getY(yBirth) - getY(yNow) - 3}`} fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   
-                  <rect x="10" y={(getY(yBirth) - getY(yNow)) / 2 - 25} width="65" height="50" rx="6" fill="white" stroke={strokeColor} strokeWidth="1" />
-                  <text x="42" y={(getY(yBirth) - getY(yNow)) / 2 - 10} fontSize="11" fill={textColor} textAnchor="middle">Nu</text>
-                  <text x="42" y={(getY(yBirth) - getY(yNow)) / 2 + 4} fontSize="12" fontWeight="600" fill={darkTextColor} textAnchor="middle">{yNow.toFixed(1).replace('.', ',')}</text>
-                  <text x="42" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="12" fontWeight="600" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
+                  <rect x="6" y={(getY(yBirth) - getY(yNow)) / 2 - 25} width="68" height="50" rx="6" fill="white" stroke={strokeColor} strokeWidth="1" />
+                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 - 10} fontSize="11" fill={textColor} textAnchor="middle">Nu</text>
+                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 4} fontSize="12" fontWeight="600" fill={darkTextColor} textAnchor="middle">{yNow.toFixed(1).replace('.', ',')}</text>
+                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="12" fontWeight="600" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
                 </g>
 
               </svg>
