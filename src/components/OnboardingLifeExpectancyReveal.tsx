@@ -107,12 +107,12 @@ export default function OnboardingLifeExpectancyReveal({
             </div>
             <div className="flex justify-between items-center text-sm">
               <span className="text-white/80">{t('onboarding.revealScreen.currentAge')}</span>
-              <span className="font-bold text-white">{inputs.currentAge} {t('common.yr', { defaultValue: 'jr' })}</span>
+              <span className="font-bold text-white">{inputs.currentAge} {t('onboarding.revealScreen.years')}</span>
             </div>
             <div className="w-full h-px bg-white/20 my-2" />
             <div className="flex justify-between items-center text-sm">
               <span className="text-white/80 pr-4">{t('onboarding.revealScreen.expectancyAtBirth')}</span>
-              <span className="font-bold text-amber-200 shrink-0">{Math.round(lifeAtBirth)} {t('common.yr', { defaultValue: 'jr' })}</span>
+              <span className="font-bold text-amber-200 shrink-0">{Math.round(lifeAtBirth)} {t('onboarding.revealScreen.years')}</span>
             </div>
           </motion.div>
 
