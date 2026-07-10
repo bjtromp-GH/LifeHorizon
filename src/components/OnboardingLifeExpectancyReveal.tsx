@@ -151,7 +151,7 @@ export default function OnboardingLifeExpectancyReveal({
             <img 
               src="/img/Olifant.png" 
               alt="Olifant Mascotte" 
-              className="absolute -right-8 -bottom-6 w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-xl z-20 pointer-events-none" 
+              className="absolute -left-4 -top-14 sm:-left-6 sm:-top-16 w-20 h-20 sm:w-28 sm:h-28 object-contain drop-shadow-xl z-20 pointer-events-none" 
             />
           </motion.div>
 
