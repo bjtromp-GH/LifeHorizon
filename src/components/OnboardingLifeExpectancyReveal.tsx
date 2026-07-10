@@ -4,6 +4,7 @@ import { UserInputs } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import Confetti from './Confetti';
 import { ChevronRight } from 'lucide-react';
+import { calculateFallbackLifeExpectancy } from '../api/cbs';
 
 interface OnboardingLifeExpectancyRevealProps {
   inputs: UserInputs;
@@ -24,6 +25,8 @@ export default function OnboardingLifeExpectancyReveal({
   const isIncreased = difference > 0.5;
   const isDecreased = difference < -0.5;
 
+  const lifeAtBirth = calculateFallbackLifeExpectancy(inputs.birthYear, inputs.gender, 0);
+
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
@@ -34,6 +37,10 @@ export default function OnboardingLifeExpectancyReveal({
       return () => clearTimeout(timer);
     }
   }, [isIncreased]);
+
+  // Circle animation settings
+  const circleRadius = 70;
+  const circumference = 2 * Math.PI * circleRadius;
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-y-auto bg-gradient-to-br from-[#E25C26] to-[#B84E29] text-white flex flex-col">
@@ -50,73 +57,64 @@ export default function OnboardingLifeExpectancyReveal({
             <h2 className="text-xl sm:text-2xl font-bold text-white/90">
               {t('onboarding.revealScreen.title')}
             </h2>
-            <div className="text-6xl sm:text-7xl font-black tabular-nums tracking-tighter drop-shadow-lg">
-              {Math.round(projectedLifeExpectancy)}
+            <div className="relative w-48 h-48 mx-auto flex items-center justify-center">
+              <svg className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-md">
+                <circle
+                  cx="96"
+                  cy="96"
+                  r={circleRadius}
+                  fill="none"
+                  stroke="rgba(255, 255, 255, 0.2)"
+                  strokeWidth="8"
+                />
+                <motion.circle
+                  cx="96"
+                  cy="96"
+                  r={circleRadius}
+                  fill="none"
+                  stroke="#FFFFFF"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  initial={{ strokeDasharray: circumference, strokeDashoffset: circumference }}
+                  animate={{ strokeDashoffset: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+                />
+              </svg>
+              <div className="text-6xl sm:text-7xl font-black tabular-nums tracking-tighter drop-shadow-lg relative z-10">
+                {Math.round(projectedLifeExpectancy)}
+              </div>
             </div>
             
-            <p className="text-lg sm:text-xl font-medium text-amber-200 leading-relaxed pt-2">
-              {isIncreased 
-                ? t('onboarding.revealScreen.increased') 
-                : isDecreased 
-                  ? t('onboarding.revealScreen.decreased') 
-                  : t('onboarding.revealScreen.neutral')}
-            </p>
-            
-            <p className="text-sm text-white/70">
-              {t('onboarding.revealScreen.explanation').replace('{{year}}', inputs.birthYear.toString()).replace('{{gender}}', inputs.gender === 'man' ? 'man' : 'vrouw')}
-            </p>
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.8 }}
+              className="text-lg sm:text-xl font-medium text-amber-200 leading-relaxed pt-2"
+            >
+              {isIncreased ? t('onboarding.revealScreen.increased') : ''}
+            </motion.p>
           </div>
 
-          {/* Animated Bar Chart */}
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 space-y-6 mt-8">
-            {/* Base Expectancy */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm font-semibold">
-                <span className="text-white/80">{t('onboarding.revealScreen.baseDesc')}</span>
-                <span>{Math.round(cbsBaseLife)}</span>
-              </div>
-              <div className="h-4 bg-black/20 rounded-full overflow-hidden w-full">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: `${Math.min(100, (cbsBaseLife / 100) * 100)}%` }}
-                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                  className="h-full bg-white/40 rounded-full"
-                />
-              </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 1 }}
+            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 space-y-4 mt-8 max-w-sm mx-auto text-left"
+          >
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-white/80">{t('onboarding.revealScreen.birthYear')}</span>
+              <span className="font-bold text-white">{inputs.birthYear}</span>
             </div>
-
-            {/* Projected Expectancy */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm font-bold text-amber-100">
-                <span>{t('onboarding.revealScreen.personalDesc')}</span>
-                <span>{Math.round(projectedLifeExpectancy)}</span>
-              </div>
-              <div className="h-4 bg-black/20 rounded-full overflow-hidden w-full flex">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: `${Math.min(100, (cbsBaseLife / 100) * 100)}%` }}
-                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                  className="h-full bg-amber-300 rounded-l-full"
-                />
-                {difference > 0 && (
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(100, (difference / 100) * 100)}%` }}
-                    transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
-                    className="h-full bg-green-400 rounded-r-full"
-                  />
-                )}
-                {difference < 0 && (
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(100, (Math.abs(difference) / 100) * 100)}%` }}
-                    transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
-                    className="h-full bg-red-400 rounded-r-full"
-                  />
-                )}
-              </div>
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-white/80">{t('onboarding.revealScreen.currentAge')}</span>
+              <span className="font-bold text-white">{inputs.currentAge} {t('common.yr', { defaultValue: 'jr' })}</span>
             </div>
-          </div>
+            <div className="w-full h-px bg-white/20 my-2" />
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-white/80 pr-4">{t('onboarding.revealScreen.expectancyAtBirth')}</span>
+              <span className="font-bold text-amber-200 shrink-0">{Math.round(lifeAtBirth)} {t('common.yr', { defaultValue: 'jr' })}</span>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
