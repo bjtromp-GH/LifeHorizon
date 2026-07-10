@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserInputs } from '../types';
 import { getHistoricalLifeExpectancyAtBirth } from '../api/cbs';
-import { useLanguage } from '../context/LanguageContext';
+import { Info, X } from 'lucide-react';
 
 interface Props {
   isOpen: boolean;
@@ -13,6 +13,8 @@ interface Props {
 }
 
 export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsBaseLife, projectedLifeExpectancy }: Props) {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   if (!isOpen) return null;
 
   const currentAge = inputs.currentAge;
@@ -37,7 +39,8 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
         y = yNow;
       } else if (age < currentAge) {
         const progress = age / currentAge;
-        y = yBirth + (yNow - yBirth) * Math.pow(progress, 1.2); 
+        // Exponential curve: starts slow, rises faster later
+        y = yBirth + (yNow - yBirth) * Math.pow(progress, 2.5); 
       } else {
         const extra = age - currentAge;
         y = yNow + extra * 0.15; // Slow rise after current age
@@ -59,8 +62,8 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
   // 2. SVG Setup
   const width = 360;
   const height = 280;
-  // Increase right padding so the label fits *inside* the viewBox
-  const padding = { top: 60, right: 90, bottom: 40, left: 30 };
+  // Make left padding smaller if needed, but 40 is good. We will draw a Y-axis line at x=0
+  const padding = { top: 60, right: 90, bottom: 40, left: 40 };
   
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = height - padding.top - padding.bottom;
@@ -116,18 +119,48 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
         >
           {/* Header */}
           <div className="flex justify-between items-center px-4 py-4 pt-[calc(env(safe-area-inset-top)+16px)]">
-            <h2 className="text-[22px] font-semibold text-[#1C1C1E] tracking-tight">
-              Levensverwachting
-            </h2>
+            <div className="flex items-center space-x-2 relative">
+              <h2 className="text-[20px] font-semibold text-[#1C1C1E] tracking-tight">
+                Je levensverwachting groeit mee
+              </h2>
+              <button 
+                onClick={() => setShowTooltip(!showTooltip)}
+                className="text-[#8E8E93] hover:text-[#1C1C1E] transition-colors"
+              >
+                <Info className="w-4 h-4" />
+              </button>
+            </div>
             <button 
               onClick={onClose} 
-              className="text-[#6E9E7A] text-[17px] font-medium active:opacity-50 transition-opacity"
+              className="text-[#6E9E7A] text-[17px] font-medium active:opacity-50 transition-opacity ml-2 shrink-0"
             >
               Gereed
             </button>
           </div>
           
           <div className="flex-1 overflow-y-auto pb-10">
+            {/* Tooltip inline expansion */}
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                  animate={{ opacity: 1, height: 'auto', marginBottom: 16 }}
+                  exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+                  className="px-4 overflow-hidden"
+                >
+                  <div className="bg-[#F2F2F7] rounded-xl p-4 text-[14px] text-[#1C1C1E] leading-relaxed relative">
+                    <button 
+                      onClick={() => setShowTooltip(false)}
+                      className="absolute top-2 right-2 p-1 text-[#8E8E93]"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                    De levensverwachting bij geboorte is een periodelevensverwachting. Naarmate je ouder wordt, stijgt je verwachte leeftijd bij overlijden omdat je eerdere sterfterisico's al hebt overleefd.
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             <div className="px-4 pt-2 pb-6">
               <p className="text-[15px] text-[#8E8E93] leading-snug">
                 Verwachte leeftijd bij overlijden voor een {inputs.gender === 'man' ? 'man' : 'vrouw'} geboren in {birthYear} in Nederland.
@@ -138,6 +171,16 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
             <div className="w-full relative">
               <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto overflow-visible font-sans">
                 
+                {/* Vertical Y-axis line at x=0 */}
+                <line
+                  x1={getX(0)}
+                  y1={padding.top - 20}
+                  x2={getX(0)}
+                  y2={height - padding.bottom}
+                  stroke={gridColor}
+                  strokeWidth="1"
+                />
+
                 {/* Horizontal Grid Lines & Y-axis labels */}
                 {yTicks.map(y => (
                   <g key={`y-${y}`}>
@@ -235,10 +278,10 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
                   <polyline points="-3,3 0,0 3,3" fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   <polyline points={`-3,${getY(yBirth) - getY(yNow) - 3} 0,${getY(yBirth) - getY(yNow)} 3,${getY(yBirth) - getY(yNow) - 3}`} fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   
-                  <rect x="6" y={(getY(yBirth) - getY(yNow)) / 2 - 25} width="68" height="50" rx="6" fill="white" stroke={strokeColor} strokeWidth="1" />
-                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 - 10} fontSize="11" fill={textColor} textAnchor="middle">Nu</text>
-                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 4} fontSize="12" fontWeight="600" fill={darkTextColor} textAnchor="middle">{yNow.toFixed(1).replace('.', ',')}</text>
-                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="12" fontWeight="600" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
+                  <rect x="6" y={(getY(yBirth) - getY(yNow)) / 2 - 25} width="68" height="42" rx="6" fill="white" stroke={strokeColor} strokeWidth="1" />
+                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 - 5} fontSize="13" fontWeight="600" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
+                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 8} fontSize="9" fill={textColor} textAnchor="middle">sinds je</text>
+                  <text x="40" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="9" fill={textColor} textAnchor="middle">geboorte</text>
                 </g>
 
               </svg>
