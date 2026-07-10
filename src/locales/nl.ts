@@ -384,6 +384,8 @@ export const nl = {
     modelInfoTitle: "Informatie over het 25/50/25 model",
     modelInfoMore: "Later meer over het 25/50/25 model",
     modelTitle: "Het 25/50/25 Model",
+    extraFreeYearsTitle: "Jouw extra vrije jaren!",
+    extraFreeYearsUnit: "jaar",
     title: "De Levensmatrix van {{name}}",
     development: "Ontwikkeling",
     work: "Werk",

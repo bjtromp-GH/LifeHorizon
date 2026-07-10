@@ -284,8 +284,8 @@ export default React.memo(function DecadeGrid({
               <div className="flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-[#EAE8E4] w-max max-w-[90vw]">
                 <img src="/img/LR_Olifant_v1.png" alt="Olifant" className="w-16 h-16 object-contain pointer-events-none shrink-0" />
                 <div className="flex flex-col pointer-events-none">
-                  <span className="text-sm font-bold text-[#2D2D2D] whitespace-nowrap">Jouw extra vrije jaren!</span>
-                  <span className="text-2xl font-black text-[#84A98C] whitespace-nowrap">+{extraFreeYears} jaar</span>
+                  <span className="text-sm font-bold text-[#2D2D2D] whitespace-nowrap">{t('decadeGrid.extraFreeYearsTitle')}</span>
+                  <span className="text-2xl font-black text-[#84A98C] whitespace-nowrap">+{extraFreeYears} {t('decadeGrid.extraFreeYearsUnit')}</span>
                 </div>
                 <button onClick={() => setShowToast(false)} className="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
                   <X className="w-4 h-4" />

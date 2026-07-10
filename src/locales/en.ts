@@ -384,6 +384,8 @@ export const en: Translations = {
     modelInfoTitle: "Information about the 25/50/25 model",
     modelInfoMore: "More about the 25/50/25 model later",
     modelTitle: "The 25/50/25 Model",
+    extraFreeYearsTitle: "Your extra free years!",
+    extraFreeYearsUnit: "years",
     title: "{{name}}'s Life Matrix",
     development: "Development",
     work: "Work",
