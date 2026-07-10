@@ -93,8 +93,13 @@ export default function OnboardingLifeExpectancyReveal({
                   transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
                 />
               </svg>
-              <div className="text-6xl sm:text-7xl font-black tabular-nums tracking-tighter drop-shadow-lg relative z-10">
-                {Math.round(projectedLifeExpectancy)}
+              <div className="relative z-10 flex flex-col items-center justify-center pt-2">
+                <div className="text-6xl sm:text-7xl font-black tabular-nums tracking-tighter drop-shadow-lg leading-none">
+                  {Math.round(projectedLifeExpectancy)}
+                </div>
+                <div className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white/80 mt-1">
+                  {t('onboarding.revealScreen.years')}
+                </div>
               </div>
             </div>
             
