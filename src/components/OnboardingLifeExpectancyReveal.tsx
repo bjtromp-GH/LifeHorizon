@@ -4,7 +4,7 @@ import { UserInputs } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import Confetti from './Confetti';
 import { ChevronRight } from 'lucide-react';
-import { calculateFallbackLifeExpectancy } from '../api/cbs';
+import { getHistoricalLifeExpectancyAtBirth } from '../api/cbs';
 
 interface OnboardingLifeExpectancyRevealProps {
   inputs: UserInputs;
@@ -25,7 +25,7 @@ export default function OnboardingLifeExpectancyReveal({
   const isIncreased = difference > 0.5;
   const isDecreased = difference < -0.5;
 
-  const lifeAtBirth = calculateFallbackLifeExpectancy(inputs.birthYear, inputs.gender, 0);
+  const lifeAtBirth = getHistoricalLifeExpectancyAtBirth(inputs.birthYear, inputs.gender);
 
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -54,19 +54,6 @@ export default function OnboardingLifeExpectancyReveal({
           className="w-full text-center space-y-8"
         >
           <div className="space-y-3">
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1, y: [-10, 0, -10] }}
-              transition={{ 
-                scale: { duration: 0.8, ease: "easeOut" },
-                opacity: { duration: 0.8 },
-                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
-              }}
-              className="flex justify-center mb-6"
-            >
-              <img src="/img/Olifant.png" alt="Olifant Mascotte" className="w-20 h-20 sm:w-28 sm:h-28 object-contain" />
-            </motion.div>
-            
             <h2 className="text-xl sm:text-2xl font-bold text-white/90">
               {t('onboarding.revealScreen.title')}
             </h2>
@@ -138,8 +125,21 @@ export default function OnboardingLifeExpectancyReveal({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 2.5 }}
-            className="pt-8"
+            className="pt-4"
           >
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1, y: [-5, 5, -5] }}
+              transition={{ 
+                scale: { duration: 0.8, ease: "easeOut", delay: 2.5 },
+                opacity: { duration: 0.8, delay: 2.5 },
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
+              }}
+              className="flex justify-center mb-4"
+            >
+              <img src="/img/Olifant.png" alt="Olifant Mascotte" className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md" />
+            </motion.div>
+
             <button
               onClick={onComplete}
               className="w-full py-4 bg-white hover:bg-stone-100 text-[#D56B45] font-black text-sm sm:text-base tracking-widest uppercase rounded-2xl flex items-center justify-center space-x-3 shadow-xl transition-all duration-300 active:scale-95"

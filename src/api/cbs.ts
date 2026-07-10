@@ -51,6 +51,33 @@ export function calculateFallbackLifeExpectancy(
 }
 
 /**
+ * Get historical period life expectancy at birth for a specific birth year in the Netherlands.
+ * This represents the actual life expectancy AT THE TIME OF BIRTH (without later cohort improvements
+ * or survival advantages). E.g. in 1978 this was ~72.2 for men and ~78.7 for women.
+ */
+export function getHistoricalLifeExpectancyAtBirth(birthYear: number, gender: Gender): number {
+  // Approximate linear interpolation of CBS historical period life expectancy at birth
+  // 1950: Men 70.3, Women 72.6
+  // 1978: Men 72.2, Women 78.7
+  // 1980: Men 72.5, Women 79.2
+  // 2000: Men 75.5, Women 80.5
+  // 2020: Men 79.7, Women 83.1
+  
+  let base1980 = gender === "man" ? 72.5 : 79.2;
+  let slopePre1980 = gender === "man" ? (72.5 - 70.3) / 30 : (79.2 - 72.6) / 30; // per year
+  let slopePost1980 = gender === "man" ? (79.7 - 72.5) / 40 : (83.1 - 79.2) / 40; // per year
+  
+  let expectancy = 0;
+  if (birthYear <= 1980) {
+    expectancy = base1980 - ((1980 - birthYear) * slopePre1980);
+  } else {
+    expectancy = base1980 + ((birthYear - 1980) * slopePost1980);
+  }
+  
+  return Math.round(expectancy * 10) / 10;
+}
+
+/**
  * Fetch life expectancy from CBS Open Data API (OData v3, dataset 80333NED).
  * Filters on Geboortejaar (cohort) and Geslacht.
  * If server blocks, times out, or fails, gracefully returns the calculated fallback.
