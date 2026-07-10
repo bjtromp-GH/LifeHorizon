@@ -108,7 +108,7 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[500] bg-white sm:bg-black/40 flex justify-center sm:items-center sm:p-4">
+        <div className="fixed inset-0 z-[500] bg-white sm:bg-[#D56B45]/80 sm:backdrop-blur-sm flex justify-center sm:items-center sm:p-4">
           <motion.div
             initial={{ opacity: 0, y: "100%" }}
             animate={{ opacity: 1, y: 0 }}
@@ -262,11 +262,21 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
                   <text x="0" y="22" fontSize="12" fontWeight="600" fill={strokeColor} textAnchor="middle">{yNow.toFixed(1).replace('.', ',')}</text>
                 </g>
 
+                {/* Highlight Point (Birth) */}
+                <circle 
+                  cx={getX(0)} 
+                  cy={getY(birthPoint.y)} 
+                  r="4" 
+                  fill="white"
+                  stroke={strokeColor}
+                  strokeWidth="2"
+                />
+
                 {/* Label Left (At Birth) */}
-                <g transform={`translate(${getX(0)}, ${getY(birthPoint.y) + 20})`}>
-                  <rect x="0" y="0" width="80" height="36" rx="6" fill="white" stroke="#E5E5EA" strokeWidth="1" />
-                  <text x="40" y="14" fontSize="10" fill={textColor} textAnchor="middle">Bij geboorte</text>
-                  <text x="40" y="28" fontSize="12" fontWeight="600" fill={darkTextColor} textAnchor="middle">{yBirth.toFixed(1).replace('.', ',')} jaar</text>
+                <g transform={`translate(${getX(0)}, ${getY(birthPoint.y) - 25})`}>
+                  <rect x="-35" y="-20" width="70" height="36" rx="6" fill="white" stroke={strokeColor} strokeWidth="1" />
+                  <text x="0" y="-7" fontSize="10" fill={textColor} textAnchor="middle">Bij geboorte</text>
+                  <text x="0" y="8" fontSize="12" fontWeight="600" fill={strokeColor} textAnchor="middle">{yBirth.toFixed(1).replace('.', ',')} jaar</text>
                 </g>
 
                 {/* Right Arrow Label for Difference */}
