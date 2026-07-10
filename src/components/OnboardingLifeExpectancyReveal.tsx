@@ -118,41 +118,37 @@ export default function OnboardingLifeExpectancyReveal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2, duration: 1 }}
-            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 space-y-4 mt-8 max-w-sm mx-auto text-left"
+            className="relative mt-8 max-w-sm mx-auto w-full"
           >
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-white/80">{t('onboarding.revealScreen.birthYear')}</span>
-              <span className="font-bold text-white">{inputs.birthYear}</span>
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 pr-8 sm:pr-12 space-y-4 text-left">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-white/80">{t('onboarding.revealScreen.birthYear')}</span>
+                <span className="font-bold text-white relative z-10">{inputs.birthYear}</span>
+              </div>
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-white/80">{t('onboarding.revealScreen.currentAge')}</span>
+                <span className="font-bold text-white relative z-10">{inputs.currentAge} {t('onboarding.revealScreen.years')}</span>
+              </div>
+              <div className="w-full h-px bg-white/20 my-2 relative z-10" />
+              <div className="flex justify-between items-center text-sm relative z-10">
+                <span className="text-white/80 pr-4">{t('onboarding.revealScreen.expectancyAtBirth')}</span>
+                <span className="font-bold text-amber-200 shrink-0">{Math.round(lifeAtBirth)} {t('onboarding.revealScreen.years')}</span>
+              </div>
             </div>
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-white/80">{t('onboarding.revealScreen.currentAge')}</span>
-              <span className="font-bold text-white">{inputs.currentAge} {t('onboarding.revealScreen.years')}</span>
-            </div>
-            <div className="w-full h-px bg-white/20 my-2" />
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-white/80 pr-4">{t('onboarding.revealScreen.expectancyAtBirth')}</span>
-              <span className="font-bold text-amber-200 shrink-0">{Math.round(lifeAtBirth)} {t('onboarding.revealScreen.years')}</span>
-            </div>
+            
+            <img 
+              src="/img/Olifant.png" 
+              alt="Olifant Mascotte" 
+              className="absolute -right-8 -bottom-6 w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-xl z-20 pointer-events-none" 
+            />
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 2.5 }}
-            className="pt-4"
+            className="pt-10"
           >
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1, y: [-5, 5, -5] }}
-              transition={{ 
-                scale: { duration: 0.8, ease: "easeOut", delay: 2.5 },
-                opacity: { duration: 0.8, delay: 2.5 },
-                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
-              }}
-              className="flex justify-center mb-4"
-            >
-              <img src="/img/Olifant.png" alt="Olifant Mascotte" className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md" />
-            </motion.div>
 
             <button
               onClick={onComplete}
