@@ -110,8 +110,8 @@ export default function OnboardingLifeExpectancyReveal({
               transition={{ delay: 1.5, duration: 0.8 }}
               className="flex items-center justify-center space-x-2 mt-4"
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-[#84A98C] shadow-sm inline-block"></span>
-              <span className="text-xs font-medium text-white/90">
+              <span className="w-3 h-3 rounded-full bg-[#84A98C] shadow-sm inline-block"></span>
+              <span className="text-sm sm:text-base font-medium text-white/90">
                 {t('onboarding.revealScreen.alreadyLived', { percent: Math.round(progressPercentage * 100).toString() })}
               </span>
             </motion.div>
@@ -133,16 +133,16 @@ export default function OnboardingLifeExpectancyReveal({
             className="relative mt-8 max-w-sm mx-auto w-full"
           >
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 pr-8 sm:pr-12 space-y-4 text-left">
-              <div className="flex justify-between items-center text-sm">
+              <div className="flex justify-between items-center text-base sm:text-lg">
                 <span className="text-white/80">{t('onboarding.revealScreen.birthYear')}</span>
                 <span className="font-bold text-white relative z-10">{inputs.birthYear}</span>
               </div>
-              <div className="flex justify-between items-center text-sm">
+              <div className="flex justify-between items-center text-base sm:text-lg">
                 <span className="text-white/80">{t('onboarding.revealScreen.currentAge')}</span>
                 <span className="font-bold text-white relative z-10">{inputs.currentAge} {t('onboarding.revealScreen.years')}</span>
               </div>
-              <div className="w-full h-px bg-white/20 my-2 relative z-10" />
-              <div className="flex justify-between items-center text-sm relative z-10">
+              <div className="w-full h-px bg-white/20 my-3 relative z-10" />
+              <div className="flex justify-between items-center text-base sm:text-lg relative z-10">
                 <span className="text-white/80 pr-4">{t('onboarding.revealScreen.expectancyAtBirth')}</span>
                 <span className="font-bold text-amber-200 shrink-0">{Math.round(lifeAtBirth)} {t('onboarding.revealScreen.years')}</span>
               </div>
@@ -151,7 +151,7 @@ export default function OnboardingLifeExpectancyReveal({
             <img 
               src="/img/Olifant.png" 
               alt="Olifant Mascotte" 
-              className="absolute left-4 sm:left-8 bottom-full w-20 h-20 sm:w-28 sm:h-28 object-contain drop-shadow-xl z-20 pointer-events-none" 
+              className="absolute left-4 sm:left-8 bottom-full mb-1.5 sm:mb-2.5 w-20 h-20 sm:w-28 sm:h-28 object-contain drop-shadow-xl z-20 pointer-events-none" 
             />
           </motion.div>
 
