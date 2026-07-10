@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, Sparkles, BrainCircuit, Activity } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { UserInputs } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface AiAnalysisModalProps {
   isOpen: boolean;
@@ -15,6 +16,8 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const { t, language } = useLanguage();
 
   const generateAnalysis = async () => {
     setLoading(true);
@@ -30,19 +33,20 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
           inputs,
           netScore,
           name: inputs.name || '',
+          language,
         }),
       });
 
       if (!response.ok) {
         const errData = await response.json().catch(() => null);
-        throw new Error(errData?.error || 'Netwerkfout bij het ophalen van de analyse');
+        throw new Error(errData?.error || t('aiAnalysis.networkError'));
       }
 
       const data = await response.json();
       setResult(data.result);
     } catch (err: any) {
       console.error(err);
-      setError(err.message || 'Er ging iets mis bij het genereren van de analyse. Probeer het later opnieuw.');
+      setError(err.message || t('aiAnalysis.genericError'));
     } finally {
       setLoading(false);
     }
@@ -73,8 +77,8 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                   <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-8 h-8 object-contain" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-black text-[#2D2D2D] tracking-tight">AI Levensmatrix Analyse</h2>
-                  <p className="text-xs text-[#767676] font-medium">Aangedreven door Google Gemini</p>
+                  <h2 className="text-xl font-black text-[#2D2D2D] tracking-tight">{t('aiAnalysis.title')}</h2>
+                  <p className="text-xs text-[#767676] font-medium">{t('aiAnalysis.poweredBy')}</p>
                 </div>
               </div>
               <button
@@ -98,9 +102,9 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                     <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-20 h-20 object-contain relative z-10" />
                   </div>
                   <div className="max-w-md space-y-3">
-                    <h3 className="text-2xl font-bold text-[#2D2D2D]">Klaar voor de waarheid?</h3>
+                    <h3 className="text-2xl font-bold text-[#2D2D2D]">{t('aiAnalysis.readyTitle')}</h3>
                     <p className="text-[#767676] leading-relaxed">
-                      Onze AI-coach analyseert je demografische en leefstijlgegevens om een gepersonaliseerd rapport te schrijven. Ontdek direct wat je grootste "winstpakkers" zijn.
+                      {t('aiAnalysis.readyDesc')}
                     </p>
                   </div>
                   <motion.button
@@ -110,7 +114,7 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                     className="mt-4 px-8 py-4 bg-[#D56B45] hover:bg-[#C25B36] text-white font-extrabold text-sm rounded-xl shadow-lg shadow-[#D56B45]/30 flex items-center gap-2 transition-all"
                   >
                     <Activity className="w-5 h-5" />
-                    <span>Genereer Mijn Analyse</span>
+                    <span>{t('aiAnalysis.generateBtn')}</span>
                   </motion.button>
                 </div>
               )}
@@ -125,8 +129,8 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                     <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-14 h-14 object-contain" />
                   </motion.div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-[#2D2D2D]">De AI is aan het schrijven...</h3>
-                    <p className="text-[#767676] text-sm animate-pulse">Data wordt gecombineerd met actuariële modellen.</p>
+                    <h3 className="text-xl font-bold text-[#2D2D2D]">{t('aiAnalysis.loadingTitle')}</h3>
+                    <p className="text-[#767676] text-sm animate-pulse">{t('aiAnalysis.loadingDesc')}</p>
                   </div>
                 </div>
               )}
@@ -138,7 +142,7 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                     onClick={() => setError(null)}
                     className="px-4 py-2 bg-white border border-red-200 rounded-lg text-sm font-bold text-red-600 hover:bg-red-50"
                   >
-                    Probeer Opnieuw
+                    {t('aiAnalysis.retryBtn')}
                   </button>
                 </div>
               )}
@@ -206,7 +210,7 @@ export const AiAnalysisModal: React.FC<AiAnalysisModalProps> = ({ isOpen, onClos
                       onClick={onClose}
                       className="px-8 py-4 bg-[#EAEAEA] hover:bg-[#D4D4D4] text-[#2D2D2D] font-extrabold text-sm tracking-wide uppercase rounded-xl shadow-sm transition-all active:scale-95"
                     >
-                      Sluiten
+                      {t('aiAnalysis.closeBtn')}
                     </button>
                   </motion.div>
                 </motion.div>

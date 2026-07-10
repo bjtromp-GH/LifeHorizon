@@ -258,34 +258,48 @@ export const en: Translations = {
       optimal: { label: "Optimal/Strength", desc: "Frequent strength training & cardio" }
     },
     sleep: {
-      title: "2. Sleep Pattern",
-      short: { label: "< 6 hours", desc: "Chronic sleep deprivation or poor quality" },
-      moderate: { label: "6 - 7 hours", desc: "Regularly too little, often rushed" },
-      good: { label: "7 - 8 hours", desc: "Variably adequate rest and quality" },
-      optimal: { label: "Consistently good", desc: "8 hours deep restorative sleep" }
+      title: "2. Sleep Quality",
+      poor: { label: "Short/Restless", desc: "<6 hours or often awake" },
+      average: { label: "Average", desc: "6-7 hours, reasonable" },
+      good: { label: "Good", desc: "7-8 hours, feels rested" },
+      optimal: { label: "Optimal", desc: "8+ hours, deep sleep" }
     },
     stress: {
-      title: "3. Stress / Workload",
-      high: { label: "High", desc: "Chronic pressure, weekly overstimulation" },
-      moderate: { label: "Average", desc: "Healthy stress with peaks, good recovery" },
-      balanced: { label: "Good balance", desc: "Sense of control and relaxation" },
-      low: { label: "Low / Zen", desc: "Deep rest, little external pressure" }
+      title: "3. Stress Level",
+      high: { label: "High", desc: "Often overwhelmed/rushed" },
+      average: { label: "Average", desc: "Sometimes busy, manageable" },
+      low: { label: "Low", desc: "Mostly relaxed" }
     },
     smoker: {
-      title: "4. Smoker",
-      no: { label: "No", desc: "Non-smoker or quit" },
-      yes: { label: "Yes", desc: "Regular smoker" }
+      title: "4. Smoking",
+      yes: { label: "Yes", desc: "Active smoker" },
+      no: { label: "No", desc: "Non-smoker" }
     },
     alcohol: {
       title: "5. Alcohol",
-      none: { label: "None / Occasional", desc: "Rarely up to max 1-2 per week" },
-      regular: { label: "Regularly", desc: "Regularly, multiple glasses per week" }
+      daily: { label: "Daily", desc: "1+ drinks per day" },
+      social: { label: "Social", desc: "Only on weekends/parties" },
+      none: { label: "Rarely/Never", desc: "Almost no alcohol" }
     },
     diet: {
       title: "6. Diet",
-      healthy: { label: "Healthy", desc: "Fresh, unprocessed, lots of vegetables" },
-      average: { label: "Average", desc: "Often processed food or high sugar" }
+      processed: { label: "Processed", desc: "Lots of ready-made/fast food" },
+      average: { label: "Average", desc: "Mix of fresh and processed" },
+      healthy: { label: "Healthy", desc: "Lots of vegetables, little processed" }
     }
+  },
+  aiAnalysis: {
+    title: "AI Life Matrix Analysis",
+    poweredBy: "Powered by Google Gemini",
+    readyTitle: "Ready for the truth?",
+    readyDesc: "Our AI coach analyzes your demographic and lifestyle data to write a personalized report. Discover instantly what your biggest \"quick wins\" are.",
+    generateBtn: "Generate My Analysis",
+    loadingTitle: "The AI is writing...",
+    loadingDesc: "Data is being combined with actuarial models.",
+    retryBtn: "Try Again",
+    closeBtn: "Close",
+    networkError: "Network error while fetching the analysis",
+    genericError: "Something went wrong while generating the analysis. Please try again later."
   },
   cards: {
     consumedVsRemaining: {

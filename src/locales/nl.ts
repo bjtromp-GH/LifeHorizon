@@ -256,34 +256,48 @@ export const nl = {
       optimal: { label: "Optimaal/Kracht", desc: "Frequente krachttraining & cardio" }
     },
     sleep: {
-      title: "2. Slaappatroon",
-      short: { label: "< 6 uur", desc: "Chronisch slaaptekort of slechte kwaliteit" },
-      moderate: { label: "6 - 7 uur", desc: "Regelmatig te weinig, vaak gejaagd" },
-      good: { label: "7 - 8 uur", desc: "Wisselend voldoende rust en kwaliteit" },
-      optimal: { label: "Consistent goed", desc: "8 uur diepe herstellende slaap" }
+      title: "2. Slaapkwaliteit",
+      poor: { label: "Kort/Onrustig", desc: "<6 uur of vaak wakker" },
+      average: { label: "Gemiddeld", desc: "6-7 uur, redelijk" },
+      good: { label: "Goed", desc: "7-8 uur, voelt uitgerust" },
+      optimal: { label: "Optimaal", desc: "8+ uur, diepe slaap" }
     },
     stress: {
-      title: "3. Stress / Werkdruk",
-      high: { label: "Hoog", desc: "Chronische druk, wekelijkse overprikkeling" },
-      moderate: { label: "Gemiddeld", desc: "Gezonde stress met pieken, prima herstel" },
-      balanced: { label: "Goede balans", desc: "Gevoel van controle en ontspanning" },
-      low: { label: "Laag / Zen", desc: "Diepe rust, weinig externe druk" }
+      title: "3. Stressniveau",
+      high: { label: "Hoog", desc: "Vaak overweldigd/gejaagd" },
+      average: { label: "Gemiddeld", desc: "Soms druk, behapbaar" },
+      low: { label: "Laag", desc: "Meestal ontspannen" }
     },
     smoker: {
-      title: "4. Roker",
-      no: { label: "Nee", desc: "Niet-roker of gestopt" },
-      yes: { label: "Ja", desc: "Regelmatige roker" }
+      title: "4. Roken",
+      yes: { label: "Ja", desc: "Actieve roker" },
+      no: { label: "Nee", desc: "Niet-roker" }
     },
     alcohol: {
       title: "5. Alcohol",
-      none: { label: "Geen / Af en toe", desc: "Zelden tot max 1-2 per week" },
-      regular: { label: "Regelmatig", desc: "Regelmatig, meerdere glazen per week" }
+      daily: { label: "Dagelijks", desc: "1+ glazen per dag" },
+      social: { label: "Sociaal", desc: "Alleen in weekenden/feestjes" },
+      none: { label: "Zelden/Nooit", desc: "Vrijwel geen alcohol" }
     },
     diet: {
-      title: "6. Dieet",
-      healthy: { label: "Gezond", desc: "Vers, onbewerkt, veel groente" },
-      average: { label: "Gemiddeld", desc: "Vaak bewerkt voedsel of veel suiker" }
+      title: "6. Voedingspatroon",
+      processed: { label: "Bewerkt", desc: "Veel kant-en-klaar/fastfood" },
+      average: { label: "Gemiddeld", desc: "Mix van vers en bewerkt" },
+      healthy: { label: "Gezond", desc: "Veel groenten, weinig bewerkt" }
     }
+  },
+  aiAnalysis: {
+    title: "AI Levensmatrix Analyse",
+    poweredBy: "Aangedreven door Google Gemini",
+    readyTitle: "Klaar voor de waarheid?",
+    readyDesc: "Onze AI-coach analyseert je demografische en leefstijlgegevens om een gepersonaliseerd rapport te schrijven. Ontdek direct wat je grootste \"winstpakkers\" zijn.",
+    generateBtn: "Genereer Mijn Analyse",
+    loadingTitle: "De AI is aan het schrijven...",
+    loadingDesc: "Data wordt gecombineerd met actuariële modellen.",
+    retryBtn: "Probeer Opnieuw",
+    closeBtn: "Sluiten",
+    networkError: "Netwerkfout bij het ophalen van de analyse",
+    genericError: "Er ging iets mis bij het genereren van de analyse. Probeer het later opnieuw."
   },
   cards: {
     consumedVsRemaining: {

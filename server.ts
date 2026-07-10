@@ -21,7 +21,7 @@ async function startServer() {
   // Secure API endpoint for the AI Analysis
   app.post("/api/analyze", async (req, res) => {
     try {
-      const { inputs, netScore, name } = req.body;
+      const { inputs, netScore, name, language } = req.body;
 
       const apiKey = process.env.GEMINI_API_KEY || process.env["Gemini API Key"] || process.env.GOOGLE_API_KEY;
       if (!apiKey) {
@@ -40,7 +40,50 @@ async function startServer() {
         }
       });
 
-      const prompt = `
+      const isEnglish = language === 'en';
+
+      const prompt = isEnglish 
+      ? `
+You are an empathetic, modern, and scientifically grounded health coach, specializing in longevity and vitality (similar to Andrew Huberman or Peter Attia).
+Write in direct, warm, and motivating English (you). Do not use complex jargon without briefly explaining it.
+
+The user has provided the following data in their health profile:
+- Name: ${name || 'Not provided'}
+- Gender: ${inputs.gender}
+- Age (birth year): ${new Date().getFullYear() - parseInt(inputs.birthYear)} (born in ${inputs.birthYear})
+- Expected start age of working: ${inputs.startWorkAge}
+- Planned retirement age (FIRE): ${inputs.fireAge}
+- Lifestyle Bio-Score Net Effect: ${netScore > 0 ? '+' : ''}${netScore} years
+  - Sleep: ${inputs.sleep}
+  - Physical Activity: ${inputs.activity}
+  - Stress level: ${inputs.stress}
+  - Smoker: ${inputs.smoker === 'yes' ? 'Yes' : 'No'}
+  - Alcohol: ${inputs.alcohol}
+  - Diet: ${inputs.diet}
+- Genetics (parents' age at passing):
+  - Father passed at: ${inputs.fatherPassedAge || 'Not filled in / alive'}
+  - Mother passed at: ${inputs.motherPassedAge || 'Not filled in / alive'}
+
+Write a personalized report (maximum 400 words) in Markdown format with the following structure:
+# Your Life Matrix Analysis
+
+Address the user personally by their name if provided (${name}).
+
+## 1. Current Course
+What is going very well and what stands out? Provide positive reinforcement.
+
+## 2. The Biggest Quick Win
+What is the single thing they can change today to make the biggest impact on their healthy years of life (based on their weakest lifestyle factor)? Be concrete.
+
+## 3. Genetics vs. Lifestyle
+Place the influence of genetics (parents) in perspective with their own lifestyle choices. Remind them that genetics only account for ~20%.
+
+## 4. Micro-Habits for Tomorrow
+Give 2 very concrete, small things they can do immediately tomorrow to improve their weakest factor.
+
+Use emojis where appropriate and keep it well-structured. Use Markdown for bolding, headers, and lists.
+      `
+      : `
 Je bent een empathische, moderne en wetenschappelijk onderbouwde gezondheidscoach, gespecialiseerd in longevity en vitaliteit (vergelijkbaar met Andrew Huberman of Peter Attia).
 Schrijf in direct, warm en motiverend Nederlands (je, jij). Gebruik geen lastig jargon zonder het kort uit te leggen.
 
