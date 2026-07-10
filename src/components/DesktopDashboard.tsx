@@ -170,12 +170,12 @@ export default function DesktopDashboard({
                     <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-10 h-10 object-contain drop-shadow-sm" />
                   </div>
                   <div className="text-left">
-                    <h3 className="font-black text-lg">AI Levensmatrix Analyse</h3>
-                    <p className="text-white/80 text-sm font-medium">Krijg direct inzicht en ontdek jouw winstpakkers.</p>
+                    <h3 className="font-black text-lg">{t('aiAnalysis.title')}</h3>
+                    <p className="text-white/80 text-sm font-medium">{t('aiAnalysis.quickWinsDesktop')}</p>
                   </div>
                 </div>
                 <div className="bg-white/10 px-4 py-2 rounded-full border border-white/20">
-                  <span className="text-sm font-bold uppercase tracking-wider">Genereer</span>
+                  <span className="text-sm font-bold uppercase tracking-wider">{t('aiAnalysis.generateSmallBtn')}</span>
                 </div>
               </motion.button>
             </div>

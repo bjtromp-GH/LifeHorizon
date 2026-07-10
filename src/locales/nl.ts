@@ -20,7 +20,14 @@ export const nl = {
     aboutApp: "Over Life Horizon",
     aboutDesc: "Ontdek je gezonde jaren, vrijheidsdatum en levensloop. Krijg diepgaand inzicht in je persoonlijke ontwikkeling, werkfase en totale vrijheid.",
     privacyPolicy: "Privacybeleid",
-    version: "Versie"
+    version: "Versie",
+    legendFreedom: "Vrijheid",
+    legendDeath: "Einde",
+    showModel: "Toon 25/50/25 Model",
+    hideModel: "✓ 25/50/25 Model",
+    modelInfoTitle: "Informatie over het 25/50/25 model",
+    modelInfoMore: "Later meer over het 25/50/25 model",
+    modelTitle: "Het 25/50/25 Model"
   },
   lifeProgress: {
     completed: "Voltooid",
@@ -297,7 +304,11 @@ export const nl = {
     retryBtn: "Probeer Opnieuw",
     closeBtn: "Sluiten",
     networkError: "Netwerkfout bij het ophalen van de analyse",
-    genericError: "Er ging iets mis bij het genereren van de analyse. Probeer het later opnieuw."
+    genericError: "Er ging iets mis bij het genereren van de analyse. Probeer het later opnieuw.",
+    quickWins: "Ontdek direct jouw winstpakkers.",
+    quickWinsDesktop: "Krijg direct inzicht en ontdek jouw winstpakkers.",
+    startBtn: "Start",
+    generateSmallBtn: "Genereer"
   },
   cards: {
     consumedVsRemaining: {

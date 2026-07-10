@@ -245,12 +245,12 @@ export default React.memo(function DecadeGrid({
                   : 'bg-white text-[#2D2D2D] border-[#EAE8E4] hover:bg-gray-50'
               }`}
             >
-              {use255025Model ? "✓ 25/50/25 Model" : "Toon 25/50/25 Model"}
+              {use255025Model ? t('decadeGrid.hideModel') : t('decadeGrid.showModel')}
             </button>
             <button
               onClick={() => setIsModelInfoModalOpen(true)}
               className="p-2 text-gray-400 hover:text-[#D56B45] transition-colors hidden sm:block"
-              title="Informatie over het 25/50/25 model"
+              title={t('decadeGrid.modelInfoTitle')}
             >
               <Info className="w-5 h-5" />
             </button>
@@ -292,7 +292,7 @@ export default React.memo(function DecadeGrid({
                 </button>
               </div>
               <div className="bg-[#2D2D2D] text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl shadow-lg self-center border border-[#1A1A1A] sm:hidden text-center max-w-[85vw]">
-                Later meer over het 25/50/25 model
+                {t('decadeGrid.modelInfoMore')}
               </div>
             </motion.div>
           </div>
@@ -555,7 +555,7 @@ export default React.memo(function DecadeGrid({
             >
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-lg font-bold text-[#2D2D2D] tracking-tight">
-                  Het 25/50/25 Model
+                  {t('decadeGrid.modelTitle')}
                 </h3>
                 <button
                   onClick={() => setIsModelInfoModalOpen(false)}

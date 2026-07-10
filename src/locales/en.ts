@@ -299,7 +299,11 @@ export const en: Translations = {
     retryBtn: "Try Again",
     closeBtn: "Close",
     networkError: "Network error while fetching the analysis",
-    genericError: "Something went wrong while generating the analysis. Please try again later."
+    genericError: "Something went wrong while generating the analysis. Please try again later.",
+    quickWins: "Discover your quick wins instantly.",
+    quickWinsDesktop: "Get instant insights and discover your quick wins.",
+    startBtn: "Start",
+    generateSmallBtn: "Generate"
   },
   cards: {
     consumedVsRemaining: {
@@ -510,6 +514,13 @@ export const en: Translations = {
     personalYardstick: "Personal Yardstick",
     calibrateLifeSpan: "Set your basic parameters to calibrate your lifespan",
     birthYear: "Birth Year",
+    legendFreedom: "Freedom",
+    legendDeath: "End",
+    showModel: "Show 25/50/25 Model",
+    hideModel: "✓ 25/50/25 Model",
+    modelInfoTitle: "Information about the 25/50/25 model",
+    modelInfoMore: "More about the 25/50/25 model later",
+    modelTitle: "The 25/50/25 Model",
     gender: "Gender",
     manStat: "Man (Statistically shorter)",
     womanStat: "Woman (Statistically longer)",

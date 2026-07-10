@@ -467,12 +467,12 @@ export default function MobileContainer({
                             <img src="/img/olifant-bril.png" alt="Olifant AI" className="w-10 h-10 object-contain drop-shadow-sm" />
                           </div>
                           <div className="text-left">
-                            <h3 className="font-black text-base">AI Levensmatrix Analyse</h3>
-                            <p className="text-white/80 text-xs font-medium">Ontdek direct jouw winstpakkers.</p>
+                            <h3 className="font-black text-base">{t('aiAnalysis.title')}</h3>
+                            <p className="text-white/80 text-xs font-medium">{t('aiAnalysis.quickWins')}</p>
                           </div>
                         </div>
                         <div className="bg-white/10 px-3 py-1.5 rounded-full border border-white/20 shrink-0 ml-2">
-                          <span className="text-xs font-bold uppercase tracking-wider">Start</span>
+                          <span className="text-xs font-bold uppercase tracking-wider">{t('aiAnalysis.startBtn')}</span>
                         </div>
                       </motion.button>
                     </div>
@@ -612,7 +612,7 @@ export default function MobileContainer({
                       className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm cursor-pointer"
                     >
                       <img src="/img/olifant-bril.png" alt="AI" className="w-5 h-5 object-contain" />
-                      <span>AI Levensmatrix Analyse</span>
+                      <span>{t('aiAnalysis.title')}</span>
                     </button>
 
                     <span className="text-[11px] font-sans text-white/80 mt-1 text-center">
