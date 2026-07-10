@@ -449,7 +449,7 @@ export const nl = {
     adjustBtn: "Pas aan",
     nextBtn: "Ga verder",
     conclusion: {
-      title: "Tussentijdse Conclusie & Reflectie",
+      title: "Alles op een rijtje",
       subtitle: "Jouw CBS Levensrunway samengevat op een<br />soevereine rij.",
       estLifeSpan: "Geschatte Levensverwachting",
       remainingTime: "Resterende Tijdsperspectief",
