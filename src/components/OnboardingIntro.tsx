@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import ScrollRevealText from "./ScrollRevealText";
 import Confetti from "./Confetti";
+import OnboardingLifeExpectancyReveal from "./OnboardingLifeExpectancyReveal";
 
 interface OnboardingIntroProps {
   initialStep?: number;
@@ -41,9 +42,19 @@ interface OnboardingIntroProps {
   hasStoredData?: boolean;
   onInputChange: (updates: Partial<UserInputs>) => void;
   onComplete: () => void;
+  cbsBaseLife?: number;
+  projectedLifeExpectancy?: number;
 }
 
-export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData, onInputChange, onComplete }: OnboardingIntroProps) {
+export default function OnboardingIntro({ 
+  initialStep = 0, 
+  inputs, 
+  hasStoredData, 
+  onInputChange, 
+  onComplete,
+  cbsBaseLife = 80,
+  projectedLifeExpectancy = 80
+}: OnboardingIntroProps) {
   const { t, language, setLanguage } = useLanguage();
   const [step, setStep] = useState<number>(initialStep);
   const [imgError, setImgError] = useState(false);
@@ -1679,7 +1690,22 @@ export default function OnboardingIntro({ initialStep = 0, inputs, hasStoredData
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-[300] bg-[#111111]"
             >
-              <ScrollRevealText onComplete={onComplete} />
+              <ScrollRevealText onComplete={() => setStep(10)} />
+            </motion.div>
+          ) : step === 10 ? (
+            <motion.div
+              key="life-expectancy-reveal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[300]"
+            >
+              <OnboardingLifeExpectancyReveal 
+                inputs={inputs}
+                cbsBaseLife={cbsBaseLife}
+                projectedLifeExpectancy={projectedLifeExpectancy}
+                onComplete={onComplete}
+              />
             </motion.div>
           ) : null}
         </AnimatePresence>

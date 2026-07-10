@@ -189,7 +189,17 @@ export const nl = {
       desc: "Alle factoren zijn gecompileerd. We sturen uw demografische gegevens live door naar het CBS model om uw exacte overlevingscurve te bepalen.",
       button: "Bekijk Levensmatrix",
       generating: "Eerst nog even dit...",
-      openDashboard: "Open Dashboard"
+      openDashboard: "Ga Verder"
+    },
+    revealScreen: {
+      title: "Je levensverwachting is",
+      increased: "Je levensverwachting is toegenomen dankzij jouw levensstijl!",
+      decreased: "Je levensverwachting is lager dan gemiddeld op basis van je huidige levensstijl.",
+      neutral: "Je levensverwachting is in lijn met het gemiddelde.",
+      baseDesc: "Basis levensverwachting",
+      personalDesc: "Jouw (Bio-Score) levensverwachting",
+      explanation: "Hiervoor is gekeken naar het gemiddelde op basis van je geboortejaar ({{year}}) en geslacht ({{gender}}).",
+      openDashboard: "OPEN DASHBOARD"
     },
     revealText: "We worden gemiddeld ouder dan ooit tevoren. Onze levensverwachting blijft stijgen. Maar er is een verborgen realiteit. Onze 'gezonde' levensverwachting stijgt niet in hetzelfde tempo mee. Dit betekent dat we aan het einde van ons leven gemiddeld langer kampen met chronische ziekten, vermoeidheid of beperkingen. Je doel is niet simpelweg zo oud mogelijk worden. Je ware doel is zo lang mogelijk reëel, vitaal en onafhankelijk leven. Hier draait de Bio-Score om. Neem de regie over je gezonde jaren."
   },

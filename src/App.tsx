@@ -235,6 +235,8 @@ export default function App() {
         hasStoredData={hasStoredData}
         onInputChange={handleInputChange}
         onComplete={handleOnboardingComplete}
+        cbsBaseLife={cbsBaseLife}
+        projectedLifeExpectancy={projectedLifeExpectancy}
       />
     );
   }

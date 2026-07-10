@@ -624,23 +624,6 @@ export default function MobileContainer({
                     </div>
                   </div>
 
-                  {/* Dutch insights summary */}
-                  <div className="bg-[#5c2411]/20 p-4 rounded-xl border border-white/10 text-[13px] text-stone-50 max-w-sm mx-auto w-full leading-relaxed space-y-2">
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: t('mobileContainer.overviewTitle', { name: inputs.name ? `${inputs.name}, ` : '' })
-                          .replace('{{years}}', Math.round(projectedLifeExpectancy).toString())
-                          .replace('{{weeks}}', Math.round(projectedLifeExpectancy * 52.17).toLocaleString(t('dashboard.lang')))
-                      }}
-                    />
-                    <div className="flex items-start space-[#767676] space-x-2 pt-1 text-left">
-                      <Lightbulb className="w-4 h-4 text-amber-200 mt-0.5 shrink-0" />
-                      <p className="text-white">
-                        {t('mobileContainer.overviewDesc')}
-                      </p>
-                    </div>
-                  </div>
-
                 </div>
 
                 <div className="flex justify-center max-w-sm mx-auto w-full pt-4 pb-2">

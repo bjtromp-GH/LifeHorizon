@@ -190,10 +190,20 @@ export const en: Translations = {
       title: "Ready to explore!",
       desc: "All factors are compiled. We will route your demographic data live into the CBS model to determine your exact survival curve.",
       button: "View Life Matrix",
-      generating: "Just one more thing...",
-      openDashboard: "Open Dashboard"
+      generating: "Just a moment...",
+      openDashboard: "Continue"
     },
-    revealText: "We are living longer than ever before. Our life expectancy continues to rise. But there is a hidden reality. Our 'healthy' life expectancy is not increasing at the same pace. This means that at the end of our lives, we suffer from chronic diseases, fatigue, or disabilities for a longer average time. Your goal is not simply to live as long as possible. Your true goal is to live a real, vital, and independent life for as long as possible. This is what the Bio-Score is all about. Take control of your healthy years."
+    revealScreen: {
+      title: "Your life expectancy is",
+      increased: "Your life expectancy has increased thanks to your lifestyle!",
+      decreased: "Your life expectancy is lower than average based on your current lifestyle.",
+      neutral: "Your life expectancy is in line with the average.",
+      baseDesc: "Base life expectancy",
+      personalDesc: "Your (Bio-Score) life expectancy",
+      explanation: "This is based on the average for your birth year ({{year}}) and gender ({{gender}}).",
+      openDashboard: "OPEN DASHBOARD"
+    },
+    revealText: "We are living longer on average than ever before. Our life expectancy continues to rise. But there is a hidden reality. Our 'healthy' life expectancy is not rising at the same pace. This means that at the end of our lives we struggle longer on average with chronic diseases, fatigue or limitations. Your goal is not simply to live as old as possible. Your true goal is to live a real, vital and independent life for as long as possible. This is what the Bio-Score is all about. Take control of your healthy years."
   },
   dashboard: {
     lang: "en-US",
