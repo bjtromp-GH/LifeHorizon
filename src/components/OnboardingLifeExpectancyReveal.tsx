@@ -86,7 +86,7 @@ export default function OnboardingLifeExpectancyReveal({
                   cy="96"
                   r={circleRadius}
                   fill="none"
-                  stroke="#4ade80"
+                  stroke="#84A98C"
                   strokeWidth="8"
                   strokeLinecap="round"
                   initial={{ strokeDasharray: circumference, strokeDashoffset: circumference }}
@@ -103,6 +103,18 @@ export default function OnboardingLifeExpectancyReveal({
                 </div>
               </div>
             </div>
+
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 0.8 }}
+              className="flex items-center justify-center space-x-2 mt-4"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-[#84A98C] shadow-sm inline-block"></span>
+              <span className="text-xs font-medium text-white/90">
+                {t('onboarding.revealScreen.alreadyLived', { percent: Math.round(progressPercentage * 100).toString() })}
+              </span>
+            </motion.div>
             
             <motion.p 
               initial={{ opacity: 0, y: 10 }}

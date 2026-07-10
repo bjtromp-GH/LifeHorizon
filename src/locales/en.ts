@@ -202,6 +202,7 @@ export const en: Translations = {
       currentAge: "Current age",
       expectancyAtBirth: "Life expectancy in your birth year",
       years: "years",
+      alreadyLived: "Already lived ({{percent}}%)",
       openDashboard: "TO DASHBOARD"
     },
     revealText: "We are living longer on average than ever before. Our life expectancy continues to rise. But there is a hidden reality. Our 'healthy' life expectancy is not rising at the same pace. This means that at the end of our lives we struggle longer on average with chronic diseases, fatigue or limitations. Your goal is not simply to live as old as possible. Your true goal is to live a real, vital and independent life for as long as possible. This is what the Bio-Score is all about. Take control of your healthy years."
