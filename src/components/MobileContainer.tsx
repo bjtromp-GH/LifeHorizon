@@ -15,7 +15,8 @@ import RemainingTimeCard from "./RemainingTimeCard";
 import SurvivalCurveCard from "./SurvivalCurveCard";
 import { useLanguage } from "../context/LanguageContext";
 import { AiAnalysisModal } from "./AiAnalysisModal";
-import { Sparkles } from "lucide-react";
+import LifeExpectancyGraphModal from "./LifeExpectancyGraphModal";
+import { Sparkles, BarChart2 } from "lucide-react";
 
 interface MobileContainerProps {
   inputs: UserInputs;
@@ -49,6 +50,7 @@ export default function MobileContainer({
   const [showMatrixModal, setShowMatrixModal] = useState(false);
   const [showSurvivalModal, setShowSurvivalModal] = useState(false);
   const [showAiModal, setShowAiModal] = useState(false);
+  const [showLifeExpectancyModal, setShowLifeExpectancyModal] = useState(false);
   const [isManualScroll, setIsManualScroll] = useState(false);
   const { t } = useLanguage();
 
@@ -615,6 +617,14 @@ export default function MobileContainer({
                     >
                       <Activity className="w-5 h-5" />
                       <span>{t('dashboard.survivalCurveTitle') || "Bekijk overlevingskans curve"}</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => setShowLifeExpectancyModal(true)}
+                      className="w-full flex items-center justify-center space-x-2 bg-white hover:bg-white/90 py-3.5 rounded-xl font-sans font-bold text-[#D56B45] transition-all active:scale-95 shadow-sm cursor-pointer"
+                    >
+                      <BarChart2 className="w-5 h-5" />
+                      <span>Levensverwachting Grafiek</span>
                     </button>
                     
                     <button
@@ -1406,6 +1416,14 @@ export default function MobileContainer({
         onClose={() => setShowAiModal(false)}
         inputs={inputs}
         netScore={netScore}
+      />
+
+      <LifeExpectancyGraphModal
+        isOpen={showLifeExpectancyModal}
+        onClose={() => setShowLifeExpectancyModal(false)}
+        inputs={inputs}
+        cbsBaseLife={cbsBaseLife}
+        projectedLifeExpectancy={projectedLifeExpectancy}
       />
       
       {/* Info Modal */}
