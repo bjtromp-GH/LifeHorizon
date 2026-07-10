@@ -547,13 +547,27 @@ export default function MobileContainer({
 
                   {/* Highlights */}
                   <div className="max-w-sm mx-auto w-full space-y-2.5">
-                    <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs">
-                      <span className="text-[11px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center">
+                    <div className="flex flex-col items-center justify-center py-4 px-5 bg-white/10 rounded-xl border border-white/15 backdrop-blur-xs relative overflow-hidden">
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-widest text-amber-100 mb-1 text-center relative z-10">
                         {t('mobileContainer.conclusion.estLifeSpan')}
                       </span>
-                      <span className="text-3xl font-extrabold font-mono tracking-tight text-white">
+                      <span className="text-3xl font-extrabold font-mono tracking-tight text-white mb-2 relative z-10">
                         {projectedLifeExpectancy.toFixed(1)} {t('decadeGrid.yr')}
                       </span>
+                      
+                      <div className="w-full mt-2 relative z-10">
+                        <div className="flex justify-between items-center text-[10px] text-white/80 mb-1.5 font-medium px-0.5">
+                          <span>{t('onboarding.revealScreen.alreadyLived', { percent: Math.round((inputs.currentAge / projectedLifeExpectancy) * 100).toString() })}</span>
+                        </div>
+                        <div className="h-2 w-full bg-white/20 rounded-full overflow-hidden shadow-inner">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            animate={{ width: `${Math.min(1, inputs.currentAge / projectedLifeExpectancy) * 100}%` }}
+                            transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                            className="h-full bg-[#FCD34D] rounded-full"
+                          />
+                        </div>
+                      </div>
                     </div>
 
                     <RemainingTimeCard totalRemaining={totalRemaining} />
