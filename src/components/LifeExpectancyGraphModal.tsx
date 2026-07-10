@@ -281,17 +281,17 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
                 </g>
 
                 {/* Right Arrow Label for Difference */}
-                <g transform={`translate(${width - padding.right + 10}, ${getY(yNow)})`}>
+                <g transform={`translate(${width - padding.right + 4}, ${getY(yNow)})`}>
                   {/* Vertical dashed arrow showing increase */}
                   <line x1="0" y1="0" x2="0" y2={getY(yBirth) - getY(yNow)} stroke={strokeColor} strokeWidth="1" strokeDasharray="3 3" />
                   {/* Arrow heads */}
                   <polyline points="-3,3 0,0 3,3" fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   <polyline points={`-3,${getY(yBirth) - getY(yNow) - 3} 0,${getY(yBirth) - getY(yNow)} 3,${getY(yBirth) - getY(yNow) - 3}`} fill="none" stroke={strokeColor} strokeWidth="1.5" />
                   
-                  <rect x="8" y={(getY(yBirth) - getY(yNow)) / 2 - 28} width="76" height="56" rx="8" fill="white" stroke={strokeColor} strokeWidth="1.5" />
-                  <text x="46" y={(getY(yBirth) - getY(yNow)) / 2 - 10} fontSize="13" fontWeight="700" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
-                  <text x="46" y={(getY(yBirth) - getY(yNow)) / 2 + 6} fontSize="10" fill={textColor} textAnchor="middle">sinds je</text>
-                  <text x="46" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="10" fill={textColor} textAnchor="middle">geboorte</text>
+                  <rect x="5" y={(getY(yBirth) - getY(yNow)) / 2 - 28} width="75" height="56" rx="8" fill="white" stroke={strokeColor} strokeWidth="1.5" />
+                  <text x="42" y={(getY(yBirth) - getY(yNow)) / 2 - 10} fontSize="12" fontWeight="700" fill={strokeColor} textAnchor="middle">+{difference.toFixed(1).replace('.', ',')} jaar</text>
+                  <text x="42" y={(getY(yBirth) - getY(yNow)) / 2 + 6} fontSize="9" fill={textColor} textAnchor="middle">sinds je</text>
+                  <text x="42" y={(getY(yBirth) - getY(yNow)) / 2 + 18} fontSize="9" fill={textColor} textAnchor="middle">geboorte</text>
                 </g>
 
               </svg>
