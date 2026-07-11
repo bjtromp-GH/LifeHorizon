@@ -91,7 +91,7 @@ export default function LifeExpectancyGraphModal({ isOpen, onClose, inputs, cbsB
   const yTicks = [70, 75, 80, 85];
   // X-axis labels: Geboorte, 20, 40, Nu, 60, 80
   const xTicks = [
-    { val: 0, label: 'Geboorte' },
+    { val: 0, label: '0' },
     { val: 20, label: '20' },
     { val: 40, label: '40' },
     { val: currentAge, label: 'Nu' },
