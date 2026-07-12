@@ -289,7 +289,7 @@ export const nl = {
     }
   },
   aiAnalysis: {
-    title: "AI Levensmatrix Analyse",
+    title: "Ai Levensmatrix Analyse",
     poweredBy: "Aangedreven door Google Gemini",
     readyTitle: "Klaar voor de waarheid?",
     readyDesc: "Onze AI-coach analyseert je demografische en leefstijlgegevens om een gepersonaliseerd rapport te schrijven. Ontdek direct wat je grootste \"winstpakkers\" zijn.",
