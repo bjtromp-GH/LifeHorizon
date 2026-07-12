@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { BioScoreAnswers, SmokerLevel, AlcoholLevel, DietLevel } from "../types";
+import { AnimatePresence, motion } from "motion/react";
 import NumberTicker from "./NumberTicker";
 import { useLanguage } from "../context/LanguageContext";
 import { getBioScoreOffset } from "./BioScoreSection";
@@ -10,6 +12,15 @@ interface BioScoreSection2Props {
 
 export default function BioScoreSection2({ answers, onChange }: BioScoreSection2Props) {
   const { t } = useLanguage();
+  const [activeToast, setActiveToast] = useState<{ id: string; category: string; optValue: string; text: string } | null>(null);
+
+  const handleSelect = (category: keyof BioScoreAnswers, value: string, offset: number) => {
+    onChange({ [category]: value } as any);
+    const sign = offset > 0 ? "+" : "";
+    const text = `${sign}${offset.toFixed(1).replace('.', ',')} jr`;
+    setActiveToast({ id: Date.now().toString(), category, optValue: value, text });
+    setTimeout(() => setActiveToast(null), 1500);
+  };
 
   const smokerOptions: { value: SmokerLevel; label: string; offset: number; desc: string }[] = [
     { value: "nee", label: t('bioScore.smoker.no.label'), offset: 0.0, desc: t('bioScore.smoker.no.desc') },
@@ -69,13 +80,29 @@ export default function BioScoreSection2({ answers, onChange }: BioScoreSection2
               <button
                 key={opt.value}
                 type="button"
-                onClick={() => onChange({ smoker: opt.value })}
-                className={`flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
+                onClick={() => handleSelect('smoker', opt.value, opt.offset)}
+                className={`relative flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? "border-[#D56B45] bg-[#FAF3F0]"
                     : "border-[#EAEAEA] bg-white hover:border-gray-300 hover:bg-gray-50"
                 }`}
               >
+                <AnimatePresence>
+                  {activeToast?.category === 'smoker' && activeToast.optValue === opt.value && (
+                    <motion.div
+                      key={activeToast.id}
+                      initial={{ opacity: 0, y: 0 }}
+                      animate={{ opacity: 1, y: -20 }}
+                      exit={{ opacity: 0, y: -30 }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                      className="absolute right-4 -top-2 pointer-events-none z-10"
+                    >
+                      <span className={`text-sm font-black font-mono drop-shadow-md ${opt.offset > 0 ? "text-[#D56B45]" : opt.offset < 0 ? "text-amber-700" : "text-zinc-500"}`}>
+                        {activeToast.text}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <div className="flex justify-between items-center w-full">
                   <span className="font-semibold text-sm text-[#2D2D2D]">{opt.label}</span>
                   <span
@@ -109,13 +136,29 @@ export default function BioScoreSection2({ answers, onChange }: BioScoreSection2
               <button
                 key={opt.value}
                 type="button"
-                onClick={() => onChange({ alcohol: opt.value })}
-                className={`flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
+                onClick={() => handleSelect('alcohol', opt.value, opt.offset)}
+                className={`relative flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? "border-[#D56B45] bg-[#FAF3F0]"
                     : "border-[#EAEAEA] bg-white hover:border-gray-300 hover:bg-gray-50"
                 }`}
               >
+                <AnimatePresence>
+                  {activeToast?.category === 'alcohol' && activeToast.optValue === opt.value && (
+                    <motion.div
+                      key={activeToast.id}
+                      initial={{ opacity: 0, y: 0 }}
+                      animate={{ opacity: 1, y: -20 }}
+                      exit={{ opacity: 0, y: -30 }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                      className="absolute right-4 -top-2 pointer-events-none z-10"
+                    >
+                      <span className={`text-sm font-black font-mono drop-shadow-md ${opt.offset > 0 ? "text-[#D56B45]" : opt.offset < 0 ? "text-amber-700" : "text-zinc-500"}`}>
+                        {activeToast.text}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <div className="flex justify-between items-center w-full">
                   <span className="font-semibold text-sm text-[#2D2D2D]">{opt.label}</span>
                   <span
@@ -149,13 +192,29 @@ export default function BioScoreSection2({ answers, onChange }: BioScoreSection2
               <button
                 key={opt.value}
                 type="button"
-                onClick={() => onChange({ diet: opt.value })}
-                className={`flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
+                onClick={() => handleSelect('diet', opt.value, opt.offset)}
+                className={`relative flex flex-col text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer ${
                   isSelected
                     ? "border-[#D56B45] bg-[#FAF3F0]"
                     : "border-[#EAEAEA] bg-white hover:border-gray-300 hover:bg-gray-50"
                 }`}
               >
+                <AnimatePresence>
+                  {activeToast?.category === 'diet' && activeToast.optValue === opt.value && (
+                    <motion.div
+                      key={activeToast.id}
+                      initial={{ opacity: 0, y: 0 }}
+                      animate={{ opacity: 1, y: -20 }}
+                      exit={{ opacity: 0, y: -30 }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                      className="absolute right-4 -top-2 pointer-events-none z-10"
+                    >
+                      <span className={`text-sm font-black font-mono drop-shadow-md ${opt.offset > 0 ? "text-[#D56B45]" : opt.offset < 0 ? "text-amber-700" : "text-zinc-500"}`}>
+                        {activeToast.text}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <div className="flex justify-between items-center w-full">
                   <span className="font-semibold text-sm text-[#2D2D2D]">{opt.label}</span>
                   <span
