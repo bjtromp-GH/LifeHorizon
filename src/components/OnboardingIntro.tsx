@@ -123,6 +123,17 @@ export default function OnboardingIntro({
   
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
+  const [activeToast, setActiveToast] = useState<{ id: string; category: string; optKey: string; text: string } | null>(null);
+
+  const handleBioSelect = (category: string, key: string, detail: string, updateStateFn: () => void) => {
+    updateStateFn();
+    const isNeutral = detail.toLowerCase().includes('neutraal') || detail.toLowerCase().includes('neutral');
+    if (!isNeutral) {
+      const text = detail.replace('.', ',') + " jr";
+      setActiveToast({ id: Date.now().toString(), category, optKey: key, text });
+      setTimeout(() => setActiveToast(null), 1500);
+    }
+  };
 
   const stepsMeta = [
     { title: t('onboarding.demographics.steps.intro'), icon: Sparkles },
@@ -1152,16 +1163,32 @@ export default function OnboardingIntro({
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-sleep-${item.key}`}
-                      onClick={() => { 
+                      onClick={() => handleBioSelect('sleep', item.key, item.detail, () => {
                         setLocalSleep(item.key as SleepLevel); 
                         updateBioAnswer("sleep", item.key as SleepLevel);
-                      }}
-                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      })}
+                      className={`relative p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localSleep === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
+                      <AnimatePresence>
+                        {activeToast?.category === 'sleep' && activeToast.optKey === item.key && (
+                          <motion.div
+                            key={activeToast.id}
+                            initial={{ opacity: 0, y: 0 }}
+                            animate={{ opacity: 1, y: -20 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="absolute right-4 -top-2 pointer-events-none z-10"
+                          >
+                            <span className={`text-sm sm:text-base font-black font-mono drop-shadow-md ${item.detail.startsWith('+') ? "text-[#D56B45]" : "text-amber-700"}`}>
+                              {activeToast.text}
+                            </span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                       <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
                       <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
                     </button>
@@ -1189,16 +1216,32 @@ export default function OnboardingIntro({
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-activity-${item.key}`}
-                      onClick={() => { 
+                      onClick={() => handleBioSelect('activity', item.key, item.detail, () => {
                         setLocalActivity(item.key as ActivityLevel); 
                         updateBioAnswer("activity", item.key as ActivityLevel);
-                      }}
-                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      })}
+                      className={`relative p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localActivity === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
+                      <AnimatePresence>
+                        {activeToast?.category === 'activity' && activeToast.optKey === item.key && (
+                          <motion.div
+                            key={activeToast.id}
+                            initial={{ opacity: 0, y: 0 }}
+                            animate={{ opacity: 1, y: -20 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="absolute right-4 -top-2 pointer-events-none z-10"
+                          >
+                            <span className={`text-sm sm:text-base font-black font-mono drop-shadow-md ${item.detail.startsWith('+') ? "text-[#D56B45]" : "text-amber-700"}`}>
+                              {activeToast.text}
+                            </span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                       <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
                       <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "licht" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
                     </button>
@@ -1226,13 +1269,32 @@ export default function OnboardingIntro({
                       key={item.key}
                       type="button"
                       id={`btn-onboarding-stress-${item.key}`}
-                      onClick={() => { setLocalStress(item.key as StressLevel); updateBioAnswer("stress", item.key as StressLevel); }}
-                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      onClick={() => handleBioSelect('stress', item.key, item.detail, () => {
+                        setLocalStress(item.key as StressLevel); 
+                        updateBioAnswer("stress", item.key as StressLevel);
+                      })}
+                      className={`relative p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localStress === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
+                      <AnimatePresence>
+                        {activeToast?.category === 'stress' && activeToast.optKey === item.key && (
+                          <motion.div
+                            key={activeToast.id}
+                            initial={{ opacity: 0, y: 0 }}
+                            animate={{ opacity: 1, y: -20 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="absolute right-4 -top-2 pointer-events-none z-10"
+                          >
+                            <span className={`text-sm sm:text-base font-black font-mono drop-shadow-md ${item.detail.startsWith('+') ? "text-[#D56B45]" : "text-amber-700"}`}>
+                              {activeToast.text}
+                            </span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                       <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
                       <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key !== "gemiddeld" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
                     </button>
@@ -1278,16 +1340,32 @@ export default function OnboardingIntro({
                     <button
                       key={item.key}
                       type="button"
-                      onClick={() => { 
-                        setLocalSmoker(item.key); 
-                        updateBioAnswer("smoker", item.key);
-                      }}
-                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      onClick={() => handleBioSelect('smoker', item.key, item.detail, () => {
+                        setLocalSmoker(item.key as SmokerLevel);
+                        updateBioAnswer("smoker", item.key as SmokerLevel);
+                      })}
+                      className={`relative p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localSmoker === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
+                      <AnimatePresence>
+                        {activeToast?.category === 'smoker' && activeToast.optKey === item.key && (
+                          <motion.div
+                            key={activeToast.id}
+                            initial={{ opacity: 0, y: 0 }}
+                            animate={{ opacity: 1, y: -20 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="absolute right-4 -top-2 pointer-events-none z-10"
+                          >
+                            <span className={`text-sm sm:text-base font-black font-mono drop-shadow-md ${item.detail.startsWith('+') ? "text-[#D56B45]" : "text-amber-700"}`}>
+                              {activeToast.text}
+                            </span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                       <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
                       <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.key === "ja" ? item.detail + " " + t('onboarding.lifestyle.yearsOffset', { val: '' }).trim() : item.detail}</span>
                     </button>
@@ -1312,16 +1390,32 @@ export default function OnboardingIntro({
                     <button
                       key={item.key}
                       type="button"
-                      onClick={() => { 
-                        setLocalAlcohol(item.key); 
-                        updateBioAnswer("alcohol", item.key);
-                      }}
-                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      onClick={() => handleBioSelect('alcohol', item.key, item.detail, () => {
+                        setLocalAlcohol(item.key as AlcoholLevel);
+                        updateBioAnswer("alcohol", item.key as AlcoholLevel);
+                      })}
+                      className={`relative p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localAlcohol === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
+                      <AnimatePresence>
+                        {activeToast?.category === 'alcohol' && activeToast.optKey === item.key && (
+                          <motion.div
+                            key={activeToast.id}
+                            initial={{ opacity: 0, y: 0 }}
+                            animate={{ opacity: 1, y: -20 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="absolute right-4 -top-2 pointer-events-none z-10"
+                          >
+                            <span className={`text-sm sm:text-base font-black font-mono drop-shadow-md ${item.detail.startsWith('+') ? "text-[#D56B45]" : "text-amber-700"}`}>
+                              {activeToast.text}
+                            </span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                       <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
                       <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
                     </button>
@@ -1346,16 +1440,32 @@ export default function OnboardingIntro({
                     <button
                       key={item.key}
                       type="button"
-                      onClick={() => { 
-                        setLocalDiet(item.key); 
-                        updateBioAnswer("diet", item.key);
-                      }}
-                      className={`p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
+                      onClick={() => handleBioSelect('diet', item.key, item.detail, () => {
+                        setLocalDiet(item.key as DietLevel);
+                        updateBioAnswer("diet", item.key as DietLevel);
+                      })}
+                      className={`relative p-2.5 sm:p-4 rounded-xl border-2 text-left flex flex-col justify-between transition-all duration-150 cursor-pointer ${
                         localDiet === item.key
                           ? "border-[#D56B45] bg-[#FAF3F0] text-[#D56B45] shadow-3xs"
                           : "border-[#EAEAEA] bg-white text-[#2D2D2D] hover:bg-gray-50"
                       }`}
                     >
+                      <AnimatePresence>
+                        {activeToast?.category === 'diet' && activeToast.optKey === item.key && (
+                          <motion.div
+                            key={activeToast.id}
+                            initial={{ opacity: 0, y: 0 }}
+                            animate={{ opacity: 1, y: -20 }}
+                            exit={{ opacity: 0, y: -30 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="absolute right-4 -top-2 pointer-events-none z-10"
+                          >
+                            <span className={`text-sm sm:text-base font-black font-mono drop-shadow-md ${item.detail.startsWith('+') ? "text-[#D56B45]" : "text-amber-700"}`}>
+                              {activeToast.text}
+                            </span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                       <span className="font-extrabold text-[14px] sm:text-[16px] leading-tight">{item.label}</span>
                       <span className="text-[11px] sm:text-sm font-semibold opacity-90 mt-0.5 sm:mt-1">{item.detail} {t('onboarding.lifestyle.yearsOffset', { val: '' }).trim()}</span>
                     </button>
