@@ -293,7 +293,7 @@ export const nl = {
     readyTitle: "Klaar voor de waarheid?",
     readyDesc: "Onze AI-coach analyseert je demografische en leefstijlgegevens om een gepersonaliseerd rapport te schrijven. Ontdek direct wat je grootste \"winstpakkers\" zijn.",
     generateBtn: "Genereer Mijn Analyse",
-    loadingTitle: "De AI is aan het schrijven...",
+    loadingTitle: "De Ai is aan het schrijven...",
     loadingDesc: "Data wordt gecombineerd met actuariële modellen.",
     retryBtn: "Probeer Opnieuw",
     closeBtn: "Sluiten",
