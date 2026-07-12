@@ -259,15 +259,16 @@ export const nl = {
     },
     sleep: {
       title: "2. Slaapkwaliteit",
-      poor: { label: "Kort/Onrustig", desc: "<6 uur of vaak wakker" },
-      average: { label: "Gemiddeld", desc: "6-7 uur, redelijk" },
+      short: { label: "Kort/Onrustig", desc: "<6 uur of vaak wakker" },
+      moderate: { label: "Gemiddeld", desc: "6-7 uur, redelijk" },
       good: { label: "Goed", desc: "7-8 uur, voelt uitgerust" },
       optimal: { label: "Optimaal", desc: "8+ uur, diepe slaap" }
     },
     stress: {
       title: "3. Stressniveau",
       high: { label: "Hoog", desc: "Vaak overweldigd/gejaagd" },
-      average: { label: "Gemiddeld", desc: "Soms druk, behapbaar" },
+      moderate: { label: "Gemiddeld", desc: "Soms druk, behapbaar" },
+      balanced: { label: "In Balans", desc: "Gezonde verhouding spanning/ontspanning" },
       low: { label: "Laag", desc: "Meestal ontspannen" }
     },
     smoker: {
@@ -277,13 +278,11 @@ export const nl = {
     },
     alcohol: {
       title: "5. Alcohol",
-      daily: { label: "Dagelijks", desc: "1+ glazen per dag" },
-      social: { label: "Sociaal", desc: "Alleen in weekenden/feestjes" },
-      none: { label: "Zelden/Nooit", desc: "Vrijwel geen alcohol" }
+      none: { label: "Zelden/Nooit", desc: "Geen of sociaal af en toe" },
+      regular: { label: "Regelmatig", desc: "Meerdere glazen per week" }
     },
     diet: {
       title: "6. Voedingspatroon",
-      processed: { label: "Bewerkt", desc: "Veel kant-en-klaar/fastfood" },
       average: { label: "Gemiddeld", desc: "Mix van vers en bewerkt" },
       healthy: { label: "Gezond", desc: "Veel groenten, weinig bewerkt" }
     }
