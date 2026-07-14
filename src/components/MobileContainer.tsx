@@ -146,7 +146,7 @@ export default function MobileContainer({
   return (
     <div
       id="mobile-viewport-root"
-      className="flex flex-col h-[100dvh] bg-[#F9F8F6] text-[#2D2D2D] overflow-hidden select-none relative"
+      className="flex flex-col h-[100dvh] bg-transparent text-[#2D2D2D] overflow-hidden select-none relative"
     >
       {/* Absolute hint of swiping gesture */}
       <AnimatePresence>
@@ -316,7 +316,7 @@ export default function MobileContainer({
               : "pt-[calc(env(safe-area-inset-top)+16px)]"
             : "pt-4"
         } ${
-          activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-[#F9F8F6] text-[#2D2D2D]"
+          activeSlide === 3 ? "bg-[#D56B45] text-white" : "bg-transparent text-[#2D2D2D]"
         }`}
       >
         <AnimatePresence mode="wait" initial={false}>

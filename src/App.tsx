@@ -220,7 +220,7 @@ export default function App() {
   // Prevent rendering until preferences are loaded
   if (!isPreferencesLoaded) {
     return (
-      <div className="h-[100dvh] w-full bg-[#FDFDFD] flex items-center justify-center">
+      <div className="h-[100dvh] w-full bg-transparent flex items-center justify-center">
         <div className="w-10 h-10 border-4 border-[#D56B45]/20 border-t-[#D56B45] rounded-full animate-spin" />
       </div>
     );

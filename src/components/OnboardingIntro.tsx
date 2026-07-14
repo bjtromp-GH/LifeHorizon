@@ -293,7 +293,7 @@ export default function OnboardingIntro({
   };
 
   return (
-    <div className="h-[100dvh] md:h-auto md:min-h-screen overflow-hidden bg-[#FDFDFD] flex flex-col justify-between p-3.5 pt-safe-sm sm:p-8 sm:pt-safe font-sans text-[#2D2D2D] select-none relative">
+    <div className="h-[100dvh] md:h-auto md:min-h-screen overflow-hidden bg-transparent flex flex-col justify-between p-3.5 pt-safe-sm sm:p-8 sm:pt-safe font-sans text-[#2D2D2D] select-none relative">
       {/* Abstract elegant background elements */}
       <motion.div 
         animate={{ 
