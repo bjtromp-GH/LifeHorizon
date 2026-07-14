@@ -62,7 +62,7 @@ export default function DesktopDashboard({
   const netScore = Math.round((projectedLifeExpectancy - cbsBaseLife) * 10) / 10;
 
   return (
-    <div id="desktop-dashboard-root" className="min-h-screen bg-transparent text-[#2D2D2D] py-8 px-6 md:px-12 xl:px-16 flex flex-col justify-between">
+    <div id="desktop-dashboard-root" className="min-h-screen bg-[#F9F8F6] text-[#2D2D2D] py-8 px-6 md:px-12 xl:px-16 flex flex-col justify-between">
       {/* Container max width constraint */}
       <div className="max-w-7xl mx-auto w-full space-y-6 flex-1 flex flex-col justify-center">
         
