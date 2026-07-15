@@ -1158,6 +1158,18 @@ export default function MobileContainer({
                             </button>
                           ))}
                         </motion.div>
+                        <AnimatePresence>
+                          {appRating > 0 && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0, y: -5 }}
+                              animate={{ opacity: 1, height: "auto", y: 0 }}
+                              exit={{ opacity: 0, height: 0, y: -5 }}
+                              className="text-[#86A789] text-[13px] font-bold mt-2 overflow-hidden"
+                            >
+                              Bedankt voor je feedback! 🐘
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </motion.div>
                     </motion.div>
                     <h3 className="text-2xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
