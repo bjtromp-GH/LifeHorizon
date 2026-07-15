@@ -691,11 +691,11 @@ export default function MobileContainer({
                   </div>
 
                   <button
-                    onClick={() => onRestartOnboarding(1)}
-                    className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5"
+                    onClick={() => goToSlide(activeSlide + 1)}
+                    className="px-4 py-2 bg-white text-[#D56B45] hover:bg-zinc-50 text-xs font-extrabold rounded-lg transition-all cursor-pointer flex items-center space-x-1"
                   >
-                    <Settings className="w-3.5 h-3.5" />
-                    <span>{t('mobileContainer.adjustBtn')}</span>
+                    <span>{t('dashboard.nav.next')}</span>
+                    <span>▶</span>
                   </button>
                 </div>
               </div>
@@ -847,11 +847,11 @@ export default function MobileContainer({
                   </div>
 
                   <button
-                    onClick={() => onRestartOnboarding(1)}
-                    className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
+                    onClick={() => goToSlide(activeSlide + 1)}
+                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
                   >
-                    <Settings className="w-3.5 h-3.5" />
-                    <span>{t('mobileContainer.adjustBtn')}</span>
+                    <span>{t('dashboard.nav.next')}</span>
+                    <span>▶</span>
                   </button>
                 </div>
               </div>
@@ -970,11 +970,11 @@ export default function MobileContainer({
                   </div>
 
                   <button
-                    onClick={() => onRestartOnboarding(1)}
-                    className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
+                    onClick={() => goToSlide(activeSlide + 1)}
+                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
                   >
-                    <Settings className="w-3.5 h-3.5" />
-                    <span>{t('mobileContainer.adjustBtn')}</span>
+                    <span>{t('dashboard.nav.next')}</span>
+                    <span>▶</span>
                   </button>
                 </div>
               </div>
@@ -1155,11 +1155,11 @@ export default function MobileContainer({
                   </div>
 
                   <button
-                    onClick={() => onRestartOnboarding(1)}
-                    className="px-4 py-2 bg-zinc-50 text-[#D56B45] hover:bg-zinc-100 text-xs font-black rounded-lg transition-all cursor-pointer flex items-center space-x-1.5 border border-[#EAEAEA]"
+                    onClick={() => goToSlide(0)}
+                    className="px-4 py-2 bg-[#D56B45] text-white text-xs font-extrabold rounded-lg hover:bg-[#C0562F] transition-all cursor-pointer flex items-center space-x-1"
                   >
-                    <Settings className="w-3.5 h-3.5" />
-                    <span>{t('mobileContainer.adjustBtn')}</span>
+                    <span>{t('dashboard.nav.next')}</span>
+                    <span>▶</span>
                   </button>
                 </div>
               </div>
