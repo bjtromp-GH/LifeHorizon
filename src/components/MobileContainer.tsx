@@ -1166,7 +1166,7 @@ export default function MobileContainer({
                               exit={{ opacity: 0, height: 0, y: -5 }}
                               className="text-[#86A789] text-[13px] font-bold mt-2 overflow-hidden"
                             >
-                              Bedankt voor je feedback! 🐘
+                              Bedankt voor je feedback!
                             </motion.div>
                           )}
                         </AnimatePresence>
