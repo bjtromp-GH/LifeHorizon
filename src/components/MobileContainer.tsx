@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import React, { useState, useEffect, useRef } from "react";
-import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity, ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import { Compass, Settings, X, RefreshCw, Minimize2, Target, Lightbulb, Info, Grid, Activity, ChevronLeft, ChevronRight, Eye, Star } from "lucide-react";
 import { UserInputs, LifePhases } from "../types";
 import OnboardingPanel from "./OnboardingPanel";
 import InfoModal from "./InfoModal";
@@ -53,6 +53,7 @@ export default function MobileContainer({
   const [showLifeExpectancyModal, setShowLifeExpectancyModal] = useState(false);
   const [showEndModal, setShowEndModal] = useState(false);
   const [isManualScroll, setIsManualScroll] = useState(false);
+  const [appRating, setAppRating] = useState(0);
   const { t } = useLanguage();
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1123,18 +1124,40 @@ export default function MobileContainer({
                         className="bg-white border border-[#EAEAEA] rounded-2xl rounded-tl-none px-4 py-3 shadow-sm flex-1 relative mt-2"
                       >
                         <div className="absolute top-0 -left-2 w-0 h-0 border-t-[0px] border-t-transparent border-r-[10px] border-r-white border-b-[12px] border-b-transparent filter drop-shadow-sm"></div>
-                        <p className="text-[15px] text-[#2D2D2D] font-medium leading-snug">
-                          {(inputs.name ? `Zo ${inputs.name}, dat was best interessant toch?` : "Zo, dat was best interessant toch?").split('').map((char, index) => (
+                        <p className="text-[15px] text-[#2D2D2D] font-medium leading-snug mb-3">
+                          {(inputs.name ? `Zo ${inputs.name}, dat was best interessant toch? Hoeveel sterren geef je deze app?` : "Zo, dat was best interessant toch? Hoeveel sterren geef je deze app?").split('').map((char, index) => (
                             <motion.span
                               key={index}
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              transition={{ delay: 0.5 + index * 0.03, duration: 0.05 }}
+                              transition={{ delay: 0.5 + index * 0.02, duration: 0.03 }}
                             >
                               {char}
                             </motion.span>
                           ))}
                         </p>
+                        <motion.div 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 2.5, duration: 0.5 }}
+                          className="flex items-center space-x-1"
+                        >
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <button
+                              key={star}
+                              onClick={() => setAppRating(star)}
+                              className="focus:outline-none transition-transform hover:scale-110 active:scale-95 cursor-pointer"
+                            >
+                              <Star
+                                className={`w-8 h-8 transition-colors duration-200 ${
+                                  star <= appRating
+                                    ? "fill-yellow-400 text-yellow-400 drop-shadow-sm"
+                                    : "fill-white text-zinc-300"
+                                }`}
+                              />
+                            </button>
+                          ))}
+                        </motion.div>
                       </motion.div>
                     </motion.div>
                     <h3 className="text-2xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
