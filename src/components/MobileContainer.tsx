@@ -1125,8 +1125,8 @@ export default function MobileContainer({
                         className="bg-white border border-[#EAEAEA] rounded-2xl rounded-tl-none px-4 py-3 shadow-sm flex-1 relative mt-2"
                       >
                         <div className="absolute top-0 -left-2 w-0 h-0 border-t-[0px] border-t-transparent border-r-[10px] border-r-white border-b-[12px] border-b-transparent filter drop-shadow-sm"></div>
-                        <p className="text-[15px] text-[#2D2D2D] font-medium leading-snug mb-3">
-                          {(inputs.name ? `Zo ${inputs.name}, dat was best interessant toch? Hoeveel sterren geef je deze app?` : "Zo, dat was best interessant toch? Hoeveel sterren geef je deze app?").split('').map((char, index) => (
+                        <p className="text-[#3a3a3a] text-[13.5px] leading-snug">
+                          {(inputs.name ? t('mobileContainer.ratingSpeechWithName', { name: inputs.name }) : t('mobileContainer.ratingSpeechWithoutName')).split('').map((char, index) => (
                             <motion.span
                               key={index}
                               initial={{ opacity: 0 }}
@@ -1164,14 +1164,13 @@ export default function MobileContainer({
                         </motion.div>
                         <AnimatePresence>
                           {appRating > 0 && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0, y: -5 }}
-                              animate={{ opacity: 1, height: "auto", y: 0 }}
-                              exit={{ opacity: 0, height: 0, y: -5 }}
-                              className="text-[#86A789] text-[13px] font-bold mt-2 overflow-hidden"
+                            <motion.p
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-center text-sm font-medium text-[#D56B45] mt-3"
                             >
-                              Bedankt voor je feedback!
-                            </motion.div>
+                              {t('mobileContainer.ratingFeedback')}
+                            </motion.p>
                           )}
                         </AnimatePresence>
                       </motion.div>
@@ -1518,9 +1517,11 @@ export default function MobileContainer({
               <h3 className="text-xl font-black text-[#2D2D2D] mb-3 uppercase tracking-tight">
                 Klaar voor de toekomst!
               </h3>
-              <p className="text-[15px] text-[#767676] mb-6 leading-relaxed">
-                Bedankt voor het doorlopen van jouw Life Horizon. Je hebt nu alle inzichten om met vertrouwen richting financiële vrijheid te sturen.
-              </p>
+              <div className="text-center space-y-3">
+                <p className="text-gray-600">
+                {t('mobileContainer.endModalThanks')}
+                </p>
+              </div>
               <button
                 onClick={() => {
                   setShowEndModal(false);
@@ -1528,7 +1529,7 @@ export default function MobileContainer({
                 }}
                 className="w-full py-3.5 bg-[#D56B45] hover:bg-[#C0562F] text-white font-extrabold rounded-xl shadow-md transition-all active:scale-95 uppercase tracking-wider text-sm cursor-pointer"
               >
-                Sluiten & Terug naar start
+                {t('mobileContainer.endModalClose')}
               </button>
             </motion.div>
           </div>
