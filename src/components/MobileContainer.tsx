@@ -1112,9 +1112,30 @@ export default function MobileContainer({
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5 }}
-                      className="mb-4"
+                      className="mb-6 flex items-start space-x-4"
                     >
-                      <img src="/img/olifant-bril.png" alt="Olifant" className="w-16 h-16 object-contain" />
+                      <img src="/img/olifant-bril.png" alt="Olifant" className="w-16 h-16 object-contain shrink-0" />
+                      
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3, duration: 0.4 }}
+                        className="bg-white border border-[#EAEAEA] rounded-2xl rounded-tl-none px-4 py-3 shadow-sm flex-1 relative mt-2"
+                      >
+                        <div className="absolute top-0 -left-2 w-0 h-0 border-t-[0px] border-t-transparent border-r-[10px] border-r-white border-b-[12px] border-b-transparent filter drop-shadow-sm"></div>
+                        <p className="text-[15px] text-[#2D2D2D] font-medium leading-snug">
+                          {(inputs.name ? `Zo ${inputs.name}, dat was best interessant toch?` : "Zo, dat was best interessant toch?").split('').map((char, index) => (
+                            <motion.span
+                              key={index}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.5 + index * 0.03, duration: 0.05 }}
+                            >
+                              {char}
+                            </motion.span>
+                          ))}
+                        </p>
+                      </motion.div>
                     </motion.div>
                     <h3 className="text-2xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
                       {t('mobileContainer.financialRunwayTitle')}
