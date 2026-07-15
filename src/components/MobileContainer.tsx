@@ -17,6 +17,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { AiAnalysisModal } from "./AiAnalysisModal";
 import LifeExpectancyGraphModal from "./LifeExpectancyGraphModal";
 import { Sparkles, BarChart2 } from "lucide-react";
+import { saveRating } from "../lib/db";
 
 interface MobileContainerProps {
   inputs: UserInputs;
@@ -1145,7 +1146,10 @@ export default function MobileContainer({
                           {[1, 2, 3, 4, 5].map((star) => (
                             <button
                               key={star}
-                              onClick={() => setAppRating(star)}
+                              onClick={() => {
+                                setAppRating(star);
+                                saveRating(star, inputs.name);
+                              }}
                               className="focus:outline-none transition-transform hover:scale-110 active:scale-95 cursor-pointer"
                             >
                               <Star
