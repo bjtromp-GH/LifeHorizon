@@ -1108,6 +1108,14 @@ export default function MobileContainer({
                       </p>
                     </div>
 
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="mb-4"
+                    >
+                      <img src="/img/olifant-bril.png" alt="Olifant" className="w-16 h-16 object-contain" />
+                    </motion.div>
                     <h3 className="text-2xl font-black font-sans uppercase tracking-tight text-[#D56B45]">
                       {t('mobileContainer.financialRunwayTitle')}
                     </h3>
@@ -1119,28 +1127,18 @@ export default function MobileContainer({
                     </p>
                   </div>
 
-                  <div className="bg-[#FAF9F8] border border-[#EAEAEA] p-6 rounded-xl shadow-sm text-center relative overflow-hidden group">
-                    <motion.img
-                      initial={{ y: 20, rotate: 10, opacity: 0 }}
-                      animate={{ y: 0, rotate: -15, opacity: 1 }}
-                      transition={{ delay: 0.4, type: "spring", stiffness: 120 }}
-                      src="/img/olifant-bril.png"
-                      alt="Olifant Mascot"
-                      className="absolute -top-3 -right-3 w-16 h-16 object-contain opacity-60 group-hover:opacity-100 group-hover:rotate-0 transition-all duration-300 z-0 drop-shadow-sm"
-                    />
-                    <div className="relative z-10">
-                      <p className="text-base text-[#767676] mb-4">
-                        {t('mobileContainer.financialRunwayPromo')}
-                      </p>
-                      <a
-                        href="https://financiele-horizon-promo.vercel.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 text-[15px] rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider relative z-10"
-                      >
-                        {t('mobileContainer.visitWebsite')}
-                      </a>
-                    </div>
+                  <div className="bg-[#FAF9F8] border border-[#EAEAEA] p-6 rounded-xl shadow-sm text-center">
+                    <p className="text-base text-[#767676] mb-4">
+                      {t('mobileContainer.financialRunwayPromo')}
+                    </p>
+                    <a
+                      href="https://financiele-horizon-promo.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center bg-[#86A789] hover:bg-[#729275] text-white py-4 text-[15px] rounded-xl font-sans font-extrabold transition-all active:scale-95 shadow-sm uppercase tracking-wider"
+                    >
+                      {t('mobileContainer.visitWebsite')}
+                    </a>
                   </div>
                 </div>
 
@@ -1456,13 +1454,6 @@ export default function MobileContainer({
             >
               <div className="w-20 h-20 bg-[#D56B45]/10 rounded-full flex items-center justify-center mb-5 relative">
                 <img src="/img/olifant-bril.png" alt="Olifant Mascot" className="w-14 h-14 object-contain drop-shadow-sm" />
-                <motion.div 
-                  className="absolute -top-1 -right-1 text-2xl"
-                  animate={{ rotate: [0, 15, -10, 0], scale: [1, 1.2, 1] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                >
-                  ✨
-                </motion.div>
               </div>
               <h3 className="text-xl font-black text-[#2D2D2D] mb-3 uppercase tracking-tight">
                 Klaar voor de toekomst!
